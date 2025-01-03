@@ -1,104 +1,73 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Metropolis', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
     text-align: center;
-    background-color: #ffffff;
     color: #333;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 15px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
-
-.logo img {
-    height: 40px;
-    float: center;
-    text-align: center;
-}
-
-main {
-    padding: 50px 20px;
 }
 
 h1 {
-    font-size: 3.5em;
+    font-weight: 700;
+    font-size: 2.5em;
     color: #aa181d;
-    margin-bottom: 20px;
 }
 
-p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 20px;
+h2, h3 {
+    color: #aa181d;
+    margin-bottom: 10px;
 }
 
-.version {
+p, li {
     font-size: 1em;
-    background-color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    line-height: 1.6;
+    margin: 10px 0;
 }
 
-ul.inline {
+.meeting-overview ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.meeting-overview li {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.inline {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center; /* Center the items */
-    gap: 15px; /* Space between items */
+    justify-content: center;
+    gap: 15px;
 }
 
-ul.inline li {
-    display: inline;
-}
-
-ul.inline a {
+.inline a {
     text-decoration: none;
-    color: #aa181d; /* Font color without hover */
-    padding: 10px 15px;
+    color: #aa181d;
+    padding: 8px 12px;
+    border: 1px solid #aa181d;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
-ul.inline a:hover {
-    background-color: #7f171b; /* Background color on hover */
-    color: #f3f0ac; /* Font color on hover */
+.inline a:hover {
+    background-color: #aa181d;
+    color: #fff;
 }
 
-ul.inline a:active {
-    background-color: #7f171b; /* Background color when active */
-    color: #f3f0ac; /* Font color when active */
+@font-face {
+    font-family: 'Metropolis';
+    src: url('/assets/fonts/metropolis/Metropolis-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
 }
 
-@media (max-width: 600px) {
-    ul.inline {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items */
-    }
-
-    ul.inline li {
-        margin-bottom: 10px; /* Space between items when stacked */
-    }
+@font-face {
+    font-family: 'Metropolis';
+    src: url('/assets/fonts/metropolis/Metropolis-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
 }
