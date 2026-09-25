@@ -1,0 +1,220 @@
+{
+  "title": "Bibeltreff Stuttgart · Gottes Wort erfahren",
+  "description": "Gottes Wort erfahren und Jesus Christus kennenlernen. Bibeltreff in Stuttgart-Vaihingen: mittwochs an der Uni, donnerstags und sonntags in der Handwerkstraße. Du bist eingeladen!",
+  "email": "bibeltreff@outlook.com",
+  "hero": {
+    "eyebrow": "Bibeltreff · Stuttgart-Vaihingen",
+    "heading": "Gottes Wort erfahren",
+    "accent": "Jesus kennenlernen",
+    "text": "Gemeinsam lesen wir die Bibel und erfahren, wie Gottes Wort in unserem Leben wirkt. Ob du glaubst, suchst oder einfach neugierig bist: Du bist herzlich eingeladen.",
+    "verse": "Das Wort Gottes ist lebendig und wirksam.",
+    "verseReference": "Hebräer 4,12"
+  },
+  "meetings": [
+    {
+      "day": "Mittwoch",
+      "label": "Mitten im Uni-Alltag",
+      "start": "13:15",
+      "end": "13:50",
+      "location": "Am grünen Tisch vor V9.02",
+      "address": "Pfaffenwaldring 9, Stuttgart",
+      "note": "Gemeinsam die Bibel lesen und beten in der Mittagspause.",
+      "map": "https://www.google.com/maps/search/?api=1&query=Pfaffenwaldring+9+Stuttgart",
+      "online": "https://us02web.zoom.us/j/106793110?pwd=dUNLMEJ2L3M4SnBkSThTY1A5cVU0QT09"
+    },
+    {
+      "day": "Donnerstag",
+      "label": "Zeit für Gottes Wort",
+      "start": "19:30",
+      "end": "21:00",
+      "location": "Handwerkstraße 5 · 4.OG",
+      "address": "70565 Stuttgart-Vaihingen",
+      "note": "Zusammen den Herrn loben, Erfahrungen teilen und im Glauben wachsen.",
+      "map": "https://www.google.com/maps/search/?api=1&query=Handwerkstrasse+5+70565+Stuttgart"
+    },
+    {
+      "day": "Sonntag",
+      "label": "Gemeinsam Gott anbeten",
+      "start": "10:00",
+      "end": "12:30",
+      "location": "Handwerkstraße 5 · 4.OG",
+      "address": "70565 Stuttgart-Vaihingen",
+      "note": "Wir nehmen das Mahl des Herrn und beten den Vater an. Anschließend essen wir zusammen zu Mittag.",
+      "map": "https://www.google.com/maps/search/?api=1&query=Handwerkstrasse+5+70565+Stuttgart"
+    }
+  ],
+  "gospel": [
+    {
+      "id": "plan",
+      "label": "Der Plan",
+      "color": "gold",
+      "colorName": "Gold",
+      "keyword": "Beziehung",
+      "question": "Wozu hat Gott uns geschaffen?",
+      "text": "Gold steht für Gottes Ziel mit uns Menschen. Er schuf uns ohne Sünde und ihm ähnlich, damit wir in seinem Auftrag gerecht über die Erde herrschen. Wir können uns für eine persönliche Beziehung zu Gott entscheiden und ihn als Vater kennenlernen.",
+      "verses": [
+        {
+          "text": "Und Gott sprach: Lasst uns Menschen machen nach unserem Bild, uns ähnlich; die sollen herrschen auf Erden!",
+          "reference": "1. Mose 1:26"
+        },
+        {
+          "text": "Er hat uns in Liebe vorherbestimmt, seine Söhne zu sein.",
+          "reference": "Epheser 1:4–5"
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "label": "Das Problem",
+      "color": "black",
+      "colorName": "Schwarz",
+      "keyword": "Trennung",
+      "question": "Was trennt uns von Gott?",
+      "text": "Doch der Mensch ließ sich von Satans Lüge verführen. So kam das Böse in uns Menschen. Da ist keiner, der Gutes tut. Wir leben in Sünde und sind von Gott getrennt. Wegen unserer Schuld stehen wir unter Gottes gerechtem Gericht, dem ewigen Feuersee.",
+      "verses": [
+        {
+          "text": "Alle haben gesündigt und haben Mangel an der Herrlichkeit Gottes.",
+          "reference": "Römer 3:23"
+        },
+        {
+          "text": "Die alte Schlange, der Teufel, verführt die ganze Erde.",
+          "reference": "Offenbarung 12:9"
+        },
+        {
+          "text": "Der Lohn der Sünde ist der Tod.",
+          "reference": "Römer 6:23"
+        },
+        {
+          "text": "Dies ist der zweite Tod, der Feuersee.",
+          "reference": "Offenbarung 20:14"
+        }
+      ]
+    },
+    {
+      "id": "loesung",
+      "label": "Die Lösung",
+      "color": "red",
+      "colorName": "Rot",
+      "keyword": "Liebe",
+      "question": "Gott sendet seinen Sohn",
+      "text": "Weil Gott uns so sehr liebt, gab er seinen Sohn Jesus Christus, um uns zu retten. Jesus war ohne Sünde, doch er nahm unsere Schuld auf sich und starb am Kreuz. Das ist der größte Beweis für Gottes Liebe.",
+      "verses": [
+        {
+          "text": "Gott aber beweist seine Liebe zu uns dadurch, dass Christus für uns gestorben ist, als wir noch Sünder waren.",
+          "reference": "Römer 5:8"
+        },
+        {
+          "text": "Denn so sehr hat Gott die Welt geliebt, dass er seinen einziggeborenen Sohn gab, …",
+          "reference": "Johannes 3:16"
+        }
+      ]
+    },
+    {
+      "id": "weg",
+      "label": "Der Weg",
+      "color": "white",
+      "colorName": "Weiß",
+      "keyword": "Neues Leben",
+      "question": "Nimm Jesus Christus auf!",
+      "text": "Jesus Christus allein kann dich von Sünde und Gericht retten. Glaube an ihn, bekenne ihn als deinen Herrn und lass dich taufen! So wirst du gerettet und empfängst ewiges Leben.",
+      "verses": [
+        {
+          "text": "Wenn du Jesus als Herrn bekennst und glaubst, dass Gott ihn von den Toten auferweckt hat, so wirst du gerettet.",
+          "reference": "Römer 10:9"
+        },
+        {
+          "text": "… damit jeder, der an ihn glaubt, nicht verloren gehe, sondern ewiges Leben habe.",
+          "reference": "Johannes 3:16"
+        },
+        {
+          "text": "Wer glaubt und getauft wird, der wird gerettet werden.",
+          "reference": "Markus 16:16a"
+        }
+      ]
+    },
+    {
+      "id": "wachstum",
+      "label": "Wachstum",
+      "color": "green",
+      "colorName": "Grün",
+      "keyword": "Im Glauben wachsen",
+      "question": "Wie kommst du im Glauben voran?",
+      "text": "Hast du Jesus aufgenommen, dann wachse in ihm. Lege alle Bosheit ab, nähre dich täglich von Gottes Wort, lass dich mit anderen aufbauen, diene Gott als Priester und bringe ihm geistliche Opfer.",
+      "verses": [
+        {
+          "text": "So legt nun ab alle Bosheit … und verlangt wie Neugeborene nach der reinen Milch des Wortes Gottes, damit ihr durch sie wachst zur Errettung.",
+          "reference": "1. Petrus 2:1–2"
+        },
+        {
+          "text": "… und lasst auch ihr euch aufbauen zum geistlichen Haus, zu einer heiligen Priesterschaft, um geistliche Opfer darzubringen durch Jesus Christus.",
+          "reference": "1. Petrus 2:5"
+        }
+      ]
+    },
+    {
+      "id": "lohn",
+      "label": "Der Lohn",
+      "color": "gold",
+      "colorName": "Gold",
+      "keyword": "Hoffnung",
+      "question": "Was hält Jesus für dich bereit?",
+      "text": "Wenn du Jesus folgst und im Glauben zur Reife kommst, erhältst du den höchsten Lohn: Du wirst Gott in seinem kommenden Reich als König und Priester dienen. Jesus kommt bald zurück!",
+      "verses": [
+        {
+          "text": "Jesus Christus spricht: Siehe, ich komme schnell und mein Lohn ist bei mir, um jedem zu geben, wie sein Werk ist.",
+          "reference": "Offenbarung 22:12"
+        },
+        {
+          "text": "… und [Jesus] hat sie unserem Gott zu Königen und Priestern gemacht, und sie werden herrschen auf Erden.",
+          "reference": "Offenbarung 5:9–10"
+        }
+      ]
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "can-luca",
+      "name": "Can Luca",
+      "headline": "Gott als den erfahren, der mir Leben und Kraft gibt.",
+      "intro": "Vom Wissen über Gott zu einer lebendigen Beziehung mit ihm.",
+      "paragraphs": [
+        "Als ich das erste Mal in den Bibelkreis gekommen bin, waren Gott und Jesus Christus eine bloße Erkenntnis für mich. Doch ist der Herr Jesus viel mehr als das. In Johannes 14:6, einem Vers, den ihr sicherlich alle kennt, sagt der Herr von sich selbst: „Ich bin der Weg und die Wahrheit und das Leben.“",
+        "Dieses Leben hatte ich noch nicht erfahren. Ich hatte die Erkenntnis Gottes und Jesu Christi, aber ich blieb trotzdem derselbe und mein Leben veränderte sich nicht. Ich hatte keine Kraft, Schwachheiten oder Sünde zu überwinden.",
+        "Aus Verzweiflung bin ich dann in den Bibelkreis gegangen, da ich selbst nicht mehr weiterwusste. Es war zunächst befremdlich aufgrund meines muslimischen Hintergrunds und da ich noch nie Gemeinschaft mit Christen hatte, die den Glauben wirklich ausleben.",
+        "Aber Woche für Woche bin ich wiedergekommen, und es war nicht um der Erkenntnis willen. Jetzt im Nachhinein weiß ich, dass es der Geschmack des Lebens war.",
+        "Das ist auch der Fokus im Bibeltreff: wie wir in die Erfahrung des Wortes Gottes kommen. Es geht also nicht um Lehre, Erkenntnis oder Theologie, sondern um das Leben. Um eine lebendige Beziehung mit einem lebendigen Gott.",
+        "Die Gemeinschaft und der Aufbau mit den Geschwistern im Bibeltreff haben mich wirklich in die Erfahrung des Wortes hineingebracht. Durch die Anwendung des Wortes aus dem Bibeltreff habe ich zum ersten Mal Gott als den erfahren, der mir Leben und Kraft gibt.",
+        "Ich habe mich schließlich ein für alle Mal in den Leib Christi hineintaufen lassen (vgl. 1. Kor. 12:13), und damit beginnt dann die wirkliche Reise des Christenlebens. Durch diesen Prozess hindurch hat sich mein Leben gewandelt, und ich habe durch die Kraft des Herrn Schwachheiten überwunden, die mir zuvor unmöglich schienen.",
+        "Ich kann den Herrn nur loben und ihm danken, dass er ein lebendiger und erfahrbarer Gott ist und ich so tolle Geschwister im Glauben kennenlernen durfte."
+      ]
+    }
+  ],
+  "contact": [
+    {
+      "label": "E-Mail schreiben",
+      "url": "mailto:bibeltreff@outlook.com"
+    },
+    {
+      "label": "WhatsApp",
+      "url": "https://wa.me/qr/VEKEHDSQNMVGH1"
+    },
+    {
+      "label": "Telegram",
+      "url": "https://t.me/tpavelka"
+    }
+  ],
+  "social": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/bibeltreff/"
+    },
+    {
+      "label": "Telegram-Kanal",
+      "url": "https://t.me/bibelkreise"
+    },
+    {
+      "label": "WhatsApp-Kanal",
+      "url": "https://whatsapp.com/channel/0029Va8EgPtBlHpUBRFnex2I"
+    }
+  ]
+}

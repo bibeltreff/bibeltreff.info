@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d61b2">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="https://bibeltreff.info/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="https://bibeltreff.info/">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt</a>
+  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  </defs></svg>
+
+  <header class="site-header">
+    <div class="header-inner wrap">
+      <a class="brand" href="#start" aria-label="Bibeltreff – Startseite"><span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg></span>bibeltreff></a>
+      <nav class="main-nav" aria-label="Hauptnavigation"><a href="#treffen">Treffen</a><a href="#evangelium">Evangelium</a><a href="#zeugnisse">Zeugnisse</a></nav>
+      <a class="header-contact" href="#kontakt">Sag Hallo <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="inhalt">
+    <section class="hero wrap" id="start" aria-labelledby="hero-title">
+      <p class="location-badge"><span class="badge-dot" aria-hidden="true"></span>{{eyebrow}}</p>
+      <h1 id="hero-title">{{heading}}<br><span>{{accent}}</span></h1>
+      <p class="hero-intro">{{intro}}</p>
+      <p class="hero-scripture">„{{verse}}“ <span>{{verseReference}}</span></p>
+      <div class="hero-actions"><a class="button button-primary" href="#treffen">Komm vorbei <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><a class="button button-quiet" href="#evangelium">Evangelium kennenlernen <span aria-hidden="true">↓</span></a></div>
+    </section>
+
+    <section class="meetings-section section wrap" id="treffen" aria-labelledby="meetings-title">
+      <div class="section-heading"><div><p class="eyebrow section-label">01 / Herzliche Einladung</p><h2 id="meetings-title">Komm, schmeck und sieh!</h2></div><p>Unter der Woche oder am Sonntag.<br> Wir freuen uns, dich kennenzulernen.</p></div>
+      <div class="meeting-grid">{{meetings}}</div>
+      <p class="meeting-footnote">Zum ersten Mal dabei? <a href="#kontakt">Schreib uns gerne vorher.</a></p>
+    </section>
+
+    <section class="gospel-section section" id="evangelium" aria-labelledby="gospel-title">
+      <div class="wrap">
+        <div class="section-heading gospel-heading"><div><p class="eyebrow section-label">02 / Die rettende Botschaft</p><h2 id="gospel-title">Das Evangelium in Farben</h2><p>Von der Sünde zum Ziel Gottes. Sechs Schritte durch die Botschaft der Bibel – und was sie für dich bedeutet.</p></div><a class="text-link pdf-link" href="assets/documents/evangelium-in-farben.pdf" download>Das Heft als PDF <span aria-hidden="true">↓</span></a></div>
+        <p class="color-hint">Wähle eine Farbe oder lies einfach weiter. <span aria-hidden="true">↘</span></p>
+        <nav class="color-nav" aria-label="Die sechs Themen des Evangeliums">{{colors}}</nav>
+        <div class="gospel-chapters">{{chapters}}</div>
+        <div class="gospel-invitation"><span>Was bedeutet das für dich? Lass uns darüber sprechen.</span><a href="#treffen">Gemeinsam erfahren <span aria-hidden="true">→</span></a></div>
+      </div>
+    </section>
+
+    <section class="testimonies-section section wrap" id="zeugnisse" aria-labelledby="testimonies-title">
+      <div class="section-heading"><div><p class="eyebrow section-label">03 / Persönlich erlebt</p><h2 id="testimonies-title">Glaube, der Leben verändert</h2></div><p>Menschen aus dem Bibeltreff erzählen,<br> wie sie Jesus Christus erleben.</p></div>
+      <div class="testimonies">{{testimonies}}</div>
+    </section>
+
+    <section class="contact-section wrap" id="kontakt" aria-labelledby="contact-title">
+      <div><p class="eyebrow section-label">04 / Lass uns kennenlernen</p><h2 id="contact-title">Stelle deine Fragen</h2><p>Du möchtest vorbeikommen oder mehr wissen?<br>Wir freuen uns auf deine Nachricht.</p></div>
+      <div class="contact-links">{{contact}}</div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap"><div class="footer-main"><a class="brand" href="#start">bibeltreff</a><p>Gemeinsam Jesus Christus erfahren.</p><nav class="social-links" aria-label="Unsere Kanäle">{{social}}</nav></div><div class="footer-bottom"><span>Stuttgart-Vaihingen</span><a href="#start">Zurück nach oben <span aria-hidden="true">↑</span></a></div></footer>
+</body>
+</html>
