@@ -65,7 +65,7 @@
       "colorName": "Black",
       "keyword": "Separation",
       "question": "What separates us from God?",
-      "text": "But man was deceived by Satan's lie. This is how evil entered mankind. There is none who does good. We live in sin and are separated from God. Because of our guilt, we face God's righteous judgment: the eternal lake of fire.",
+      "text": "Man was deceived by Satan's lie. This is how evil entered mankind. There is none who does good. We live in sin and are separated from God. Because of our guilt, we face God's righteous judgment: the eternal lake of fire.",
       "verses": [
         { "text": "… that serpent of old, called the Devil and Satan, who deceives the whole world …", "reference": "Revelation 12:9" },
         { "text": "… for all have sinned and fall short of the glory of God …", "reference": "Romans 3:23" },
@@ -173,8 +173,8 @@
   ],
   "contact": [
     { "label": "Send an email", "url": "mailto:bibeltreff@outlook.com" },
-    { "label": "WhatsApp", "url": "https://wa.me/qr/VEKEHDSQNMVGH1" },
-    { "label": "Telegram", "url": "https://t.me/tpavelka" }
+    { "label": "WhatsApp", "url": "https://wa.me/NoelR0", "newTab": true },
+    { "label": "Telegram", "url": "https://t.me/NoelR0", "newTab": true }
   ],
   "social": [
     { "label": "Telegram channel", "url": "https://t.me/bibelkreise" }

@@ -8,7 +8,7 @@ const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
 const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8'));
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const arrow = '<span aria-hidden="true">↗</span>';
-const links = (items, className = '') => items.map((item) => `<a class="${className}" href="${escape(item.url)}">${escape(item.label)} ${arrow}</a>`).join('\n');
+const links = (items, className = '') => items.map((item) => `<a class="${className}" href="${escape(item.url)}"${item.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${escape(item.label)} ${arrow}</a>`).join('\n');
 const weekdays = {
   de: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -34,7 +34,7 @@ const slots = {
   canonical: `https://bibeltreff.info/${english ? 'en.html' : ''}`,
   languageUrl: english ? 'index.html' : 'en.html',
   otherLang: english ? 'de' : 'en',
-  scriptureNotice: ui.scriptureNotice ? `<p class="scripture-notice">${escape(ui.scriptureNotice)}</p>` : '',
+  scriptureNotice: `<details class="footer-legal"><summary>${escape(ui.legalNoticeLabel)}</summary><div class="footer-legal-body"><div><h2>${escape(ui.legalNoticeTitle)}</h2><address>Noel Reinhold<br>70563 Stuttgart</address></div>${ui.scriptureNotice ? `<div class="scripture-notice"><h2>${escape(ui.scriptureNoticeTitle)}</h2><p>${escape(ui.scriptureNotice)}</p>${ui.scriptureNoticeNote ? `<p class="scripture-notice-note">${escape(ui.scriptureNoticeNote)}</p>` : ''}</div>` : ''}</div></details>`,
   title: escape(content.title),
   description: escape(content.description),
   eyebrow: escape(content.hero.eyebrow),
