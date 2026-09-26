@@ -1,0 +1,87 @@
+name: Telegram and GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Inspect the existing bot or sync and deploy
+        type: choice
+        options: [inspect, sync]
+        default: inspect
+
+permissions:
+  contents: read
+
+concurrency:
+  group: telegram-pages
+  cancel-in-progress: false
+
+jobs:
+  inspect:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'inspect'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm run telegram:inspect
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+  build:
+    if: github.ref == 'refs/heads/main' && vars.TELEGRAM_SYNC_ENABLED == 'true' && (github.event_name != 'workflow_dispatch' || inputs.mode == 'sync')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm run telegram:sync
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_SYNC_ENABLED: 'true'
+      - run: npm run build
+      - run: npm run check
+      # Persist the batch before the next run can acknowledge it to Telegram.
+      # A conflicting push fails safely; the unacknowledged batch is retried.
+      - name: Save public feed and generated pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/telegram.json index.html en.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update Telegram feed'
+            git push origin HEAD:main
+          fi
+      - name: Stage public website only
+        run: |
+          mkdir _site
+          cp index.html en.html styles.css site.js CNAME .nojekyll _site/
+          cp -R assets _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

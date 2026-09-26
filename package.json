@@ -5,7 +5,9 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs && node --test scripts/telegram.test.mjs",
+    "telegram:inspect": "node scripts/telegram.mjs inspect",
+    "telegram:sync": "node scripts/telegram.mjs sync"
   },
   "engines": { "node": ">=20" }
 }

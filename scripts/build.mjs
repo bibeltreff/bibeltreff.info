@@ -1,9 +1,11 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { renderTelegram } from './telegram-render.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
+const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8'));
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const arrow = '<span aria-hidden="true">↗</span>';
 const links = (items, className = '') => items.map((item) => `<a class="${className}" href="${escape(item.url)}">${escape(item.label)} ${arrow}</a>`).join('\n');
@@ -20,6 +22,7 @@ const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${escape(verse.text)}${u
 const slots = {
   ...Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)])),
   lang,
+  telegram: renderTelegram(telegram, ui, lang),
   ogLocale: english ? 'en_GB' : 'de_DE',
   canonical: `https://bibeltreff.info/${english ? 'en.html' : ''}`,
   languageUrl: english ? 'index.html' : 'en.html',

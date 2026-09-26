@@ -48,7 +48,7 @@ Treffzeiten und der Treffpunkt am grünen Tisch stammen auf Wunsch des Betreiber
 
 ## Statisches Hosting
 
-Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; es werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
+Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; ohne automatischen Telegram-Import werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. Für automatische Kanalnachrichten dient der unten beschriebene optionale Workflow. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
 
 Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js` und `assets/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig.
 
@@ -63,3 +63,58 @@ Alle Inhalte, Sprunglinks und Aufklappbereiche funktionieren ohne JavaScript. Di
 Source Sans 3 wird wie gewünscht direkt von Google Fonts geladen, mit System-Sans-Serif als Fallback. Google Fonts stellt dabei eine externe Verbindung her. Karten, Zoom und soziale Kanäle werden nur als Links angeboten, nicht eingebettet. Die Website verwendet keine Analytics und setzt selbst keine Cookies.
 
 Im bisherigen Projekt waren keine Impressums- oder Datenschutzhinweise enthalten. Entsprechende Betreiberangaben und Texte sind weiterhin vom Betreiber bereitzustellen; es wurden keine Angaben erfunden.
+
+## Telegram: die letzten drei Nachrichten
+
+Die Website kann Texte und Bildunterschriften aus `@bibelkreise` als drei Karten zwischen Treffen und Evangelium anzeigen. Die Inhalte bleiben in ihrer Originalsprache. Medien werden über die Originalnachricht auf Telegram geöffnet; Bilder, Videos, Dateien und besondere Nachrichtenformate werden nicht auf die Website kopiert. Textformatierungen werden als einfacher Text dargestellt. Es gibt keine Telegram-Skripte oder direkten Telegram-Verbindungen im Browser. Ohne importierte Nachrichten bleibt der Abschnitt ausgeblendet.
+
+`content/telegram.json` enthält die drei neuesten Nachrichten sowie den gespeicherten Update-Offset. `scripts/telegram.mjs` sammelt ausschließlich Beiträge aus dem öffentlichen Kanal. Andere Nachrichten und private Nutzerdaten werden nicht gespeichert. Bearbeitungen werden übernommen, solange Telegram sie dem Bot zustellt. Gelöschte Kanalnachrichten meldet die Bot API nicht: entsprechende Einträge müssen manuell entfernt werden. Albumteile zählen als einzelne Telegram-Nachrichten.
+
+### Einmalige Einrichtung auf GitHub
+
+1. Diese Änderungen nach Prüfung in den Branch `main` pushen. Allein dadurch wird die Synchronisierung noch nicht aktiviert.
+2. Bei `@BotFather` über `/mybots` → `@bibeltreff_bot` den API-Token abrufen. Im Repository unter **Settings → Secrets and variables → Actions → Secrets → New repository secret** als `TELEGRAM_BOT_TOKEN` speichern. Nicht in Dateien, Nachrichten oder öffentliche Logs einfügen.
+3. Unter **Actions → Telegram and GitHub Pages → Run workflow** zunächst `mode: inspect` auswählen. Die Ausgabe zeigt nur `webhookActive`, `pendingUpdates` und `membership`. Diese Prüfung verändert keine Verbindung und bestätigt keine Updates.
+4. Bei `webhookActive: true` zuerst den bisherigen Dienst identifizieren. Der Collector löscht den Webhook niemals automatisch. Auch bei `false` prüfen, ob auf einem alten Server oder bei einem Bot-Dienst noch ein Polling-Programm läuft; das lässt sich über die API nicht zuverlässig erkennen. Für diesen Collector darf kein anderer Empfänger den Bot abfragen.
+5. Unter **Settings → Pages → Build and deployment → Source** auf **GitHub Actions** umstellen. Der Workflow veröffentlicht nur die Website-Dateien, nicht Quellcode oder den Update-Offset. Er schreibt den Feed und die generierten Seiten nach `main`; Branch-Regeln müssen diesen Workflow-Push erlauben.
+6. Unter **Settings → Secrets and variables → Actions → Variables** die Repository-Variable `TELEGRAM_SYNC_ENABLED` auf `true` setzen. Danach den Workflow einmal mit `mode: sync` starten. Der Workflow läuft auch bei Pushes auf `main` und stündlich zur Minute 17. GitHub kann geplante Läufe verzögern und bei längerer Repository-Inaktivität deaktivieren; fehlgeschlagene oder ausbleibende Läufe beachten.
+
+Der Workflow bestätigt bei Telegram nur Updates, deren Zustand bereits in einem vorherigen Lauf gespeichert wurde. Neue Updates werden zunächst zusammen mit den drei Nachrichten versioniert. Bei einem fehlgeschlagenen Commit/Push wird der noch unbestätigte Stapel beim nächsten Lauf erneut eingelesen. Pro Lauf werden bis zu 100 Updates verarbeitet; bei einem größeren Rückstand weitere Läufe auslösen. Updates hält Telegram höchstens 24 Stunden vor; nach längeren Ausfällen können erneute manuelle Importe nötig sein.
+
+### Die vorhandenen drei Nachrichten übernehmen
+
+Nach der Verbindungsprüfung die drei letzten Kanalnachrichten in Telegram **an `@bibeltreff_bot` weiterleiten**, mit sichtbarer Herkunft und ohne den Absender auszublenden. Danach innerhalb von 24 Stunden den Workflow mit `mode: sync` starten. Nur Weiterleitungen mit Telegrams Kanal-Herkunft `bibelkreise` werden übernommen, mit der ursprünglichen Nachrichten-ID und dem ursprünglichen Datum. Eine alte Weiterleitung überschreibt keinen bereits gespeicherten Beitrag.
+
+Falls der Kanal Weiterleitungen verhindert, können die drei Einträge einmalig direkt in `content/telegram.json` eingetragen werden. Beispielstruktur (Werte durch den echten Inhalt ersetzen):
+
+```json
+{
+  "nextOffset": 0,
+  "posts": [
+    {
+      "id": 433,
+      "date": "2026-09-23T18:39:25.000Z",
+      "text": "Hier den vollständigen Originaltext eintragen.",
+      "hasMedia": false
+    }
+  ]
+}
+```
+
+Einen bereits vorhandenen `nextOffset` unverändert lassen. Danach bauen, prüfen und veröffentlichen. Neue Kanalbeiträge werden anschließend automatisch gesammelt. Der Bot antwortet auf Weiterleitungen nicht; das ist für diesen Collector normal.
+
+### Lokale Ausführung
+
+Token über eine private Umgebungsvariable `TELEGRAM_BOT_TOKEN` bereitstellen. Die Befehle laden keine `.env`-Dateien automatisch.
+
+```sh
+npm run telegram:inspect
+# Erst nach Prüfung auf bisherige Bot-Dienste TELEGRAM_SYNC_ENABLED=true setzen:
+npm run telegram:sync
+npm run build
+npm run check
+```
+
+Den geänderten Feed vor dem nächsten Sync dauerhaft sichern/committen. Lokalen Sync und den GitHub-Workflow nicht parallel betreiben. Der normale Build funktioniert weiterhin ohne Netzwerk und ohne Token. `npm run check` testet zusätzlich Auswahl, Bearbeitungen, Weiterleitungen, Datenschutzfilter, Webhook-Schutz und HTML-Escaping anhand künstlicher Nachrichten; echte API-Zugriffe erfolgen dabei nicht.
+
+Referenzen: [Telegram Bot API](https://core.telegram.org/bots/api#getupdates), [Webhook-Prüfung](https://core.telegram.org/bots/api#getwebhookinfo), [GitHub Pages mit Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
