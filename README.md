@@ -14,12 +14,18 @@ npm run dev
 
 ## Inhalte und Gestaltung ändern
 
-- `content/site.json`: Einladung, Treffzeiten, sechs Evangeliums-Themen, Zeugnisse und Kontaktlinks.
-- `src/index.html`: HTML-Vorlage, Seitengerüst und feste Beschriftungen.
+- `content/site.json`: Deutsche Einladung, Treffzeiten, sechs Evangeliums-Themen, Zeugnisse und Kontaktlinks.
+- `content/site.en.json`: Englische Übersetzung mit gekürzten NKJV-Bibelzitaten.
+- `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
+- `src/index.html`: Gemeinsame HTML-Vorlage mit Platzhaltern für beide Sprachen.
 - `styles.css`: Responsive Gestaltung; Hauptfarbe ist das Blau aus dem PDF `#1d61b2` (`--accent`).
 - `site.js`: Markierung des aktuellen Evangeliums-Themas und Messung der haftenden Navigation.
 - `assets/documents/evangelium-in-farben.pdf`: Unverändertes Originalheft als Download.
-- `index.html`: Generierte, vollständige Seite. Änderungen hier werden beim Bauen überschrieben.
+- `index.html` und `en.html`: Generierte deutsche und englische Seiten. Änderungen hier werden beim Bauen überschrieben.
+
+Deutsch bleibt die Standardsprache. Der Sprachlink in der Kopfzeile öffnet `en.html` beziehungsweise `index.html` und funktioniert ohne JavaScript. Beide Seiten haben eigene Metadaten sowie gegenseitige `hreflang`-Verweise. Das Originalheft bleibt deutsch und ist auf der englischen Seite als „German PDF“ gekennzeichnet.
+
+Englische Bibelzitate folgen der NKJV, auch in der Einleitung und im Zeugnis. Auslassungen in gekürzten Versen sind mit „…“ markiert; Johannes 3:16 bleibt auf zwei Themen verteilt. Übersetzungsunterschiede bleiben erhalten: 1. Petrus 2:2 endet mit „grow thereby“, Offenbarung 5:10 verwendet „us“ und „we“. Offenbarung 20:14 wird vollständig zitiert, damit Feuersee und zweiter Tod im Zusammenhang bleiben. Der englische Fußbereich enthält den NKJV-Quellenhinweis. Wortlaut geprüft anhand der [NKJV bei Bible Gateway](https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/).
 
 Das kleine Symbol neben „Sag Hallo“ bietet die Farbschemata Systemstandard, Hell und Dunkel an. Standardmäßig folgt die Seite dem System, auch ohne JavaScript. Eine manuelle Auswahl wird lokal im Browser gespeichert; „Systemstandard“ hebt sie wieder auf. Das Drucklayout bleibt hell.
 
@@ -30,7 +36,7 @@ npm run build
 npm run check
 ```
 
-`check` prüft interne Sprungziele, eindeutige IDs, lokale Assets, Link-Schemata, PDF, Textkodierung und das Vorhandensein der Themen und Zeugnisse. Browserprüfung bleibt für Darstellung und Bedienung notwendig.
+`check` prüft beide Sprachen: interne Sprungziele, eindeutige und übereinstimmende IDs, lokale Assets, Link-Schemata, PDF, Textkodierung, Sprachlinks und das Vorhandensein aller Themen und Zeugnisse. Außerdem müssen Treffzeiten, Kontaktlinks, Übersetzungsschlüssel und Inhaltsstruktur übereinstimmen. Browserprüfung bleibt für Darstellung und Bedienung notwendig.
 
 Ein neues Zeugnis wird im Array `testimonies` ergänzt: `id` (eindeutiger URL-tauglicher Bezeichner), `name`, `headline`, `intro` und `paragraphs` (Liste einzelner Absätze). Es erhält automatisch ein per Maus, Touch und Tastatur bedienbares Aufklappelement. Das vorhandene Zeugnis stammt von Can Luca; Rechtschreibung, Zeichensetzung und Absatzgliederung wurden leicht geglättet, die inhaltlichen Aussagen beibehalten.
 
@@ -40,9 +46,9 @@ Treffzeiten und der Treffpunkt am grünen Tisch stammen auf Wunsch des Betreiber
 
 ## Statisches Hosting
 
-Die fertig gebaute `index.html` wird mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; es werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
+Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; es werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
 
-Für einen späteren IONOS-/Linux-Server genügen `index.html`, `styles.css`, `site.js` und `assets/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig.
+Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js` und `assets/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig.
 
 ## Späteres Payload CMS
 

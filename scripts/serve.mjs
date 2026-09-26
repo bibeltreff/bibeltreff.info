@@ -13,7 +13,7 @@ const server = http.createServer(async (request, response) => {
     const name = decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html';
     const target = path.resolve(root, name);
     const relative = path.relative(root, target);
-    const allowed = ['index.html', 'styles.css', 'site.js'].includes(name) || name.startsWith('assets/');
+    const allowed = ['index.html', 'en.html', 'styles.css', 'site.js'].includes(name) || name.startsWith('assets/');
     if (!allowed || relative.startsWith('..') || path.isAbsolute(relative)) {
       response.writeHead(404).end('Not found');
       return;

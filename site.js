@@ -10,7 +10,7 @@ function updateThemeControl() {
     const selected = option.dataset.themeOption === theme;
     option.setAttribute('aria-pressed', String(selected));
     if (selected) {
-      themeToggle.title = `Farbschema: ${option.textContent.trim()}`;
+      themeToggle.title = `${themeControl.dataset.label}: ${option.textContent.trim()}`;
       themeToggle.setAttribute('aria-label', themeToggle.title);
     }
   }

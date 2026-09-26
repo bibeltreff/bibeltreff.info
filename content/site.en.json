@@ -1,0 +1,161 @@
+{
+  "title": "Bibeltreff Stuttgart · Experience God's Word",
+  "description": "Experience God's Word and get to know Jesus Christ. Join our Bible fellowship in Stuttgart: Wednesdays at the university, Thursdays and Sundays on Handwerkstraße. You are welcome!",
+  "email": "bibeltreff@outlook.com",
+  "hero": {
+    "eyebrow": "Bibeltreff · Stuttgart",
+    "heading": "Experience God's Word",
+    "accent": "Get to know Jesus",
+    "text": "We read the Bible together and experience how God's Word works in our lives. Whether you believe, are seeking God, or are simply curious, you are warmly invited.",
+    "verse": "For the word of God is living and powerful …",
+    "verseReference": "Hebrews 4:12"
+  },
+  "meetings": [
+    {
+      "day": "Wednesday",
+      "label": "In the midst of university life",
+      "start": "13:15",
+      "end": "13:50",
+      "location": "At the green table outside V9.02",
+      "address": "Pfaffenwaldring 9, 70569 Stuttgart",
+      "note": "Read the Bible and pray together during the lunch break.",
+      "map": "https://www.google.com/maps/search/?api=1&query=48.74646666293245%2C9.105809034911882",
+      "online": "https://us02web.zoom.us/j/106793110?pwd=dUNLMEJ2L3M4SnBkSThTY1A5cVU0QT09"
+    },
+    {
+      "day": "Thursday",
+      "label": "Time for God's Word",
+      "start": "19:30",
+      "end": "21:00",
+      "location": "Handwerkstraße 5 · 4th floor",
+      "address": "70565 Stuttgart-Vaihingen",
+      "note": "Praise the Lord together, share what we have experienced, and grow in faith.",
+      "map": "https://www.google.com/maps/search/?api=1&query=Handwerkstrasse+5+70565+Stuttgart"
+    },
+    {
+      "day": "Sunday",
+      "label": "Worship God together",
+      "start": "10:00",
+      "end": "12:30",
+      "location": "Handwerkstraße 5 · 4th floor",
+      "address": "70565 Stuttgart-Vaihingen",
+      "note": "We share the Lord's Supper and worship the Father. Afterwards, we have lunch together.",
+      "map": "https://www.google.com/maps/search/?api=1&query=Handwerkstrasse+5+70565+Stuttgart"
+    }
+  ],
+  "gospel": [
+    {
+      "id": "plan",
+      "label": "The Plan",
+      "color": "gold",
+      "colorName": "Gold",
+      "keyword": "Fellowship",
+      "question": "Why did God create us?",
+      "text": "Gold stands for God's purpose for us. He created us without sin and in His likeness, to rule righteously over the earth on His behalf. We can choose a personal relationship with God and come to know Him as our Father.",
+      "verses": [
+        { "text": "Then God said, ‘Let Us make man in Our image, according to Our likeness; let them have dominion … over all the earth …’", "reference": "Genesis 1:26" },
+        { "text": "… in love, having predestined us to be His sons by Jesus Christ to Himself …", "reference": "Ephesians 1:4–5" }
+      ],
+      "moreVerses": []
+    },
+    {
+      "id": "problem",
+      "label": "The Problem",
+      "color": "black",
+      "colorName": "Black",
+      "keyword": "Separation",
+      "question": "What separates us from God?",
+      "text": "But man was deceived by Satan's lie. This is how evil entered mankind. There is none who does good. We live in sin and are separated from God. Because of our guilt, we face God's righteous judgment: the eternal lake of fire.",
+      "verses": [
+        { "text": "… that serpent of old, called the Devil and Satan, who deceives the whole world …", "reference": "Revelation 12:9" },
+        { "text": "… for all have sinned and fall short of the glory of God …", "reference": "Romans 3:23" },
+        { "text": "For the wages of sin is death …", "reference": "Romans 6:23" },
+        { "text": "Then Death and Hades were cast into the lake of fire. This is the second death.", "reference": "Revelation 20:14" }
+      ],
+      "moreVerses": []
+    },
+    {
+      "id": "loesung",
+      "label": "The Answer",
+      "color": "red",
+      "colorName": "Red",
+      "keyword": "Love",
+      "question": "God sends His Son",
+      "text": "God loves us so much that He gave His Son Jesus Christ to save us. Jesus was without sin, yet He bore our sins and died on the cross. This is the greatest proof of God's love.",
+      "verses": [
+        { "text": "But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.", "reference": "Romans 5:8" },
+        { "text": "For God so loved the world that He gave His only begotten Son …", "reference": "John 3:16" }
+      ],
+      "moreVerses": []
+    },
+    {
+      "id": "weg",
+      "label": "The Way",
+      "color": "white",
+      "colorName": "White",
+      "keyword": "New life",
+      "question": "Receive Jesus Christ!",
+      "text": "Jesus Christ alone can save you from sin and judgment. Believe in Him, confess Him as your Lord, and be baptized! Then you will be saved and receive eternal life.",
+      "verses": [
+        { "text": "… that whoever believes in Him should not perish but have everlasting life.", "reference": "John 3:16" },
+        { "text": "… if you confess … the Lord Jesus and believe … that God has raised Him from the dead, you will be saved.", "reference": "Romans 10:9" },
+        { "text": "He who believes and is baptized will be saved …", "reference": "Mark 16:16a" }
+      ],
+      "moreVerses": []
+    },
+    {
+      "id": "wachstum",
+      "label": "Growth",
+      "color": "green",
+      "colorName": "Green",
+      "keyword": "Grow in faith",
+      "question": "How do you grow in faith?",
+      "text": "Once you have received Jesus, grow in Him. Put away all malice, feed on God's Word each day, be built up together with others, serve God as a priest, and offer Him spiritual sacrifices.",
+      "verses": [
+        { "text": "Therefore, laying aside all malice … as newborn babes, desire the pure milk of the word, that you may grow thereby …", "reference": "1 Peter 2:1–2" },
+        { "text": "… you also … are being built up a spiritual house, a holy priesthood, to offer up spiritual sacrifices … through Jesus Christ.", "reference": "1 Peter 2:5" }
+      ],
+      "moreVerses": []
+    },
+    {
+      "id": "lohn",
+      "label": "The Reward",
+      "color": "gold",
+      "colorName": "Gold",
+      "keyword": "Hope",
+      "question": "What does Jesus have in store for you?",
+      "text": "If you follow Jesus and grow to maturity in faith, you will receive the highest reward: you will serve God as a king and priest in His coming kingdom. Jesus is coming back soon!",
+      "verses": [
+        { "text": "And have made us kings and priests to our God; And we shall reign on the earth.", "reference": "Revelation 5:10" },
+        { "text": "And behold, I am coming quickly, and My reward is with Me, to give to every one according to his work.", "reference": "Revelation 22:12" }
+      ],
+      "moreVerses": []
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "can-luca",
+      "name": "Can Luca",
+      "headline": "I came to know God as the One who gives me life and strength.",
+      "intro": "From knowing about God to a living relationship with Him.",
+      "paragraphs": [
+        "When I first came to Bibeltreff, God and Jesus Christ were only things I knew about. But the Lord Jesus is much more than that. In John 14:6, a verse you probably all know, the Lord says of Himself: “I am the way, the truth, and the life.”",
+        "I had not yet experienced this life. I knew about God and Jesus Christ, but I stayed the same, and my life did not change. I had no strength to overcome weaknesses or sin.",
+        "In my despair, I went to Bibeltreff because I did not know what else to do. At first, it felt unfamiliar because of my Muslim background. I had never had fellowship with Christians who truly lived out their faith.",
+        "But I came back week after week, and it was not just to gain knowledge. Looking back now, I know that I had tasted life.",
+        "That is also the focus at Bibeltreff: experiencing the Word of God. It is not about doctrine, knowledge, or theology, but about life. It is about a living relationship with a living God.",
+        "Through fellowship and being built up together with the brothers and sisters at Bibeltreff, I began to experience the Word. By putting the Word we shared into practice, I came to know God for the first time as the One who gives me life and strength.",
+        "I was finally baptized once and for all into the Body of Christ (see 1 Cor. 12:13), and that is where the real journey of the Christian life begins. Through this process, my life changed. By the Lord's strength, I overcame weaknesses that had seemed impossible to overcome before.",
+        "I can only praise the Lord and thank Him that He is a living God whom we can experience, and that I have come to know such wonderful brothers and sisters in the faith."
+      ]
+    }
+  ],
+  "contact": [
+    { "label": "Send an email", "url": "mailto:bibeltreff@outlook.com" },
+    { "label": "WhatsApp", "url": "https://wa.me/qr/VEKEHDSQNMVGH1" },
+    { "label": "Telegram", "url": "https://t.me/tpavelka" }
+  ],
+  "social": [
+    { "label": "Telegram channel", "url": "https://t.me/bibelkreise" }
+  ]
+}

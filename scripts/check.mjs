@@ -4,15 +4,32 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const html = await readFile(path.join(root, 'index.html'), 'utf8');
-const content = JSON.parse(await readFile(path.join(root, 'content/site.json'), 'utf8'));
+const locales = [
+  { lang: 'de', page: 'index.html', source: 'site.json', other: 'en.html' },
+  { lang: 'en', page: 'en.html', source: 'site.en.json', other: 'index.html' }
+];
+const pages = [];
+const contents = [];
+let checked = 0;
+for (const { lang, page, source, other } of locales) {
+const html = await readFile(path.join(root, page), 'utf8');
+const content = JSON.parse(await readFile(path.join(root, 'content', source), 'utf8'));
+const ui = JSON.parse(await readFile(path.join(root, 'content', `ui.${lang}.json`), 'utf8'));
+assert.ok(html.includes(`<html lang="${lang}">`), `Incorrect language in ${page}`);
+assert.ok(html.includes(`class="language-switch" href="${other}"`), `Missing language switch in ${page}`);
+for (const alternate of ['de', 'en', 'x-default']) {
+  assert.ok(html.includes(`rel="alternate" hreflang="${alternate}"`), `Missing alternate ${alternate} in ${page}`);
+}
+if (lang === 'en') {
+  assert.ok(html.includes('New King James Version'), 'Missing NKJV attribution');
+  assert.ok(html.includes('German PDF'), 'Download language must be clear');
+}
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(new Set(ids).size, ids.length, 'Duplicate HTML IDs');
 assert.ok(!/\{\{\w+\}\}/.test(html), 'Unresolved template slots');
 assert.ok(!html.includes('\uFFFD'), 'Broken text encoding');
 assert.equal((html.match(/<h1\b/g) || []).length, 1, 'Expected a single page heading');
 
-let checked = 0;
 for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
   if (url.startsWith('#')) assert.ok(ids.includes(url.slice(1)), `Missing anchor ${url}`);
   else if (!/^[a-z]+:/i.test(url)) await access(path.join(root, url));
@@ -22,6 +39,19 @@ for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
 for (const chapter of content.gospel) assert.ok(ids.includes(chapter.id), `Missing chapter ${chapter.id}`);
 assert.equal(content.gospel.length, 6, 'Expected all six gospel chapters');
 for (const testimony of content.testimonies) assert.ok(ids.includes(`zeugnis-${testimony.id}`), `Missing testimony ${testimony.id}`);
+pages.push({ ids, ui });
+contents.push(content);
+}
+assert.deepEqual(pages[0].ids, pages[1].ids, 'Language versions must share all anchor targets');
+assert.deepEqual(Object.keys(pages[0].ui).sort(), Object.keys(pages[1].ui).sort(), 'Interface translations must have matching keys');
+const structure = content => ({
+  meetings: content.meetings.map(({ start, end, map, online }) => ({ start, end, map, online })),
+  gospel: content.gospel.map(({ id, color, verses, moreVerses }) => ({ id, color, verses: verses.length, moreVerses: moreVerses?.length || 0 })),
+  testimonies: content.testimonies.map(({ id, name, paragraphs }) => ({ id, name, paragraphs: paragraphs.length })),
+  contact: content.contact.map(({ url }) => url),
+  social: content.social.map(({ url }) => url)
+});
+assert.deepEqual(structure(contents[0]), structure(contents[1]), 'Keep both languages complete and meeting details/links in sync');
 const pdf = await readFile(path.join(root, 'assets/documents/evangelium-in-farben.pdf'));
 assert.equal(pdf.subarray(0, 5).toString(), '%PDF-', 'Download must be a valid PDF file');
-console.log(`OK: ${checked} links/assets, unique anchors, all six chapters, testimonies, PDF and text encoding.`);
+console.log(`OK: both languages, ${checked} links/assets, matching anchors/content, six chapters, testimonies, PDF and text encoding.`);
