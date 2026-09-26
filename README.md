@@ -61,7 +61,7 @@ Darstellung und Inhalte sind bereits getrennt. Als nächste Ausbaustufe lassen s
 
 Alle Inhalte, Sprunglinks und Aufklappbereiche funktionieren ohne JavaScript. Die Farbnavigation bleibt innerhalb des Evangeliums-Bereichs unter der Hauptnavigation sichtbar; kleine Displays zeigen alle sechs Farben in zwei Reihen. JavaScript ergänzt die aktuelle Leseposition. Reduzierte Bewegung wird berücksichtigt.
 
-Source Sans 3 wird wie gewünscht direkt von Google Fonts geladen, mit System-Sans-Serif als Fallback. Google Fonts stellt dabei eine externe Verbindung her. Karten, Zoom und soziale Kanäle werden nur als Links angeboten, nicht eingebettet. Die Website verwendet keine Analytics und setzt selbst keine Cookies.
+Source Sans 3 wird wie gewünscht direkt von Google Fonts geladen, mit System-Sans-Serif als Fallback. Google Fonts stellt dabei eine externe Verbindung her. Die Lagekarte ist ein OpenStreetMap-iframe (ohne JavaScript, ohne API-Key, ohne Tracking-Cookies); dabei lädt der Browser Kartenkacheln von openstreetmap.org. Routen, Zoom und soziale Kanäle werden nur als Links angeboten, nicht eingebettet. Die Website verwendet keine Analytics und setzt selbst keine Cookies.
 
 Im bisherigen Projekt waren keine Impressums- oder Datenschutzhinweise enthalten. Entsprechende Betreiberangaben und Texte sind weiterhin vom Betreiber bereitzustellen; es wurden keine Angaben erfunden.
 
