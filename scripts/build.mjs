@@ -45,7 +45,7 @@ const slots = {
     <span class="color-index" aria-hidden="true">0${index + 1}<span class="color-arrow">↘</span></span><span class="color-label">${escape(chapter.label)}</span>
     <span class="color-tooltip" aria-hidden="true">${escape(chapter.question)}</span>
   </a>`).join('\n'),
-  chapters: content.gospel.map((chapter, index) => `<article class="gospel-chapter" id="${escape(chapter.id)}" aria-labelledby="${escape(chapter.id)}-title">
+  chapters: content.gospel.map((chapter, index) => `<article class="gospel-chapter chapter-${escape(chapter.color)}" id="${escape(chapter.id)}" aria-labelledby="${escape(chapter.id)}-title">
     <div class="chapter-marker"><span class="chapter-dot color-${escape(chapter.color)}" aria-hidden="true"></span><span>0${index + 1} / ${escape(chapter.label)}</span></div>
     <div class="chapter-copy"><h3 id="${escape(chapter.id)}-title">${escape(chapter.question)}</h3><p>${escape(chapter.text)}</p></div>
     <div class="chapter-scripture">${chapter.verses.map(quote).join('')}${chapter.moreVerses?.length ? `<details class="verse-details"><summary>${escape(ui.moreVerses)} <span aria-hidden="true">+</span></summary><div>${chapter.moreVerses.map(quote).join('')}</div></details>` : ''}</div>

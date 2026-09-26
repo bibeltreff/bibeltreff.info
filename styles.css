@@ -113,7 +113,9 @@ h1 > span { color: var(--accent); }
 .pdf-link > span { margin-left: 12px; }
 .color-hint { font-size: 13px; color: var(--muted); margin-top: 33px; }
 .color-hint > span { margin-left: 5px; }
-.color-nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; position: sticky; top: var(--header-height); z-index: 10; padding-block: 14px 17px; background: light-dark(#f6f7f9fa, #182230fa); }
+.color-nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; position: sticky; top: var(--header-height); z-index: 10; isolation: isolate; padding-block: 14px 17px; background: light-dark(#f6f7f9, #182230); }
+/* Cover the chapter backgrounds, including their 20px overhang, while sticky. */
+.color-nav::before { content: ''; position: absolute; inset: 0 -20px; z-index: -1; background: inherit; pointer-events: none; }
 .color-tab { position: relative; min-width: 0; padding: 12px 15px; border: 1px solid #0000000b; border-radius: 7px; line-height: 1.35; transition: box-shadow .15s, transform .15s; }
 .color-gold { background: #f9b919; color: #342900; }
 .color-black { background: #222b29; color: #fff; }
@@ -133,20 +135,34 @@ h1 > span { color: var(--accent); }
 @media (hover: hover) { .color-tab:hover .color-tooltip { visibility: visible; opacity: 1; } }
 .color-tab:focus-visible .color-tooltip { visibility: visible; opacity: 1; }
 .gospel-chapter { display: grid; grid-template-columns: 135px minmax(0, 1.1fr) minmax(0, .9fr); gap: 32px; padding: 47px 0; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--color-nav-height) + 8px); }
+.gospel-chapter { --chapter-accent: var(--accent); --chapter-wash: transparent; position: relative; isolation: isolate; }
+.gospel-chapter::before { content: ''; position: absolute; z-index: -1; inset: 13px -20px; border-radius: 12px; background: linear-gradient(90deg, var(--chapter-wash), transparent 72%); pointer-events: none; }
+.chapter-gold { --chapter-accent: light-dark(#8a6200, #f7c84a); --chapter-wash: light-dark(#f9b91917, #f9b91912); }
+.chapter-black { --chapter-accent: light-dark(#27302e, #c8d0cd); --chapter-wash: light-dark(#222b2914, #ffffff0b); }
+.chapter-red { --chapter-accent: light-dark(#a6212b, #ef7880); --chapter-wash: light-dark(#bf2e3613, #bf2e3615); }
+.chapter-white { --chapter-accent: light-dark(#242a32, #e8eeeb); --chapter-wash: light-dark(#ffffffb8, #ffffff0b); }
+.chapter-green { --chapter-accent: light-dark(#1f6a3d, #71c58d); --chapter-wash: light-dark(#267a4813, #267a4817); }
 .chapter-marker { display: flex; align-items: center; gap: 9px; align-self: start; margin-top: 7px; color: var(--muted); font-size: 13px; white-space: nowrap; }
 .chapter-dot { width: 13px; height: 13px; border-radius: 3px; flex-shrink: 0; }
 .chapter-copy h3 { font-size: 28px; letter-spacing: -.025em; margin-bottom: 17px; }
+.chapter-marker, .chapter-copy h3 { color: var(--chapter-accent); }
+.chapter-dot { box-shadow: 0 0 0 1px #00000010; }
 .chapter-copy > p { font-size: 16px; line-height: 1.75; color: light-dark(#5c6674, #b1bccb); }
+.chapter-white .chapter-copy > p { color: var(--ink); }
 .chapter-scripture { margin-left: 12px; }
 .chapter-scripture > blockquote + blockquote { margin-top: 23px; }
 blockquote { margin: 0; padding-left: 20px; border-left: 2px solid light-dark(#bccfe4, #476385); }
+.gospel-chapter blockquote { border-left-color: var(--chapter-accent); }
 blockquote p { font-size: 19px; line-height: 1.55; font-weight: 500; letter-spacing: -.015em; }
 cite { display: block; margin-top: 12px; font-size: 13px; color: var(--muted); font-style: normal; }
+.gospel-chapter cite { color: var(--chapter-accent); font-weight: 600; }
 summary { cursor: pointer; list-style: none; }
 summary::-webkit-details-marker { display: none; }
 .verse-details { margin-top: 22px; }
 .verse-details summary { display: flex; align-items: center; justify-content: space-between; padding-block: 7px; color: var(--accent); font-size: 13px; font-weight: 600; border-bottom: 1px solid var(--line); }
 .verse-details summary:hover { color: var(--accent-hover); }
+.gospel-chapter .verse-details summary { color: var(--chapter-accent); }
+.gospel-chapter .verse-details summary:hover { filter: brightness(.85); }
 .verse-details summary > span { font-size: 20px; line-height: 1; font-weight: 400; }
 .verse-details[open] summary > span { transform: rotate(45deg); }
 .verse-details blockquote { margin-top: 23px; }
@@ -233,10 +249,13 @@ summary::-webkit-details-marker { display: none; }
   .color-label { font-size: 11px; }
   .color-arrow { font-size: 12px; }
   .color-tooltip { display: none; }
-  .gospel-chapter { gap: 19px; padding-block: 33px; }
-  .chapter-copy { grid-column: 1 / -1; }
-  .chapter-copy h3 { font-size: 27px; }
-  .chapter-scripture { grid-column: 1 / -1; margin-top: 5px; }
+  .gospel-chapter { grid-template-columns: minmax(0, 1fr); gap: 19px; padding-block: 33px; }
+  /* Flatten only on mobile so the verses fit between the heading and explanation. */
+  .chapter-copy { display: contents; }
+  .chapter-marker { grid-row: 1; }
+  .chapter-copy h3 { grid-row: 2; font-size: 27px; margin-bottom: 0; }
+  .chapter-scripture { grid-column: 1 / -1; grid-row: 3; margin-top: 5px; }
+  .chapter-copy > p { grid-row: 4; }
   .chapter-scripture blockquote p { font-size: 18px; }
   .verse-details { margin-top: 14px; }
   .gospel-invitation { display: block; font-size: 15px; }
