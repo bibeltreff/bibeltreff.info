@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { cleanEntities } from './telegram-format.mjs';
 import { getAudio, getPhoto, downloadMedia, audioSourcePattern, photoSourcePattern } from './telegram-media.mjs';
 
-export const channel = 'bibelkreise';
+export const channel = 'bibeltreff_uni';
 const stateFile = new URL('../content/telegram.json', import.meta.url);
 const mediaTypes = ['photo', 'video', 'animation', 'audio', 'voice', 'video_note', 'document', 'sticker', 'poll', 'contact', 'location', 'venue', 'rich_message', 'live_photo', 'paid_media'];
 
@@ -77,7 +77,7 @@ export async function inspectBot(api) {
   if (bot.username?.toLowerCase() !== 'bibeltreff_bot') throw new Error('This token does not belong to @bibeltreff_bot.');
   const webhook = await api('getWebhookInfo');
   const member = await api('getChatMember', { chat_id: `@${channel}`, user_id: bot.id });
-  if (!['administrator', 'creator', 'member'].includes(member.status)) throw new Error('The bot is not a member of @bibelkreise.');
+  if (!['administrator', 'creator', 'member'].includes(member.status)) throw new Error('The bot is not a member of @bibeltreff_uni.');
   return { webhookActive: Boolean(webhook.url), pendingUpdates: webhook.pending_update_count, membership: member.status };
 }
 

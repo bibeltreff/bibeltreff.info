@@ -4,7 +4,7 @@ import { mergeUpdates, syncFeed, createApi } from './telegram.mjs';
 import { renderTelegram } from './telegram-render.mjs';
 
 const empty = () => ({ nextOffset: 0, posts: [] });
-const message = (id, text = `Post ${id}`) => ({ message_id: id, date: 1790188765, chat: { type: 'channel', username: 'bibelkreise' }, text });
+const message = (id, text = `Post ${id}`) => ({ message_id: id, date: 1790188765, chat: { type: 'channel', username: 'bibeltreff_uni' }, text });
 const update = (id, post) => ({ update_id: id, channel_post: post });
 
 test('keeps newest three by message ID, deduplicates, and applies edits', () => {
@@ -26,7 +26,7 @@ test('ignores private messages, other channels, and service messages', () => {
 });
 
 test('seeds only verifiable forwards from the target channel, preserving original ID/date', () => {
-  const forwarded = { update_id: 5, message: { ...message(99, 'Seed'), forward_origin: { type: 'channel', chat: { username: 'bibelkreise' }, message_id: 433, date: 1790188765 } } };
+  const forwarded = { update_id: 5, message: { ...message(99, 'Seed'), forward_origin: { type: 'channel', chat: { username: 'bibeltreff_uni' }, message_id: 433, date: 1790188765 } } };
   const state = mergeUpdates(empty(), [forwarded]);
   assert.equal(state.posts[0].id, 433);
   const changed = mergeUpdates(state, [{ update_id: 6, edited_channel_post: message(433, 'Edited') }, { ...forwarded, update_id: 7 }]);
@@ -85,8 +85,8 @@ test('renders complete escaped text, safe links, three cards, and no empty secti
     assert.ok(html.includes('&lt;script&gt;'));
     assert.ok(html.includes('A &amp; B'));
     assert.ok(!html.includes('<script>'));
-    assert.ok(html.includes('https://t.me/bibelkreise'));
-    assert.ok(html.includes('https://t.me/bibelkreise/3'));
+    assert.ok(html.includes('https://t.me/bibeltreff_uni'));
+    assert.ok(html.includes('https://t.me/bibeltreff_uni/3'));
   }
 });
 
@@ -121,7 +121,7 @@ const audioMessage = id => ({ ...message(id), audio: { file_id: 'opaque-file-id'
 test('captures caption entities and audio; re-forwarding upgrades legacy posts without reverting edits', () => {
   const legacy = mergeUpdates(empty(), [update(1, message(433))]);
   delete legacy.posts[0].entities;
-  const forwarded = { update_id: 2, message: { ...audioMessage(99), text: 'Post 433', forward_origin: { type: 'channel', chat: { username: 'bibelkreise' }, message_id: 433, date: 1790188765 } } };
+  const forwarded = { update_id: 2, message: { ...audioMessage(99), text: 'Post 433', forward_origin: { type: 'channel', chat: { username: 'bibeltreff_uni' }, message_id: 433, date: 1790188765 } } };
   const upgraded = mergeUpdates(legacy, [forwarded]);
   assert.equal(upgraded.posts[0].entities[0].type, 'bold');
   assert.equal(upgraded.posts[0].audio.extension, 'mp3');
@@ -201,7 +201,7 @@ const photoMessage = id => ({ ...message(id), photo: [
 test('imports the largest photo and enriches a legacy forward without changing its text', () => {
   assert.equal(getPhoto(photoMessage(1)).fileId, 'large');
   const legacy = mergeUpdates(empty(), [update(1, message(433))]);
-  const upgraded = mergeUpdates(legacy, [{ update_id: 2, message: { ...photoMessage(99), text: 'Post 433', forward_origin: { type: 'channel', chat: { username: 'bibelkreise' }, message_id: 433, date: 1790188765 } } }]);
+  const upgraded = mergeUpdates(legacy, [{ update_id: 2, message: { ...photoMessage(99), text: 'Post 433', forward_origin: { type: 'channel', chat: { username: 'bibeltreff_uni' }, message_id: 433, date: 1790188765 } } }]);
   assert.equal(upgraded.posts[0].photo.width, 1280);
   assert.equal(upgraded.posts[0].text, legacy.posts[0].text);
 });
@@ -220,7 +220,7 @@ test('downloads photos alongside audio, renders local images and cleans retired 
   assert.ok(html.includes('width="1280" height="850"'));
   assert.ok(html.includes('Open full-size photo'));
   assert.ok(!html.includes('<figcaption>'));
-  assert.ok(html.includes('https://t.me/bibelkreise/433'));
+  assert.ok(html.includes('https://t.me/bibeltreff_uni/433'));
   assert.ok(!html.includes('undefined'));
   await downloadMedia(state, () => assert.fail('Cache should include both attachments'), 'secret', options);
   await downloadMedia(empty(), api, 'secret', options);
