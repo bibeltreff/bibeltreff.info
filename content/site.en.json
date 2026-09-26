@@ -76,7 +76,7 @@
     },
     {
       "id": "loesung",
-      "label": "The Answer",
+      "label": "The Solution",
       "color": "red",
       "colorName": "Red",
       "keyword": "Love",
@@ -105,7 +105,7 @@
     },
     {
       "id": "wachstum",
-      "label": "Growth",
+      "label": "The Process",
       "color": "green",
       "colorName": "Green",
       "keyword": "Grow in faith",
