@@ -53,7 +53,7 @@ const slots = {
   testimonies: content.testimonies.map((testimony) => `<details class="testimony" id="zeugnis-${escape(testimony.id)}">
     <summary><span class="testimony-person"><span class="avatar" aria-hidden="true">${escape(testimony.name.split(' ').map(n => n[0]).join(''))}</span><span><strong>${escape(testimony.name)}</strong><span>${escape(ui.myTestimony)}</span></span></span>
     <span class="testimony-preview"><span class="testimony-headline">${ui.quoteOpen}${escape(testimony.headline)}${ui.quoteClose}</span><span class="testimony-intro">${escape(testimony.intro)}</span><span class="testimony-action"><span class="when-closed">${escape(ui.readTestimony)}</span><span class="when-open">${escape(ui.closeTestimony)}</span></span></span><span class="expand-icon" aria-hidden="true">+</span></summary>
-    <div class="testimony-body">${testimony.paragraphs.map(p => `<p>${escape(p)}</p>`).join('\n')}</div>
+    <div class="testimony-body">${testimony.paragraphs.map(p => typeof p === 'string' ? `<p>${escape(p)}</p>` : quote(p)).join('\n')}</div>
   </details>`).join('\n'),
   contact: links(content.contact, 'contact-link'),
   social: links(content.social)

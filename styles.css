@@ -187,6 +187,8 @@ summary::-webkit-details-marker { display: none; }
 .testimony[open] .when-open { display: inline; }
 .testimony-body { padding: 5px 94px 36px 0; margin-left: 249px; }
 .testimony-body p { margin-top: 18px; color: light-dark(#566271, #b1bccb); font-size: 17px; line-height: 1.8; }
+.testimony-body blockquote { margin-top: 24px; margin-bottom: 24px; }
+.testimony-body blockquote p { margin-top: 0; }
 .contact-section { padding: 42px 48px; display: grid; grid-template-columns: 1fr 240px; gap: 50px; align-items: center; background: light-dark(#edf3fa, #1d2d42); border: 1px solid light-dark(#dce5f1, #33465e); border-radius: 12px; }
 .contact-section h2 { font-size: 33px; }
 .contact-section p:last-child { margin-top: 17px; color: var(--muted); font-size: 16px; }
@@ -249,7 +251,8 @@ summary::-webkit-details-marker { display: none; }
   .color-label { font-size: 11px; }
   .color-arrow { font-size: 12px; }
   .color-tooltip { display: none; }
-  .gospel-chapter { grid-template-columns: minmax(0, 1fr); gap: 19px; padding-block: 33px; }
+  .gospel-chapter { grid-template-columns: minmax(0, 1fr); gap: 19px; padding: 33px 16px; }
+  .gospel-chapter::before { inset: 13px 0; }
   /* Flatten only on mobile so the verses fit between the heading and explanation. */
   .chapter-copy { display: contents; }
   .chapter-marker { grid-row: 1; }
