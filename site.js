@@ -46,6 +46,10 @@ themeControl.hidden = false;
 
 const header = document.querySelector('.site-header');
 const navigation = document.querySelector('.color-nav');
+const sectionLinks = [...document.querySelectorAll('.main-nav a[href^="#"]')].map(link => ({
+  link,
+  section: document.getElementById(link.hash.slice(1)),
+}));
 const chapters = [...document.querySelectorAll('.gospel-chapter')];
 const chapterLinks = [...document.querySelectorAll('[data-chapter]')];
 
@@ -55,9 +59,18 @@ function measureNavigation() {
 }
 
 let scheduled = false;
-function updateActiveChapter() {
+function updateActiveNavigation() {
   scheduled = false;
-  const readingLine = header.getBoundingClientRect().height + navigation.getBoundingClientRect().height + 60;
+  const headerHeight = header.getBoundingClientRect().height;
+  const sectionReadingLine = headerHeight + 24;
+  for (const { link, section } of sectionLinks) {
+    const bounds = section.getBoundingClientRect();
+    if (bounds.top <= sectionReadingLine && bounds.bottom > sectionReadingLine) {
+      link.setAttribute('aria-current', 'location');
+    } else link.removeAttribute('aria-current');
+  }
+
+  const readingLine = headerHeight + navigation.getBoundingClientRect().height + 60;
   const current = chapters.findLast(chapter => chapter.getBoundingClientRect().top <= readingLine) || chapters[0];
   for (const link of chapterLinks) {
     if (link.dataset.chapter === current.id) link.setAttribute('aria-current', 'location');
@@ -68,12 +81,12 @@ function updateActiveChapter() {
 function scheduleUpdate() {
   if (!scheduled) {
     scheduled = true;
-    requestAnimationFrame(updateActiveChapter);
+    requestAnimationFrame(updateActiveNavigation);
   }
 }
 
 measureNavigation();
-updateActiveChapter();
+updateActiveNavigation();
 window.addEventListener('scroll', scheduleUpdate, { passive: true });
 window.addEventListener('resize', () => { measureNavigation(); scheduleUpdate(); });
 if ('ResizeObserver' in window) {

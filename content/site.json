@@ -17,7 +17,7 @@
       "start": "13:15",
       "end": "13:50",
       "location": "Am grünen Tisch vor V9.02",
-      "address": "Pfaffenwaldring 9, Stuttgart",
+      "address": "Pfaffenwaldring 9, 70569Stuttgart",
       "note": "Gemeinsam die Bibel lesen und beten in der Mittagspause.",
       "map": "https://www.google.com/maps/search/?api=1&query=48.74646666293245%2C9.105809034911882",
       "online": "https://us02web.zoom.us/j/106793110?pwd=dUNLMEJ2L3M4SnBkSThTY1A5cVU0QT09"
@@ -178,13 +178,13 @@
       "headline": "Gott als den erfahren, der mir Leben und Kraft gibt.",
       "intro": "Vom Wissen über Gott zu einer lebendigen Beziehung mit ihm.",
       "paragraphs": [
-        "Als ich das erste Mal in den Bibelkreis gekommen bin, waren Gott und Jesus Christus eine bloße Erkenntnis für mich. Doch ist der Herr Jesus viel mehr als das. In Johannes 14:6, einem Vers, den ihr sicherlich alle kennt, sagt der Herr von sich selbst: „Ich bin der Weg und die Wahrheit und das Leben.“",
+        "Als ich das erste Mal in den Bibeltreff gekommen bin, waren Gott und Jesus Christus eine bloße Erkenntnis für mich. Doch ist der Herr Jesus viel mehr als das. In Johannes 14:6, einem Vers, den ihr sicherlich alle kennt, sagt der Herr von sich selbst: „Ich bin der Weg und die Wahrheit und das Leben.“",
         "Dieses Leben hatte ich noch nicht erfahren. Ich hatte die Erkenntnis Gottes und Jesu Christi, aber ich blieb trotzdem derselbe und mein Leben veränderte sich nicht. Ich hatte keine Kraft, Schwachheiten oder Sünde zu überwinden.",
-        "Aus Verzweiflung bin ich dann in den Bibelkreis gegangen, da ich selbst nicht mehr weiterwusste. Es war zunächst befremdlich aufgrund meines muslimischen Hintergrunds und da ich noch nie Gemeinschaft mit Christen hatte, die den Glauben wirklich ausleben.",
+        "Aus Verzweiflung bin ich dann in den Bibeltreff gegangen, da ich selbst nicht mehr weiterwusste. Es war zunächst befremdlich aufgrund meines muslimischen Hintergrunds und da ich noch nie Gemeinschaft mit Christen hatte, die den Glauben wirklich ausleben.",
         "Aber Woche für Woche bin ich wiedergekommen, und es war nicht um der Erkenntnis willen. Jetzt im Nachhinein weiß ich, dass es der Geschmack des Lebens war.",
         "Das ist auch der Fokus im Bibeltreff: wie wir in die Erfahrung des Wortes Gottes kommen. Es geht also nicht um Lehre, Erkenntnis oder Theologie, sondern um das Leben. Um eine lebendige Beziehung mit einem lebendigen Gott.",
         "Die Gemeinschaft und der Aufbau mit den Geschwistern im Bibeltreff haben mich wirklich in die Erfahrung des Wortes hineingebracht. Durch die Anwendung des Wortes aus dem Bibeltreff habe ich zum ersten Mal Gott als den erfahren, der mir Leben und Kraft gibt.",
-        "Ich habe mich schließlich ein für alle Mal in den Leib Christi hineintaufen lassen (vgl. 1. Kor. 12:13), und damit beginnt dann die wirkliche Reise des Christenlebens. Durch diesen Prozess hindurch hat sich mein Leben gewandelt, und ich habe durch die Kraft des Herrn Schwachheiten überwunden, die mir zuvor unmöglich schienen.",
+        "Ich habe mich schließlich ein für alle Mal in den Leib Christi hineintaufen lassen (vgl. 1.Kor. 12:13), und damit beginnt dann die wirkliche Reise des Christenlebens. Durch diesen Prozess hindurch hat sich mein Leben gewandelt, und ich habe durch die Kraft des Herrn Schwachheiten überwunden, die mir zuvor unmöglich schienen.",
         "Ich kann den Herrn nur loben und ihm danken, dass er ein lebendiger und erfahrbarer Gott ist und ich so tolle Geschwister im Glauben kennenlernen durfte."
       ]
     }
@@ -205,16 +205,8 @@
   ],
   "social": [
     {
-      "label": "Instagram",
-      "url": "https://www.instagram.com/bibeltreff/"
-    },
-    {
       "label": "Telegram-Kanal",
       "url": "https://t.me/bibelkreise"
-    },
-    {
-      "label": "WhatsApp-Kanal",
-      "url": "https://whatsapp.com/channel/0029Va8EgPtBlHpUBRFnex2I"
     }
   ]
 }
