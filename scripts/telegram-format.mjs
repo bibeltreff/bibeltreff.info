@@ -24,7 +24,7 @@ function tags(entity, text) {
   return [`<a href="${escapeHtml(url)}" rel="noopener noreferrer">`, '</a>'];
 }
 
-export function renderText(text, entities = []) {
+export function renderText(text, entities = [], { compactParagraphs = false } = {}) {
   const ranges = cleanEntities(text, entities).map(e => ({ ...e, end: e.offset + e.length, tags: tags(e, text) })).filter(e => e.tags)
     .sort((a, b) => Number(blocks.has(b.type)) - Number(blocks.has(a.type)) || a.offset - b.offset || b.end - a.end);
   const boundaries = [...new Set([0, text.length, ...ranges.flatMap(e => [e.offset, e.end])])].sort((a, b) => a - b);
@@ -43,7 +43,12 @@ export function renderText(text, entities = []) {
     while (common < active.length && common < next.length && active[common] === next[common]) common++;
     html += active.slice(common).reverse().map(e => e.tags[1]).join('');
     html += next.slice(common).map(e => e.tags[0]).join('');
-    html += escapeHtml(text.slice(start, boundaries[i + 1]));
+    let segment = escapeHtml(text.slice(start, boundaries[i + 1]));
+    // Compact blank lines after applying entity offsets; preserve code whitespace.
+    if (compactParagraphs && !next.some(e => e.type === 'pre' || e.type === 'code')) {
+      segment = segment.replace(/(?:\r?\n){2,}/g, '<span class="telegram-paragraph-gap" aria-hidden="true"></span>');
+    }
+    html += segment;
     active = next;
   }
   return html + active.reverse().map(e => e.tags[1]).join('');

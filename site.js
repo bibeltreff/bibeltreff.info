@@ -94,3 +94,23 @@ if ('ResizeObserver' in window) {
   observer.observe(header);
   observer.observe(navigation);
 }
+
+// Open the chat at the latest message, without moving the page or stealing focus.
+// Stop following as soon as the visitor interacts, so reading older posts is stable.
+const telegramWindow = document.querySelector('.telegram-window');
+if (telegramWindow) {
+  let followNewest = true;
+  const showNewest = () => {
+    if (followNewest) telegramWindow.scrollTop = telegramWindow.scrollHeight;
+  };
+  for (const event of ['wheel', 'touchstart', 'pointerdown', 'keydown', 'focusin']) {
+    telegramWindow.addEventListener(event, () => { followNewest = false; }, { passive: true });
+  }
+  requestAnimationFrame(showNewest);
+  // Font and image loading can change the message heights after the first paint.
+  if (document.fonts) document.fonts.ready.then(showNewest);
+  if ('ResizeObserver' in window) {
+    const chatObserver = new ResizeObserver(showNewest);
+    chatObserver.observe(telegramWindow.querySelector('.telegram-grid'));
+  }
+}
