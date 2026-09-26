@@ -1,23 +1,67 @@
 {
-  "nextOffset": 244344102,
+  "nextOffset": 244344108,
   "posts": [
     {
       "id": 433,
       "date": "2026-09-23T18:39:25.000Z",
       "text": "Aus dem Bibeltreff:\n\nDer neue und der alte Bund\n\nHebr. 8:1-5,11",
-      "hasMedia": true
+      "hasMedia": true,
+      "entities": [
+        {
+          "type": "bold",
+          "offset": 21,
+          "length": 26
+        }
+      ],
+      "audio": {
+        "fileId": "CQACAgIAAxkBAAMGarfLezl74Zg924gz9YaGmmcHuAgAAlOoAALrmaFJFJvXqxFB6js9BA",
+        "key": "14a328443baaeb39",
+        "extension": "mp3",
+        "title": "Der neue und der alte Bund",
+        "size": 11834202,
+        "src": "assets/telegram/audio-433-14a328443baaeb39.mp3"
+      }
     },
     {
       "id": 432,
       "date": "2026-09-17T20:15:06.000Z",
       "text": "Aus dem Bibeltreff:\n\nGott spricht zu uns in dem Sohn, der Gehorsam lernte indem, was er litt\n\nHebr. 1:1-2; Apg. 15; Hebr. 5:7-10",
-      "hasMedia": true
+      "hasMedia": true,
+      "entities": [
+        {
+          "type": "bold",
+          "offset": 21,
+          "length": 71
+        }
+      ],
+      "audio": {
+        "fileId": "CQACAgIAAxkBAAMFarfLcfqYOE7mLBr8BzXZYedOHNMAAlGnAAJcSGlJwvlYS-dLQA89BA",
+        "key": "2ccf9a92bf6739d7",
+        "extension": "mp3",
+        "title": "Gott spricht zu uns in dem Sohn, der Gehorsam lernte an dem, was…",
+        "size": 21179608
+      }
     },
     {
       "id": 430,
       "date": "2026-09-09T16:55:06.000Z",
       "text": "Aus dem Bibeltreff:\n\nÜberfluss der Geschwister vom Jugendwochende über die Feste des Herrn\n\nHebr 7:1-2; 4. Mose 10:9; 2. Mose 5:1-3; 2. Mose 7:26",
-      "hasMedia": true
+      "hasMedia": true,
+      "entities": [
+        {
+          "type": "bold",
+          "offset": 19,
+          "length": 71
+        }
+      ],
+      "audio": {
+        "fileId": "CQACAgIAAxkBAAMEarfLZuaHsAjciQ-gSG2eXHsUXJwAAv2mAAJeWxFJW0vRKytYLRI9BA",
+        "key": "882237e5eb72e0e6",
+        "extension": "mp3",
+        "title": "Überfluss der Geschwister vom Jugendwochende über die Feste des…",
+        "size": 16697388,
+        "src": "assets/telegram/audio-430-882237e5eb72e0e6.mp3"
+      }
     }
   ]
 }
