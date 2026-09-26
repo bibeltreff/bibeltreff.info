@@ -54,6 +54,12 @@ h2 { font-size: clamp(1.85rem, 3.3vw, 2.5rem); letter-spacing: -.035em; }
 .hero { padding-block: 85px 69px; text-align: center; }
 .location-badge { display: inline-flex; align-items: center; gap: 9px; padding: 5px 13px; color: light-dark(#466185, #acc8eb); background: light-dark(#edf3fa, #1d2d42); border: 1px solid light-dark(#e0e8f2, #33465e); border-radius: 50px; font-size: 13px; font-weight: 500; letter-spacing: .01em; }
 .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.badge-dot[hidden] { display: none; }
+.badge-dot:not([hidden]) { animation: meeting-pulse 4s ease-in-out infinite; }
+@keyframes meeting-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
 h1 { margin-block: 24px 22px; font-size: clamp(2.7rem, 5.2vw, 4.1rem); font-weight: 700; line-height: 1.06; letter-spacing: -.045em; }
 h1 > span { color: var(--accent); }
 .hero-intro { max-width: 590px; margin-inline: auto; color: var(--muted); font-size: 19px; line-height: 1.65; }
@@ -95,6 +101,32 @@ h1 > span { color: var(--accent); }
 .meeting-featured { background: var(--gold-soft); border-color: var(--gold-line); }
 .meeting-featured .meeting-top .eyebrow { color: var(--gold-ink); }
 .meeting-featured .meeting-links { border-top-color: var(--gold-line); }
+@property --meeting-border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.meeting-active { position: relative; --meeting-highlight: var(--accent); }
+.meeting-active.meeting-featured { --meeting-highlight: var(--gold); }
+.meeting-active::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+  background: conic-gradient(from var(--meeting-border-angle),
+    color-mix(in srgb, var(--meeting-highlight) 12%, transparent) 0deg,
+    color-mix(in srgb, var(--meeting-highlight) 12%, transparent) 230deg,
+    color-mix(in srgb, var(--meeting-highlight) 55%, transparent) 300deg,
+    color-mix(in srgb, var(--meeting-highlight) 12%, transparent) 360deg);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: meeting-border-orbit 4s linear infinite;
+}
+@keyframes meeting-border-orbit {
+  to { --meeting-border-angle: 360deg; }
+}
 .meeting-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 23px; color: var(--muted); }
 .meeting-number { font-size: 12px; color: light-dark(#77889e, #a0b2c9); font-variant-numeric: tabular-nums; }
 .meeting-card h3 { font-size: 27px; letter-spacing: -.025em; }

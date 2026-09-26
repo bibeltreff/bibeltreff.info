@@ -27,6 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="site.js" defer></script>
+  <script src="assets/meeting-status.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#inhalt">{{skip}}</a>
@@ -65,7 +66,7 @@
 
   <main id="inhalt">
     <section class="hero wrap" id="start" aria-labelledby="hero-title">
-      <p class="location-badge"><span class="badge-dot" aria-hidden="true"></span>{{eyebrow}}</p>
+      <p class="location-badge"><span class="badge-dot" role="img" aria-label="{{meetingNow}}" title="{{meetingNow}}" hidden></span>{{eyebrow}}</p>
       <p class="hero-scripture">{{quoteOpen}}{{verse}}{{quoteClose}} <span>{{verseReference}}</span></p>
       <h1 id="hero-title">{{heading}}<br><span>{{accent}}</span></h1>
       <p class="hero-intro">{{intro}}</p>

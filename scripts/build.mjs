@@ -9,6 +9,10 @@ const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.jso
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const arrow = '<span aria-hidden="true">↗</span>';
 const links = (items, className = '') => items.map((item) => `<a class="${className}" href="${escape(item.url)}">${escape(item.label)} ${arrow}</a>`).join('\n');
+const weekdays = {
+  de: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+};
 
 // Generate full HTML at build time: content and navigation work without JavaScript.
 // A future CMS exporter only needs to provide the same content/site.json schema.
@@ -18,6 +22,9 @@ const contentFile = english ? 'site.en.json' : 'site.json';
 const outputFile = english ? 'en.html' : 'index.html';
 const content = JSON.parse(await readFile(path.join(root, 'content', contentFile), 'utf8'));
 const ui = JSON.parse(await readFile(path.join(root, 'content', `ui.${lang}.json`), 'utf8'));
+for (const meeting of content.meetings) {
+  if (!weekdays[lang].includes(meeting.day)) throw new Error(`Unknown meeting day: ${meeting.day}`);
+}
 const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${escape(verse.text)}${ui.quoteClose}</p><cite>${escape(verse.reference)}</cite></blockquote>`;
 const slots = {
   ...Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)])),
@@ -36,7 +43,7 @@ const slots = {
   intro: escape(content.hero.text),
   verse: escape(content.hero.verse),
   verseReference: escape(content.hero.verseReference),
-  meetings: content.meetings.map((meeting, index) => `<article class="meeting-card${index === 0 ? ' meeting-featured' : ''}">
+  meetings: content.meetings.map((meeting, index) => `<article class="meeting-card${index === 0 ? ' meeting-featured' : ''}" data-meeting-day="${weekdays[lang].indexOf(meeting.day)}" data-meeting-start="${escape(meeting.start)}" data-meeting-end="${escape(meeting.end)}">
     <div class="meeting-top"><span class="eyebrow">${escape(meeting.label)}</span><span class="meeting-number" aria-hidden="true">0${index + 1}</span></div>
     <h3>${escape(meeting.day)}</h3>
     <p class="meeting-time"><time>${escape(meeting.start)}</time><span aria-hidden="true">–</span><span class="sr-only">${escape(ui.to)}</span><time>${escape(meeting.end)}</time>${ui.timeSuffix ? ` <span>${escape(ui.timeSuffix)}</span>` : ''}</p>

@@ -27,6 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="site.js" defer></script>
+  <script src="assets/meeting-status.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#inhalt">Zum Inhalt</a>
@@ -65,7 +66,7 @@
 
   <main id="inhalt">
     <section class="hero wrap" id="start" aria-labelledby="hero-title">
-      <p class="location-badge"><span class="badge-dot" aria-hidden="true"></span>Bibeltreff · Stuttgart</p>
+      <p class="location-badge"><span class="badge-dot" role="img" aria-label="Gerade ist Treffzeit" title="Gerade ist Treffzeit" hidden></span>Bibeltreff · Stuttgart</p>
       <p class="hero-scripture">„Das Wort Gottes ist lebendig und wirksam.“ <span>Hebräer 4:12</span></p>
       <h1 id="hero-title">Gottes Wort erfahren<br><span>Jesus kennenlernen</span></h1>
       <p class="hero-intro">Gemeinsam lesen wir die Bibel und erfahren, wie Gottes Wort in unserem Leben wirkt. Ob du glaubst, suchst oder einfach neugierig bist: Du bist herzlich eingeladen.</p>
@@ -74,7 +75,7 @@
 
     <section class="meetings-section section wrap" id="treffen" aria-labelledby="meetings-title">
       <div class="section-heading"><div><p class="eyebrow section-label">01 / Herzliche Einladung</p><h2 id="meetings-title">Komm, schmeck und sieh!</h2></div><p>Unter der Woche oder am Sonntag.<br> Wir freuen uns, dich kennenzulernen.</p></div>
-      <div class="meeting-grid"><article class="meeting-card meeting-featured">
+      <div class="meeting-grid"><article class="meeting-card meeting-featured" data-meeting-day="3" data-meeting-start="13:15" data-meeting-end="13:50">
     <div class="meeting-top"><span class="eyebrow">Mitten im Uni-Alltag</span><span class="meeting-number" aria-hidden="true">01</span></div>
     <h3>Mittwoch</h3>
     <p class="meeting-time"><time>13:15</time><span aria-hidden="true">–</span><span class="sr-only">bis</span><time>13:50</time> <span>Uhr</span></p>
@@ -82,7 +83,7 @@
     <p class="meeting-note">Gemeinsam die Bibel lesen und beten in der Mittagspause.</p>
     <div class="meeting-links"><a href="https://www.google.com/maps/search/?api=1&amp;query=48.74646666293245%2C9.105809034911882">Route ansehen <span aria-hidden="true">↗</span></a><a href="https://us02web.zoom.us/j/106793110?pwd=dUNLMEJ2L3M4SnBkSThTY1A5cVU0QT09">Online dabei <span aria-hidden="true">↗</span></a></div>
   </article>
-<article class="meeting-card">
+<article class="meeting-card" data-meeting-day="4" data-meeting-start="19:30" data-meeting-end="21:00">
     <div class="meeting-top"><span class="eyebrow">Zeit für Gottes Wort</span><span class="meeting-number" aria-hidden="true">02</span></div>
     <h3>Donnerstag</h3>
     <p class="meeting-time"><time>19:30</time><span aria-hidden="true">–</span><span class="sr-only">bis</span><time>21:00</time> <span>Uhr</span></p>
@@ -90,7 +91,7 @@
     <p class="meeting-note">Zusammen den Herrn loben, Erfahrungen teilen und im Glauben wachsen.</p>
     <div class="meeting-links"><a href="https://www.google.com/maps/search/?api=1&amp;query=Handwerkstrasse+5+70565+Stuttgart">Route ansehen <span aria-hidden="true">↗</span></a></div>
   </article>
-<article class="meeting-card">
+<article class="meeting-card" data-meeting-day="0" data-meeting-start="10:00" data-meeting-end="12:30">
     <div class="meeting-top"><span class="eyebrow">Gemeinsam Gott anbeten</span><span class="meeting-number" aria-hidden="true">03</span></div>
     <h3>Sonntag</h3>
     <p class="meeting-time"><time>10:00</time><span aria-hidden="true">–</span><span class="sr-only">bis</span><time>12:30</time> <span>Uhr</span></p>
@@ -199,7 +200,7 @@
     <div class="chapter-copy"><h3 id="lohn-title">Was hält Jesus für dich bereit?</h3><p>Wenn du Jesus folgst und im Glauben zur Reife kommst, erhältst du den höchsten Lohn: Du wirst Gott in seinem kommenden Reich als König und Priester dienen. Jesus kommt bald zurück!</p></div>
     <div class="chapter-scripture"><blockquote><p>„… und [Jesus] hat sie unserem Gott zu Königen und Priestern gemacht, und sie werden herrschen auf Erden.“</p><cite>Offenbarung 5:9–10</cite></blockquote><blockquote><p>„Jesus Christus spricht: Siehe, ich komme schnell und mein Lohn ist bei mir, um jedem zu geben, wie sein Werk ist.“</p><cite>Offenbarung 22:12</cite></blockquote></div>
   </article></div>
-        <div class="gospel-invitation"><span>Was bedeutet das für dich? Lass uns darüber sprechen.</span><a href="#treffen">Gemeinsam erfahren <span aria-hidden="true">→</span></a></div>
+        <div class="gospel-invitation"><span>Was bedeutet das für dich? Lass uns darüber sprechen.</span><a href="#treffen">Gemeinsam entdecken <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
 

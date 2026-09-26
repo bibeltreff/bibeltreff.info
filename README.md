@@ -20,6 +20,7 @@ npm run dev
 - `src/index.html`: Gemeinsame HTML-Vorlage mit Platzhaltern für beide Sprachen.
 - `styles.css`: Responsive Gestaltung; Hauptfarbe ist das Blau aus dem PDF `#1d61b2` (`--accent`).
 - `site.js`: Markierung des aktuellen Evangeliums-Themas und Messung der haftenden Navigation.
+- `assets/meeting-status.js`: Zeigt den sanft pulsierenden blauen Punkt nur zu den veröffentlichten wöchentlichen Treffzeiten (Zeitzone Europe/Berlin). Bei reduzierter Bewegung bleibt er ruhig; ohne JavaScript bleibt er verborgen.
 - `assets/documents/evangelium-in-farben.pdf`: Unverändertes Originalheft als Download.
 - `index.html` und `en.html`: Generierte deutsche und englische Seiten. Änderungen hier werden beim Bauen überschrieben.
 
