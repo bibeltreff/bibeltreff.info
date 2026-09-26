@@ -30,7 +30,7 @@
   <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
     <symbol id="icon-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></symbol>
     <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
-    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></symbol>
     <symbol id="icon-system" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
     <symbol id="icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
     <symbol id="icon-dark" viewBox="0 0 24 24"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></symbol>
@@ -59,10 +59,10 @@
   <main id="inhalt">
     <section class="hero wrap" id="start" aria-labelledby="hero-title">
       <p class="location-badge"><span class="badge-dot" aria-hidden="true"></span>{{eyebrow}}</p>
+      <p class="hero-scripture">„{{verse}}“ <span>{{verseReference}}</span></p>
       <h1 id="hero-title">{{heading}}<br><span>{{accent}}</span></h1>
       <p class="hero-intro">{{intro}}</p>
-      <p class="hero-scripture">„{{verse}}“ <span>{{verseReference}}</span></p>
-      <div class="hero-actions"><a class="button button-primary" href="#treffen">Komm vorbei <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><a class="button button-quiet" href="#evangelium">Evangelium kennenlernen <span aria-hidden="true">↓</span></a></div>
+      <div class="hero-actions"><a class="button button-primary" href="#treffen"><span class="button-label">Komm vorbei</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a><a class="button button-quiet" href="#evangelium"><span class="button-label">Evangelium kennenlernen</span><svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a></div>
     </section>
 
     <section class="meetings-section section wrap" id="treffen" aria-labelledby="meetings-title">
