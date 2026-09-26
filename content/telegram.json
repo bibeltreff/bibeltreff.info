@@ -1,4 +1,23 @@
 {
-  "nextOffset": 0,
-  "posts": []
+  "nextOffset": 244344102,
+  "posts": [
+    {
+      "id": 433,
+      "date": "2026-09-23T18:39:25.000Z",
+      "text": "Aus dem Bibeltreff:\n\nDer neue und der alte Bund\n\nHebr. 8:1-5,11",
+      "hasMedia": true
+    },
+    {
+      "id": 432,
+      "date": "2026-09-17T20:15:06.000Z",
+      "text": "Aus dem Bibeltreff:\n\nGott spricht zu uns in dem Sohn, der Gehorsam lernte indem, was er litt\n\nHebr. 1:1-2; Apg. 15; Hebr. 5:7-10",
+      "hasMedia": true
+    },
+    {
+      "id": 430,
+      "date": "2026-09-09T16:55:06.000Z",
+      "text": "Aus dem Bibeltreff:\n\nÜberfluss der Geschwister vom Jugendwochende über die Feste des Herrn\n\nHebr 7:1-2; 4. Mose 10:9; 2. Mose 5:1-3; 2. Mose 7:26",
+      "hasMedia": true
+    }
+  ]
 }
