@@ -21,6 +21,8 @@ npm run dev
 - `assets/documents/evangelium-in-farben.pdf`: Unverändertes Originalheft als Download.
 - `index.html`: Generierte, vollständige Seite. Änderungen hier werden beim Bauen überschrieben.
 
+Das kleine Symbol neben „Sag Hallo“ bietet die Farbschemata Systemstandard, Hell und Dunkel an. Standardmäßig folgt die Seite dem System, auch ohne JavaScript. Eine manuelle Auswahl wird lokal im Browser gespeichert; „Systemstandard“ hebt sie wieder auf. Das Drucklayout bleibt hell.
+
 Nach Änderungen an Inhalten oder Vorlage:
 
 ```sh

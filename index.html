@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1d61b2">
+  <script>
+    try {
+      const theme = localStorage.getItem('bibeltreff-theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+    } catch { /* The system theme also works when storage is unavailable. */ }
+  </script>
   <title>Bibeltreff Stuttgart · Gottes Wort erfahren</title>
   <meta name="description" content="Gottes Wort erfahren und Jesus Christus kennenlernen. Bibeltreff in Stuttgart-Vaihingen: mittwochs an der Uni, donnerstags und sonntags in der Handwerkstraße. Du bist eingeladen!">
   <link rel="canonical" href="https://bibeltreff.info/">
@@ -25,13 +31,28 @@
     <symbol id="icon-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></symbol>
     <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="icon-system" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+    <symbol id="icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="icon-dark" viewBox="0 0 24 24"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></symbol>
   </defs></svg>
 
   <header class="site-header">
     <div class="header-inner wrap">
       <a class="brand" href="#start" aria-label="Bibeltreff – Startseite"><span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg></span>Bibeltreff</a>
       <nav class="main-nav" aria-label="Hauptnavigation"><a href="#treffen">Treffen</a><a href="#evangelium">Evangelium</a><a href="#zeugnisse">Zeugnisse</a></nav>
-      <a class="header-contact" href="#kontakt">Sag Hallo <span aria-hidden="true">↗</span></a>
+      <div class="header-actions">
+        <details class="theme-control" hidden>
+          <summary class="theme-toggle" title="Farbschema: Systemstandard" aria-label="Farbschema: Systemstandard">
+            <svg class="icon" aria-hidden="true"><use href="#icon-system"/></svg>
+          </summary>
+          <div class="theme-menu" role="group" aria-label="Farbschema">
+            <button type="button" data-theme-option="system" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#icon-system"/></svg><span>Systemstandard</span></button>
+            <button type="button" data-theme-option="light" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-light"/></svg><span>Hell</span></button>
+            <button type="button" data-theme-option="dark" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-dark"/></svg><span>Dunkel</span></button>
+          </div>
+        </details>
+        <a class="header-contact" href="#kontakt">Sag Hallo <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </header>
 
