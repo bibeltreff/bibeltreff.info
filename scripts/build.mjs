@@ -36,7 +36,7 @@ const slots = {
   chapters: content.gospel.map((chapter, index) => `<article class="gospel-chapter" id="${escape(chapter.id)}" aria-labelledby="${escape(chapter.id)}-title">
     <div class="chapter-marker"><span class="chapter-dot color-${escape(chapter.color)}" aria-hidden="true"></span><span>0${index + 1} / ${escape(chapter.label)}</span></div>
     <div class="chapter-copy"><h3 id="${escape(chapter.id)}-title">${escape(chapter.question)}</h3><p>${escape(chapter.text)}</p></div>
-    <div class="chapter-scripture">${quote(chapter.verses[0])}${chapter.verses.length > 1 ? `<details class="verse-details"><summary>Weitere Bibelstellen <span aria-hidden="true">+</span></summary><div>${chapter.verses.slice(1).map(quote).join('')}</div></details>` : ''}</div>
+    <div class="chapter-scripture">${chapter.verses.map(quote).join('')}${chapter.moreVerses?.length ? `<details class="verse-details"><summary>Weitere Bibelstellen <span aria-hidden="true">+</span></summary><div>${chapter.moreVerses.map(quote).join('')}</div></details>` : ''}</div>
   </article>`).join('\n'),
   testimonies: content.testimonies.map((testimony) => `<details class="testimony" id="zeugnis-${escape(testimony.id)}">
     <summary><span class="testimony-person"><span class="avatar" aria-hidden="true">${escape(testimony.name.split(' ').map(n => n[0]).join(''))}</span><span><strong>${escape(testimony.name)}</strong><span>Mein Zeugnis</span></span></span>
