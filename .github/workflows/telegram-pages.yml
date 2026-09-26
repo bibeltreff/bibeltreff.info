@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '17 * * * *'
+    # 18:17 UTC: 19:17 in Berlin in winter, 20:17 in summer.
+    - cron: '17 18 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -46,7 +47,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: npm run telegram:sync
+      - name: Fetch Telegram messages
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'sync')
+        run: npm run telegram:sync
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_SYNC_ENABLED: 'true'

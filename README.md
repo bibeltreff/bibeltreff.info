@@ -78,9 +78,9 @@ Die Website kann Texte und Bildunterschriften aus `@bibelkreise` als drei Karten
 3. Unter **Actions → Telegram and GitHub Pages → Run workflow** zunächst `mode: inspect` auswählen. Die Ausgabe zeigt nur `webhookActive`, `pendingUpdates` und `membership`. Diese Prüfung verändert keine Verbindung und bestätigt keine Updates.
 4. Bei `webhookActive: true` zuerst den bisherigen Dienst identifizieren. Der Collector löscht den Webhook niemals automatisch. Auch bei `false` prüfen, ob auf einem alten Server oder bei einem Bot-Dienst noch ein Polling-Programm läuft; das lässt sich über die API nicht zuverlässig erkennen. Für diesen Collector darf kein anderer Empfänger den Bot abfragen.
 5. Unter **Settings → Pages → Build and deployment → Source** auf **GitHub Actions** umstellen. Der Workflow veröffentlicht nur die Website-Dateien, nicht Quellcode oder den Update-Offset. Er schreibt den Feed und die generierten Seiten nach `main`; Branch-Regeln müssen diesen Workflow-Push erlauben.
-6. Unter **Settings → Secrets and variables → Actions → Variables** die Repository-Variable `TELEGRAM_SYNC_ENABLED` auf `true` setzen. Danach den Workflow einmal mit `mode: sync` starten. Der Workflow läuft auch bei Pushes auf `main` und stündlich zur Minute 17. GitHub kann geplante Läufe verzögern und bei längerer Repository-Inaktivität deaktivieren; fehlgeschlagene oder ausbleibende Läufe beachten.
+6. Unter **Settings → Secrets and variables → Actions → Variables** die Repository-Variable `TELEGRAM_SYNC_ENABLED` auf `true` setzen. Danach den Workflow einmal mit `mode: sync` starten. Der Telegram-Import läuft einmal täglich um 18:17 UTC (19:17 Uhr in Berlin im Winter, 20:17 Uhr im Sommer). Pushes auf `main` bauen und veröffentlichen die Website mit den bereits gespeicherten Nachrichten, ohne Telegram erneut abzufragen. GitHub kann geplante Läufe verzögern und bei längerer Repository-Inaktivität deaktivieren; fehlgeschlagene oder ausbleibende Läufe beachten.
 
-Der Workflow bestätigt bei Telegram nur Updates, deren Zustand bereits in einem vorherigen Lauf gespeichert wurde. Neue Updates werden zunächst zusammen mit den drei Nachrichten versioniert. Bei einem fehlgeschlagenen Commit/Push wird der noch unbestätigte Stapel beim nächsten Lauf erneut eingelesen. Pro Lauf werden bis zu 100 Updates verarbeitet; bei einem größeren Rückstand weitere Läufe auslösen. Updates hält Telegram höchstens 24 Stunden vor; nach längeren Ausfällen können erneute manuelle Importe nötig sein.
+Der Workflow bestätigt bei Telegram nur Updates, deren Zustand bereits in einem vorherigen Lauf gespeichert wurde. Neue Updates werden zunächst zusammen mit den drei Nachrichten versioniert. Bei einem fehlgeschlagenen Commit/Push wird der noch unbestätigte Stapel beim nächsten Lauf erneut eingelesen. Pro Lauf werden bis zu 100 Updates verarbeitet; bei einem größeren Rückstand weitere Läufe auslösen. Updates hält Telegram höchstens 24 Stunden vor. Beim täglichen Abruf gibt es daher keinen Zeitpuffer: Verzögerte oder ausgefallene Läufe können Nachrichten verpassen; diese müssen gegebenenfalls erneut an den Bot weitergeleitet werden.
 
 ### Die vorhandenen drei Nachrichten übernehmen
 
@@ -106,11 +106,11 @@ Einen bereits vorhandenen `nextOffset` unverändert lassen. Danach bauen, prüfe
 
 ### Wann läuft der Workflow?
 
-- **Push nach `main`**: Auch normale Inhalts- oder Codeänderungen starten Sync, Build, Prüfungen und Deployment. Ein rein lokaler Commit oder ein Push in einen anderen Branch startet diesen Workflow nicht.
-- **Stündlich zur Minute 17**: Neue Telegram-Nachrichten werden abgeholt; das Veröffentlichen einer Kanalnachricht löst selbst keinen sofortigen Workflow aus.
+- **Push nach `main`**: Normale Inhalts- oder Codeänderungen starten Build, Prüfungen und Deployment mit dem gespeicherten Telegram-Feed; es erfolgt kein neuer Telegram-Abruf. Ein rein lokaler Commit oder ein Push in einen anderen Branch startet diesen Workflow nicht.
+- **Einmal täglich um 18:17 UTC**: Neue Telegram-Nachrichten werden abgeholt; das Veröffentlichen einer Kanalnachricht löst selbst keinen sofortigen Workflow aus.
 - **Manuell**: `inspect` prüft nur die Bot-Verbindung; `sync` aktualisiert und veröffentlicht.
 
-Sync und Deployment benötigen `TELEGRAM_SYNC_ENABLED=true`. Ein Lauf holt neue bzw. bearbeitete Beiträge, behält die drei höchsten Nachrichten-IDs, lädt unterstütztes Audio herunter, baut beide Sprachen, prüft sie und speichert Feed, Audio und generierte Seiten im Repository. Danach veröffentlicht er die Website auf GitHub Pages. Der eigene Commit mit dem `GITHUB_TOKEN` löst keinen weiteren Push-Workflow aus. Bei einem Fehler vor dem Deployment bleibt die bisherige Website online.
+Sync und Deployment benötigen `TELEGRAM_SYNC_ENABLED=true`. Ein geplanter oder manuell gestarteter Sync holt neue bzw. bearbeitete Beiträge, behält die drei höchsten Nachrichten-IDs, lädt unterstütztes Audio herunter, baut beide Sprachen, prüft sie und speichert Feed, Audio und generierte Seiten im Repository. Danach veröffentlicht er die Website auf GitHub Pages. Der eigene Commit mit dem `GITHUB_TOKEN` löst keinen weiteren Push-Workflow aus. Bei einem Fehler vor dem Deployment bleibt die bisherige Website online.
 
 ### Audio, Fotos und Formatierungen
 
