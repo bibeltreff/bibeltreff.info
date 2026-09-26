@@ -88,3 +88,105 @@ test('renders complete escaped text, safe links, three cards, and no empty secti
     assert.ok(html.includes('https://t.me/bibelkreise/3'));
   }
 });
+
+// Formatting and local audio regression coverage.
+import { cleanEntities, renderText } from './telegram-format.mjs';
+import { getAudio, downloadAudio, readAudioResponse, maxAudioBytes } from './telegram-audio.mjs';
+import { mkdtemp, readFile, writeFile, readdir, unlink, rmdir } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+
+test('formatting uses UTF-16 offsets and preserves nested styles and line breaks', () => {
+  const text = '🎧 Bold title\nText';
+  assert.equal(renderText(text, [
+    { type: 'bold', offset: 3, length: 10 },
+    { type: 'italic', offset: 8, length: 5 }
+  ]), '🎧 <strong>Bold <em>title</em></strong>\nText');
+  assert.equal(renderText('abcde', [{ type: 'bold', offset: 0, length: 3 }, { type: 'italic', offset: 2, length: 3 }]), '<strong>ab<em>c</em></strong><em>de</em>');
+  assert.equal(renderText('quote', [{ type: 'blockquote', offset: 0, length: 5 }]), '<blockquote>quote</blockquote>');
+});
+
+test('links and formatting cannot inject HTML or script URLs', () => {
+  const text = '<click>';
+  assert.equal(renderText(text, [{ type: 'text_link', offset: 0, length: 7, url: 'javascript:alert(1)' }]), '&lt;click&gt;');
+  assert.equal(renderText(text, [{ type: 'text_link', offset: 0, length: 7, url: 'https://example.org/?x="&y=2' }]), '<a href="https://example.org/?x=&quot;&amp;y=2" rel="noopener noreferrer">&lt;click&gt;</a>');
+  assert.equal(cleanEntities('Hi', [{ type: 'bold', offset: -1, length: 3 }, { type: 'bold', offset: 0, length: 30 }, { type: 'text_mention', offset: 0, length: 2, user: { id: 123 } }]).length, 0);
+  assert.equal((renderText('Hi', [{ type: 'url', offset: 0, length: 2 }, { type: 'text_link', offset: 0, length: 2, url: 'https://example.org' }]).match(/<a /g) || []).length, 1);
+});
+
+const audioMessage = id => ({ ...message(id), audio: { file_id: 'opaque-file-id', file_unique_id: 'unique-audio', file_size: 4, mime_type: 'audio/mpeg', title: 'A <title>' }, entities: [{ type: 'bold', offset: 0, length: 4 }] });
+
+test('captures caption entities and audio; re-forwarding upgrades legacy posts without reverting edits', () => {
+  const legacy = mergeUpdates(empty(), [update(1, message(433))]);
+  delete legacy.posts[0].entities;
+  const forwarded = { update_id: 2, message: { ...audioMessage(99), text: 'Post 433', forward_origin: { type: 'channel', chat: { username: 'bibelkreise' }, message_id: 433, date: 1790188765 } } };
+  const upgraded = mergeUpdates(legacy, [forwarded]);
+  assert.equal(upgraded.posts[0].entities[0].type, 'bold');
+  assert.equal(upgraded.posts[0].audio.extension, 'mp3');
+  const caption = mergeUpdates(empty(), [update(3, { ...audioMessage(434), text: undefined, entities: undefined, caption: 'Title', caption_entities: [{ type: 'bold', offset: 0, length: 5 }] })]);
+  assert.equal(caption.posts[0].entities[0].length, 5);
+  const edited = mergeUpdates(upgraded, [{ update_id: 4, edited_channel_post: message(433, 'New text') }, { ...forwarded, update_id: 5 }]);
+  assert.equal(edited.posts[0].text, 'New text');
+  assert.equal(edited.posts[0].audio, undefined);
+});
+
+test('supports voice messages and audio documents with safe extension selection', () => {
+  assert.equal(getAudio({ voice: { file_id: 'v', file_unique_id: 'v' } }).extension, 'ogg');
+  assert.equal(getAudio({ document: { file_id: 'd', file_unique_id: 'd', file_name: '../../track.mp3', mime_type: 'audio/mpeg' } }).extension, 'mp3');
+  assert.equal(getAudio({ document: { file_id: 'd', file_unique_id: 'd', file_name: 'script.html', mime_type: 'text/html' } }), undefined);
+});
+
+async function audioFolder(t) {
+  const folderPath = await mkdtemp(join(tmpdir(), 'bibeltreff-audio-test-'));
+  const folder = pathToFileURL(folderPath + '/');
+  t.after(async () => {
+    for (const name of await readdir(folder)) await unlink(new URL(name, folder));
+    await rmdir(folder);
+  });
+  return folder;
+}
+
+test('downloads audio once, renders local player, and removes retired managed audio only', async t => {
+  const folder = await audioFolder(t);
+  const state = mergeUpdates(empty(), [update(1, audioMessage(433))]);
+  const calls = [];
+  const api = async (method, params) => { calls.push({ method, params }); return { file_path: 'music/file_1.mp3', file_size: 4 }; };
+  const options = { folder, fetcher: async () => new Response(new Uint8Array([1, 2, 3, 4])), warn: message => assert.fail(message) };
+  await downloadAudio(state, api, 'test-secret', options);
+  assert.equal(calls[0].method, 'getFile');
+  assert.match(state.posts[0].audio.src, /^assets\/telegram\/audio-433-[a-f0-9]{16}\.mp3$/);
+  assert.equal((await readFile(new URL(state.posts[0].audio.src.split('/').pop(), folder))).length, 4);
+  await downloadAudio(state, api, 'test-secret', { ...options, fetcher: () => assert.fail('Cache was ignored') });
+  assert.equal(calls.length, 1);
+  const html = renderTelegram(state, { telegramAudio: 'Audio', telegramAudioDownload: 'Download' }, 'en');
+  assert.ok(html.includes('<audio controls preload="none"'));
+  assert.ok(html.includes('A &lt;title&gt;'));
+  assert.ok(html.includes('<strong>Post</strong>'));
+  assert.ok(!html.includes('test-secret'));
+  assert.ok(!html.includes('opaque-file-id'));
+  await writeFile(new URL('keep.txt', folder), 'unrelated');
+  await downloadAudio(empty(), api, 'test-secret', options);
+  assert.deepEqual(await readdir(folder), ['keep.txt']);
+});
+
+test('oversize audio and failed downloads preserve feed with a Telegram fallback', async t => {
+  const folder = await audioFolder(t);
+  const state = mergeUpdates(empty(), [update(1, audioMessage(433))]);
+  state.posts[0].audio.size = maxAudioBytes + 1;
+  const warnings = [];
+  const options = { folder, fetcher: () => assert.fail('Must not download'), warn: message => warnings.push(message) };
+  await downloadAudio(state, () => assert.fail('Must not call API'), 'secret', options);
+  assert.equal(state.posts[0].audio.src, undefined);
+  state.posts[0].audio.size = 4;
+  await downloadAudio(state, async () => { throw new Error('secret'); }, 'secret', options);
+  assert.equal(state.posts[0].audio.src, undefined);
+  assert.ok(warnings.every(message => !message.includes('secret')));
+  assert.equal(state.posts[0].text, 'Post 433');
+});
+
+test('audio downloader enforces declared and streamed byte limits', async () => {
+  await assert.rejects(readAudioResponse(new Response('x', { headers: { 'content-length': String(maxAudioBytes + 1) } })), /too large/);
+  await assert.rejects(readAudioResponse(new Response(new ReadableStream({ start(controller) { controller.enqueue(new Uint8Array(maxAudioBytes + 1)); controller.close(); } }))), /too large/);
+  await assert.rejects(readAudioResponse(new Response('')), /empty/);
+});

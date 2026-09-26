@@ -63,5 +63,7 @@
   "quoteClose": "“",
   "languageLabel": "Switch to English",
   "languageName": "EN",
-  "scriptureNotice": ""
+  "scriptureNotice": "",
+  "telegramAudio": "Audio zur Nachricht",
+  "telegramAudioDownload": "Audiodatei herunterladen"
 }

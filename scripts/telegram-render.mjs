@@ -1,6 +1,5 @@
 import { channel, validateState } from './telegram.mjs';
-
-const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+import { renderText, escapeHtml as escape } from './telegram-format.mjs';
 
 export function renderTelegram(state, ui, lang) {
   validateState(state);
@@ -9,8 +8,9 @@ export function renderTelegram(state, ui, lang) {
   const dateFormat = new Intl.DateTimeFormat(lang, { dateStyle: 'long', timeZone: 'Europe/Berlin' });
   const cards = [...state.posts].sort((a, b) => b.id - a.id).map(post => `<article class="telegram-card">
     <h3><a href="https://t.me/${channel}/${post.id}"><time datetime="${escape(post.date)}">${escape(dateFormat.format(new Date(post.date)))}</time></a></h3>
-    ${post.text ? `<p class="telegram-text" dir="auto">${escape(post.text)}</p>` : ''}
-    ${post.hasMedia ? `<p class="telegram-media">${escape(ui.telegramMedia)}</p>` : ''}
+    ${post.text ? `<div class="telegram-text" dir="auto">${renderText(post.text, post.entities)}</div>` : ''}
+    ${post.audio?.src ? `<figure class="telegram-audio"><figcaption>${escape(post.audio.title || ui.telegramAudio)}</figcaption><audio controls preload="none" aria-label="${escape(post.audio.title || ui.telegramAudio)}" src="${escape(post.audio.src)}"></audio><a href="${escape(post.audio.src)}" download>${escape(ui.telegramAudioDownload)}</a></figure>` : ''}
+    ${post.hasMedia && !post.audio?.src ? `<p class="telegram-media">${escape(ui.telegramMedia)}</p>` : ''}
     <a class="text-link" href="https://t.me/${channel}/${post.id}">${escape(ui.telegramRead)} <span aria-hidden="true">↗</span></a>
   </article>`).join('\n');
   return `<section class="telegram-section section wrap" id="aktuelles" aria-labelledby="telegram-title">

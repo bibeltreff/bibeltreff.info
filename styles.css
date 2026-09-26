@@ -343,3 +343,15 @@ summary::-webkit-details-marker { display: none; }
   .directions-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 }
 @media print { .directions-map iframe { display: none; } }
+
+/* Telegram text entities and locally hosted audio. */
+.telegram-text a { color: var(--accent); text-decoration: underline; }
+.telegram-text strong { font-weight: 700; }
+.telegram-text blockquote { margin: 12px 0; padding-left: 14px; border-left: 3px solid var(--accent); }
+.telegram-text pre { margin: 12px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.telegram-text code { font-size: .9em; }
+.telegram-audio { min-width: 0; margin: 20px 0 0; }
+.telegram-audio figcaption { margin-bottom: 10px; font-weight: 600; overflow-wrap: anywhere; font-size: 15px; }
+.telegram-audio audio { display: block; width: 100%; min-width: 0; }
+.telegram-audio > a { display: inline-block; margin-top: 8px; color: var(--accent); font-size: 14px; }
+@media print { .telegram-audio audio { display: none; } }

@@ -4,4 +4,5 @@ Thumbs.db
 .env
 .env.*
 content/telegram.json.tmp
+assets/telegram/*.tmp
 _site/

@@ -1,5 +1,7 @@
 import { readFile, writeFile, rename } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
+import { cleanEntities } from './telegram-format.mjs';
+import { getAudio, downloadAudio, audioSourcePattern } from './telegram-audio.mjs';
 
 export const channel = 'bibelkreise';
 const stateFile = new URL('../content/telegram.json', import.meta.url);
@@ -10,6 +12,8 @@ export function validateState(state) {
   const ids = new Set();
   for (const post of state.posts) {
     if (!Number.isSafeInteger(post.id) || post.id < 1 || ids.has(post.id) || typeof post.text !== 'string' || typeof post.hasMedia !== 'boolean' || typeof post.date !== 'string' || !Number.isFinite(Date.parse(post.date))) throw new Error('Invalid Telegram post.');
+    if (post.entities !== undefined && !Array.isArray(post.entities)) throw new Error('Invalid Telegram formatting.');
+    if (post.audio && (typeof post.audio.fileId !== 'string' || !/^[a-f0-9]{16}$/.test(post.audio.key) || !/^(mp3|m4a|ogg|oga|opus|wav|aac|flac)$/.test(post.audio.extension) || typeof post.audio.title !== 'string' || !Number.isSafeInteger(post.audio.size) || post.audio.size < 0 || (post.audio.src !== undefined && !audioSourcePattern.test(post.audio.src)))) throw new Error('Invalid Telegram audio.');
     ids.add(post.id);
   }
   return state;
@@ -30,11 +34,20 @@ export function mergeUpdates(state, updates) {
     if (!message || (direct && (message.chat?.type !== 'channel' || message.chat?.username?.toLowerCase() !== channel))) continue;
     const id = direct ? message.message_id : origin.message_id;
     // Forwarding an older copy must not overwrite a previously collected edit.
-    if (!direct && posts.has(id)) continue;
+    const previous = posts.get(id);
     const text = message.text ?? message.caption ?? (message.poll ? [message.poll.question, ...message.poll.options.map(option => option.text)].join('\n') : '');
     const hasMedia = mediaTypes.some(key => message[key] != null);
     if (!text && !hasMedia) continue; // Ignore channel service messages.
-    posts.set(id, { id, date: new Date((direct ? message.date : origin.date) * 1000).toISOString(), text, hasMedia });
+    const entities = cleanEntities(text, message.text !== undefined ? message.entities : message.caption_entities);
+    const audio = getAudio(message);
+    if (!direct && previous) {
+      if (previous.text !== text) continue;
+      // Re-forwarding can enrich a legacy import without undoing known edits.
+      posts.set(id, { ...previous, entities: previous.entities ?? entities, ...(previous.audio || !audio ? {} : { audio }) });
+      continue;
+    }
+    if (audio && audio.key === previous?.audio?.key && previous.audio.src) audio.src = previous.audio.src;
+    posts.set(id, { id, date: new Date((direct ? message.date : origin.date) * 1000).toISOString(), text, entities, hasMedia, ...(audio ? { audio } : {}) });
   }
   return validateState({ nextOffset, posts: [...posts.values()].sort((a, b) => b.id - a.id).slice(0, 3) });
 }
@@ -85,7 +98,7 @@ async function main() {
   }
   if (process.env.TELEGRAM_SYNC_ENABLED !== 'true') throw new Error('First inspect the bot and stop any old polling program. Then set TELEGRAM_SYNC_ENABLED=true.');
   const state = validateState(JSON.parse(await readFile(stateFile, 'utf8')));
-  const next = await syncFeed(api, state);
+  const next = await downloadAudio(await syncFeed(api, state), api, process.env.TELEGRAM_BOT_TOKEN);
   if (JSON.stringify(next) !== JSON.stringify(state)) {
     const temporary = new URL('../content/telegram.json.tmp', import.meta.url);
     await writeFile(temporary, JSON.stringify(next, null, 2) + '\n');

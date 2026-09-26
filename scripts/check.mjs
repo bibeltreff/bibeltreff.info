@@ -33,7 +33,7 @@ assert.equal((html.match(/<h1\b/g) || []).length, 1, 'Expected a single page hea
 for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
   if (url.startsWith('#')) assert.ok(ids.includes(url.slice(1)), `Missing anchor ${url}`);
   else if (!/^[a-z]+:/i.test(url)) await access(path.join(root, url));
-  else assert.ok(/^(https:|mailto:)/.test(url), `Unexpected URL scheme: ${url}`);
+  else assert.ok(/^(https?:|mailto:)/.test(url), `Unexpected URL scheme: ${url}`);
   checked++;
 }
 for (const chapter of content.gospel) assert.ok(ids.includes(chapter.id), `Missing chapter ${chapter.id}`);
