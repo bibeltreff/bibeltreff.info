@@ -1,7 +1,7 @@
 import { readFile, writeFile, rename } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { cleanEntities } from './telegram-format.mjs';
-import { getAudio, downloadAudio, audioSourcePattern } from './telegram-audio.mjs';
+import { getAudio, getPhoto, downloadMedia, audioSourcePattern, photoSourcePattern } from './telegram-media.mjs';
 
 export const channel = 'bibelkreise';
 const stateFile = new URL('../content/telegram.json', import.meta.url);
@@ -14,6 +14,7 @@ export function validateState(state) {
     if (!Number.isSafeInteger(post.id) || post.id < 1 || ids.has(post.id) || typeof post.text !== 'string' || typeof post.hasMedia !== 'boolean' || typeof post.date !== 'string' || !Number.isFinite(Date.parse(post.date))) throw new Error('Invalid Telegram post.');
     if (post.entities !== undefined && !Array.isArray(post.entities)) throw new Error('Invalid Telegram formatting.');
     if (post.audio && (typeof post.audio.fileId !== 'string' || !/^[a-f0-9]{16}$/.test(post.audio.key) || !/^(mp3|m4a|ogg|oga|opus|wav|aac|flac)$/.test(post.audio.extension) || typeof post.audio.title !== 'string' || !Number.isSafeInteger(post.audio.size) || post.audio.size < 0 || (post.audio.src !== undefined && !audioSourcePattern.test(post.audio.src)))) throw new Error('Invalid Telegram audio.');
+    if (post.photo && (typeof post.photo.fileId !== 'string' || !/^[a-f0-9]{16}$/.test(post.photo.key) || post.photo.extension !== 'jpg' || !Number.isSafeInteger(post.photo.width) || post.photo.width < 1 || !Number.isSafeInteger(post.photo.height) || post.photo.height < 1 || !Number.isSafeInteger(post.photo.size) || post.photo.size < 0 || (post.photo.src !== undefined && !photoSourcePattern.test(post.photo.src)))) throw new Error('Invalid Telegram photo.');
     ids.add(post.id);
   }
   return state;
@@ -40,14 +41,16 @@ export function mergeUpdates(state, updates) {
     if (!text && !hasMedia) continue; // Ignore channel service messages.
     const entities = cleanEntities(text, message.text !== undefined ? message.entities : message.caption_entities);
     const audio = getAudio(message);
+    const photo = getPhoto(message);
     if (!direct && previous) {
       if (previous.text !== text) continue;
       // Re-forwarding can enrich a legacy import without undoing known edits.
-      posts.set(id, { ...previous, entities: previous.entities ?? entities, ...(previous.audio || !audio ? {} : { audio }) });
+      posts.set(id, { ...previous, entities: previous.entities ?? entities, ...(previous.audio || !audio ? {} : { audio }), ...(previous.photo || !photo ? {} : { photo }) });
       continue;
     }
     if (audio && audio.key === previous?.audio?.key && previous.audio.src) audio.src = previous.audio.src;
-    posts.set(id, { id, date: new Date((direct ? message.date : origin.date) * 1000).toISOString(), text, entities, hasMedia, ...(audio ? { audio } : {}) });
+    if (photo && photo.key === previous?.photo?.key && previous.photo.src) photo.src = previous.photo.src;
+    posts.set(id, { id, date: new Date((direct ? message.date : origin.date) * 1000).toISOString(), text, entities, hasMedia, ...(audio ? { audio } : {}), ...(photo ? { photo } : {}) });
   }
   return validateState({ nextOffset, posts: [...posts.values()].sort((a, b) => b.id - a.id).slice(0, 3) });
 }
@@ -98,7 +101,7 @@ async function main() {
   }
   if (process.env.TELEGRAM_SYNC_ENABLED !== 'true') throw new Error('First inspect the bot and stop any old polling program. Then set TELEGRAM_SYNC_ENABLED=true.');
   const state = validateState(JSON.parse(await readFile(stateFile, 'utf8')));
-  const next = await downloadAudio(await syncFeed(api, state), api, process.env.TELEGRAM_BOT_TOKEN);
+  const next = await downloadMedia(await syncFeed(api, state), api, process.env.TELEGRAM_BOT_TOKEN);
   if (JSON.stringify(next) !== JSON.stringify(state)) {
     const temporary = new URL('../content/telegram.json.tmp', import.meta.url);
     await writeFile(temporary, JSON.stringify(next, null, 2) + '\n');

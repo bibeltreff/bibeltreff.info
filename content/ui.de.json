@@ -5,8 +5,7 @@
   "navMeetings": "Treffen",
   "telegramHeading": "Neues aus dem Bibeltreff",
   "telegramIntro": "Die letzten Nachrichten aus unserem Telegram-Kanal.",
-  "telegramRead": "Nachricht auf Telegram öffnen",
-  "telegramMedia": "Medien und weitere Inhalte findest du in der Originalnachricht.",
+  "telegramMedia": "Weitere Medien findest du im Telegram-Kanal.",
   "telegramChannel": "Alle Nachrichten auf Telegram",
   "navGospel": "Evangelium",
   "navTestimonies": "Zeugnisse",
@@ -65,5 +64,9 @@
   "languageName": "EN",
   "scriptureNotice": "",
   "telegramAudio": "Audio zur Nachricht",
-  "telegramAudioDownload": "Audiodatei herunterladen"
+  "telegramAudioDownload": "Audiodatei herunterladen",
+  "telegramAudioFallback": "Diese Aufnahme kannst du im Telegram-Kanal anhören.",
+  "telegramOpenMessage": "Nachricht auf Telegram öffnen",
+  "telegramPhoto": "Foto zur Nachricht",
+  "telegramPhotoOpen": "Foto in voller Größe öffnen"
 }

@@ -5,8 +5,7 @@
   "navMeetings": "Meetings",
   "telegramHeading": "News from Bibeltreff",
   "telegramIntro": "The latest messages from our Telegram channel, in their original language.",
-  "telegramRead": "Open message on Telegram",
-  "telegramMedia": "See the original message for media and additional content.",
+  "telegramMedia": "More media is available in our Telegram channel.",
   "telegramChannel": "All messages on Telegram",
   "navGospel": "Gospel",
   "navTestimonies": "Testimonies",
@@ -65,5 +64,9 @@
   "languageName": "DE",
   "scriptureNotice": "Scripture quotations are from the New King James Version® (NKJV). Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved. Some passages are shortened; omissions are marked with …",
   "telegramAudio": "Message audio",
-  "telegramAudioDownload": "Download audio"
+  "telegramAudioDownload": "Download audio",
+  "telegramAudioFallback": "You can listen to this recording in our Telegram channel.",
+  "telegramOpenMessage": "Open message on Telegram",
+  "telegramPhoto": "Message photo",
+  "telegramPhotoOpen": "Open full-size photo"
 }

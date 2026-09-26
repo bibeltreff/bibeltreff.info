@@ -85,13 +85,14 @@ test('renders complete escaped text, safe links, three cards, and no empty secti
     assert.ok(html.includes('&lt;script&gt;'));
     assert.ok(html.includes('A &amp; B'));
     assert.ok(!html.includes('<script>'));
+    assert.ok(html.includes('https://t.me/bibelkreise'));
     assert.ok(html.includes('https://t.me/bibelkreise/3'));
   }
 });
 
 // Formatting and local audio regression coverage.
 import { cleanEntities, renderText } from './telegram-format.mjs';
-import { getAudio, downloadAudio, readAudioResponse, maxAudioBytes } from './telegram-audio.mjs';
+import { getAudio, downloadMedia, readMediaResponse, maxMediaBytes } from './telegram-media.mjs';
 import { mkdtemp, readFile, writeFile, readdir, unlink, rmdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -153,11 +154,11 @@ test('downloads audio once, renders local player, and removes retired managed au
   const calls = [];
   const api = async (method, params) => { calls.push({ method, params }); return { file_path: 'music/file_1.mp3', file_size: 4 }; };
   const options = { folder, fetcher: async () => new Response(new Uint8Array([1, 2, 3, 4])), warn: message => assert.fail(message) };
-  await downloadAudio(state, api, 'test-secret', options);
+  await downloadMedia(state, api, 'test-secret', options);
   assert.equal(calls[0].method, 'getFile');
   assert.match(state.posts[0].audio.src, /^assets\/telegram\/audio-433-[a-f0-9]{16}\.mp3$/);
   assert.equal((await readFile(new URL(state.posts[0].audio.src.split('/').pop(), folder))).length, 4);
-  await downloadAudio(state, api, 'test-secret', { ...options, fetcher: () => assert.fail('Cache was ignored') });
+  await downloadMedia(state, api, 'test-secret', { ...options, fetcher: () => assert.fail('Cache was ignored') });
   assert.equal(calls.length, 1);
   const html = renderTelegram(state, { telegramAudio: 'Audio', telegramAudioDownload: 'Download' }, 'en');
   assert.ok(html.includes('<audio controls preload="none"'));
@@ -166,27 +167,72 @@ test('downloads audio once, renders local player, and removes retired managed au
   assert.ok(!html.includes('test-secret'));
   assert.ok(!html.includes('opaque-file-id'));
   await writeFile(new URL('keep.txt', folder), 'unrelated');
-  await downloadAudio(empty(), api, 'test-secret', options);
+  await downloadMedia(empty(), api, 'test-secret', options);
   assert.deepEqual(await readdir(folder), ['keep.txt']);
 });
 
 test('oversize audio and failed downloads preserve feed with a Telegram fallback', async t => {
   const folder = await audioFolder(t);
   const state = mergeUpdates(empty(), [update(1, audioMessage(433))]);
-  state.posts[0].audio.size = maxAudioBytes + 1;
+  state.posts[0].audio.size = maxMediaBytes + 1;
   const warnings = [];
   const options = { folder, fetcher: () => assert.fail('Must not download'), warn: message => warnings.push(message) };
-  await downloadAudio(state, () => assert.fail('Must not call API'), 'secret', options);
+  await downloadMedia(state, () => assert.fail('Must not call API'), 'secret', options);
   assert.equal(state.posts[0].audio.src, undefined);
   state.posts[0].audio.size = 4;
-  await downloadAudio(state, async () => { throw new Error('secret'); }, 'secret', options);
+  await downloadMedia(state, async () => { throw new Error('secret'); }, 'secret', options);
   assert.equal(state.posts[0].audio.src, undefined);
   assert.ok(warnings.every(message => !message.includes('secret')));
   assert.equal(state.posts[0].text, 'Post 433');
 });
 
 test('audio downloader enforces declared and streamed byte limits', async () => {
-  await assert.rejects(readAudioResponse(new Response('x', { headers: { 'content-length': String(maxAudioBytes + 1) } })), /too large/);
-  await assert.rejects(readAudioResponse(new Response(new ReadableStream({ start(controller) { controller.enqueue(new Uint8Array(maxAudioBytes + 1)); controller.close(); } }))), /too large/);
-  await assert.rejects(readAudioResponse(new Response('')), /empty/);
+  await assert.rejects(readMediaResponse(new Response('x', { headers: { 'content-length': String(maxMediaBytes + 1) } })), /too large/);
+  await assert.rejects(readMediaResponse(new Response(new ReadableStream({ start(controller) { controller.enqueue(new Uint8Array(maxMediaBytes + 1)); controller.close(); } }))), /too large/);
+  await assert.rejects(readMediaResponse(new Response('')), /empty/);
+});
+
+import { getPhoto } from './telegram-media.mjs';
+const photoMessage = id => ({ ...message(id), photo: [
+  { file_id: 'small', file_unique_id: 'small', width: 90, height: 60, file_size: 4 },
+  { file_id: 'large', file_unique_id: 'large', width: 1280, height: 850, file_size: 4 }
+] });
+
+test('imports the largest photo and enriches a legacy forward without changing its text', () => {
+  assert.equal(getPhoto(photoMessage(1)).fileId, 'large');
+  const legacy = mergeUpdates(empty(), [update(1, message(433))]);
+  const upgraded = mergeUpdates(legacy, [{ update_id: 2, message: { ...photoMessage(99), text: 'Post 433', forward_origin: { type: 'channel', chat: { username: 'bibelkreise' }, message_id: 433, date: 1790188765 } } }]);
+  assert.equal(upgraded.posts[0].photo.width, 1280);
+  assert.equal(upgraded.posts[0].text, legacy.posts[0].text);
+});
+
+test('downloads photos alongside audio, renders local images and cleans retired media', async t => {
+  const folder = await audioFolder(t);
+  const state = mergeUpdates(empty(), [update(1, photoMessage(434)), update(2, audioMessage(433))]);
+  const options = { folder, fetcher: async () => new Response(new Uint8Array([255, 216, 255, 217])), warn: message => assert.fail(message) };
+  const api = async () => ({ file_path: 'photos/file.jpg', file_size: 4 });
+  await downloadMedia(state, api, 'secret', options);
+  assert.match(state.posts[0].photo.src, /^assets\/telegram\/photo-434-[a-f0-9]{16}\.jpg$/);
+  assert.ok(state.posts[1].audio.src);
+  const ui = JSON.parse(await readFile(new URL('../content/ui.en.json', import.meta.url), 'utf8'));
+  const html = renderTelegram(state, ui, 'en');
+  assert.ok(html.includes('loading="lazy"'));
+  assert.ok(html.includes('width="1280" height="850"'));
+  assert.ok(html.includes('Open full-size photo'));
+  assert.ok(!html.includes('<figcaption>'));
+  assert.ok(html.includes('https://t.me/bibelkreise/433'));
+  assert.ok(!html.includes('undefined'));
+  await downloadMedia(state, () => assert.fail('Cache should include both attachments'), 'secret', options);
+  await downloadMedia(empty(), api, 'secret', options);
+  assert.deepEqual(await readdir(folder), []);
+});
+
+test('failed photo downloads preserve captions and unsafe photo sources are rejected', async t => {
+  const folder = await audioFolder(t);
+  const state = mergeUpdates(empty(), [update(1, photoMessage(434))]);
+  await downloadMedia(state, async () => { throw new Error('secret'); }, 'secret', { folder, warn: () => {} });
+  assert.equal(state.posts[0].photo.src, undefined);
+  assert.equal(state.posts[0].text, 'Post 434');
+  state.posts[0].photo.src = 'https://example.org/private.jpg';
+  assert.throws(() => renderTelegram(state, {}, 'en'), /Invalid Telegram photo/);
 });
