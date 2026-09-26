@@ -16,6 +16,7 @@ npm run dev
 
 - `content/site.json`: Deutsche Einladung, Treffzeiten, sechs Evangeliums-Themen, Zeugnisse und Kontaktlinks.
 - `content/site.en.json`: Englische Übersetzung mit gekürzten NKJV-Bibelzitaten.
+- `content/legal.json`: Betreiberangaben für Impressum und Datenschutzerklärung.
 - `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
 - `src/index.html`: Gemeinsame HTML-Vorlage mit Platzhaltern für beide Sprachen.
 - `styles.css`: Responsive Gestaltung; Hauptfarbe ist das Blau aus dem PDF `#1d61b2` (`--accent`).
@@ -63,7 +64,7 @@ Alle Inhalte, Sprunglinks und Aufklappbereiche funktionieren ohne JavaScript. Di
 
 Source Sans 3 (SIL Open Font License, siehe `assets/fonts/OFL.txt`) liegt als variable WOFF2-Schrift (Gewichte 400–700, Teilmengen Latin und Latin Extended) unter `assets/fonts/` und wird selbst ausgeliefert, mit System-Sans-Serif als Fallback. Es gibt keine Verbindung zu Google Fonts. Die Lagekarte ist ein OpenStreetMap-iframe (ohne JavaScript, ohne API-Key, ohne Tracking-Cookies); dabei lädt der Browser Kartenkacheln von openstreetmap.org. Routen, Zoom und soziale Kanäle werden nur als Links angeboten, nicht eingebettet. Die Website verwendet keine Analytics und setzt selbst keine Cookies.
 
-Im bisherigen Projekt waren keine Impressums- oder Datenschutzhinweise enthalten. Entsprechende Betreiberangaben und Texte sind weiterhin vom Betreiber bereitzustellen; es wurden keine Angaben erfunden.
+Impressum und Datenschutzerklärung stehen als ausklappbare Bereiche im Fußbereich (Sprungmarke `#datenschutz`). Die Betreiberangaben (Gruppenname, verantwortliche Person, Anschrift, E-Mail, optionaler Vereinsregistereintrag, Stand der Datenschutzerklärung) stehen einmal in `content/legal.json` und gelten für beide Sprachen; ein leerer `register` blendet den Registereintrag aus. Die Texte der Datenschutzerklärung stehen unter `privacy` in `content/site.json` und `content/site.en.json`. Solange `content/legal.json` noch „BITTE ERGÄNZEN“ enthält, gibt `npm run check` eine Warnung aus.
 
 ## Telegram: die letzten drei Nachrichten
 

@@ -237,5 +237,72 @@
       "label": "Telegram-Kanal",
       "url": "https://t.me/bibeltreff_uni"
     }
-  ]
+  ],
+  "privacy": {
+    "intro": "Diese Website kommt ohne Cookies, Tracking und Analyse-Werkzeuge aus. Hier erfährst du, welche Daten trotzdem anfallen und welche Rechte du hast.",
+    "sections": [
+      {
+        "heading": "Hosting",
+        "paragraphs": [
+          "Diese Website wird bei GitHub Pages gehostet, einem Dienst der GitHub Inc. (USA). Beim Aufruf verarbeitet GitHub technisch notwendige Daten, insbesondere deine IP-Adresse, Datum und Uhrzeit des Abrufs sowie Angaben zu Browser und Betriebssystem, um die Seite auszuliefern und den Dienst abzusichern.",
+          "Rechtsgrundlage ist unser berechtigtes Interesse an einer zuverlässigen Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO). GitHub ist nach dem EU-US Data Privacy Framework zertifiziert."
+        ],
+        "links": [
+          {
+            "label": "Datenschutzerklärung von GitHub",
+            "url": "https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement"
+          }
+        ]
+      },
+      {
+        "heading": "Karte (OpenStreetMap)",
+        "paragraphs": [
+          "Im Abschnitt zur Anfahrt zeigen wir eine Karte von OpenStreetMap, betrieben von der OpenStreetMap Foundation (Vereinigtes Königreich). Dein Browser lädt die Karte direkt von deren Servern; dabei wird deine IP-Adresse übermittelt. Für das Vereinigte Königreich besteht ein Angemessenheitsbeschluss der EU-Kommission.",
+          "Rechtsgrundlage ist unser berechtigtes Interesse, den Treffpunkt leicht auffindbar zu machen (Art. 6 Abs. 1 lit. f DSGVO)."
+        ],
+        "links": [
+          {
+            "label": "Datenschutzerklärung der OpenStreetMap Foundation",
+            "url": "https://osmfoundation.org/wiki/Privacy_Policy"
+          }
+        ]
+      },
+      {
+        "heading": "Schriftart und Telegram-Beiträge",
+        "paragraphs": [
+          "Die Schriftart liefern wir selbst aus; es besteht keine Verbindung zu Google oder anderen Schriftanbietern. Beiträge, Fotos und Audios aus unserem Telegram-Kanal liegen als Kopie auf dieser Website. Beim Anschauen werden keine Daten an Telegram übertragen."
+        ]
+      },
+      {
+        "heading": "Speicherung im Browser",
+        "paragraphs": [
+          "Wenn du oben ein Farbschema (hell oder dunkel) auswählst, wird diese Auswahl im lokalen Speicher deines Browsers abgelegt, damit sie beim nächsten Besuch erhalten bleibt. Sie verlässt dein Gerät nicht. Mit „Systemstandard“ wird sie wieder gelöscht. Diese Speicherung ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Cookies setzen wir nicht."
+        ]
+      },
+      {
+        "heading": "Kontakt",
+        "paragraphs": [
+          "Wenn du uns per E-Mail, WhatsApp oder Telegram schreibst, verwenden wir deine Angaben (etwa Name, Kontaktdaten und Inhalt der Nachricht) nur, um dir zu antworten und mit dir in Kontakt zu bleiben (Art. 6 Abs. 1 lit. b und f DSGVO). Wir speichern deine Kontaktdaten, bis wir unsere gespeicherten Kontakte aufräumen oder du uns darum bittest, sie zu löschen – in dem Fall schreib uns einfach. Für die Übertragung gelten zusätzlich die Datenschutzbestimmungen des jeweiligen Anbieters (Microsoft, WhatsApp bzw. Meta, Telegram)."
+        ]
+      },
+      {
+        "heading": "Links zu anderen Angeboten",
+        "paragraphs": [
+          "Wir verlinken unter anderem auf Google Maps, Zoom und unseren Telegram-Kanal. Erst wenn du einen solchen Link öffnest, werden Daten an den jeweiligen Anbieter übertragen; für die Verarbeitung dort ist dieser verantwortlich."
+        ]
+      },
+      {
+        "heading": "Deine Rechte",
+        "paragraphs": [
+          "Du kannst jederzeit Auskunft über deine bei uns gespeicherten Daten verlangen und ihre Berichtigung oder Löschung fordern. Außerdem kannst du der Verarbeitung widersprechen und dich bei einer Datenschutz-Aufsichtsbehörde beschweren, etwa beim LfDI Baden-Württemberg."
+        ],
+        "links": [
+          {
+            "label": "LfDI Baden-Württemberg",
+            "url": "https://www.baden-wuerttemberg.datenschutz.de/"
+          }
+        ]
+      }
+    ]
+  }
 }

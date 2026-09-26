@@ -247,8 +247,14 @@ summary::-webkit-details-marker { display: none; }
 .footer-legal > summary { width: fit-content; padding-block: 8px; cursor: pointer; }
 .footer-legal > summary:hover { color: var(--accent); }
 .footer-legal-body { display: grid; gap: 20px; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--line); }
-.footer-legal h2 { margin-bottom: 8px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: 0; }
+.footer-legal h2, .footer-legal h3 { margin-bottom: 8px; color: var(--ink); font-size: 13px; font-weight: 600; letter-spacing: 0; }
 .footer-legal address { font-style: normal; }
+/* Open legal texts take the full footer width instead of the narrow link column. */
+.footer-links:has(.footer-legal[open]) { flex-basis: 100%; margin-left: 0; }
+.privacy p, .privacy address { max-width: 78ch; }
+.privacy p + p { margin-top: 8px; }
+.privacy .text-link { color: var(--accent); }
+.privacy-updated { font-style: italic; }
 .scripture-notice p { max-width: 78ch; }
 .scripture-notice .scripture-notice-note { margin-top: 8px; }
 .footer-main { display: flex; flex-wrap: wrap; align-items: center; gap: 26px; padding-bottom: 28px; }

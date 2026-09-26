@@ -53,8 +53,14 @@
       "question": "Why did God create us?",
       "text": "Gold stands for God's purpose for us. He created us without sin and in His likeness, to rule righteously over the earth on His behalf. We can choose a personal relationship with God and come to know Him as our Father.",
       "verses": [
-        { "text": "Then God said, ‘Let Us make man in Our image, according to Our likeness; let them have dominion … over all the earth …’", "reference": "Genesis 1:26" },
-        { "text": "… in love, having predestined us to be His sons by Jesus Christ to Himself …", "reference": "Ephesians 1:4–5" }
+        {
+          "text": "Then God said, ‘Let Us make man in Our image, according to Our likeness; let them have dominion … over all the earth …’",
+          "reference": "Genesis 1:26"
+        },
+        {
+          "text": "… in love, having predestined us to be His sons by Jesus Christ to Himself …",
+          "reference": "Ephesians 1:4–5"
+        }
       ],
       "moreVerses": []
     },
@@ -67,10 +73,22 @@
       "question": "What separates us from God?",
       "text": "Man was deceived by Satan's lie. This is how evil entered mankind. There is none who does good. We live in sin and are separated from God. Because of our guilt, we face God's righteous judgment: the eternal lake of fire.",
       "verses": [
-        { "text": "… that serpent of old, called the Devil and Satan, who deceives the whole world …", "reference": "Revelation 12:9" },
-        { "text": "… for all have sinned and fall short of the glory of God …", "reference": "Romans 3:23" },
-        { "text": "For the wages of sin is death …", "reference": "Romans 6:23" },
-        { "text": "Then Death and Hades were cast into the lake of fire. This is the second death.", "reference": "Revelation 20:14" }
+        {
+          "text": "… that serpent of old, called the Devil and Satan, who deceives the whole world …",
+          "reference": "Revelation 12:9"
+        },
+        {
+          "text": "… for all have sinned and fall short of the glory of God …",
+          "reference": "Romans 3:23"
+        },
+        {
+          "text": "For the wages of sin is death …",
+          "reference": "Romans 6:23"
+        },
+        {
+          "text": "Then Death and Hades were cast into the lake of fire. This is the second death.",
+          "reference": "Revelation 20:14"
+        }
       ],
       "moreVerses": []
     },
@@ -83,8 +101,14 @@
       "question": "God sends His Son",
       "text": "God loves us so much that He gave His Son Jesus Christ to save us. Jesus was without sin, yet He bore our sins and died on the cross. This is the greatest proof of God's love.",
       "verses": [
-        { "text": "But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.", "reference": "Romans 5:8" },
-        { "text": "For God so loved the world that He gave His only begotten Son …", "reference": "John 3:16" }
+        {
+          "text": "But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.",
+          "reference": "Romans 5:8"
+        },
+        {
+          "text": "For God so loved the world that He gave His only begotten Son …",
+          "reference": "John 3:16"
+        }
       ],
       "moreVerses": []
     },
@@ -97,9 +121,18 @@
       "question": "Receive Jesus Christ!",
       "text": "Jesus Christ alone can save you from sin and judgment. Believe in Him, confess Him as your Lord, and be baptized! Then you will be saved and receive eternal life.",
       "verses": [
-        { "text": "… that whoever believes in Him should not perish but have everlasting life.", "reference": "John 3:16" },
-        { "text": "… if you confess … the Lord Jesus and believe … that God has raised Him from the dead, you will be saved.", "reference": "Romans 10:9" },
-        { "text": "He who believes and is baptized will be saved …", "reference": "Mark 16:16a" }
+        {
+          "text": "… that whoever believes in Him should not perish but have everlasting life.",
+          "reference": "John 3:16"
+        },
+        {
+          "text": "… if you confess … the Lord Jesus and believe … that God has raised Him from the dead, you will be saved.",
+          "reference": "Romans 10:9"
+        },
+        {
+          "text": "He who believes and is baptized will be saved …",
+          "reference": "Mark 16:16a"
+        }
       ],
       "moreVerses": []
     },
@@ -112,8 +145,14 @@
       "question": "How do you grow in faith?",
       "text": "Once you have received Jesus, grow in Him. Put away all malice, feed on God's Word each day, be built up together with others, serve God as a priest, and offer Him spiritual sacrifices.",
       "verses": [
-        { "text": "Therefore, laying aside all malice … as newborn babes, desire the pure milk of the word, that you may grow thereby …", "reference": "1 Peter 2:1–2" },
-        { "text": "… you also … are being built up a spiritual house, a holy priesthood, to offer up spiritual sacrifices … through Jesus Christ.", "reference": "1 Peter 2:5" }
+        {
+          "text": "Therefore, laying aside all malice … as newborn babes, desire the pure milk of the word, that you may grow thereby …",
+          "reference": "1 Peter 2:1–2"
+        },
+        {
+          "text": "… you also … are being built up a spiritual house, a holy priesthood, to offer up spiritual sacrifices … through Jesus Christ.",
+          "reference": "1 Peter 2:5"
+        }
       ],
       "moreVerses": []
     },
@@ -126,8 +165,14 @@
       "question": "What does Jesus have in store for you?",
       "text": "If you follow Jesus and grow to maturity in faith, you will receive the highest reward: you will serve God as a king and priest in His coming kingdom. Jesus is coming back soon!",
       "verses": [
-        { "text": "And have made us kings and priests to our God; And we shall reign on the earth.", "reference": "Revelation 5:10" },
-        { "text": "And behold, I am coming quickly, and My reward is with Me, to give to every one according to his work.", "reference": "Revelation 22:12" }
+        {
+          "text": "And have made us kings and priests to our God; And we shall reign on the earth.",
+          "reference": "Revelation 5:10"
+        },
+        {
+          "text": "And behold, I am coming quickly, and My reward is with Me, to give to every one according to his work.",
+          "reference": "Revelation 22:12"
+        }
       ],
       "moreVerses": []
     }
@@ -172,11 +217,92 @@
     }
   ],
   "contact": [
-    { "label": "Send an email", "url": "mailto:bibeltreff@outlook.com" },
-    { "label": "WhatsApp", "url": "https://wa.me/NoelR0", "newTab": true },
-    { "label": "Telegram", "url": "https://t.me/NoelR0", "newTab": true }
+    {
+      "label": "Send an email",
+      "url": "mailto:bibeltreff@outlook.com"
+    },
+    {
+      "label": "WhatsApp",
+      "url": "https://wa.me/NoelR0",
+      "newTab": true
+    },
+    {
+      "label": "Telegram",
+      "url": "https://t.me/NoelR0",
+      "newTab": true
+    }
   ],
   "social": [
-    { "label": "Telegram channel", "url": "https://t.me/bibeltreff_uni" }
-  ]
+    {
+      "label": "Telegram channel",
+      "url": "https://t.me/bibeltreff_uni"
+    }
+  ],
+  "privacy": {
+    "intro": "This website uses no cookies, tracking or analytics. Here you can find out which data is still processed and what your rights are.",
+    "sections": [
+      {
+        "heading": "Hosting",
+        "paragraphs": [
+          "This website is hosted on GitHub Pages, a service of GitHub Inc. (USA). When you visit, GitHub processes technically necessary data, in particular your IP address, the date and time of the request and details about your browser and operating system, in order to deliver the page and keep the service secure.",
+          "The legal basis is our legitimate interest in providing the website reliably (Art. 6(1)(f) GDPR). GitHub is certified under the EU-US Data Privacy Framework."
+        ],
+        "links": [
+          {
+            "label": "GitHub privacy statement",
+            "url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+          }
+        ]
+      },
+      {
+        "heading": "Map (OpenStreetMap)",
+        "paragraphs": [
+          "In the directions section we show a map from OpenStreetMap, operated by the OpenStreetMap Foundation (United Kingdom). Your browser loads the map directly from their servers, which transmits your IP address. The European Commission has issued an adequacy decision for the United Kingdom.",
+          "The legal basis is our legitimate interest in making our meeting point easy to find (Art. 6(1)(f) GDPR)."
+        ],
+        "links": [
+          {
+            "label": "OpenStreetMap Foundation privacy policy",
+            "url": "https://osmfoundation.org/wiki/Privacy_Policy"
+          }
+        ]
+      },
+      {
+        "heading": "Font and Telegram posts",
+        "paragraphs": [
+          "We serve the font ourselves; there is no connection to Google or any other font provider. Posts, photos and audio from our Telegram channel are stored as copies on this website. Viewing them sends no data to Telegram."
+        ]
+      },
+      {
+        "heading": "Browser storage",
+        "paragraphs": [
+          "If you choose a colour scheme (light or dark) at the top of the page, your choice is saved in your browser’s local storage so it is kept for your next visit. It never leaves your device. Choosing “System default” deletes it again. This storage is required for the feature you asked for (Section 25(2) no. 2 TDDDG). We do not set cookies."
+        ]
+      },
+      {
+        "heading": "Contact",
+        "paragraphs": [
+          "If you write to us by email, WhatsApp or Telegram, we use your details (such as your name, contact details and message) only to reply and stay in touch with you (Art. 6(1)(b) and (f) GDPR). We keep your contact details until we clean up our saved contacts or until you ask us to delete them - in this case please just let us know. The privacy policies of the respective provider (Microsoft, WhatsApp/Meta, Telegram) also apply to the transmission."
+        ]
+      },
+      {
+        "heading": "Links to other services",
+        "paragraphs": [
+          "We link to services such as Google Maps, Zoom and our Telegram channel. Data is only transmitted to the respective provider once you open such a link; that provider is responsible for any processing on their side."
+        ]
+      },
+      {
+        "heading": "Your rights",
+        "paragraphs": [
+          "You can ask at any time what data we hold about you and request that it be corrected or deleted. You can also object to the processing and lodge a complaint with a data protection supervisory authority, such as the LfDI Baden-Württemberg."
+        ],
+        "links": [
+          {
+            "label": "LfDI Baden-Württemberg",
+            "url": "https://www.baden-wuerttemberg.datenschutz.de/"
+          }
+        ]
+      }
+    ]
+  }
 }

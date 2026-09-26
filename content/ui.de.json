@@ -74,5 +74,12 @@
   "telegramAudioFallback": "Diese Aufnahme kannst du im Telegram-Kanal anhören.",
   "telegramOpenMessage": "Nachricht auf Telegram öffnen",
   "telegramPhoto": "Foto zur Nachricht",
-  "telegramPhotoOpen": "Foto in voller Größe öffnen"
+  "telegramPhotoOpen": "Foto in voller Größe öffnen",
+  "legalResponsible": "Verantwortlich",
+  "legalRegister": "Registereintrag",
+  "legalEmail": "E-Mail",
+  "privacyLabel": "Datenschutz",
+  "privacyTitle": "Datenschutzerklärung",
+  "privacyControllerTitle": "Verantwortlich",
+  "privacyUpdated": "Stand"
 }

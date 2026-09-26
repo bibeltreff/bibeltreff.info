@@ -6,6 +6,7 @@ import { renderTelegram } from './telegram-render.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
 const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8'));
+const legal = JSON.parse(await readFile(path.join(root, 'content/legal.json'), 'utf8'));
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const arrow = '<span aria-hidden="true">↗</span>';
 const links = (items, className = '') => items.map((item) => `<a class="${className}" href="${escape(item.url)}"${item.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${escape(item.label)} ${arrow}</a>`).join('\n');
@@ -25,6 +26,13 @@ const ui = JSON.parse(await readFile(path.join(root, 'content', `ui.${lang}.json
 for (const meeting of content.meetings) {
   if (!weekdays[lang].includes(meeting.day)) throw new Error(`Unknown meeting day: ${meeting.day}`);
 }
+const operator = `<address>${escape(legal.name)}<br>${escape(ui.legalResponsible)}: ${escape(legal.representative)}<br>${escape(legal.street)}<br>${escape(legal.city)}<br>${escape(ui.legalEmail)}: <a href="mailto:${escape(legal.email)}">${escape(legal.email)}</a></address>`;
+const privacyDate = new Intl.DateTimeFormat(english ? 'en-GB' : 'de-DE', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(legal.privacyUpdated));
+const legalNotice = `<details class="footer-legal"><summary>${escape(ui.legalNoticeLabel)}</summary><div class="footer-legal-body"><div><h2>${escape(ui.legalNoticeTitle)}</h2>${operator}${legal.register ? `<p>${escape(ui.legalRegister)}: ${escape(legal.register)}</p>` : ''}</div>${ui.scriptureNotice ? `<div class="scripture-notice"><h2>${escape(ui.scriptureNoticeTitle)}</h2><p>${escape(ui.scriptureNotice)}</p>${ui.scriptureNoticeNote ? `<p class="scripture-notice-note">${escape(ui.scriptureNoticeNote)}</p>` : ''}</div>` : ''}</div></details>`;
+const privacy = `<details class="footer-legal" id="datenschutz"><summary>${escape(ui.privacyLabel)}</summary><div class="footer-legal-body privacy"><div><h2>${escape(ui.privacyTitle)}</h2><p>${escape(content.privacy.intro)}</p></div>
+    <section><h3>${escape(ui.privacyControllerTitle)}</h3>${operator}</section>
+${content.privacy.sections.map((section) => `    <section><h3>${escape(section.heading)}</h3>${section.paragraphs.map((p) => `<p>${escape(p)}</p>`).join('')}${section.links?.length ? `<p>${links(section.links, 'text-link')}</p>` : ''}</section>`).join('\n')}
+    <p class="privacy-updated">${escape(ui.privacyUpdated)}: ${escape(privacyDate)}</p></div></details>`;
 const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${escape(verse.text)}${ui.quoteClose}</p><cite>${escape(verse.reference)}</cite></blockquote>`;
 const slots = {
   ...Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)])),
@@ -34,7 +42,7 @@ const slots = {
   canonical: `https://bibeltreff.info/${english ? 'en.html' : ''}`,
   languageUrl: english ? 'index.html' : 'en.html',
   otherLang: english ? 'de' : 'en',
-  scriptureNotice: `<details class="footer-legal"><summary>${escape(ui.legalNoticeLabel)}</summary><div class="footer-legal-body"><div><h2>${escape(ui.legalNoticeTitle)}</h2><address>Noel Reinhold<br>70563 Stuttgart</address></div>${ui.scriptureNotice ? `<div class="scripture-notice"><h2>${escape(ui.scriptureNoticeTitle)}</h2><p>${escape(ui.scriptureNotice)}</p>${ui.scriptureNoticeNote ? `<p class="scripture-notice-note">${escape(ui.scriptureNoticeNote)}</p>` : ''}</div>` : ''}</div></details>`,
+  legal: legalNotice + privacy,
   title: escape(content.title),
   description: escape(content.description),
   eyebrow: escape(content.hero.eyebrow),
