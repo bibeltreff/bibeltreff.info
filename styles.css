@@ -243,3 +243,24 @@ summary::-webkit-details-marker { display: none; }
   .contact-section { background: white; padding: 20px; }
   .testimony > summary { padding: 20px; }
 }
+
+/* Campus meeting point: photo and walking directions. */
+.directions { margin-top: 32px; padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: white; }
+.directions-heading { max-width: 760px; margin-bottom: 22px; }
+.directions-heading h3 { font-size: clamp(1.45rem, 3vw, 1.8rem); letter-spacing: -.025em; }
+.directions-heading > p:last-child { margin-top: 14px; color: var(--muted); font-size: 16px; }
+.directions-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.meeting-photo { margin: 0; min-width: 0; }
+.meeting-photo a { display: block; }
+.meeting-photo img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.meeting-photo figcaption, .directions-map-caption { padding-top: 12px; font-size: 14px; }
+.meeting-photo figcaption span, .directions-note { color: var(--muted); font-size: 13px; }
+.directions-map { min-width: 0; }
+.directions-map iframe { display: block; width: 100%; height: auto; aspect-ratio: 3249 / 2252; min-height: 280px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
+.directions-map-caption .text-link { display: inline-block; margin-top: 4px; color: var(--accent); font-weight: 600; }
+.directions-note { margin-top: 8px; }
+@media (max-width: 700px) {
+  .directions { padding: 20px; }
+  .directions-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+}
+@media print { .directions-map iframe { display: none; } }
