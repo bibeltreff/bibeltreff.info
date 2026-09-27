@@ -46,9 +46,6 @@ h2 { font-size: clamp(1.85rem, 3.3vw, 2.5rem); letter-spacing: -.035em; }
 .main-nav { display: flex; align-items: center; gap: 32px; font-size: 15px; font-weight: 500; color: light-dark(#596371, #b1bccb); }
 .main-nav a { padding: 10px 0; }
 .main-nav a[aria-current="location"] { color: var(--accent); }
-.header-contact { padding: 8px 16px; border: 1px solid light-dark(#dae2ed, #36465a); border-radius: 7px; font-size: 15px; font-weight: 600; }
-.header-contact span { margin-left: 12px; }
-.header-contact:hover { background: var(--soft); }
 .header-actions { display: flex; align-items: center; gap: 10px; }
 .language-switch { display: grid; place-items: center; min-width: 36px; min-height: 36px; border-radius: 7px; color: var(--accent); font-size: 13px; font-weight: 600; }
 .language-switch:hover { background: var(--soft); }
@@ -287,7 +284,6 @@ summary::-webkit-details-marker { display: none; }
   .brand-icon { width: 26px; margin-right: 8px; }
   .main-nav { grid-row: 2; grid-column: 1 / -1; justify-content: center; gap: 36px; font-size: 14px; }
   .main-nav a { padding-block: 10px; }
-  .header-contact { font-size: 13px; padding: 6px 12px; }
   .hero { padding-block: 48px; }
   h1 { font-size: clamp(2.25rem, 7.8vw, 3.2rem); line-height: 1.1; margin-top: 24px; }
   .hero-intro { font-size: 17px; max-width: 480px; }
@@ -342,8 +338,6 @@ summary::-webkit-details-marker { display: none; }
 @media (max-width: 420px) {
   .header-actions { gap: 4px; }
   .header-inner .brand { font-size: 22px; }
-  .header-contact { padding-inline: 9px; }
-  .header-contact span { display: none; }
   :root { --color-nav-height: 128px; }
   .color-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .color-tab { display: flex; align-items: center; gap: 8px; padding: 11px 9px; }

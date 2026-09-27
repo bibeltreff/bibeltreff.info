@@ -29,7 +29,7 @@ Deutsch bleibt die Standardsprache. Der Sprachlink in der Kopfzeile öffnet `en.
 
 Englische Bibelzitate folgen der NKJV, auch in der Einleitung und im Zeugnis. Auslassungen in gekürzten Versen sind mit „…“ markiert; Johannes 3:16 bleibt auf zwei Themen verteilt. Übersetzungsunterschiede bleiben erhalten: 1. Petrus 2:2 endet mit „grow thereby“, Offenbarung 5:10 verwendet „us“ und „we“. Offenbarung 20:14 wird vollständig zitiert, damit Feuersee und zweiter Tod im Zusammenhang bleiben. Der englische Fußbereich enthält den NKJV-Quellenhinweis. Wortlaut geprüft anhand der [NKJV bei Bible Gateway](https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/).
 
-Das kleine Symbol neben „Sag Hallo“ bietet die Farbschemata Systemstandard, Hell und Dunkel an. Standardmäßig folgt die Seite dem System, auch ohne JavaScript. Eine manuelle Auswahl wird lokal im Browser gespeichert; „Systemstandard“ hebt sie wieder auf. Das Drucklayout bleibt hell.
+Das kleine Symbol oben rechts bietet die Farbschemata Systemstandard, Hell und Dunkel an. Standardmäßig folgt die Seite dem System, auch ohne JavaScript. Eine manuelle Auswahl wird lokal im Browser gespeichert; „Systemstandard“ hebt sie wieder auf. Das Drucklayout bleibt hell.
 
 Nach Änderungen an Inhalten oder Vorlage:
 
