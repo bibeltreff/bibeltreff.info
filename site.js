@@ -26,12 +26,12 @@ for (const option of themeOptions) option.addEventListener('click', () => {
   } catch { /* Switching still works for this visit without storage. */ }
   updateThemeControl();
   themeControl.open = false;
-  themeToggle.focus();
+  themeToggle.focus({ preventScroll: true });
 });
 themeControl.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     themeControl.open = false;
-    themeToggle.focus();
+    themeToggle.focus({ preventScroll: true });
     event.preventDefault();
   }
 });
