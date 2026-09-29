@@ -10,17 +10,17 @@
     "verseReference": "Hebräer 4:12"
   },
   "meetings": {
-    "uni": {
+    "bibeltreff-uni": {
       "label": "Mitten im Uni-Alltag",
       "location": "Am grünen Tisch vor V9.02",
       "note": "Gemeinsam die Bibel lesen und beten in der Mittagspause."
     },
-    "bibelabend": {
+    "anwendungsversammlung": {
       "label": "Zeit für Gottes Wort",
       "location": "Handwerkstraße 5 · 4.OG",
       "note": "Zusammen den Herrn loben, Erfahrungen teilen und im Glauben wachsen."
     },
-    "anbetung": {
+    "festversammlung": {
       "label": "Gemeinsam Gott anbeten",
       "location": "Handwerkstraße 5 · 4.OG",
       "note": "Wir nehmen das Mahl des Herrn und beten den Vater an. Anschließend essen wir zusammen zu Mittag."

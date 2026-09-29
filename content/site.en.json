@@ -10,17 +10,17 @@
     "verseReference": "Hebrews 4:12"
   },
   "meetings": {
-    "uni": {
+    "bibeltreff-uni": {
       "label": "In the midst of university life",
       "location": "At the green table outside V9.02",
       "note": "Read the Bible and pray together during the lunch break."
     },
-    "bibelabend": {
+    "anwendungsversammlung": {
       "label": "Time for God's Word",
       "location": "Handwerkstraße 5 · 4th floor",
       "note": "Praise the Lord together, share what we have experienced, and grow in faith."
     },
-    "anbetung": {
+    "festversammlung": {
       "label": "Worship God together",
       "location": "Handwerkstraße 5 · 4th floor",
       "note": "We share the Lord's Supper and worship the Father. Afterwards, we have lunch together."
