@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderTelegram } from './telegram-render.mjs';
+import { loadTestimonies } from './testimonies.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
@@ -45,6 +46,7 @@ const meetings = localize('meetings').map((meeting) => {
 const gospel = localize('gospel');
 const contact = localize('contact', (label) => ({ label }));
 const social = localize('social', (label) => ({ label }));
+const testimonies = await loadTestimonies(root, lang, shared.testimonies);
 const operator = `<address>${escape(legal.name)}<br>${escape(ui.legalResponsible)}: ${escape(legal.representative)}<br>${escape(legal.street)}<br>${escape(legal.city)}<br>${escape(ui.legalEmail)}: <a href="mailto:${escape(legal.email)}">${escape(legal.email)}</a></address>`;
 const privacyDate = new Intl.DateTimeFormat(english ? 'en-GB' : 'de-DE', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(legal.privacyUpdated));
 const legalNotice = `<details class="footer-legal"><summary>${escape(ui.legalNoticeLabel)}</summary><div class="footer-legal-body"><div><h2>${escape(ui.legalNoticeTitle)}</h2>${operator}${legal.register ? `<p>${escape(ui.legalRegister)}: ${escape(legal.register)}</p>` : ''}</div>${ui.scriptureNotice ? `<div class="scripture-notice"><h2>${escape(ui.scriptureNoticeTitle)}</h2><p>${escape(ui.scriptureNotice)}</p>${ui.scriptureNoticeNote ? `<p class="scripture-notice-note">${escape(ui.scriptureNoticeNote)}</p>` : ''}</div>` : ''}</div></details>`;
@@ -87,7 +89,7 @@ const slots = {
     <div class="chapter-copy"><h3 id="${escape(chapter.id)}-title">${escape(chapter.question)}</h3><p>${escape(chapter.text)}</p></div>
     <div class="chapter-scripture">${chapter.verses.map(quote).join('')}${chapter.moreVerses?.length ? `<details class="verse-details"><summary>${escape(ui.moreVerses)} <span aria-hidden="true">+</span></summary><div>${chapter.moreVerses.map(quote).join('')}</div></details>` : ''}</div>
   </article>`).join('\n'),
-  testimonies: content.testimonies.map((testimony) => `<details class="testimony" id="zeugnis-${escape(testimony.id)}">
+  testimonies: testimonies.map((testimony) => `<details class="testimony" id="zeugnis-${escape(testimony.id)}">
     <summary><span class="testimony-person"><span class="avatar" aria-hidden="true">${escape(testimony.name.split(' ').map(n => n[0]).join(''))}</span><span><strong>${escape(testimony.name)}</strong><span>${escape(ui.myTestimony)}</span></span></span>
     <span class="testimony-preview"><span class="testimony-headline">${ui.quoteOpen}${escape(testimony.headline)}${ui.quoteClose}</span><span class="testimony-intro">${escape(testimony.intro)}</span><span class="testimony-action"><span class="when-closed">${escape(ui.readTestimony)}</span><span class="when-open">${escape(ui.closeTestimony)}</span></span></span><span class="expand-icon" aria-hidden="true">+</span></summary>
     <div class="testimony-body">${testimony.paragraphs.map(p => typeof p === 'string' ? `<p>${escape(p)}</p>` : quote(p)).join('\n')}</div>
@@ -101,5 +103,5 @@ const html = template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   return slots[key];
 });
 await writeFile(path.join(root, outputFile), html);
-console.log(`Built ${outputFile} from src/index.html, content/shared.json and content/${contentFile}.`);
+console.log(`Built ${outputFile} from src/index.html, content/shared.json, content/${contentFile} and content/zeugnisse/${lang}.`);
 }

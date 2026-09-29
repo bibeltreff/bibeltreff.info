@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, access } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { loadTestimonies } from './testimonies.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const locales = [
@@ -15,6 +16,7 @@ let checked = 0;
 for (const { lang, page, source, other } of locales) {
 const html = await readFile(path.join(root, page), 'utf8');
 const content = JSON.parse(await readFile(path.join(root, 'content', source), 'utf8'));
+content.testimonies = await loadTestimonies(root, lang, shared.testimonies);
 const ui = JSON.parse(await readFile(path.join(root, 'content', `ui.${lang}.json`), 'utf8'));
 assert.ok(html.includes(`<html lang="${lang}">`), `Incorrect language in ${page}`);
 assert.ok(html.includes(`class="language-switch" href="${other}"`), `Missing language switch in ${page}`);

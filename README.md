@@ -14,9 +14,10 @@ npm run dev
 
 ## Inhalte und Gestaltung ändern
 
-- `content/shared.json`: Sprachunabhängige Daten, die für beide Sprachen gelten: Wochentag, Uhrzeiten, Adresse, Karten- und Zoom-Link der Treffen, Farben und Reihenfolge der Evangeliums-Themen sowie die URLs der Kontakt- und Kanal-Links.
-- `content/site.json`: Deutsche Texte: Einladung, Beschreibung der Treffen, sechs Evangeliums-Themen, Zeugnisse, Beschriftungen der Kontaktlinks und Datenschutztexte.
+- `content/shared.json`: Sprachunabhängige Daten, die für beide Sprachen gelten: Wochentag, Uhrzeiten, Adresse, Karten- und Zoom-Link der Treffen, Farben und Reihenfolge der Evangeliums-Themen die URLs der Kontakt- und Kanal-Links sowie die Reihenfolge der Zeugnisse.
+- `content/site.json`: Deutsche Texte: Einladung, Beschreibung der Treffen, sechs Evangeliums-Themen, Beschriftungen der Kontaktlinks und Datenschutztexte.
 - `content/site.en.json`: Englische Übersetzung mit gekürzten NKJV-Bibelzitaten.
+- `content/zeugnisse/de/` und `content/zeugnisse/en/`: Zeugnisse als Markdown, eine Datei pro Zeugnis und Sprache (siehe „Zeugnisse schreiben“).
 - `content/legal.json`: Betreiberangaben für Impressum und Datenschutzerklärung.
 - `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
 - `src/index.html`: Gemeinsame HTML-Vorlage mit Platzhaltern für beide Sprachen.
@@ -41,15 +42,43 @@ npm run check
 
 `check` prüft beide Sprachen: interne Sprungziele, eindeutige und übereinstimmende IDs, lokale Assets, Link-Schemata, PDF, Textkodierung, Sprachlinks und das Vorhandensein aller Themen und Zeugnisse. Außerdem müssen Übersetzungsschlüssel und Inhaltsstruktur übereinstimmen. Browserprüfung bleibt für Darstellung und Bedienung notwendig.
 
-Ein neues Zeugnis wird im Array `testimonies` ergänzt: `id` (eindeutiger URL-tauglicher Bezeichner), `name`, `headline`, `intro` und `paragraphs` (Liste einzelner Absätze). Es erhält automatisch ein per Maus, Touch und Tastatur bedienbares Aufklappelement. Die vorhandenen Zeugnisse stammen von Can Luca und Thomas; Rechtschreibung, Zeichensetzung und Absatzgliederung wurden leicht geglättet, die inhaltlichen Aussagen beibehalten. Thomas’ englisches Bibelzitat verwendet einen gekürzten [NKJV-Wortlaut von Philipper 3:8](https://www.biblegateway.com/passage/?search=Philippians+3%3A8&version=NKJV).
-
-In `testimonies[].paragraphs` stehen normale Absätze als Text. Bibelzitate werden an der gewünschten Stelle als Objekt mit `text` und `reference` eingefügt und als Blockzitat mit eigener Quellenangabe dargestellt.
-
 In `content/shared.json` stehen nur Daten, die nicht übersetzt werden. Sichtbare Wörter bleiben immer in der Sprachdatei, auch wenn sie in beiden Sprachen gleich lauten (etwa „WhatsApp“ oder „Gold“). Jeder Eintrag in `meetings`, `gospel`, `contact` und `social` hat in `shared.json` eine `id`; die Sprachdateien enthalten unter derselben `id` die Texte dazu. Die Reihenfolge bestimmt `shared.json`. Ein neues Treffen braucht also einen Eintrag in `shared.json` (`id`, `weekday` als englischer Kleinbuchstaben-Name wie `wednesday`, `start`, `end`, `address`, `map`, optional `online`) und in beiden Sprachdateien einen Eintrag mit `label`, `location` und `note`. Fehlt eine `id` in einer Sprache oder gibt es sie nur dort, bricht der Build mit einer Fehlermeldung ab.
 
 Bei jedem Thema in `gospel` werden alle Bibelstellen in `verses` direkt angezeigt. Zusätzliche Stellen können in `moreVerses` eingetragen werden, ebenfalls als Objekte mit `text` und `reference`. Nur wenn `moreVerses` Einträge enthält, erscheint darunter „Weitere Bibelstellen +“ zum Aufklappen. Ein leeres oder weggelassenes `moreVerses` erzeugt keinen Aufklappbereich.
 
 Treffzeiten und der Treffpunkt am grünen Tisch stammen auf Wunsch des Betreibers aus dem PDF. Die Kontakt-, Kanal- und Zoom-Links stammen von der bisherigen Website. Sonntag bleibt mit anschließendem Mittagessen. Bibelzitate und Erläuterungen folgen dem bereitgestellten Heft; die Farbreihenfolge ist Gold, Schwarz, Rot, Weiß, Grün, Gold.
+
+### Zeugnisse schreiben
+
+Jedes Zeugnis ist eine Markdown-Datei pro Sprache: `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md`. Der Dateiname ohne `.md` ist die `id`; er darf nur Kleinbuchstaben, Ziffern und Bindestriche enthalten und erscheint als Sprungmarke `#zeugnis-<id>`. Die Reihenfolge auf der Seite bestimmt die Liste `testimonies` in `content/shared.json`.
+
+```markdown
+---
+name: Maria
+headline: Ein Satz, der als Überschrift erscheint.
+intro: Eine kurze Zeile unter der Überschrift.
+---
+
+Erster Absatz. Ein Absatz darf über mehrere Zeilen gehen;
+erst eine Leerzeile beginnt einen neuen Absatz.
+
+> Denn so hat Gott die Welt geliebt …
+> — Johannes 3:16
+
+Weiter geht es nach dem Bibelzitat.
+```
+
+- Zwischen den beiden `---` stehen genau die Felder `name`, `headline` und `intro`, jeweils in einer Zeile.
+- Ein Bibelzitat ist ein Block, dessen Zeilen alle mit `>` beginnen. Die letzte Zeile nennt nach einem Gedankenstrich (`—`, `–` oder `--`) die Stelle.
+- Der Text bleibt schlicht: Überschriften, Listen, Links und Formatierungen wie `**fett**` werden nicht unterstützt. Anführungszeichen um Überschrift und Zitat setzt die Seite selbst.
+
+Ein neues Zeugnis anlegen:
+
+1. `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md` schreiben.
+2. Die `id` in `content/shared.json` unter `testimonies` an der gewünschten Stelle eintragen.
+3. `npm run build` und `npm run check` ausführen. Fehlt eine Sprache, ein Feld oder der Eintrag in `shared.json`, nennt die Fehlermeldung Datei und Zeile.
+
+Jedes Zeugnis erhält automatisch ein per Maus, Touch und Tastatur bedienbares Aufklappelement. Die vorhandenen Zeugnisse stammen von Can Luca und Thomas; Rechtschreibung, Zeichensetzung und Absatzgliederung wurden leicht geglättet, die inhaltlichen Aussagen beibehalten. Thomas’ englisches Bibelzitat verwendet einen gekürzten [NKJV-Wortlaut von Philipper 3:8](https://www.biblegateway.com/passage/?search=Philippians+3%3A8&version=NKJV).
 
 ## Statisches Hosting
 
@@ -59,7 +88,7 @@ Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styl
 
 ## Späteres Payload CMS
 
-Darstellung und Inhalte sind bereits getrennt. Als nächste Ausbaustufe lassen sich `meetings`, `gospel` und `testimonies` auf Payload Collections sowie Einladung und Kontakte auf Globals abbilden. Ein Build-Schritt kann die veröffentlichten Inhalte serverseitig aus Payload abrufen und im gleichen JSON-Format an diesen Generator übergeben. Das Frontend bleibt statisch; Aktualisierungen können per Webhook einen neuen Build auslösen. API-Zugangsdaten gehören ausschließlich in die Build-Umgebung. Payload selbst ist noch nicht installiert oder integriert.
+Darstellung und Inhalte sind bereits getrennt. Als nächste Ausbaustufe lassen sich `meetings`, `gospel` und die Zeugnisse auf Payload Collections sowie Einladung und Kontakte auf Globals abbilden. Ein Build-Schritt kann die veröffentlichten Inhalte serverseitig aus Payload abrufen und im gleichen JSON-Format an diesen Generator übergeben. Das Frontend bleibt statisch; Aktualisierungen können per Webhook einen neuen Build auslösen. API-Zugangsdaten gehören ausschließlich in die Build-Umgebung. Payload selbst ist noch nicht installiert oder integriert.
 
 ## Bedienung und externe Dienste
 
