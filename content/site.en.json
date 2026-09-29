@@ -1,7 +1,6 @@
 {
   "title": "Bibeltreff Stuttgart · Experience God's Word",
   "description": "Experience God's Word and get to know Jesus Christ. Join our Bible fellowship in Stuttgart: Wednesdays at the university, Thursdays and Sundays on Handwerkstraße. You are welcome!",
-  "email": "bibeltreff@outlook.com",
   "hero": {
     "eyebrow": "Bibeltreff · Stuttgart",
     "heading": "Experience God's Word",
@@ -10,44 +9,26 @@
     "verse": "For the word of God is living and powerful …",
     "verseReference": "Hebrews 4:12"
   },
-  "meetings": [
-    {
-      "day": "Wednesday",
+  "meetings": {
+    "uni": {
       "label": "In the midst of university life",
-      "start": "13:15",
-      "end": "13:50",
       "location": "At the green table outside V9.02",
-      "address": "Pfaffenwaldring 9, 70569 Stuttgart",
-      "note": "Read the Bible and pray together during the lunch break.",
-      "map": "https://www.google.com/maps/search/?api=1&query=48.74646666293245%2C9.105809034911882",
-      "online": "https://us02web.zoom.us/j/106793110?pwd=dUNLMEJ2L3M4SnBkSThTY1A5cVU0QT09"
+      "note": "Read the Bible and pray together during the lunch break."
     },
-    {
-      "day": "Thursday",
+    "bibelabend": {
       "label": "Time for God's Word",
-      "start": "19:30",
-      "end": "21:00",
       "location": "Handwerkstraße 5 · 4th floor",
-      "address": "70565 Stuttgart-Vaihingen",
-      "note": "Praise the Lord together, share what we have experienced, and grow in faith.",
-      "map": "https://www.google.com/maps/search/?api=1&query=Handwerkstrasse+5+70565+Stuttgart"
+      "note": "Praise the Lord together, share what we have experienced, and grow in faith."
     },
-    {
-      "day": "Sunday",
+    "anbetung": {
       "label": "Worship God together",
-      "start": "10:00",
-      "end": "12:30",
       "location": "Handwerkstraße 5 · 4th floor",
-      "address": "70565 Stuttgart-Vaihingen",
-      "note": "We share the Lord's Supper and worship the Father. Afterwards, we have lunch together.",
-      "map": "https://www.google.com/maps/search/?api=1&query=Handwerkstrasse+5+70565+Stuttgart"
+      "note": "We share the Lord's Supper and worship the Father. Afterwards, we have lunch together."
     }
-  ],
-  "gospel": [
-    {
-      "id": "plan",
+  },
+  "gospel": {
+    "plan": {
       "label": "The Plan",
-      "color": "gold",
       "colorName": "Gold",
       "keyword": "Fellowship",
       "question": "Why did God create us?",
@@ -64,10 +45,8 @@
       ],
       "moreVerses": []
     },
-    {
-      "id": "problem",
+    "problem": {
       "label": "The Problem",
-      "color": "black",
       "colorName": "Black",
       "keyword": "Separation",
       "question": "What separates us from God?",
@@ -92,10 +71,8 @@
       ],
       "moreVerses": []
     },
-    {
-      "id": "loesung",
+    "loesung": {
       "label": "The Solution",
-      "color": "red",
       "colorName": "Red",
       "keyword": "Love",
       "question": "God sends His Son",
@@ -112,10 +89,8 @@
       ],
       "moreVerses": []
     },
-    {
-      "id": "weg",
+    "weg": {
       "label": "The Way",
-      "color": "white",
       "colorName": "White",
       "keyword": "New life",
       "question": "Receive Jesus Christ!",
@@ -136,10 +111,8 @@
       ],
       "moreVerses": []
     },
-    {
-      "id": "wachstum",
+    "wachstum": {
       "label": "The Process",
-      "color": "green",
       "colorName": "Green",
       "keyword": "Grow in faith",
       "question": "How do you grow in faith?",
@@ -156,10 +129,8 @@
       ],
       "moreVerses": []
     },
-    {
-      "id": "lohn",
+    "lohn": {
       "label": "The Reward",
-      "color": "gold",
       "colorName": "Gold",
       "keyword": "Hope",
       "question": "What does Jesus have in store for you?",
@@ -176,7 +147,7 @@
       ],
       "moreVerses": []
     }
-  ],
+  },
   "testimonies": [
     {
       "id": "can-luca",
@@ -216,28 +187,14 @@
       ]
     }
   ],
-  "contact": [
-    {
-      "label": "Send an email",
-      "url": "mailto:bibeltreff@outlook.com"
-    },
-    {
-      "label": "WhatsApp",
-      "url": "https://wa.me/NoelR0",
-      "newTab": true
-    },
-    {
-      "label": "Telegram",
-      "url": "https://t.me/NoelR0",
-      "newTab": true
-    }
-  ],
-  "social": [
-    {
-      "label": "Telegram channel",
-      "url": "https://t.me/bibeltreff_uni"
-    }
-  ],
+  "contact": {
+    "email": "Send an email",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram"
+  },
+  "social": {
+    "kanal": "Telegram channel"
+  },
   "privacy": {
     "intro": "This website uses no cookies, tracking or analytics. Here you can find out which data is still processed and what your rights are.",
     "sections": [

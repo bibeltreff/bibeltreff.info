@@ -14,7 +14,8 @@ npm run dev
 
 ## Inhalte und Gestaltung ändern
 
-- `content/site.json`: Deutsche Einladung, Treffzeiten, sechs Evangeliums-Themen, Zeugnisse und Kontaktlinks.
+- `content/shared.json`: Sprachunabhängige Daten, die für beide Sprachen gelten: Wochentag, Uhrzeiten, Adresse, Karten- und Zoom-Link der Treffen, Farben und Reihenfolge der Evangeliums-Themen sowie die URLs der Kontakt- und Kanal-Links.
+- `content/site.json`: Deutsche Texte: Einladung, Beschreibung der Treffen, sechs Evangeliums-Themen, Zeugnisse, Beschriftungen der Kontaktlinks und Datenschutztexte.
 - `content/site.en.json`: Englische Übersetzung mit gekürzten NKJV-Bibelzitaten.
 - `content/legal.json`: Betreiberangaben für Impressum und Datenschutzerklärung.
 - `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
@@ -38,11 +39,13 @@ npm run build
 npm run check
 ```
 
-`check` prüft beide Sprachen: interne Sprungziele, eindeutige und übereinstimmende IDs, lokale Assets, Link-Schemata, PDF, Textkodierung, Sprachlinks und das Vorhandensein aller Themen und Zeugnisse. Außerdem müssen Treffzeiten, Kontaktlinks, Übersetzungsschlüssel und Inhaltsstruktur übereinstimmen. Browserprüfung bleibt für Darstellung und Bedienung notwendig.
+`check` prüft beide Sprachen: interne Sprungziele, eindeutige und übereinstimmende IDs, lokale Assets, Link-Schemata, PDF, Textkodierung, Sprachlinks und das Vorhandensein aller Themen und Zeugnisse. Außerdem müssen Übersetzungsschlüssel und Inhaltsstruktur übereinstimmen. Browserprüfung bleibt für Darstellung und Bedienung notwendig.
 
 Ein neues Zeugnis wird im Array `testimonies` ergänzt: `id` (eindeutiger URL-tauglicher Bezeichner), `name`, `headline`, `intro` und `paragraphs` (Liste einzelner Absätze). Es erhält automatisch ein per Maus, Touch und Tastatur bedienbares Aufklappelement. Die vorhandenen Zeugnisse stammen von Can Luca und Thomas; Rechtschreibung, Zeichensetzung und Absatzgliederung wurden leicht geglättet, die inhaltlichen Aussagen beibehalten. Thomas’ englisches Bibelzitat verwendet einen gekürzten [NKJV-Wortlaut von Philipper 3:8](https://www.biblegateway.com/passage/?search=Philippians+3%3A8&version=NKJV).
 
 In `testimonies[].paragraphs` stehen normale Absätze als Text. Bibelzitate werden an der gewünschten Stelle als Objekt mit `text` und `reference` eingefügt und als Blockzitat mit eigener Quellenangabe dargestellt.
+
+In `content/shared.json` stehen nur Daten, die nicht übersetzt werden. Sichtbare Wörter bleiben immer in der Sprachdatei, auch wenn sie in beiden Sprachen gleich lauten (etwa „WhatsApp“ oder „Gold“). Jeder Eintrag in `meetings`, `gospel`, `contact` und `social` hat in `shared.json` eine `id`; die Sprachdateien enthalten unter derselben `id` die Texte dazu. Die Reihenfolge bestimmt `shared.json`. Ein neues Treffen braucht also einen Eintrag in `shared.json` (`id`, `weekday` als englischer Kleinbuchstaben-Name wie `wednesday`, `start`, `end`, `address`, `map`, optional `online`) und in beiden Sprachdateien einen Eintrag mit `label`, `location` und `note`. Fehlt eine `id` in einer Sprache oder gibt es sie nur dort, bricht der Build mit einer Fehlermeldung ab.
 
 Bei jedem Thema in `gospel` werden alle Bibelstellen in `verses` direkt angezeigt. Zusätzliche Stellen können in `moreVerses` eingetragen werden, ebenfalls als Objekte mit `text` und `reference`. Nur wenn `moreVerses` Einträge enthält, erscheint darunter „Weitere Bibelstellen +“ zum Aufklappen. Ein leeres oder weggelassenes `moreVerses` erzeugt keinen Aufklappbereich.
 

@@ -8,6 +8,7 @@ const locales = [
   { lang: 'de', page: 'index.html', source: 'site.json', other: 'en.html' },
   { lang: 'en', page: 'en.html', source: 'site.en.json', other: 'index.html' }
 ];
+const shared = JSON.parse(await readFile(path.join(root, 'content/shared.json'), 'utf8'));
 const pages = [];
 const contents = [];
 let checked = 0;
@@ -36,8 +37,8 @@ for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
   else assert.ok(/^(https?:|mailto:)/.test(url), `Unexpected URL scheme: ${url}`);
   checked++;
 }
-for (const chapter of content.gospel) assert.ok(ids.includes(chapter.id), `Missing chapter ${chapter.id}`);
-assert.equal(content.gospel.length, 6, 'Expected all six gospel chapters');
+for (const chapter of shared.gospel) assert.ok(ids.includes(chapter.id), `Missing chapter ${chapter.id}`);
+assert.equal(shared.gospel.length, 6, 'Expected all six gospel chapters');
 for (const testimony of content.testimonies) assert.ok(ids.includes(`zeugnis-${testimony.id}`), `Missing testimony ${testimony.id}`);
 pages.push({ ids, ui });
 contents.push(content);
@@ -45,14 +46,14 @@ contents.push(content);
 assert.deepEqual(pages[0].ids, pages[1].ids, 'Language versions must share all anchor targets');
 assert.deepEqual(Object.keys(pages[0].ui).sort(), Object.keys(pages[1].ui).sort(), 'Interface translations must have matching keys');
 const structure = content => ({
-  meetings: content.meetings.map(({ start, end, map, online }) => ({ start, end, map, online })),
-  gospel: content.gospel.map(({ id, color, verses, moreVerses }) => ({ id, color, verses: verses.length, moreVerses: moreVerses?.length || 0 })),
+  meetings: Object.keys(content.meetings),
+  gospel: Object.entries(content.gospel).map(([id, { verses, moreVerses }]) => ({ id, verses: verses.length, moreVerses: moreVerses?.length || 0 })),
   testimonies: content.testimonies.map(({ id, name, paragraphs }) => ({ id, name, paragraphs: paragraphs.length })),
-  contact: content.contact.map(({ url }) => url),
-  social: content.social.map(({ url }) => url),
+  contact: Object.keys(content.contact),
+  social: Object.keys(content.social),
   privacy: content.privacy.sections.map(({ paragraphs, links }) => ({ paragraphs: paragraphs.length, links: links?.map(({ url }) => url.replace('/de/', '/en/')) }))
 });
-assert.deepEqual(structure(contents[0]), structure(contents[1]), 'Keep both languages complete and meeting details/links in sync');
+assert.deepEqual(structure(contents[0]), structure(contents[1]), 'Keep both languages complete and in sync');
 const pdf = await readFile(path.join(root, 'assets/documents/evangelium-in-farben.pdf'));
 assert.equal(pdf.subarray(0, 5).toString(), '%PDF-', 'Download must be a valid PDF file');
 const legal = JSON.parse(await readFile(path.join(root, 'content/legal.json'), 'utf8'));
