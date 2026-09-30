@@ -11,6 +11,8 @@
   "navGospel": "Evangelium",
   "navTestimonies": "Zeugnisse",
   "theme": "Farbschema",
+  "switchLight": "Zum hellen Modus wechseln",
+  "switchDark": "Zum dunklen Modus wechseln",
   "system": "Systemstandard",
   "light": "Hell",
   "dark": "Dunkel",

@@ -1,48 +1,30 @@
 // Progressive enhancement only. Anchors and disclosures also work without JS.
-const themeControl = document.querySelector('.theme-control');
-const themeToggle = themeControl.querySelector('summary');
-const themeOptions = [...themeControl.querySelectorAll('[data-theme-option]')];
+const themeToggle = document.querySelector('.theme-toggle');
+const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-function updateThemeControl() {
-  const theme = document.documentElement.dataset.theme || 'system';
-  themeToggle.querySelector('use').setAttribute('href', `#icon-${theme}`);
-  for (const option of themeOptions) {
-    const selected = option.dataset.themeOption === theme;
-    option.setAttribute('aria-pressed', String(selected));
-    if (selected) {
-      themeToggle.title = `${themeControl.dataset.label}: ${option.textContent.trim()}`;
-      themeToggle.setAttribute('aria-label', themeToggle.title);
-    }
-  }
+function currentTheme() {
+  return document.documentElement.dataset.theme || (systemTheme.matches ? 'dark' : 'light');
 }
 
-for (const option of themeOptions) option.addEventListener('click', () => {
-  const theme = option.dataset.themeOption;
-  if (theme === 'system') delete document.documentElement.dataset.theme;
-  else document.documentElement.dataset.theme = theme;
+function updateThemeControl() {
+  const theme = currentTheme();
+  themeToggle.querySelector('use').setAttribute('href', `#icon-${theme}`);
+  const action = theme === 'dark' ? themeToggle.dataset.switchLight : themeToggle.dataset.switchDark;
+  themeToggle.title = `${themeToggle.dataset.label}: ${themeToggle.dataset[theme]}. ${action}`;
+  themeToggle.setAttribute('aria-label', themeToggle.title);
+}
+
+themeToggle.addEventListener('click', () => {
+  const theme = currentTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
   try {
-    if (theme === 'system') localStorage.removeItem('bibeltreff-theme');
-    else localStorage.setItem('bibeltreff-theme', theme);
-  } catch { /* Switching still works for this visit without storage. */ }
+    sessionStorage.setItem('bibeltreff-theme', theme);
+  } catch { /* Switching still works for this page without storage. */ }
   updateThemeControl();
-  themeControl.open = false;
-  themeToggle.focus({ preventScroll: true });
 });
-themeControl.addEventListener('keydown', event => {
-  if (event.key === 'Escape') {
-    themeControl.open = false;
-    themeToggle.focus({ preventScroll: true });
-    event.preventDefault();
-  }
-});
-document.addEventListener('pointerdown', event => {
-  if (!themeControl.contains(event.target)) themeControl.open = false;
-});
-themeControl.addEventListener('focusout', event => {
-  if (!themeControl.contains(event.relatedTarget)) themeControl.open = false;
-});
+systemTheme.addEventListener('change', updateThemeControl);
 updateThemeControl();
-themeControl.hidden = false;
+themeToggle.hidden = false;
 
 const header = document.querySelector('.site-header');
 const navigation = document.querySelector('.color-nav');
