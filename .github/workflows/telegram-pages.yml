@@ -62,7 +62,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/telegram.json assets/telegram assets/previews index.html en.html artikel articles
+          git add content/telegram.json assets/telegram assets/previews index.html en.html artikel articles sitemap.xml robots.txt
           if ! git diff --cached --quiet; then
             git commit -m 'Update Telegram feed'
             git push origin HEAD:main
@@ -70,7 +70,7 @@ jobs:
       - name: Stage public website only
         run: |
           mkdir _site
-          cp index.html en.html styles.css site.js CNAME .nojekyll _site/
+          cp index.html en.html styles.css site.js CNAME .nojekyll robots.txt sitemap.xml _site/
           cp -R assets artikel articles _site/
       - uses: actions/upload-pages-artifact@v3
         with:

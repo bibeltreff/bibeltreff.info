@@ -9,8 +9,8 @@ const escape = value => String(value).replace(/[&"<>]/g, c => ({ '&': '&amp;', '
 // Keep the surrounding HTML byte-for-byte intact; only replace image elements.
 export function createImageOptimizer(root) {
   const previews = new Map();
-  // One cached WebP per source and size; the file name depends on the image content and the size.
-  function generate(src, key, resize) {
+  // One cached WebP (or JPEG) per source and size; the file name depends on the image content and the size.
+  function generate(src, key, resize, format = 'webp') {
     const id = `${key}:${src}`;
     if (!previews.has(id)) previews.set(id, (async () => {
       const file = path.resolve(root, src);
@@ -18,9 +18,9 @@ export function createImageOptimizer(root) {
       if (relative.startsWith('..') || path.isAbsolute(relative)) throw new Error(`Image must be inside assets/: ${src}`);
       const input = await readFile(file);
       const hash = createHash('sha256').update(input).update(key).digest('hex').slice(0, 20);
-      const url = `assets/previews/${hash}.webp`;
+      const url = `assets/previews/${hash}.${format === 'jpeg' ? 'jpg' : format}`;
       await mkdir(path.join(root, 'assets/previews'), { recursive: true });
-      const info = await sharp(input).rotate().resize(resize).webp({ quality: 80 }).toFile(path.join(root, url));
+      const info = await sharp(input).rotate().resize(resize)[format]({ quality: 80 }).toFile(path.join(root, url));
       return { url, width: info.width, height: info.height };
     })());
     return previews.get(id);
@@ -54,5 +54,7 @@ export function createImageOptimizer(root) {
   };
   // Small cropped image for article lists (shown at up to 240 px wide, sharp on high-density screens).
   optimize.thumbnail = (src) => generate(src, 'thumb-480x300-webp-80-v1', { width: 480, height: 300, fit: 'cover' });
+  // Link preview for WhatsApp, Telegram, Facebook etc.: 1200 × 630 is the common card size, JPEG is read everywhere.
+  optimize.share = (src) => generate(src, 'share-1200x630-jpeg-80-v1', { width: 1200, height: 630, fit: 'cover' }, 'jpeg');
   return optimize;
 }

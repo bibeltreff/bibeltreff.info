@@ -188,7 +188,17 @@ Nach jeder Änderung `npm run build` und `npm run check` ausführen und das Erge
 
 Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; ohne automatischen Telegram-Import werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. Für automatische Kanalnachrichten dient der unten beschriebene optionale Workflow. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
 
-Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js`, `assets/`, `artikel/` und `articles/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig; Ordner wie `artikel/` müssen nur ihre `index.html` ausliefern, wie es nginx, Apache und GitHub Pages standardmäßig tun.
+Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js`, `robots.txt`, `sitemap.xml`, `assets/`, `artikel/` und `articles/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig; Ordner wie `artikel/` müssen nur ihre `index.html` ausliefern, wie es nginx, Apache und GitHub Pages standardmäßig tun.
+
+### Suchmaschinen und Link-Vorschau
+
+`npm run build` erzeugt alles automatisch, es gibt nichts von Hand zu pflegen:
+
+- `sitemap.xml` listet jede Seite, bei Artikeln und Themen mit dem Datum des neuesten Artikels. `robots.txt` verweist darauf. Die Sitemap-Adresse `https://bibeltreff.info/sitemap.xml` einmalig in der Google Search Console und den Bing Webmaster Tools einreichen (Bing liefert auch DuckDuckGo und Ecosia).
+- Jede Seite hat ein Vorschaubild für WhatsApp, Telegram, Signal usw. (`og:image`, `twitter:card`). Artikel verwenden ihr Beitragsbild (`image`), zugeschnitten auf 1200 × 630 Pixel als JPEG unter `assets/previews/`; alle anderen Seiten das Logo `assets/images/bibeltreff_logo_telegram.jpg`.
+- Strukturierte Daten (JSON-LD) beschreiben die Startseite als Organisation mit den Treffpunkten, Artikel mit Titel, Datum, Bild und Thema sowie den Brotkrumenpfad der Themen- und Artikelseiten.
+
+`npm run check` prüft, dass die Sitemap genau die gebauten Seiten enthält, jedes Vorschaubild existiert und die strukturierten Daten gültiges JSON sind. Ob Google die Daten versteht, zeigt der [Test für Rich-Suchergebnisse](https://search.google.com/test/rich-results); die Link-Vorschau lässt sich mit [opengraph.xyz](https://www.opengraph.xyz/) ansehen.
 
 ## Späteres Payload CMS
 

@@ -11,6 +11,8 @@ const locales = [
   { lang: 'en', page: 'en.html', source: 'site.en.json', other: 'index.html' }
 ];
 const shared = JSON.parse(await readFile(path.join(root, 'content/shared.json'), 'utf8'));
+const site = 'https://bibeltreff.info/';
+const checkedPages = [];
 const pages = [];
 const contents = [];
 let checked = 0;
@@ -21,6 +23,12 @@ async function checkPage(page, html) {
   assert.ok(!/\{\{\w+\}\}/.test(html), `Unresolved template slots in ${page}`);
   assert.ok(!html.includes('\uFFFD'), `Broken text encoding in ${page}`);
   assert.equal((html.match(/<h1\b/g) || []).length, 1, `Expected a single page heading in ${page}`);
+  // Share preview and structured data: the image must exist and the JSON-LD must parse.
+  const image = html.match(/<meta property="og:image" content="([^"]+)">/)?.[1];
+  assert.ok(image?.startsWith(site), `Missing absolute og:image in ${page}`);
+  await access(path.join(root, image.slice(site.length))).catch(() => assert.fail(`Missing og:image ${image} in ${page}`));
+  for (const [, json] of html.matchAll(/<script type="application\/ld\+json">([^<]*)<\/script>/g)) JSON.parse(json);
+  checkedPages.push(page);
   for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (url.startsWith('#')) assert.ok(ids.includes(url.slice(1)), `Missing anchor ${url} in ${page}`);
     else if (!/^[a-z]+:/i.test(url)) {
@@ -83,9 +91,14 @@ for (const lang of ['de', 'en']) {
     articlePages++;
   }
 }
+// sitemap.xml lists exactly the generated pages, robots.txt points to it.
+const sitemapUrls = [...(await readFile(path.join(root, 'sitemap.xml'), 'utf8')).matchAll(/<loc>([^<]+)<\/loc>/g)]
+  .map(([, url]) => url.slice(site.length).replace(/(^|\/)$/, '$1index.html')).sort();
+assert.deepEqual(sitemapUrls, [...checkedPages].sort(), 'sitemap.xml does not match the pages; run npm run build');
+assert.ok((await readFile(path.join(root, 'robots.txt'), 'utf8')).includes(`Sitemap: ${site}sitemap.xml`), 'robots.txt must point to sitemap.xml');
 const pdf = await readFile(path.join(root, 'assets/documents/evangelium-in-farben.pdf'));
 assert.equal(pdf.subarray(0, 5).toString(), '%PDF-', 'Download must be a valid PDF file');
 const legal = JSON.parse(await readFile(path.join(root, 'content/legal.json'), 'utf8'));
 const missing = Object.entries(legal).filter(([, value]) => value.includes('BITTE ERGÄNZEN')).map(([key]) => key);
 if (missing.length) console.warn(`WARNING: content/legal.json still has placeholders: ${missing.join(', ')}`);
-console.log(`OK: both languages, ${articlePages} article pages, ${checked} links/assets, matching anchors/content, six chapters, testimonies, PDF and text encoding.`);
+console.log(`OK: both languages, ${articlePages} article pages, ${checked} links/assets, matching anchors/content, six chapters, testimonies, PDF, text encoding, share images, structured data and sitemap.`);

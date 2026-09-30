@@ -25,6 +25,13 @@ const weekdays = {
 const weekdayKeys = weekdays.en.map((day) => day.toLowerCase());
 const homeFiles = { de: 'index.html', en: 'en.html' };
 const site = 'https://bibeltreff.info/';
+const siteName = 'Bibeltreff Stuttgart';
+// Link preview for pages without their own image; square, so shown as a small card.
+const defaultImage = { url: 'assets/images/bibeltreff_logo_telegram.jpg', width: 640, height: 640, alt: siteName };
+const organization = { '@type': 'Organization', name: siteName, url: site };
+// Every public page, for sitemap.xml.
+const sitemap = [];
+const day = (date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(date);
 
 const fill = (text, slots) => text.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   if (!(key in slots)) throw new Error(`Unknown template slot: ${key}`);
@@ -32,7 +39,8 @@ const fill = (text, slots) => text.replace(/\{\{(\w+)\}\}/g, (_, key) => {
 });
 // Pages are written with URLs relative to the site root; pages in subfolders get the matching ../ prefix.
 const relocate = (html, prefix) => prefix ? html.replace(/(\s(?:href|src))="(?![a-z][a-z0-9+.-]*:|#|\/)([^"]*)"/gi, `$1="${prefix}$2"`) : html;
-async function writePage(file, html) {
+async function writePage(file, html, lastmod) {
+  sitemap.push({ url: file.replace(/(^|\/)index\.html$/, '$1'), lastmod });
   const prefix = '../'.repeat(file.split('/').length - 1);
   await mkdir(path.dirname(path.join(root, file)), { recursive: true });
   await writeFile(path.join(root, file), relocate(await optimizeImages(html), prefix));
@@ -87,7 +95,7 @@ const list = articles[lang];
 const langTopics = topics.filter((topic) => list.some((article) => article.topic === topic.id));
 const topicName = (id) => topics.find((topic) => topic.id === id)[lang];
 const dateFormat = new Intl.DateTimeFormat(english ? 'en-GB' : 'de-DE', { dateStyle: 'long', timeZone: 'Europe/Berlin' });
-const isoDay = (date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(date);
+const isoDay = day;
 const time = (article) => `<time datetime="${isoDay(article.date)}">${escape(dateFormat.format(article.date))}</time>`;
 const count = (n) => n === 1 ? ui.articleCountOne : ui.articleCountOther.replace('{count}', n);
 const latest = list[0];
@@ -137,7 +145,23 @@ const nav = (page) => {
       </div>`;
 };
 
-const renderPage = ({ file, page, title, description, canonical, alternates = '', ogType = 'website', languageUrl, main, scripts = '' }) => fill(layout, {
+// Share preview (Open Graph, X/Twitter) and structured data (JSON-LD) for search engines.
+// "<" is escaped so the JSON cannot close the script element.
+const meta = ({ image = defaultImage, published, structuredData }) => [
+  `  <meta property="og:site_name" content="${escape(siteName)}">`,
+  `  <meta property="og:image" content="${escape(site + image.url)}">`,
+  `  <meta property="og:image:width" content="${image.width}">`,
+  `  <meta property="og:image:height" content="${image.height}">`,
+  `  <meta property="og:image:alt" content="${escape(image.alt)}">`,
+  published ? `  <meta property="article:published_time" content="${published.toISOString()}">` : '',
+  `  <meta name="twitter:card" content="${image.width > image.height ? 'summary_large_image' : 'summary'}">`,
+  structuredData ? `  <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': structuredData }).replace(/</g, '\\u003c')}</script>` : ''
+].filter(Boolean).join('\n');
+const breadcrumbData = (items) => ({
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map(([url, name], index) => ({ '@type': 'ListItem', position: index + 1, name, item: site + url }))
+});
+const renderPage = ({ file, page, title, description, canonical, alternates = '', ogType = 'website', image, published, structuredData, languageUrl, main, scripts = '' }) => fill(layout, {
   ...uiSlots,
   lang,
   root: '../'.repeat(file.split('/').length - 1),
@@ -147,6 +171,7 @@ const renderPage = ({ file, page, title, description, canonical, alternates = ''
   alternates,
   ogType,
   ogLocale: english ? 'en_GB' : 'de_DE',
+  meta: meta({ image, published, structuredData }),
   scripts,
   homeUrl: page === 'home' ? '#start' : homeFiles[lang],
   nav: nav(page),
@@ -223,6 +248,16 @@ await writePage(outputFile, renderPage({
   canonical: `${site}${english ? 'en.html' : ''}`,
   alternates: alternateLinks({ de: '', en: 'en.html' }),
   languageUrl: homeFiles[other],
+  structuredData: [
+    { '@type': 'WebSite', name: siteName, url: site, inLanguage: lang },
+    {
+      ...organization,
+      logo: site + defaultImage.url,
+      email: legal.email,
+      sameAs: social.map((item) => item.url),
+      location: meetings.map((meeting) => ({ '@type': 'Place', name: meeting.location, address: meeting.address }))
+    }
+  ],
   main: home,
   scripts: '  <script src="assets/meeting-status.js" defer></script>'
 }));
@@ -255,7 +290,7 @@ await writePage(`${overview}index.html`, renderPage({
     ${randomScript}
   </main>
 `
-}));
+}), latest.date);
 
 // --- One page per topic: all articles, newest first --------------------------
 for (const topic of langTopics) {
@@ -272,6 +307,7 @@ for (const topic of langTopics) {
     canonical: `${site}${topicUrl(lang, topic.id)}`,
     alternates: alternateLinks({ de: topicUrl('de', topic.id), en: articles.en.some((article) => article.topic === topic.id) && topicUrl('en', topic.id) }),
     languageUrl: articles[other].some((article) => article.topic === topic.id) ? topicUrl(other, topic.id) : overviewUrl(other),
+    structuredData: [breadcrumbData([[overview, ui.articlesTitle], [topicUrl(lang, topic.id), topic[lang]]])],
     main: `  <main id="inhalt" class="articles-page">
     <header class="page-head wrap">
       ${breadcrumb([[overview, ui.articlesTitle]])}
@@ -290,7 +326,7 @@ for (const topic of langTopics) {
     </ol>
   </main>
 `
-  }));
+  }), topicArticles[0].date);
 }
 
 // --- One page per article ----------------------------------------------------
@@ -300,6 +336,7 @@ for (const article of list) {
   const [newer, older] = [topicArticles[index - 1], topicArticles[index + 1]];
   const pager = (target, label, rel) => target ? `<a class="pager-${rel}" rel="${rel}" href="${target.url}"><span>${escape(label)}</span>${escape(target.title)}</a>` : '<span></span>';
   const translation = article.translations[other];
+  const shareImage = article.image && { ...await optimizeImages.share(article.image), alt: article.title };
   await writePage(article.url, renderPage({
     file: article.url,
     page: 'article',
@@ -308,6 +345,23 @@ for (const article of list) {
     canonical: `${site}${article.url}`,
     alternates: alternateLinks({ [lang]: article.url, [other]: translation?.url }),
     ogType: 'article',
+    image: shareImage || undefined,
+    published: article.date,
+    structuredData: [
+      {
+        '@type': 'Article',
+        headline: article.title,
+        description: article.excerpt,
+        datePublished: article.date.toISOString(),
+        inLanguage: lang,
+        ...(shareImage && { image: site + shareImage.url }),
+        author: organization,
+        publisher: { ...organization, logo: site + defaultImage.url },
+        mainEntityOfPage: site + article.url,
+        articleSection: topicName(article.topic)
+      },
+      breadcrumbData([[overview, ui.articlesTitle], [topicUrl(lang, article.topic), topicName(article.topic)], [article.url, article.title]])
+    ],
     languageUrl: translation ? translation.url : overviewUrl(other),
     main: `  <main id="inhalt" class="articles-page">
     <article class="article wrap">
@@ -322,7 +376,17 @@ ${article.html}      </div>
     </article>
   </main>
 `
-  }));
+  }), article.date);
 }
 console.log(`Built ${outputFile}, ${overview} with ${langTopics.length} topics and ${list.length} articles from src/, content/shared.json, content/${contentFile}, content/${gospelFile}, content/zeugnisse/${lang} and content/artikel/${lang}.`);
 }
+
+// --- Search engines: sitemap.xml lists every page, robots.txt points to it ---
+const xml = (value) => escape(value).replace(/&#39;/g, '&apos;');
+await writeFile(path.join(root, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemap.map(({ url, lastmod }) => `  <url><loc>${xml(site + url)}</loc>${lastmod ? `<lastmod>${day(lastmod)}</lastmod>` : ''}</url>`).join('\n')}
+</urlset>
+`);
+await writeFile(path.join(root, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site}sitemap.xml\n`);
+console.log(`Built sitemap.xml with ${sitemap.length} pages and robots.txt.`);
