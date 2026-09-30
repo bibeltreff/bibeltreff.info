@@ -1,7 +1,7 @@
 ---
 name: Thomas
-headline: I was never satisfied with my Christian life.
-intro: Freed from the Cycle of Resolutions and Backsliding – for a Life with Christ.
+headline: I have tasted how surpassingly excellent Christ is
+intro: Freed from a worldly, sinful Christian life – to live with Christ every day.
 ---
 
 I received the Lord Jesus into my life when I was six years old. He put joy in my heart. My parents told me a lot about the Bible, and I enjoyed going to church.
@@ -19,8 +19,8 @@ I thank God that He did not give up on me, even though I deserved it. He brought
 > … I also count all things loss for the excellence of the knowledge of Christ Jesus my Lord … that I may gain Christ.
 > — Philippians 3:8
 
-After I moved to Stuttgart to study, I met the brothers and sisters from Bibeltreff on the very first day of the preparatory maths course! Through fellowship, God showed me more and more how I could actually live with Him every day.
+After I moved to Stuttgart to study, I met the brothers and sisters from Bibeltreff on the very first day of the preparatory maths course! Through fellowship with them, God showed me more and more how I could actually live with Him every day.
 
-I learned that the Bible has been given to us as our daily food! God's Word tastes good and strengthens me to overcome! Regularly sharing with the others and praying together also gave me more and more strength to leave my old, worldly life behind. It is so much better to live through and with Christ.
+I learned that the Bible has been given to us as our daily food! God's Word tastes wonderful and strengthens me to overcome! Regularly sharing with the others and praying together also gave me more and more strength to leave my old, worldly life behind. It is so much better to live through and with Christ.
 
 Through further fellowship, the Lord continued to show me that if I want to live with Him consistently and experience Him, I need to learn to serve Him as a priest. In this way, I came to experience how to gain Christ as the spiritual sacrifices in order to live a life pleasing to God. I am endlessly grateful to God for His grace and for the revelation He gives when we seek Him!

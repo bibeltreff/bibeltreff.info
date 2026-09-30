@@ -49,16 +49,11 @@ h2 { font-size: clamp(1.85rem, 3.3vw, 2.5rem); letter-spacing: -.035em; }
 .header-actions { display: flex; align-items: center; gap: 10px; }
 .language-switch { display: grid; place-items: center; min-width: 36px; min-height: 36px; border-radius: 7px; color: var(--accent); font-size: 13px; font-weight: 600; }
 .language-switch:hover { background: var(--soft); }
-.theme-control { position: relative; width: 36px; height: 36px; flex-shrink: 0; color: var(--muted); }
-.theme-control[hidden] { display: none; }
-.theme-control .icon { width: 18px; height: 18px; pointer-events: none; }
-.theme-toggle { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 7px; }
-.theme-toggle:hover, .theme-control[open] .theme-toggle { color: var(--accent); background: var(--soft); }
-.theme-menu { position: absolute; top: calc(100% + 8px); right: 0; min-width: 190px; padding: 5px; border: 1px solid var(--line); border-radius: 9px; background: light-dark(#fdfdfd, #1b2635); box-shadow: 0 6px 22px #00000018; }
-.theme-menu button { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 8px 10px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); font: inherit; font-size: 14px; text-align: left; cursor: pointer; }
-.theme-menu button:hover, .theme-menu button[aria-pressed="true"] { color: var(--accent); background: var(--soft); }
-.theme-menu button[aria-pressed="true"]::after { content: '✓'; margin-left: auto; }
-.theme-toggle:focus-visible, .theme-menu button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; padding: 0; border: 0; border-radius: 7px; background: transparent; color: var(--muted); cursor: pointer; }
+.theme-toggle[hidden] { display: none; }
+.theme-toggle .icon { width: 18px; height: 18px; pointer-events: none; }
+.theme-toggle:hover { color: var(--accent); background: var(--soft); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .hero { padding-block: 85px 69px; text-align: center; }
 .location-badge { display: inline-flex; align-items: center; gap: 9px; padding: 5px 13px; color: light-dark(#466185, #acc8eb); background: light-dark(#edf3fa, #1d2d42); border: 1px solid light-dark(#e0e8f2, #33465e); border-radius: 50px; font-size: 13px; font-weight: 500; letter-spacing: .01em; }
 .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
@@ -258,6 +253,7 @@ summary::-webkit-details-marker { display: none; }
 .footer-main .brand-icon { width: 34px; height: 29px; margin-right: 0; }
 .footer-main > p { flex: 1 1 320px; max-width: 56ch; font-size: 13px; color: var(--muted); }
 .social-links { display: flex; gap: 20px; margin-left: auto; font-size: 13px; color: var(--muted); }
+.social-links > a { padding-block: 8px; }
 @media (max-width: 950px) {
   .wrap { width: calc(100% - 48px); }
   .header-inner { gap: 16px; }
