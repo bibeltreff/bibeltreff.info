@@ -8,7 +8,8 @@ const unquote = (value) => {
   return value;
 };
 
-export function parseMarkdown(source, file) {
+// Shared by testimonies and articles: returns the fields and the body lines after the frontmatter.
+export function readFrontmatter(source, file) {
   const lines = source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').split('\n');
   if (lines[0].trim() !== '---') throw new Error(`${file}: must start with a --- line`);
   const end = lines.findIndex((line, index) => index > 0 && line.trim() === '---');
@@ -22,6 +23,11 @@ export function parseMarkdown(source, file) {
     if (match[1] in data) throw new Error(`${file}:${index + 2}: duplicate field ${match[1]}`);
     data[match[1]] = unquote(match[2].trim());
   });
+  return { data, lines, end };
+}
+
+export function parseMarkdown(source, file) {
+  const { data, lines, end } = readFrontmatter(source, file);
 
   const blocks = [];
   let block = [];

@@ -1,6 +1,6 @@
 ---
 title: "Offenbarung 8: Das Räucherwerk vor dem Thron – Die Gebete der Heiligen"
-date: 2021-05-18
+date: 2021-05-18T21:44:45+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-8-das-raeucherwerk-vor-dem-thron-die-gebete-der-heiligen/
 image: assets/artikel/das-buch-offenbarung/offenbarung-8-das-raeucherwerk-vor-dem-thron-die-gebete-der-heiligen/Screenshot-2022-02-21-233304-1-752x440.png
 imageAlt: Screenshot 2022 02 21 233304 1

@@ -1,6 +1,6 @@
 ---
 title: "The Outer Gate: The Entrance into the Temple Compound"
-date: 2022-02-24
+date: 2022-02-24T22:12:17+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/the-outer-gate-the-entrance-into-the-temple-compound/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-eingang-in-die-tempelanlage/Tor_6-752x440-1-752x440.jpg
 imageAlt: Tor 6 752x440 1

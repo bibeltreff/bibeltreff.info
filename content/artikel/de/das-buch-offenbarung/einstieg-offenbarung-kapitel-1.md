@@ -1,6 +1,6 @@
 ---
 title: Offenbarung 1 – Einstieg
-date: 2020-11-01
+date: 2020-11-01T12:00:42+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/einstieg-offenbarung-kapitel-1/
 image: assets/artikel/das-buch-offenbarung/einstieg-offenbarung-kapitel-1/DasBuchOffenbarung-752x440.jpg
 imageAlt: DasBuchOffenbarung

@@ -1,6 +1,6 @@
 ---
 title: Gottes Ziel mit uns Menschen
-date: 2017-12-15
+date: 2017-12-15T17:49:22+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-gottes-ziel-mit-uns-menschen/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-gottes-ziel-mit-uns-menschen/Bild-Reich-e1511627871231-752x440.jpg
 imageAlt: Bild Reich e1511627871231

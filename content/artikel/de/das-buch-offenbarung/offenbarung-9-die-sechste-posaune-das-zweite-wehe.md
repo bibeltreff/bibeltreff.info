@@ -1,6 +1,6 @@
 ---
 title: "Offenbarung 9: Die sechste Posaune – das zweite Wehe"
-date: 2021-12-14
+date: 2021-12-14T14:36:48+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-9-die-sechste-posaune-das-zweite-wehe/
 image: assets/artikel/das-buch-offenbarung/offenbarung-9-die-sechste-posaune-das-zweite-wehe/Offb-9_13-21-200-Millionen-Reiter-752x440-1-752x440.png
 imageAlt: Offenbarung 200 Millionen Reiter

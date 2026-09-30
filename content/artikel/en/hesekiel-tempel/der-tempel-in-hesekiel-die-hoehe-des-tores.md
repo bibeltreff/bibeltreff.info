@@ -1,6 +1,6 @@
 ---
 title: The Height of the Gate
-date: 2022-02-24
+date: 2022-02-24T22:22:31+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/the-height-of-the-gate/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-die-hoehe-des-tores/Brandenburger_Tor-752x440-1-752x440.jpg
 imageAlt: Brandenburger Tor 752x440 1

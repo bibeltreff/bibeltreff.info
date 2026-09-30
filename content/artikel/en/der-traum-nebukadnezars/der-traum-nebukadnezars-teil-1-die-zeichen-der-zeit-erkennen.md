@@ -1,6 +1,6 @@
 ---
 title: "Nebuchadnezzar’s Dream (Part 1): Recognizing the Signs of the Times"
-date: 2022-02-24
+date: 2022-02-24T22:41:48+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/nebuchadnezzars-dream-part-1-recognizing-the-signs-of-the-times/
 image: assets/artikel/der-traum-nebukadnezars/der-traum-nebukadnezars-teil-1-die-zeichen-der-zeit-erkennen/DasBuchDaniel_new-768x530-752x440-1-752x440.jpg
 imageAlt: The Book of Daniel
@@ -26,5 +26,3 @@ But to understand this dream in its depth, reading it with our natural understan
 > But as for me, this secret has **not** been revealed to me because I have more wisdom than anyone living, but for our sakes who make known the interpretation to the king, and that **you may know the thoughts of your heart.**
 >
 > — *Daniel 2:30*
-
-In the [next summary](https://hochschul-bibelkreise.de/artikel/die-zeichen-der-zeit-erkennen-teil-2/), we will take a closer look at the content of the dream.

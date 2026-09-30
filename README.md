@@ -36,12 +36,13 @@ Vorschaudateinamen hängen vom Bildinhalt ab, damit ausgetauschte Fotos keine ve
 - `content/zeugnisse/de/` und `content/zeugnisse/en/`: Zeugnisse als Markdown, eine Datei pro Zeugnis und Sprache (siehe „Zeugnisse schreiben“).
 - `content/legal.json`: Betreiberangaben für Impressum und Datenschutzerklärung.
 - `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
-- `src/index.html`: Gemeinsame HTML-Vorlage mit Platzhaltern für beide Sprachen.
+- `src/layout.html`: Gemeinsames Seitengerüst aller Seiten (Kopf, Navigation mit Artikel-Menü, Fußbereich) mit Platzhaltern für beide Sprachen.
+- `src/index.html`: Inhalt der Startseite; wird in `src/layout.html` eingesetzt.
 - `styles.css`: Responsive Gestaltung; Hauptfarbe ist das Blau aus dem PDF `#1d61b2` (`--accent`).
 - `site.js`: Markierung des aktuellen Evangeliums-Themas und Messung der haftenden Navigation.
 - `assets/meeting-status.js`: Zeigt den sanft pulsierenden blauen Punkt nur zu den veröffentlichten wöchentlichen Treffzeiten (Zeitzone Europe/Berlin). Bei reduzierter Bewegung bleibt er ruhig; ohne JavaScript bleibt er verborgen.
 - `assets/documents/evangelium-in-farben.pdf`: Aktuelles deutsches Originalheft als Download (Fassung `Das_Evangelium_in_Farben_3_Uni_GER.pdf`).
-- `index.html` und `en.html`: Generierte deutsche und englische Seiten. Änderungen hier werden beim Bauen überschrieben.
+- `index.html` und `en.html`, `artikel/` und `articles/`: Generierte deutsche und englische Seiten. Änderungen hier werden beim Bauen überschrieben; `artikel/` und `articles/` werden dabei jedes Mal komplett neu erzeugt.
 
 Deutsch bleibt die Standardsprache. Der Sprachlink in der Kopfzeile öffnet `en.html` beziehungsweise `index.html` und funktioniert ohne JavaScript. Beide Seiten haben eigene Metadaten sowie gegenseitige `hreflang`-Verweise. Das Originalheft bleibt deutsch und ist auf der englischen Seite als „German PDF“ gekennzeichnet.
 
@@ -88,17 +89,17 @@ Weiter geht es nach dem Bibelzitat.
 - Ein Bibelzitat ist ein Block, dessen Zeilen alle mit `>` beginnen. Die letzte Zeile nennt nach einem Gedankenstrich (`—`, `–` oder `--`) die Stelle.
 - Der Text bleibt schlicht: Überschriften, Listen, Links und Formatierungen wie `**fett**` werden nicht unterstützt. Anführungszeichen um Überschrift und Zitat setzt die Seite selbst.
 
-Ein neues Zeugnis anlegen:
-
-1. `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md` schreiben.
-2. Die `id` in `content/shared.json` unter `testimonies` an der gewünschten Stelle eintragen.
-3. `npm run build` und `npm run check` ausführen. Fehlt eine Sprache, ein Feld oder der Eintrag in `shared.json`, nennt die Fehlermeldung Datei und Zeile.
+Wie ein neues Zeugnis angelegt wird, steht unter „Neue Inhalte anlegen“.
 
 Jedes Zeugnis erhält automatisch ein per Maus, Touch und Tastatur bedienbares Aufklappelement. Die vorhandenen Zeugnisse stammen von Can Luca und Thomas; Rechtschreibung, Zeichensetzung und Absatzgliederung wurden leicht geglättet, die inhaltlichen Aussagen beibehalten. Thomas’ englisches Bibelzitat verwendet einen gekürzten [NKJV-Wortlaut von Philipper 3:8](https://www.biblegateway.com/passage/?search=Philippians+3%3A8&version=NKJV).
 
 ### Artikel
 
-Die Artikel von [hochschul-bibelkreise.de](https://hochschul-bibelkreise.de/category/neues-aus-dem-bibelkreis/) liegen als Markdown unter `content/artikel/de/<serie>/<id>.md`, ihre Bilder unter `assets/artikel/<serie>/<id>/`. Die Serien entsprechen den Themen der alten Website: `das-buch-offenbarung`, `das-reich-gottes-in-den-verschiedenen-zeitaltern`, `der-traum-nebukadnezars`, `die-aufstiegslieder`, `die-stiftshuette`, `hesekiel-tempel` und `zion-die-wohnung-gottes`. Die angezeigten Namen der Themen stehen in beiden Sprachen in `content/artikel/themen.json`; die Reihenfolge dort entspricht dem Menü der alten Website. Die `id` ist der Slug des deutschen Originals. Eine englische Fassung ist optional und liegt mit derselben Serie und `id` unter `content/artikel/en/<serie>/`. Übernommen wurden alle 68 deutschen Artikel und die 9 vorhandenen englischen Fassungen; weitere Artikel sollen nur noch neu übersetzt werden. Die Artikel sind noch nicht in die Website eingebunden.
+Die Artikel von [hochschul-bibelkreise.de](https://hochschul-bibelkreise.de/category/neues-aus-dem-bibelkreis/) liegen als Markdown unter `content/artikel/de/<serie>/<id>.md`, ihre Bilder unter `assets/artikel/<serie>/<id>/`. Die Serien entsprechen den Themen der alten Website: `das-buch-offenbarung`, `das-reich-gottes-in-den-verschiedenen-zeitaltern`, `der-traum-nebukadnezars`, `die-aufstiegslieder`, `die-stiftshuette`, `hesekiel-tempel` und `zion-die-wohnung-gottes`. Die angezeigten Namen der Themen stehen in beiden Sprachen in `content/artikel/themen.json`; die Reihenfolge dort entspricht dem Menü der alten Website. Die `id` ist der Slug des deutschen Originals. Eine englische Fassung ist optional und liegt mit derselben Serie und `id` unter `content/artikel/en/<serie>/`. Übernommen wurden alle 68 deutschen Artikel und die 9 vorhandenen englischen Fassungen; weitere Artikel sollen nur noch neu übersetzt werden.
+
+Der Build erzeugt daraus statische Seiten: `artikel/` (Übersicht), `artikel/<serie>/` (alle Artikel eines Themas, neueste zuerst, mit Datum und den ersten ein bis zwei Sätzen) und `artikel/<serie>/<id>.html` (der Artikel mit Links zum älteren und neueren Artikel desselben Themas). Die englischen Seiten liegen entsprechend unter `articles/` und zeigen nur Themen mit englischen Artikeln. Der Sprachlink führt zur Übersetzung, sonst zur Übersicht der anderen Sprache. Die Übersicht zeigt den letzten Artikel, einen zufälligen Artikel und alle Themen. Im Kopf öffnet „Artikel“ bei Maus-Hover ein Menü mit „Letzter Artikel“, „Zufälliger Artikel“ und „Alle Artikel“, daneben klappen die Themen auf. Auf Touch-Geräten und schmalen Bildschirmen führt „Artikel“ direkt zur Übersicht. Der Zufall wählt JavaScript beim Klick bzw. beim Laden der Übersicht; ohne JavaScript führen beide zu einem beim Bauen festgelegten Artikel.
+
+`date` ist der Veröffentlichungszeitpunkt (`2024-05-31` oder mit Uhrzeit `2024-05-31T18:30:00+02:00`); er bestimmt die Reihenfolge, angezeigt wird nur der Tag. Bei gleichem Zeitpunkt wird nach Titel sortiert, etwa bei elf Aufstiegsliedern, die im Original alle den 30. November 2007 tragen. Artikelbilder erhalten wie andere Bilder automatisch eine WebP-Vorschau mit Link zum Original.
 
 ```markdown
 ---
@@ -118,13 +119,65 @@ Einleitung …
 > — Offenbarung 11:3
 ```
 
-`image` und `imageAlt` (Beitragsbild) sind optional. Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Entfernt wurden nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links zwischen Artikeln und die zwei Audiodateien verweisen noch auf die alte Website.
+`image` und `imageAlt` (Beitragsbild) sind optional und werden bisher nicht angezeigt. Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Sonstiges HTML wird als Text angezeigt, erlaubt sind nur `<u>` und `<br>`. `#`-Überschriften werden zu Zwischenüberschriften, weil der Titel die Seitenüberschrift ist. Ein Zitat, dessen letzter Absatz mit `—` beginnt, zeigt diesen als Quellenangabe. Entfernt wurden beim Import nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links auf importierte Artikel und Themen der alten Website führen beim Bauen auf die neuen Seiten.
+
+### Neue Inhalte anlegen
+
+Nach jeder Änderung `npm run build` und `npm run check` ausführen und das Ergebnis mit `npm run dev` im Browser ansehen. Fehlermeldungen nennen Datei und, wo möglich, Zeile. Dateinamen und `id`s bestehen nur aus Kleinbuchstaben, Ziffern und Bindestrichen, also ohne Umlaute: `ae`, `oe`, `ue`, `ss`.
+
+**Ein neues Zeugnis**
+
+1. `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md` im Format aus „Zeugnisse schreiben“ anlegen, zum Beispiel `content/zeugnisse/de/maria.md`. Beide Sprachen sind Pflicht.
+2. Die `id` (hier `maria`) in `content/shared.json` unter `testimonies` an der Stelle eintragen, an der das Zeugnis erscheinen soll.
+3. Bauen und prüfen.
+
+**Ein neuer Artikel**
+
+1. Das Thema wählen, also einen Ordner unter `content/artikel/de/`, etwa `das-buch-offenbarung`. Für ein neues Thema zuerst die Kategorie anlegen (siehe unten).
+2. `content/artikel/de/<thema>/<id>.md` anlegen. Die `id` wird Teil der Adresse (`artikel/<thema>/<id>.html`) und darf in keinem anderen Thema schon vorkommen.
+
+   ```markdown
+   ---
+   title: Offenbarung 12 Die Frau und der Drache
+   date: 2026-10-07
+   ---
+
+   Der erste Absatz erscheint gekürzt in der Übersicht und in der Themenliste.
+
+   ## Zwischenüberschrift
+
+   > “Und ein großes Zeichen erschien im Himmel …”
+   >
+   > — Offenbarung 12:1
+
+   ![Beschreibung des Bildes](assets/artikel/das-buch-offenbarung/offenbarung-12-die-frau-und-der-drache/zeitstrahl.jpg)
+   ```
+
+   Pflicht sind nur `title` und `date`. Der Anrisstext in Übersicht und Themenliste (zugleich die Seitenbeschreibung für Suchmaschinen) entsteht automatisch aus den ersten ein bis zwei Sätzen des ersten Absatzes und endet immer mit „…“. Wer ihn selbst formulieren möchte, trägt ihn optional als einzeiliges `excerpt: Mein eigener Anrisstext.` ein; dieser Text wird unverändert und ohne „…“ angezeigt. `source` gibt es nur bei den importierten Artikeln. Mehrere Artikel am selben Tag lassen sich mit Uhrzeit ordnen, zum Beispiel `date: 2026-10-07T19:30:00+02:00`.
+3. Bilder unter `assets/artikel/<thema>/<id>/` ablegen und mit dem Pfad ab `assets/` einbinden, wie im Beispiel. Die Beschreibung in `![…]` ist der Alternativtext. Die Vorschau erzeugt der Build.
+4. Optional die englische Fassung als `content/artikel/en/<thema>/<id>.md` mit gleichem Thema und gleicher `id` anlegen. Ohne sie erscheint der Artikel nur auf Deutsch; der Sprachlink führt dann zur englischen Übersicht.
+5. Bauen und prüfen. Der neue Artikel erscheint automatisch als „Letzter Artikel“, in seinem Thema und im Zufall.
+
+**Eine neue Artikelkategorie (Thema)**
+
+1. In `content/artikel/themen.json` einen Eintrag hinzufügen. `id` ist der Ordnername, `de` und `en` die angezeigten Namen; beide sind Pflicht, auch wenn es noch keine englischen Artikel gibt. Die Reihenfolge in der Datei bestimmt die Reihenfolge in Menü und Übersicht.
+
+   ```json
+   {
+     "id": "das-evangelium-nach-johannes",
+     "de": "Das Evangelium nach Johannes",
+     "en": "The Gospel of John"
+   }
+   ```
+2. Den Ordner `content/artikel/de/<id>/` anlegen und darin den ersten Artikel schreiben. Ein Thema ohne Artikel wird nicht angezeigt. Im Englischen erscheint es erst mit dem ersten englischen Artikel in `content/artikel/en/<id>/`.
+3. Bilder kommen nach `assets/artikel/<id>/<artikel-id>/`.
+4. Bauen und prüfen. Das Thema erscheint automatisch im Menü unter „Alle Artikel“, in der Übersicht und mit eigener Seite `artikel/<id>/`.
 
 ## Statisches Hosting
 
 Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; ohne automatischen Telegram-Import werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. Für automatische Kanalnachrichten dient der unten beschriebene optionale Workflow. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
 
-Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js` und `assets/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig.
+Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js`, `assets/`, `artikel/` und `articles/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig; Ordner wie `artikel/` müssen nur ihre `index.html` ausliefern, wie es nginx, Apache und GitHub Pages standardmäßig tun.
 
 ## Späteres Payload CMS
 

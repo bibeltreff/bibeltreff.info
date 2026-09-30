@@ -1,6 +1,6 @@
 ---
 title: Rettung von Lügenlippen
-date: 2007-11-30
+date: 2007-11-30T16:15:43+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/rettung-von-luegenlippen/
 image: assets/artikel/die-aufstiegslieder/rettung-von-luegenlippen/balloon-1014411_1920-752x440.jpg
 imageAlt: balloon 1014411 1920

@@ -1,6 +1,6 @@
 ---
 title: Unsere Hilfe kommt vom HERRN
-date: 2013-12-23
+date: 2013-12-23T04:10:38+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/unsere-hilfe-kommt-vom-herrn/
 image: assets/artikel/die-aufstiegslieder/unsere-hilfe-kommt-vom-herrn/sunset-1807524_1920-752x440.jpg
 imageAlt: sunset 1807524 1920

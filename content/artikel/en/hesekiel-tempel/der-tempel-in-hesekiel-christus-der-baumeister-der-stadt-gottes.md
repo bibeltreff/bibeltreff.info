@@ -1,6 +1,6 @@
 ---
 title: Christ, the Builder of the City of God
-date: 2022-02-24
+date: 2022-02-24T22:04:50+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/christ-the-builder-of-the-city-of-god/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-christus-der-baumeister-der-stadt-gottes/Hesekiel-Tempel-752x440-1-752x440.jpg
 imageAlt: Hesekiel Tempel 752x440 1

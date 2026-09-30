@@ -1,17 +1,20 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderTelegram } from './telegram-render.mjs';
 import { loadTestimonies } from './testimonies.mjs';
 import { createImageOptimizer } from './images.mjs';
+import { articleFolders, loadArticles, overviewUrl, topicUrl } from './articles.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const optimizeImages = createImageOptimizer(root);
+const layout = await readFile(path.join(root, 'src/layout.html'), 'utf8');
 const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
 const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8'));
 const legal = JSON.parse(await readFile(path.join(root, 'content/legal.json'), 'utf8'));
 // Language-independent data (times, addresses, links, colors); the language files only hold visible text.
 const shared = JSON.parse(await readFile(path.join(root, 'content/shared.json'), 'utf8'));
+const { topics, articles } = await loadArticles(root);
 const escape = (value) => String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const arrow = '<span aria-hidden="true">↗</span>';
 const links = (items, className = '') => items.map((item) => `<a class="${className}" href="${escape(item.url)}"${item.newTab ? ' target="_blank" rel="noopener noreferrer"' : ''}>${escape(item.label)} ${arrow}</a>`).join('\n');
@@ -20,13 +23,32 @@ const weekdays = {
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 };
 const weekdayKeys = weekdays.en.map((day) => day.toLowerCase());
+const homeFiles = { de: 'index.html', en: 'en.html' };
+const site = 'https://bibeltreff.info/';
+
+const fill = (text, slots) => text.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+  if (!(key in slots)) throw new Error(`Unknown template slot: ${key}`);
+  return slots[key];
+});
+// Pages are written with URLs relative to the site root; pages in subfolders get the matching ../ prefix.
+const relocate = (html, prefix) => prefix ? html.replace(/(\s(?:href|src))="(?![a-z][a-z0-9+.-]*:|#|\/)([^"]*)"/gi, `$1="${prefix}$2"`) : html;
+async function writePage(file, html) {
+  const prefix = '../'.repeat(file.split('/').length - 1);
+  await mkdir(path.dirname(path.join(root, file)), { recursive: true });
+  await writeFile(path.join(root, file), relocate(await optimizeImages(html), prefix));
+  return prefix;
+}
+
+// Article pages are fully generated: start from empty folders so removed articles disappear.
+for (const folder of Object.values(articleFolders)) await rm(path.join(root, folder), { recursive: true, force: true });
 
 // Generate full HTML at build time: content and navigation work without JavaScript.
 // A future CMS exporter only needs to provide the same shared, site and gospel content schemas.
 for (const lang of ['de', 'en']) {
 const english = lang === 'en';
+const other = english ? 'de' : 'en';
 const contentFile = english ? 'site.en.json' : 'site.json';
-const outputFile = english ? 'en.html' : 'index.html';
+const outputFile = homeFiles[lang];
 const content = JSON.parse(await readFile(path.join(root, 'content', contentFile), 'utf8'));
 const gospelFile = `gospel.${lang}.json`;
 const gospelTexts = JSON.parse(await readFile(path.join(root, 'content', gospelFile), 'utf8'));
@@ -58,17 +80,98 @@ const privacy = `<details class="footer-legal" id="datenschutz"><summary>${escap
 ${content.privacy.sections.map((section) => `    <section><h3>${escape(section.heading)}</h3>${section.paragraphs.map((p) => `<p>${escape(p)}</p>`).join('')}${section.links?.length ? `<p>${links(section.links, 'text-link')}</p>` : ''}</section>`).join('\n')}
     <p class="privacy-updated">${escape(ui.privacyUpdated)}: ${escape(privacyDate)}</p></div></details>`;
 const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${escape(verse.text)}${ui.quoteClose}</p><cite>${escape(verse.reference)}</cite></blockquote>`;
-const slots = {
-  ...Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)])),
+const uiSlots = Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)]));
+
+// --- Articles of this language ----------------------------------------------
+const list = articles[lang];
+const langTopics = topics.filter((topic) => list.some((article) => article.topic === topic.id));
+const topicName = (id) => topics.find((topic) => topic.id === id)[lang];
+const dateFormat = new Intl.DateTimeFormat(english ? 'en-GB' : 'de-DE', { dateStyle: 'long', timeZone: 'Europe/Berlin' });
+const isoDay = (date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(date);
+const time = (article) => `<time datetime="${isoDay(article.date)}">${escape(dateFormat.format(article.date))}</time>`;
+const count = (n) => n === 1 ? ui.articleCountOne : ui.articleCountOther.replace('{count}', n);
+const latest = list[0];
+// Without JavaScript the "random" links need a fixed target; it only changes when the articles change.
+const fallback = list[[...list.map((article) => article.id).join()].reduce((sum, c) => (sum * 31 + c.charCodeAt(0)) % 1000003, 7) % list.length];
+const pickable = list.map((article) => article.url).join(' ');
+
+// Semesters as at Uni Stuttgart: summer 1 April – 30 September, winter 1 October – 31 March.
+// Keys count half-years, so consecutive semesters have consecutive keys.
+const semesterKey = (date) => {
+  const [year, month] = isoDay(date).split('-').map(Number);
+  if (month >= 4 && month <= 9) return year * 2;
+  return (month >= 10 ? year : year - 1) * 2 + 1;
+};
+const semesterName = (key) => {
+  const year = Math.floor(key / 2);
+  return key % 2 ? ui.semesterWinter.replace('{year}', `${year}/${String(year + 1).slice(2)}`) : ui.semesterSummer.replace('{year}', year);
+};
+// "WiSe 2020/21 – SoSe 2022" for consecutive semesters, otherwise a list.
+const semesterRanges = (keys) => keys.reduce((ranges, key) => {
+  const last = ranges.at(-1);
+  if (last && key === last[1] + 1) last[1] = key; else ranges.push([key, key]);
+  return ranges;
+}, []).map(([from, to]) => from === to ? semesterName(from) : `${semesterName(from)} – ${semesterName(to)}`).join(', ');
+// Topics are listed by the semester they started in, newest first.
+const topicsBySemester = langTopics.map((topic) => {
+  const topicArticles = list.filter((article) => article.topic === topic.id);
+  // Translations are dated when they were translated, so the German original decides the semester.
+  const semesters = [...new Set(topicArticles.map((article) => semesterKey(article.translations.de.date)))].sort((a, b) => a - b);
+  return { topic, count: topicArticles.length, semesters };
+}).sort((a, b) => b.semesters[0] - a.semesters[0] || a.topic[lang].localeCompare(b.topic[lang], lang));
+
+// Navigation: on the home page the sections are anchors, elsewhere they lead back to it.
+// Artikel comes last, set apart from the home page sections by a divider.
+const nav = (page) => {
+  const home = page === 'home' ? '' : homeFiles[lang];
+  const current = page === 'home' ? '' : ' aria-current="page"';
+  return `<a href="${home}#treffen">${uiSlots.navMeetings}</a><a href="${home}#evangelium">${uiSlots.navGospel}</a><a href="${home}#zeugnisse">${uiSlots.navTestimonies}</a><a href="${home}#kontakt">${uiSlots.navContact}</a><div class="nav-item nav-articles">
+        <a class="nav-parent" href="${overviewUrl(lang)}"${current}>${uiSlots.navArticles}</a>
+        <div class="nav-menu" aria-label="${uiSlots.articlesMenu}" role="group">
+          <a href="${latest.url}">${uiSlots.articlesLatest}</a>
+          <a href="${fallback.url}" data-random-articles="${escape(pickable)}">${uiSlots.articlesRandom}</a>
+          <div class="nav-item nav-subitem"><a class="nav-parent" href="${overviewUrl(lang)}">${uiSlots.articlesAll} <span aria-hidden="true">›</span></a>
+            <div class="nav-menu nav-submenu">${langTopics.map((topic) => `<a href="${topicUrl(lang, topic.id)}">${escape(topic[lang])}</a>`).join('')}</div>
+          </div>
+        </div>
+      </div>`;
+};
+
+const renderPage = ({ file, page, title, description, canonical, alternates = '', ogType = 'website', languageUrl, main, scripts = '' }) => fill(layout, {
+  ...uiSlots,
   lang,
-  telegram: renderTelegram(telegram, ui, lang),
+  root: '../'.repeat(file.split('/').length - 1),
+  title: escape(title),
+  description: escape(description),
+  canonical: escape(canonical),
+  alternates,
+  ogType,
   ogLocale: english ? 'en_GB' : 'de_DE',
-  canonical: `https://bibeltreff.info/${english ? 'en.html' : ''}`,
-  languageUrl: english ? 'index.html' : 'en.html',
-  otherLang: english ? 'de' : 'en',
+  scripts,
+  homeUrl: page === 'home' ? '#start' : homeFiles[lang],
+  nav: nav(page),
+  languageUrl,
+  otherLang: other,
+  main,
   legal: legalNotice + privacy,
-  title: escape(content.title),
-  description: escape(content.description),
+  social: links(social)
+});
+const alternateLinks = (urls) => typeof urls.de === 'string' && typeof urls.en === 'string'
+  ? ['de', 'en'].map((code) => `  <link rel="alternate" hreflang="${code}" href="${site}${urls[code]}">`).join('\n') + `\n  <link rel="alternate" hreflang="x-default" href="${site}${urls.de}">`
+  : '';
+const articleCard = (article, label, attributes = '') => `<article class="article-card"${attributes}>
+          <p class="eyebrow section-label">${escape(label)}</p>
+          <h2><a href="${article.url}" data-field="title">${escape(article.title)}</a></h2>
+          <p class="article-meta"><span data-field="date">${time(article)}</span> · <a href="${topicUrl(lang, article.topic)}" data-field="topic">${escape(topicName(article.topic))}</a></p>
+          <p class="article-excerpt" data-field="excerpt">${escape(article.excerpt)}</p>
+          <a class="text-link" href="${article.url}" data-field="link">${uiSlots.readArticle} <span aria-hidden="true">→</span></a>
+        </article>`;
+const breadcrumb = (items) => `<nav class="breadcrumb" aria-label="${uiSlots.breadcrumb}">${items.map(([url, label]) => `<a href="${url}">${escape(label)}</a>`).join('<span aria-hidden="true">/</span>')}</nav>`;
+
+// --- Home page --------------------------------------------------------------
+const home = fill(template, {
+  ...uiSlots,
+  telegram: renderTelegram(telegram, ui, lang),
   eyebrow: escape(content.hero.eyebrow),
   heading: escape(content.hero.heading),
   accent: escape(content.hero.accent),
@@ -97,14 +200,115 @@ const slots = {
     <span class="testimony-preview"><span class="testimony-headline">${ui.quoteOpen}${escape(testimony.headline)}${ui.quoteClose}</span><span class="testimony-intro">${escape(testimony.intro)}</span><span class="testimony-action"><span class="when-closed">${escape(ui.readTestimony)}</span><span class="when-open">${escape(ui.closeTestimony)}</span></span></span><span class="expand-icon" aria-hidden="true">+</span></summary>
     <div class="testimony-body">${testimony.paragraphs.map(p => typeof p === 'string' ? `<p>${escape(p)}</p>` : quote(p)).join('\n')}</div>
   </details>`).join('\n'),
-  contact: links(contact, 'contact-link'),
-  social: links(social)
-};
-
-const html = template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
-  if (!(key in slots)) throw new Error(`Unknown template slot: ${key}`);
-  return slots[key];
+  contact: links(contact, 'contact-link')
 });
-await writeFile(path.join(root, outputFile), await optimizeImages(html));
-console.log(`Built ${outputFile} from src/index.html, content/shared.json, content/${contentFile}, content/${gospelFile} and content/zeugnisse/${lang}.`);
+await writePage(outputFile, renderPage({
+  file: outputFile,
+  page: 'home',
+  title: content.title,
+  description: content.description,
+  canonical: `${site}${english ? 'en.html' : ''}`,
+  alternates: alternateLinks({ de: '', en: 'en.html' }),
+  languageUrl: homeFiles[other],
+  main: home,
+  scripts: '  <script src="assets/meeting-status.js" defer></script>'
+}));
+
+// --- Article overview: latest, random, then all topics -----------------------
+const overview = overviewUrl(lang);
+// Data for the random card; "<" is escaped so the JSON cannot close the script element.
+const randomData = JSON.stringify(list.map((article) => ({
+  url: article.url, title: article.title, date: dateFormat.format(article.date), datetime: isoDay(article.date),
+  topic: topicName(article.topic), topicUrl: topicUrl(lang, article.topic), excerpt: article.excerpt
+}))).replace(/</g, '\\u003c');
+await writePage(`${overview}index.html`, renderPage({
+  file: `${overview}index.html`,
+  page: 'articles',
+  title: `${ui.articlesTitle} – Bibeltreff`,
+  description: ui.articlesIntro,
+  canonical: `${site}${overview}`,
+  alternates: alternateLinks({ de: overviewUrl('de'), en: overviewUrl('en') }),
+  languageUrl: overviewUrl(other),
+  main: `  <main id="inhalt" class="articles-page">
+    <header class="page-head wrap">
+      <h1>${uiSlots.articlesTitle}</h1>
+      <p class="page-intro">${uiSlots.articlesIntro}${ui.articlesInGerman ? ` ${uiSlots.articlesInGerman} <a class="text-link" href="${overviewUrl('de')}" lang="de" hreflang="de">${uiSlots.articlesInGermanLink} <span aria-hidden="true">→</span></a>` : ''}</p>
+    </header>
+    <section class="article-highlights wrap" aria-label="${uiSlots.articlesLatest}, ${uiSlots.articlesRandom}">
+        ${articleCard(latest, ui.articlesLatest)}
+        ${articleCard(fallback, ui.articlesRandom, ' data-random-card')}
+    </section>
+    <section class="topics-section wrap" aria-labelledby="topics-title">
+      <h2 id="topics-title">${uiSlots.articlesTopics}</h2>
+<ul class="topic-list">${topicsBySemester.map(({ topic, count: n, semesters }) => `
+        <li><a class="topic-row" href="${topicUrl(lang, topic.id)}"><span class="topic-name">${escape(topic[lang])}</span><span class="topic-semesters">${escape(semesterRanges(semesters))}</span><span class="topic-count">${escape(count(n))}</span><span class="topic-arrow" aria-hidden="true">→</span></a></li>`).join('')}
+      </ul>
+    </section>
+    <script type="application/json" id="article-index">${randomData}</script>
+  </main>
+`
+}));
+
+// --- One page per topic: all articles, newest first --------------------------
+for (const topic of langTopics) {
+  const file = `${topicUrl(lang, topic.id)}index.html`;
+  const topicArticles = list.filter((article) => article.topic === topic.id);
+  await writePage(file, renderPage({
+    file,
+    page: 'topic',
+    title: `${topic[lang]} – ${ui.articlesTitle} – Bibeltreff`,
+    description: `${topic[lang]}: ${count(topicArticles.length)}. ${ui.articlesIntro}`,
+    canonical: `${site}${topicUrl(lang, topic.id)}`,
+    alternates: alternateLinks({ de: topicUrl('de', topic.id), en: articles.en.some((article) => article.topic === topic.id) && topicUrl('en', topic.id) }),
+    languageUrl: articles[other].some((article) => article.topic === topic.id) ? topicUrl(other, topic.id) : overviewUrl(other),
+    main: `  <main id="inhalt" class="articles-page">
+    <header class="page-head wrap">
+      ${breadcrumb([[overview, ui.articlesTitle]])}
+      <h1>${escape(topic[lang])}</h1>
+      <p class="page-intro">${escape(count(topicArticles.length))}</p>
+    </header>
+    <ol class="article-list wrap">${topicArticles.map((article) => `
+      <li class="article-item">
+        <h2><a href="${article.url}">${escape(article.title)}</a></h2>
+        <p class="article-meta">${time(article)}</p>
+        <p class="article-excerpt">${escape(article.excerpt)}</p>
+      </li>`).join('')}
+    </ol>
+  </main>
+`
+  }));
+}
+
+// --- One page per article ----------------------------------------------------
+for (const article of list) {
+  const topicArticles = list.filter((candidate) => candidate.topic === article.topic);
+  const index = topicArticles.indexOf(article);
+  const [newer, older] = [topicArticles[index - 1], topicArticles[index + 1]];
+  const pager = (target, label, rel) => target ? `<a class="pager-${rel}" rel="${rel}" href="${target.url}"><span>${escape(label)}</span>${escape(target.title)}</a>` : '<span></span>';
+  const translation = article.translations[other];
+  await writePage(article.url, renderPage({
+    file: article.url,
+    page: 'article',
+    title: `${article.title} – Bibeltreff`,
+    description: article.excerpt,
+    canonical: `${site}${article.url}`,
+    alternates: alternateLinks({ [lang]: article.url, [other]: translation?.url }),
+    ogType: 'article',
+    languageUrl: translation ? translation.url : overviewUrl(other),
+    main: `  <main id="inhalt" class="articles-page">
+    <article class="article wrap">
+      <header class="page-head">
+        ${breadcrumb([[overview, ui.articlesTitle], [topicUrl(lang, article.topic), topicName(article.topic)]])}
+        <h1>${escape(article.title)}</h1>
+        <p class="article-meta">${time(article)}</p>
+      </header>
+      <div class="article-body">
+${article.html}      </div>
+      ${older || newer ? `<nav class="article-pager" aria-label="${uiSlots.articleMore}">${pager(older, ui.articleOlder, 'prev')}${pager(newer, ui.articleNewer, 'next')}</nav>` : ''}
+    </article>
+  </main>
+`
+  }));
+}
+console.log(`Built ${outputFile}, ${overview} with ${langTopics.length} topics and ${list.length} articles from src/, content/shared.json, content/${contentFile}, content/${gospelFile}, content/zeugnisse/${lang} and content/artikel/${lang}.`);
 }

@@ -1,6 +1,6 @@
 ---
 title: Der Kampf um das Reich Gottes
-date: 2018-01-16
+date: 2018-01-16T21:36:34+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-der-kampf-um-das-reich-gottes/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-der-kampf-um-das-reich-gottes/Bild-Reich-e1511628021610-752x440.jpg
 imageAlt: Bild Reich e1511628021610

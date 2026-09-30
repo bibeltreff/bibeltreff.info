@@ -1,6 +1,6 @@
 ---
 title: Wir sind der Tempel Gottes
-date: 2020-05-16
+date: 2020-05-16T23:40:24+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/wir-sind-der-tempel-gottes/
 image: assets/artikel/die-stiftshuette/wir-sind-der-tempel-gottes/stiftsh-tte.jpg
 imageAlt: stiftshütte

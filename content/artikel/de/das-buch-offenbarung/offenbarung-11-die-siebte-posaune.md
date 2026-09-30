@@ -1,6 +1,6 @@
 ---
 title: Offenbarung 11:15-18 Die siebte Posaune
-date: 2022-04-20
+date: 2022-04-20T16:17:37+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-11-die-siebte-posaune/
 image: assets/artikel/das-buch-offenbarung/offenbarung-11-die-siebte-posaune/Offb-11_15-18-Die-siebte-Posaune-1-752x440.png
 imageAlt: Die siebte Posaune

@@ -1,6 +1,6 @@
 ---
 title: Durch Leiden vollendet
-date: 2007-11-30
+date: 2007-11-30T16:15:43+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/durch-leiden-vollendet/
 image: assets/artikel/die-aufstiegslieder/durch-leiden-vollendet/cross-3080144_1920-752x440.jpg
 imageAlt: Durch Leiden vollendet

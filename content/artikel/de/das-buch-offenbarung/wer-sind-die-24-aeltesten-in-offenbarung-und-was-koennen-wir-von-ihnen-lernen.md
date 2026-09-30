@@ -1,6 +1,6 @@
 ---
 title: Offenbarung 4 und 5 – Wer sind die 24 Ältesten in Offenbarung und was können wir von ihnen lernen?
-date: 2021-01-06
+date: 2021-01-06T17:01:05+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/wer-sind-die-24-aeltesten-in-offenbarung-und-was-koennen-wir-von-ihnen-lernen/
 image: assets/artikel/das-buch-offenbarung/wer-sind-die-24-aeltesten-in-offenbarung-und-was-koennen-wir-von-ihnen-lernen/Screenshot-2022-02-28-225516-1-752x440.png
 imageAlt: Screenshot 2022 02 28 225516 1

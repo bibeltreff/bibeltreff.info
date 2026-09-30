@@ -1,6 +1,6 @@
 ---
 title: "The Outer Gate: The Way to Full Salvation"
-date: 2022-02-24
+date: 2022-02-24T22:17:38+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/the-outer-gate-the-way-to-full-salvation/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-eingang-in-die-tempelanlage/Tor_6-752x440-1-752x440.jpg
 imageAlt: Tor 6 752x440 1

@@ -1,6 +1,6 @@
 ---
 title: Salvation by Christ’s Life
-date: 2022-02-24
+date: 2022-02-24T22:27:16+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/salvation-by-christs-life/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-errettung-durch-das-leben-christi/tree-gf4dd22bb3_1920-752x440.jpg
 imageAlt: tree gf4dd22bb3 1920

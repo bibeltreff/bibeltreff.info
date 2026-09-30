@@ -1,6 +1,6 @@
 ---
 title: Der Eingang ins Himmelreich durch Wasser und Geist
-date: 2018-09-27
+date: 2018-09-27T16:20:47+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-der-eingang-ins-himmelreich-durch-wasser-und-geist/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-der-eingang-ins-himmelreich-durch-wasser-und-geist/bora-bora-685303_1920-752x440.jpg
 imageAlt: bora bora 685303 1920

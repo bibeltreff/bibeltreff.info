@@ -1,6 +1,6 @@
 ---
 title: The Steps and Their Significance
-date: 2022-02-24
+date: 2022-02-24T22:33:51+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/the-steps-and-their-significance/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-die-treppenstufen-und-ihre-bedeutung/Die-Tempelanlage-in-Hesekiel-3D-offen-752x440-1-752x440.jpg
 imageAlt: Die Tempelanlage in Hesekiel 3D offen 752x440 1

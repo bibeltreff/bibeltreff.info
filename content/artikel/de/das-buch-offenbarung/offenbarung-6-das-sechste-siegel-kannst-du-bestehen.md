@@ -1,6 +1,6 @@
 ---
 title: "Offenbarung 6: Das sechste Siegel – Kannst du bestehen?"
-date: 2021-04-01
+date: 2021-04-01T15:48:43+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-6-das-sechste-siegel-kannst-du-bestehen/
 image: assets/artikel/das-buch-offenbarung/offenbarung-6-das-sechste-siegel-kannst-du-bestehen/Screenshot-2022-02-28-225953-1-752x440.png
 imageAlt: Screenshot 2022 02 28 225953 1

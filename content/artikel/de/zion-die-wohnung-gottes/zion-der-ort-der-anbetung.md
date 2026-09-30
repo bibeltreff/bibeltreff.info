@@ -1,6 +1,6 @@
 ---
 title: Zion – der Ort der Anbetung
-date: 2020-04-14
+date: 2020-04-14T17:58:35+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/zion-der-ort-der-anbetung/
 image: assets/artikel/zion-die-wohnung-gottes/zion-der-ort-der-anbetung/santorini-gca93d3a8d_1920-752x440.jpg
 imageAlt: santorini gca93d3a8d 1920

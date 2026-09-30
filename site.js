@@ -37,7 +37,7 @@ const chapterLinks = [...document.querySelectorAll('[data-chapter]')];
 
 function measureNavigation() {
   document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
-  document.documentElement.style.setProperty('--color-nav-height', `${navigation.getBoundingClientRect().height}px`);
+  if (navigation) document.documentElement.style.setProperty('--color-nav-height', `${navigation.getBoundingClientRect().height}px`);
 }
 
 let scheduled = false;
@@ -52,6 +52,8 @@ function updateActiveNavigation() {
     } else link.removeAttribute('aria-current');
   }
 
+  // Article pages have no gospel chapters.
+  if (!navigation) return;
   const readingLine = headerHeight + navigation.getBoundingClientRect().height + 60;
   const current = chapters.findLast(chapter => chapter.getBoundingClientRect().top <= readingLine) || chapters[0];
   for (const link of chapterLinks) {
@@ -74,7 +76,7 @@ window.addEventListener('resize', () => { measureNavigation(); scheduleUpdate();
 if ('ResizeObserver' in window) {
   const observer = new ResizeObserver(() => { measureNavigation(); scheduleUpdate(); });
   observer.observe(header);
-  observer.observe(navigation);
+  if (navigation) observer.observe(navigation);
 }
 
 // Open the chat at the latest message, without moving the page or stealing focus.
@@ -95,4 +97,49 @@ if (telegramWindow) {
     const chatObserver = new ResizeObserver(showNewest);
     chatObserver.observe(telegramWindow.querySelector('.telegram-grid'));
   }
+}
+
+// "Zufälliger Artikel": without JavaScript the link opens a fixed article chosen at build time.
+const siteRoot = new URL(document.documentElement.dataset.root || './', location.href);
+const pickRandom = (items, avoid) => {
+  const choices = items.filter(item => new URL(item, siteRoot).pathname !== avoid);
+  return choices[Math.floor(Math.random() * choices.length)] || items[0];
+};
+for (const link of document.querySelectorAll('[data-random-articles]')) {
+  link.addEventListener('click', event => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    location.href = new URL(pickRandom(link.dataset.randomArticles.split(' '), location.pathname), siteRoot).href;
+  });
+}
+
+// The overview shows a different random article on every visit.
+const randomCard = document.querySelector('[data-random-card]');
+const articleIndex = document.getElementById('article-index');
+if (randomCard && articleIndex) {
+  const articles = JSON.parse(articleIndex.textContent);
+  const latest = articles[0].url;
+  const url = pickRandom(articles.map(article => article.url), new URL(latest, siteRoot).pathname);
+  const article = articles.find(item => item.url === url);
+  const field = name => randomCard.querySelector(`[data-field="${name}"]`);
+  const resolve = target => new URL(target, siteRoot).href;
+  field('title').textContent = article.title;
+  field('title').href = field('link').href = resolve(article.url);
+  const time = field('date').querySelector('time');
+  time.textContent = article.date;
+  time.dateTime = article.datetime;
+  field('topic').textContent = article.topic;
+  field('topic').href = resolve(article.topicUrl);
+  field('excerpt').textContent = article.excerpt;
+}
+
+// Open the topic flyout to the left when the window is too narrow on the right.
+for (const item of document.querySelectorAll('.nav-subitem')) {
+  const place = () => {
+    item.classList.remove('open-left');
+    const menu = item.querySelector('.nav-submenu');
+    if (menu.getBoundingClientRect().right > document.documentElement.clientWidth - 8) item.classList.add('open-left');
+  };
+  item.addEventListener('mouseenter', place);
+  item.addEventListener('focusin', place);
 }

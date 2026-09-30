@@ -1,6 +1,6 @@
 ---
 title: Der Goldene Leuchter und der Schaubrottisch
-date: 2020-07-23
+date: 2020-07-23T20:37:31+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-goldene-leuchter-und-der-schaubrottisch-teil-6/
 image: assets/artikel/die-stiftshuette/der-goldene-leuchter-und-der-schaubrottisch-teil-6/Leuchter_Schaubrottisch-752x440.jpg
 imageAlt: Leuchter Schaubrottisch

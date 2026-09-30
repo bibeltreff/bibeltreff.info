@@ -1,6 +1,6 @@
 ---
 title: "Turmbau zu Babel: Der Beginn von Satans Meisterwerk"
-date: 2018-01-29
+date: 2018-01-29T10:21:31+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-turmbau-zu-babel-der-beginn-von-satans-meisterwerk/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-turmbau-zu-babel-der-beginn-von-satans-meisterwerk/Bild-Reich-752x440.jpg
 imageAlt: Bild Reich

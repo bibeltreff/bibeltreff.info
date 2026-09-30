@@ -1,58 +1,3 @@
-<!doctype html>
-<html lang="{{lang}}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1d61b2">
-  <script>
-    try {
-      const theme = sessionStorage.getItem('bibeltreff-theme');
-      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
-    } catch { /* The system theme also works when storage is unavailable. */ }
-  </script>
-  <title>{{title}}</title>
-  <meta name="description" content="{{description}}">
-  <link rel="canonical" href="{{canonical}}">
-  <link rel="alternate" hreflang="de" href="https://bibeltreff.info/">
-  <link rel="alternate" hreflang="en" href="https://bibeltreff.info/en.html">
-  <link rel="alternate" hreflang="x-default" href="https://bibeltreff.info/">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="{{ogLocale}}">
-  <meta property="og:title" content="{{title}}">
-  <meta property="og:description" content="{{description}}">
-  <meta property="og:url" content="{{canonical}}">
-  <link rel="icon" href="assets/images/favicon-tree.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
-  <script src="site.js" defer></script>
-  <script src="assets/meeting-status.js" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#inhalt">{{skip}}</a>
-  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
-    <symbol id="icon-tree" viewBox="0 0 24 24">
-      <path d="M10.5 14H6a3 3 0 0 1-1.2-5.75A3 3 0 0 1 8 5.5a4 4 0 0 1 8 0 3 3 0 0 1 3.2 2.75A3 3 0 0 1 18 14h-4.5"/>
-      <path d="M7.5 9.5c2.5.5 3 2 3 4.5v3c0 2-2 3.5-5.5 4.5m11.5-12c-2.5.5-3 2-3 4.5v3c0 2 2 3.5 5.5 4.5M12 18.5v4"/>
-    </symbol>
-    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
-    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></symbol>
-    <symbol id="icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
-    <symbol id="icon-dark" viewBox="0 0 24 24"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></symbol>
-  </defs></svg>
-
-  <header class="site-header">
-    <div class="header-inner wrap">
-      <a class="brand" href="#start" aria-label="{{home}}"><span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#icon-tree"/></svg></span>Bibeltreff</a>
-      <nav class="main-nav" aria-label="{{navigation}}"><a href="#treffen">{{navMeetings}}</a><a href="#evangelium">{{navGospel}}</a><a href="#zeugnisse">{{navTestimonies}}</a><a href="#kontakt">{{navContact}}</a></nav>
-      <div class="header-actions">
-        <button type="button" class="theme-toggle" data-label="{{theme}}" data-light="{{light}}" data-dark="{{dark}}" data-switch-light="{{switchLight}}" data-switch-dark="{{switchDark}}" aria-label="{{theme}}" hidden>
-          <svg class="icon" aria-hidden="true"><use href="#icon-light"/></svg>
-        </button>
-        <a class="language-switch" href="{{languageUrl}}" lang="{{otherLang}}" hreflang="{{otherLang}}" aria-label="{{languageLabel}}">{{languageName}}</a>
-      </div>
-    </div>
-  </header>
-
   <main id="inhalt">
     <section class="hero wrap" id="start" aria-labelledby="hero-title">
       <p class="location-badge"><span class="badge-dot" role="img" aria-label="{{meetingNow}}" title="{{meetingNow}}" hidden></span>{{eyebrow}}</p>
@@ -97,7 +42,3 @@
       <div class="contact-links">{{contact}}</div>
     </section>
   </main>
-
-  <footer class="site-footer wrap"><div class="footer-main"><a class="brand" href="#start"><span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#icon-tree"/></svg></span>Bibeltreff</a><p>{{footer}}</p><div class="footer-links"><nav class="social-links" aria-label="{{channels}}">{{social}}</nav>{{legal}}</div></div></footer>
-</body>
-</html>

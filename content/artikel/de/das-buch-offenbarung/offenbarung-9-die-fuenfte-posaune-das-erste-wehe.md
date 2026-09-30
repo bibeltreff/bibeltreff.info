@@ -1,6 +1,6 @@
 ---
 title: "Offenbarung 9: Die fünfte Posaune – das erste Wehe"
-date: 2021-12-12
+date: 2021-12-12T21:19:36+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-9-die-fuenfte-posaune-das-erste-wehe/
 image: assets/artikel/das-buch-offenbarung/offenbarung-9-die-fuenfte-posaune-das-erste-wehe/Offb-9_1-12-Oeffnen-des-Abgrunds-752x440-1-752x440.png
 imageAlt: Offenbarung - Das Öffnen des Abgrunds

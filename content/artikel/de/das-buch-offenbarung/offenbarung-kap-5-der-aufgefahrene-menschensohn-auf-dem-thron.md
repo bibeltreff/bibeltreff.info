@@ -1,12 +1,10 @@
 ---
 title: "Offenbarung 5: Der aufgefahrene Menschensohn auf dem Thron"
-date: 2021-02-07
+date: 2021-02-07T11:50:24+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-kap-5-der-aufgefahrene-menschensohn-auf-dem-thron/
 image: assets/artikel/das-buch-offenbarung/offenbarung-kap-5-der-aufgefahrene-menschensohn-auf-dem-thron/jesus-ge800ab09f_1920-752x440.jpg
 imageAlt: jesus ge800ab09f 1920
 ---
-
-[Audio](https://www.hochschul-bibelkreise.de/wp-content/uploads/2020/12/2020-12-09-Bibelkreis.mp3)
 
 In der vergangenen Woche lasen wir im vierten Kapitel der Offenbarung von der Herrlichkeit dessen, der auf dem Thron im Himmel sitzt. Dieser lebt von Ewigkeit zu Ewigkeit und er hat alle Dinge geschaffen. Es ist Gott der Vater, er ist der allerhöchste Herrscher.
 

@@ -1,6 +1,6 @@
 ---
 title: The Different Dispensations of the Kingdom of God on Earth – Your Kingdom Come
-date: 2022-02-28
+date: 2022-02-28T23:35:07+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/the-different-dispensations-of-the-kingdom-of-god-on-earth-your-kingdom-come/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme/4-Dispensations-gross-farbig-english-3-752x440.jpg
 imageAlt: 4 Dispensations gross farbig english 3

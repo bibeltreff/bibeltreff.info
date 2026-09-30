@@ -1,6 +1,6 @@
 ---
 title: Zion – eine Burg gegen den Feind
-date: 2020-05-27
+date: 2020-05-27T20:00:06+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/zion-eine-burg-gegen-den-feind/
 image: assets/artikel/zion-die-wohnung-gottes/zion-eine-burg-gegen-den-feind/germany-gb3bf7087a_1920-752x440.jpg
 imageAlt: germany gb3bf7087a 1920

@@ -1,6 +1,6 @@
 ---
 title: Der Herr hat Zion erwählt!
-date: 2007-11-30
+date: 2007-11-30T16:15:43+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-herr-hat-zion-erwahlt/
 image: assets/artikel/die-aufstiegslieder/der-herr-hat-zion-erwahlt/pexels-pixabay-262405-752x440.jpg
 imageAlt: Der Herr hat Zion erwählt!

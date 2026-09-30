@@ -1,6 +1,6 @@
 ---
 title: Christus, der Baumeister der Stadt Gottes
-date: 2018-11-01
+date: 2018-11-01T17:37:46+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-christus-der-baumeister-der-stadt-gottes/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-christus-der-baumeister-der-stadt-gottes/Hesekiel-Tempel-752x440.jpg
 imageAlt: Hesekiel Tempel

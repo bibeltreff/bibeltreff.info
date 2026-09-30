@@ -11,10 +11,16 @@ types['.webp'] = 'image/webp';
 const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');
-    const name = decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html';
+    let name = decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html';
+    if (['artikel', 'articles'].includes(name)) {
+      response.writeHead(301, { Location: `/${name}/` }).end();
+      return;
+    }
+    // Folders such as artikel/ and artikel/<topic>/ serve their index.html, like GitHub Pages.
+    if (name.endsWith('/')) name += 'index.html';
     const target = path.resolve(root, name);
     const relative = path.relative(root, target);
-    const allowed = ['index.html', 'en.html', 'styles.css', 'site.js'].includes(name) || name.startsWith('assets/');
+    const allowed = ['index.html', 'en.html', 'styles.css', 'site.js'].includes(name) || /^(assets|artikel|articles)\//.test(name);
     if (!allowed || relative.startsWith('..') || path.isAbsolute(relative)) {
       response.writeHead(404).end('Not found');
       return;

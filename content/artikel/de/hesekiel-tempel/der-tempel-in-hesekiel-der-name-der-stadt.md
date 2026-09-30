@@ -1,6 +1,6 @@
 ---
 title: "Der Name der Stadt: JAHWEH SHAMMAH"
-date: 2019-09-26
+date: 2019-09-26T15:49:41+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-der-name-der-stadt/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-der-name-der-stadt/stadt-1280x720-752x440.jpg
 imageAlt: stadt 1280x720

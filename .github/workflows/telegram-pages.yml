@@ -62,7 +62,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/telegram.json assets/telegram assets/previews index.html en.html
+          git add content/telegram.json assets/telegram assets/previews index.html en.html artikel articles
           if ! git diff --cached --quiet; then
             git commit -m 'Update Telegram feed'
             git push origin HEAD:main
@@ -71,7 +71,7 @@ jobs:
         run: |
           mkdir _site
           cp index.html en.html styles.css site.js CNAME .nojekyll _site/
-          cp -R assets _site/
+          cp -R assets artikel articles _site/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

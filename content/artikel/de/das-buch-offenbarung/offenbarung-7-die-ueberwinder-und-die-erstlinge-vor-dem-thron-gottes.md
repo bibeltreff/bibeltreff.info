@@ -1,6 +1,6 @@
 ---
 title: "Offenbarung 7: Die Überwinder und die Erstlinge vor dem Thron Gottes"
-date: 2021-04-12
+date: 2021-04-12T10:03:24+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-7-die-ueberwinder-und-die-erstlinge-vor-dem-thron-gottes/
 image: assets/artikel/das-buch-offenbarung/offenbarung-7-die-ueberwinder-und-die-erstlinge-vor-dem-thron-gottes/Screenshot-2022-02-21-233200-1-752x440.png
 imageAlt: Screenshot 2022 02 21 233200 1

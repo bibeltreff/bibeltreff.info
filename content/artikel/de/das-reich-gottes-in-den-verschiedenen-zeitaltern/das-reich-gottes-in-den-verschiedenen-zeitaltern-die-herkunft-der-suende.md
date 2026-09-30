@@ -1,6 +1,6 @@
 ---
 title: Die Herkunft der Sünde
-date: 2018-05-03
+date: 2018-05-03T11:14:30+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-die-herkunft-der-suende/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-die-herkunft-der-suende/schlange-752x440.jpg
 imageAlt: schlange

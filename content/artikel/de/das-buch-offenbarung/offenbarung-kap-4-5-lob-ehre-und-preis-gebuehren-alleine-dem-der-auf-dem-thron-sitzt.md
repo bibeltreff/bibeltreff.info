@@ -1,6 +1,6 @@
 ---
 title: Offenbarung 4 und 5 – Lob, Ehre und Preis gebühren alleine dem, der auf dem Thron sitzt
-date: 2020-12-26
+date: 2020-12-26T16:09:39+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-kap-4-5-lob-ehre-und-preis-gebuehren-alleine-dem-der-auf-dem-thron-sitzt/
 image: assets/artikel/das-buch-offenbarung/offenbarung-kap-4-5-lob-ehre-und-preis-gebuehren-alleine-dem-der-auf-dem-thron-sitzt/poppy-g90e0cc242_1920-752x440.jpg
 imageAlt: poppy g90e0cc242 1920

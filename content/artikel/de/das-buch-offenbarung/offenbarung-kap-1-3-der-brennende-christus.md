@@ -1,6 +1,6 @@
 ---
 title: "Offenbarung Kap. 1-3: Der brennende Christus"
-date: 2020-11-02
+date: 2020-11-02T11:52:29+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-kap-1-3-der-brennende-christus/
 image: assets/artikel/das-buch-offenbarung/offenbarung-kap-1-3-der-brennende-christus/Offb1-3-Der-brennende-Christus-752x440.png
 imageAlt: Der brennende Christus in Offenbarung

@@ -1,6 +1,6 @@
 ---
 title: Errettung durch das Leben Christi
-date: 2019-01-09
+date: 2019-01-09T16:54:16+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-errettung-durch-das-leben-christi/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-errettung-durch-das-leben-christi/palmen-752x440.jpg
 imageAlt: palmen

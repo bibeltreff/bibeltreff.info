@@ -1,6 +1,6 @@
 ---
 title: Offenbarung 10:8-11 – Das geöffnete kleine Buch
-date: 2022-03-06
+date: 2022-03-06T16:28:36+01:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-10-das-kleine-buch/
 image: assets/artikel/das-buch-offenbarung/offenbarung-10-das-kleine-buch/Bibel-essen-schneiden-eating-bible-cut-752x440.jpeg
 imageAlt: Das Wort Gottes essen

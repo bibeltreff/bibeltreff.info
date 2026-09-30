@@ -1,6 +1,6 @@
 ---
 title: "The Name of the City: YAHWEH SHAMMAH"
-date: 2022-02-24
+date: 2022-02-24T22:37:19+01:00
 source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/the-name-of-the-city-yahweh-shammah/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-der-name-der-stadt/stadt-1280x720-752x440-1-752x440.jpg
 imageAlt: stadt 1280x720 752x440 1

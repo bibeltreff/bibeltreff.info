@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs && node --test scripts/telegram.test.mjs scripts/meeting-status.test.mjs scripts/markdown.test.mjs scripts/images.test.mjs",
+    "check": "node scripts/check.mjs && node --test scripts/telegram.test.mjs scripts/meeting-status.test.mjs scripts/markdown.test.mjs scripts/images.test.mjs scripts/articles.test.mjs",
     "telegram:inspect": "node scripts/telegram.mjs inspect",
     "telegram:sync": "node scripts/telegram.mjs sync"
   },
@@ -13,6 +13,7 @@
     "node": ">=20.9.0"
   },
   "devDependencies": {
+    "marked": "^16.4.2",
     "parse5": "^7.3.0",
     "sharp": "^0.35.5"
   }

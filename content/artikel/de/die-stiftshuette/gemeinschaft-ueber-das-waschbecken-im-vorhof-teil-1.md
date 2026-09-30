@@ -1,6 +1,6 @@
 ---
 title: Das kupferne Waschbecken im Vorhof
-date: 2020-06-11
+date: 2020-06-11T09:41:47+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/gemeinschaft-ueber-das-waschbecken-im-vorhof-teil-1/
 image: assets/artikel/die-stiftshuette/gemeinschaft-ueber-das-waschbecken-im-vorhof-teil-1/Waschbecken_V3-752x440.jpg
 imageAlt: Waschbecken V3

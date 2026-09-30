@@ -1,6 +1,6 @@
 ---
 title: Der Schaubrottisch – Beständig Speise einander darreichen
-date: 2020-07-23
+date: 2020-07-23T20:42:42+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-schaubrottisch-bestaendig-speise-einander-darreichen-teil-7/
 image: assets/artikel/die-stiftshuette/der-schaubrottisch-bestaendig-speise-einander-darreichen-teil-7/Schaubrottisch_V1-752x440.jpg
 imageAlt: Schaubrottisch V1

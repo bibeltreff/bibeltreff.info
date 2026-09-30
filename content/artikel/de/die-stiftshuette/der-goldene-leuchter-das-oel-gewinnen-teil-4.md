@@ -1,6 +1,6 @@
 ---
 title: Der Goldene Leuchter – Das Öl gewinnen
-date: 2020-07-01
+date: 2020-07-01T15:19:46+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-goldene-leuchter-das-oel-gewinnen-teil-4/
 image: assets/artikel/die-stiftshuette/der-goldene-leuchter-das-oel-gewinnen-teil-4/Leuchter_Teil3-752x440.jpg
 imageAlt: Leuchter Teil3

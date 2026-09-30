@@ -1,6 +1,6 @@
 ---
 title: "Gerechtigkeit aus Glauben vs. Gerechtigkeit aus Werken: Widersprüche in der Bibel?"
-date: 2018-04-07
+date: 2018-04-07T19:54:38+02:00
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-gerechtigkeit-aus-glauben-vs-gerechtigkeit-aus-werken-widersprueche-in-der-bibel/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-gerechtigkeit-aus-glauben-vs-gerechtigkeit-aus-werken-widersprueche-in-der-bibel/glasses-1052010_1920-752x440.jpg
 imageAlt: glasses 1052010 1920
