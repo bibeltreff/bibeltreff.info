@@ -1,7 +1,7 @@
 ---
 name: Thomas
-headline: Ich war nie zufrieden mit meinem Christenleben.
-intro: Befreit vom Kreislauf der Vorsätze und Rückfälle – für ein Leben mit Christus.
+headline: Ich habe geschmeckt, wie unübertrefflich Christus ist
+intro: Befreit von einem weltlichen, sündigen Leben - für ein tägliches Leben mit Christus.
 ---
 
 Ich nahm den Herrn Jesus in mein Leben auf, als ich sechs Jahre alt war. Er gab mir Freude ins Herz. Meine Eltern erzählten mir viel von der Bibel und ich ging gerne in den Gottesdienst.
