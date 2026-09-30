@@ -80,6 +80,30 @@ Ein neues Zeugnis anlegen:
 
 Jedes Zeugnis erhält automatisch ein per Maus, Touch und Tastatur bedienbares Aufklappelement. Die vorhandenen Zeugnisse stammen von Can Luca und Thomas; Rechtschreibung, Zeichensetzung und Absatzgliederung wurden leicht geglättet, die inhaltlichen Aussagen beibehalten. Thomas’ englisches Bibelzitat verwendet einen gekürzten [NKJV-Wortlaut von Philipper 3:8](https://www.biblegateway.com/passage/?search=Philippians+3%3A8&version=NKJV).
 
+### Artikel
+
+Die Artikel von [hochschul-bibelkreise.de](https://hochschul-bibelkreise.de/category/neues-aus-dem-bibelkreis/) liegen als Markdown unter `content/artikel/de/<id>.md`, ihre Bilder unter `assets/artikel/<id>/`. Die `id` ist der Slug des deutschen Originals. Eine englische Fassung ist optional und hat dieselbe `id` in `content/artikel/en/`. Übernommen wurden alle 68 deutschen Artikel und die 9 vorhandenen englischen Fassungen; weitere Artikel sollen nur noch neu übersetzt werden. Die Artikel sind noch nicht in die Website eingebunden.
+
+```markdown
+---
+title: Offenbarung 11:3-14 Die zwei Zeugen
+date: 2022-03-22
+source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-11-die-zwei-zeugen/
+image: assets/artikel/offenbarung-11-die-zwei-zeugen/Oelbaeume-752x440.jpeg
+imageAlt: Die zwei Ölbäume
+---
+
+Einleitung …
+
+## Zwischenüberschrift
+
+> “Bibeltext …”
+>
+> — Offenbarung 11:3
+```
+
+`image` und `imageAlt` (Beitragsbild) sind optional. Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Text und Formatierung wurden unverändert aus WordPress übernommen: In Kapitälchen gesetztes „Herr“ steht als HERR in Großbuchstaben, Unterstreichungen als `<u>…</u>`. Entfernt wurden nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links zwischen Artikeln und die zwei Audiodateien verweisen noch auf die alte Website.
+
 ## Statisches Hosting
 
 Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; ohne automatischen Telegram-Import werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. Für automatische Kanalnachrichten dient der unten beschriebene optionale Workflow. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
