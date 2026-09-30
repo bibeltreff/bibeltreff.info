@@ -3,8 +3,10 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderTelegram } from './telegram-render.mjs';
 import { loadTestimonies } from './testimonies.mjs';
+import { createImageOptimizer } from './images.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const optimizeImages = createImageOptimizer(root);
 const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
 const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8'));
 const legal = JSON.parse(await readFile(path.join(root, 'content/legal.json'), 'utf8'));
@@ -103,6 +105,6 @@ const html = template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   if (!(key in slots)) throw new Error(`Unknown template slot: ${key}`);
   return slots[key];
 });
-await writeFile(path.join(root, outputFile), html);
+await writeFile(path.join(root, outputFile), await optimizeImages(html));
 console.log(`Built ${outputFile} from src/index.html, content/shared.json, content/${contentFile}, content/${gospelFile} and content/zeugnisse/${lang}.`);
 }

@@ -253,6 +253,7 @@ summary::-webkit-details-marker { display: none; }
 .footer-main .brand-icon { width: 34px; height: 29px; margin-right: 0; }
 .footer-main > p { flex: 1 1 320px; max-width: 56ch; font-size: 13px; color: var(--muted); }
 .social-links { display: flex; gap: 20px; margin-left: auto; font-size: 13px; color: var(--muted); }
+.social-links > a { padding-block: 8px; }
 @media (max-width: 950px) {
   .wrap { width: calc(100% - 48px); }
   .header-inner { gap: 16px; }

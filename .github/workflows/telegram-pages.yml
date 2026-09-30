@@ -47,6 +47,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - run: npm ci
       - name: Fetch Telegram messages
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'sync')
         run: npm run telegram:sync
@@ -61,7 +62,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/telegram.json assets/telegram index.html en.html
+          git add content/telegram.json assets/telegram assets/previews index.html en.html
           if ! git diff --cached --quiet; then
             git commit -m 'Update Telegram feed'
             git push origin HEAD:main

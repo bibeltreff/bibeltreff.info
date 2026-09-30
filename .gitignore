@@ -6,3 +6,4 @@ Thumbs.db
 content/telegram.json.tmp
 assets/telegram/*.tmp
 _site/
+tmp/

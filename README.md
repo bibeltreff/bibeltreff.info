@@ -4,15 +4,30 @@ Schlichte, statische Website für [bibeltreff.info](https://bibeltreff.info). Fo
 
 ## Lokal ansehen
 
-Node.js 20 oder neuer, keine Pakete zu installieren:
+Node.js 20.9 oder neuer. Beim ersten Start die Build-Abhängigkeiten installieren:
 
 ```sh
+npm ci
 npm run dev
 ```
 
 Öffnet einen lokalen Server unter `http://127.0.0.1:4173`. Alternativ `node scripts/serve.mjs`. Der Server baut beim Start die Seite; nach Inhaltsänderungen `npm run build` ausführen und den Browser neu laden. CSS und JavaScript benötigen nur ein Neuladen. Ein anderer Port lässt sich über `PORT` setzen.
 
 ## Inhalte und Gestaltung ändern
+
+### Fotos automatisch verkleinern
+
+Originalfotos unter `assets/images/` ablegen und in `src/index.html` mit ihrem Originalpfad einbinden, zum Beispiel:
+
+```html
+<img src="assets/images/mein-foto.jpg" alt="Beschreibung des Fotos">
+```
+
+`npm run build` erstellt automatisch eine WebP-Vorschau mit höchstens 1200 Pixeln Breite unter `assets/previews/`, setzt die passenden Bildmaße und verlinkt das Original zum Öffnen per Klick. Vorhandene Links bleiben erhalten. Das Original wird nicht verändert; zum Austauschen einfach die Datei ersetzen und erneut bauen. Auch Telegram-Fotos werden beim Build verarbeitet. SVG, GIF, externe Bilder, dekorative Bilder mit `alt=""` sowie Bilder mit `srcset` oder innerhalb von `<picture>` werden nicht verarbeitet.
+
+Vorschaudateinamen hängen vom Bildinhalt ab, damit ausgetauschte Fotos keine veraltete Vorschau aus dem Browsercache zeigen. Originale, erzeugte Vorschauen und die beiden HTML-Seiten gemeinsam einchecken; der Deployment-Workflow erzeugt die Vorschauen ebenfalls automatisch. Nur eine Datei in den Bilderordner zu legen fügt sie noch nicht zur Seite hinzu: Sie muss auch im Template eingebunden sein.
+
+### Inhaltsdateien
 
 - `content/shared.json`: Sprachunabhängige Daten, die für beide Sprachen gelten: Wochentag, Uhrzeiten, Adresse, Karten- und Zoom-Link der Treffen, Farben und Reihenfolge der Evangeliums-Themen die URLs der Kontakt- und Kanal-Links sowie die Reihenfolge der Zeugnisse.
 - `content/site.json`: Deutsche Texte: Einladung, Beschreibung der Treffen, Beschriftungen der Kontaktlinks und Datenschutztexte.
