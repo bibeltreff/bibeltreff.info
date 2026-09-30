@@ -40,16 +40,40 @@ function measureNavigation() {
   if (navigation) document.documentElement.style.setProperty('--color-nav-height', `${navigation.getBoundingClientRect().height}px`);
 }
 
+// A section chosen from the menu stays highlighted until the visitor scrolls on their own.
+// Otherwise sections near the page end, which cannot scroll up to the reading line, never become active.
+let chosenSection = sectionLinks.find(({ link }) => link.hash === location.hash)?.section || null;
+for (const { link, section } of sectionLinks) {
+  link.addEventListener('click', () => { chosenSection = section; scheduleUpdate(); });
+}
+for (const event of ['wheel', 'touchstart', 'keydown', 'pointerdown']) {
+  window.addEventListener(event, () => {
+    if (!chosenSection) return;
+    chosenSection = null;
+    scheduleUpdate();
+  }, { passive: true });
+}
+
+function currentSection(headerHeight) {
+  if (chosenSection) return chosenSection;
+  const visible = sectionLinks.map(({ section }) => section).filter(section => section.getBoundingClientRect().bottom > headerHeight);
+  const pageEnd = document.documentElement.scrollHeight - 1;
+  if (window.scrollY + window.innerHeight >= pageEnd) {
+    return visible.findLast(section => section.getBoundingClientRect().top < window.innerHeight) || null;
+  }
+  // 1px tolerance, because anchor jumps can stop a fraction of a pixel below the line.
+  const readingLine = headerHeight + 24 + 1;
+  return visible.find(section => section.getBoundingClientRect().top <= readingLine && section.getBoundingClientRect().bottom > readingLine) || null;
+}
+
 let scheduled = false;
 function updateActiveNavigation() {
   scheduled = false;
   const headerHeight = header.getBoundingClientRect().height;
-  const sectionReadingLine = headerHeight + 24;
+  const currentLocation = currentSection(headerHeight);
   for (const { link, section } of sectionLinks) {
-    const bounds = section.getBoundingClientRect();
-    if (bounds.top <= sectionReadingLine && bounds.bottom > sectionReadingLine) {
-      link.setAttribute('aria-current', 'location');
-    } else link.removeAttribute('aria-current');
+    if (section === currentLocation) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
   }
 
   // Article pages have no gospel chapters.
