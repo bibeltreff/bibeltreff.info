@@ -37,13 +37,15 @@
     <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></symbol>
     <symbol id="icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
     <symbol id="icon-dark" viewBox="0 0 24 24"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></symbol>
   </defs></svg>
 
   <header class="site-header">
     <div class="header-inner wrap">
       <a class="brand" href="#start" aria-label="Bibeltreff – Home"><span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#icon-tree"/></svg></span>Bibeltreff</a>
-      <nav class="main-nav" aria-label="Main navigation"><a href="#treffen">Meetings</a><a href="#evangelium">Gospel</a><a href="#zeugnisse">Testimonies</a><a href="#kontakt">Contact</a><div class="nav-item nav-articles">
+      <nav class="main-nav" id="main-nav" aria-label="Main navigation"><a href="#treffen">Meetings</a><a href="#evangelium">Gospel</a><a href="#zeugnisse">Testimonies</a><a href="#kontakt">Contact</a><div class="nav-item nav-articles">
         <a class="nav-parent" href="articles/">Articles</a>
         <div class="nav-menu" aria-label="Articles menu" role="group">
           <a href="articles/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme.html">Latest article</a>
@@ -56,6 +58,9 @@
       <div class="header-actions">
         <button type="button" class="theme-toggle" data-label="Color scheme" data-light="Light" data-dark="Dark" data-switch-light="Switch to light mode" data-switch-dark="Switch to dark mode" aria-label="Color scheme" hidden>
           <svg class="icon" aria-hidden="true"><use href="#icon-light"/></svg>
+        </button>
+        <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" data-open="Open menu" data-close="Close menu" aria-label="Open menu" hidden>
+          <svg class="icon" aria-hidden="true"><use href="#icon-menu"/></svg>
         </button>
         <a class="language-switch" href="index.html" lang="de" hreflang="de" aria-label="Auf Deutsch lesen">DE</a>
       </div>
@@ -109,8 +114,8 @@
     </section>
 
 <section class="telegram-section section wrap" id="aktuelles" aria-labelledby="telegram-title">
-    <div class="section-heading"><div><p class="eyebrow section-label">Telegram · @bibeltreff_uni</p><h2 id="telegram-title">News from Bibeltreff</h2></div><p>The latest messages from our Telegram channel, in their original language.</p></div>
-    <div class="telegram-window" role="region" aria-labelledby="telegram-title" tabindex="0"><div class="telegram-grid"><div class="telegram-message">
+    <div class="section-heading"><div><p class="eyebrow section-label">Telegram · @bibeltreff_uni</p><h2 id="telegram-title">News from Bibeltreff</h2></div><p>The latest messages from our Telegram channel, in their original language, and articles from the Bibeltreff.</p></div>
+    <div class="telegram-layout"><div class="telegram-chat"><div class="telegram-window" role="region" aria-labelledby="telegram-title" tabindex="0"><div class="telegram-grid"><div class="telegram-message">
     <p class="telegram-date"><time datetime="2026-09-09T16:55:06.000Z">September 9</time></p>
     <article class="telegram-card">
     <header class="telegram-sender"><img class="telegram-avatar" src="assets/images/bibeltreff_logo_telegram.jpg" width="36" height="36" loading="lazy" decoding="async" alt=""><h3><a class="telegram-card-link" href="https://t.me/bibeltreff_uni/430" target="_blank" rel="noopener noreferrer" aria-label="Open message on Telegram · September 9">Bibeltreff</a></h3></header>
@@ -136,8 +141,26 @@
 <div class="telegram-text" dir="auto">Aus dem Bibeltreff:<span class="telegram-paragraph-gap" aria-hidden="true"></span><strong>Der neue und der alte Bund</strong><span class="telegram-paragraph-gap" aria-hidden="true"></span>Hebr. 8:1-5,11</div>
 <div class="telegram-attachments"><div class="telegram-audio"><audio controls preload="none" aria-label="Der neue und der alte Bund" src="assets/telegram/audio-433-14a328443baaeb39.mp3"></audio><a href="assets/telegram/audio-433-14a328443baaeb39.mp3" download>Download audio</a></div></div>
     </article>
-  </div></div></div>
+  </div></div></div></div>
     <p class="telegram-channel"><a class="text-link" href="https://t.me/bibeltreff_uni">All messages on Telegram <span aria-hidden="true">↗</span></a></p>
+    <aside class="telegram-articles" aria-label="Articles">
+        <article class="article-card">
+          <p class="eyebrow section-label">Latest article</p>
+          <h3><a href="articles/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme.html" data-field="title">The Different Dispensations of the Kingdom of God on Earth – Your Kingdom Come</a></h3>
+          <p class="article-meta"><span data-field="date"><time datetime="2022-02-28">28 February 2022</time></span> · <a href="articles/das-reich-gottes-in-den-verschiedenen-zeitaltern/" data-field="topic">The Kingdom of God in the Different Ages</a></p>
+          <p class="article-excerpt" data-field="excerpt">Through all of these verses, it is apparent that the kingdom of God is very important. We should be aware of everything that concerns the kingdom of God. …</p>
+          <a class="text-link" href="articles/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme.html" data-field="link">Read article <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="article-card" data-random-card>
+          <p class="eyebrow section-label">Random article</p>
+          <h3><a href="articles/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-eingang-in-die-tempelanlage.html" data-field="title">The Outer Gate: The Entrance into the Temple Compound</a></h3>
+          <p class="article-meta"><span data-field="date"><time datetime="2022-02-24">24 February 2022</time></span> · <a href="articles/hesekiel-tempel/" data-field="topic">Ezekiel Temple</a></p>
+          <p class="article-excerpt" data-field="excerpt">How does God want to live among us Christians today? How does He want to build His church? …</p>
+          <a class="text-link" href="articles/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-eingang-in-die-tempelanlage.html" data-field="link">Read article <span aria-hidden="true">→</span></a>
+        </article>
+        <a class="article-all" href="articles/"><span class="eyebrow section-label">All articles</span><span class="article-all-count">9 articles · 3 topics</span><span class="article-all-arrow" aria-hidden="true">→</span></a>
+        <script type="application/json" id="article-index">[{"url":"articles/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme.html","title":"The Different Dispensations of the Kingdom of God on Earth – Your Kingdom Come","date":"28 February 2022","datetime":"2022-02-28","topic":"The Kingdom of God in the Different Ages","topicUrl":"articles/das-reich-gottes-in-den-verschiedenen-zeitaltern/","excerpt":"Through all of these verses, it is apparent that the kingdom of God is very important. We should be aware of everything that concerns the kingdom of God. …"},{"url":"articles/der-traum-nebukadnezars/der-traum-nebukadnezars-teil-1-die-zeichen-der-zeit-erkennen.html","title":"Nebuchadnezzar’s Dream (Part 1): Recognizing the Signs of the Times","date":"24 February 2022","datetime":"2022-02-24","topic":"The Dream of Nebuchadnezzar (Daniel 2)","topicUrl":"articles/der-traum-nebukadnezars/","excerpt":"The greatest king of the Babylonian kingdom, Nebuchadnezzar, wondered what would happen after he died. Then he had a dream. …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-der-name-der-stadt.html","title":"The Name of the City: YAHWEH SHAMMAH","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"After God gave precise instructions for the building of His house in the preceding chapters, He specified that the name of the city should be “The LORD is there”! …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-die-treppenstufen-und-ihre-bedeutung.html","title":"The Steps and Their Significance","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"Every single detail concerning the temple compound in Ezekiel has a spiritual meaning. God’s word is truly amazing; who but God could have written such a document? …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-errettung-durch-das-leben-christi.html","title":"Salvation by Christ’s Life","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"If you desire to enter into the temple compound through this glorious gate, you will not only pass through guard chambers and windows shedding light on you, but you will also pass by pillars on both your right and left sides adorned with palm branches from the bottom all the way to the top – what a …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-die-hoehe-des-tores.html","title":"The Height of the Gate","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"It is quite amazing how detailed God’s word is in describing the entrance of the temple compound. As we saw in our last few meetings, this gate is not an ordinary gate – who would have imagined that the gate is so special that we would still be having fellowship about it so many weeks later? …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-der-weg-zur-vollstaendigen-errettung.html","title":"The Outer Gate: The Way to Full Salvation","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"God makes it clear to us in His Word how important righteousness is to Him. He is righteous and cannot tolerate unrighteousness. …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-eingang-in-die-tempelanlage.html","title":"The Outer Gate: The Entrance into the Temple Compound","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"How does God want to live among us Christians today? How does He want to build His church? …"},{"url":"articles/hesekiel-tempel/der-tempel-in-hesekiel-christus-der-baumeister-der-stadt-gottes.html","title":"Christ, the Builder of the City of God","date":"24 February 2022","datetime":"2022-02-24","topic":"Ezekiel Temple","topicUrl":"articles/hesekiel-tempel/","excerpt":"Christ appeared to Ezekiel as a man of bronze. In the book of Revelation, John also saw that Jesus’ feet were made of bronze. …"}]</script>
+      </aside></div>
   </section>
 
     <section class="gospel-section section" id="evangelium" aria-labelledby="gospel-title">

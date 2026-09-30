@@ -178,3 +178,30 @@ for (const item of document.querySelectorAll('.nav-subitem')) {
   item.addEventListener('mouseenter', place);
   item.addEventListener('focusin', place);
 }
+
+// On phones the navigation folds into a menu button. It closes after a choice, on Escape and on a tap outside.
+const menuToggle = document.querySelector('.nav-toggle');
+const phoneWidth = window.matchMedia('(max-width: 700px)');
+
+function setMenu(open) {
+  header.classList.toggle('menu-open', open);
+  menuToggle.setAttribute('aria-expanded', open);
+  menuToggle.setAttribute('aria-label', open ? menuToggle.dataset.close : menuToggle.dataset.open);
+  menuToggle.querySelector('use').setAttribute('href', open ? '#icon-close' : '#icon-menu');
+}
+
+menuToggle.addEventListener('click', () => setMenu(!header.classList.contains('menu-open')));
+document.querySelector('.main-nav').addEventListener('click', event => {
+  if (event.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || !header.classList.contains('menu-open')) return;
+  setMenu(false);
+  menuToggle.focus();
+});
+document.addEventListener('pointerdown', event => {
+  if (header.classList.contains('menu-open') && !header.contains(event.target)) setMenu(false);
+});
+phoneWidth.addEventListener('change', () => setMenu(false));
+header.classList.add('menu-ready');
+menuToggle.hidden = false;

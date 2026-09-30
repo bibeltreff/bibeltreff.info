@@ -1,9 +1,10 @@
 import { channel, validateState } from './telegram.mjs';
 import { renderText, escapeHtml as escape } from './telegram-format.mjs';
 
-export function renderTelegram(state, ui, lang) {
+// `aside` is optional HTML shown next to the chat (the article teasers on the home page).
+export function renderTelegram(state, ui, lang, aside = '') {
   validateState(state);
-  if (!state.posts.length) return '';
+  if (!state.posts.length && !aside) return '';
   const dateFormat = new Intl.DateTimeFormat(lang, { day: 'numeric', month: 'long', timeZone: 'Europe/Berlin' });
   const cards = [...state.posts].sort((a, b) => a.id - b.id).map(post => `<div class="telegram-message">
     <p class="telegram-date"><time datetime="${escape(post.date)}">${escape(dateFormat.format(new Date(post.date)))}</time></p>
@@ -16,7 +17,8 @@ ${post.audio || (post.hasMedia && !post.photo?.src) ? `<div class="telegram-atta
   </div>`).join('\n');
   return `<section class="telegram-section section wrap" id="aktuelles" aria-labelledby="telegram-title">
     <div class="section-heading"><div><p class="eyebrow section-label">Telegram · @${channel}</p><h2 id="telegram-title">${escape(ui.telegramHeading)}</h2></div><p>${escape(ui.telegramIntro)}</p></div>
-    <div class="telegram-window" role="region" aria-labelledby="telegram-title" tabindex="0"><div class="telegram-grid">${cards}</div></div>
-    <p class="telegram-channel"><a class="text-link" href="https://t.me/${channel}">${escape(ui.telegramChannel)} <span aria-hidden="true">↗</span></a></p>
+    ${aside ? '<div class="telegram-layout">' : ''}${state.posts.length ? `<div class="telegram-chat"><div class="telegram-window" role="region" aria-labelledby="telegram-title" tabindex="0"><div class="telegram-grid">${cards}</div></div></div>` : ''}
+    <p class="telegram-channel"><a class="text-link" href="https://t.me/${channel}">${escape(ui.telegramChannel)} <span aria-hidden="true">↗</span></a></p>${aside ? `
+    ${aside}</div>` : ''}
   </section>`;
 }

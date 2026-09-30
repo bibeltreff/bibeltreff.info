@@ -159,9 +159,9 @@ const renderPage = ({ file, page, title, description, canonical, alternates = ''
 const alternateLinks = (urls) => typeof urls.de === 'string' && typeof urls.en === 'string'
   ? ['de', 'en'].map((code) => `  <link rel="alternate" hreflang="${code}" href="${site}${urls[code]}">`).join('\n') + `\n  <link rel="alternate" hreflang="x-default" href="${site}${urls.de}">`
   : '';
-const articleCard = (article, label, attributes = '') => `<article class="article-card"${attributes}>
+const articleCard = (article, label, attributes = '', level = 2) => `<article class="article-card"${attributes}>
           <p class="eyebrow section-label">${escape(label)}</p>
-          <h2><a href="${article.url}" data-field="title">${escape(article.title)}</a></h2>
+          <h${level}><a href="${article.url}" data-field="title">${escape(article.title)}</a></h${level}>
           <p class="article-meta"><span data-field="date">${time(article)}</span> · <a href="${topicUrl(lang, article.topic)}" data-field="topic">${escape(topicName(article.topic))}</a></p>
           <p class="article-excerpt" data-field="excerpt">${escape(article.excerpt)}</p>
           <a class="text-link" href="${article.url}" data-field="link">${uiSlots.readArticle} <span aria-hidden="true">→</span></a>
@@ -169,9 +169,22 @@ const articleCard = (article, label, attributes = '') => `<article class="articl
 const breadcrumb = (items) => `<nav class="breadcrumb" aria-label="${uiSlots.breadcrumb}">${items.map(([url, label]) => `<a href="${url}">${escape(label)}</a>`).join('<span aria-hidden="true">/</span>')}</nav>`;
 
 // --- Home page --------------------------------------------------------------
+// Data for the random card; "<" is escaped so the JSON cannot close the script element.
+const randomData = JSON.stringify(list.map((article) => ({
+  url: article.url, title: article.title, date: dateFormat.format(article.date), datetime: isoDay(article.date),
+  topic: topicName(article.topic), topicUrl: topicUrl(lang, article.topic), excerpt: article.excerpt
+}))).replace(/</g, '\\u003c');
+const randomScript = `<script type="application/json" id="article-index">${randomData}</script>`;
+// Next to the Telegram chat: latest, random and all articles.
+const articleAside = `<aside class="telegram-articles" aria-label="${uiSlots.articlesTitle}">
+        ${articleCard(latest, ui.articlesLatest, '', 3)}
+        ${articleCard(fallback, ui.articlesRandom, ' data-random-card', 3)}
+        <a class="article-all" href="${overviewUrl(lang)}"><span class="eyebrow section-label">${uiSlots.articlesAll}</span><span class="article-all-count">${escape(count(list.length))} · ${escape(ui.articlesTopicCount.replace('{count}', langTopics.length))}</span><span class="article-all-arrow" aria-hidden="true">→</span></a>
+        ${randomScript}
+      </aside>`;
 const home = fill(template, {
   ...uiSlots,
-  telegram: renderTelegram(telegram, ui, lang),
+  telegram: renderTelegram(telegram, ui, lang, articleAside),
   eyebrow: escape(content.hero.eyebrow),
   heading: escape(content.hero.heading),
   accent: escape(content.hero.accent),
@@ -216,11 +229,6 @@ await writePage(outputFile, renderPage({
 
 // --- Article overview: latest, random, then all topics -----------------------
 const overview = overviewUrl(lang);
-// Data for the random card; "<" is escaped so the JSON cannot close the script element.
-const randomData = JSON.stringify(list.map((article) => ({
-  url: article.url, title: article.title, date: dateFormat.format(article.date), datetime: isoDay(article.date),
-  topic: topicName(article.topic), topicUrl: topicUrl(lang, article.topic), excerpt: article.excerpt
-}))).replace(/</g, '\\u003c');
 await writePage(`${overview}index.html`, renderPage({
   file: `${overview}index.html`,
   page: 'articles',
@@ -244,7 +252,7 @@ await writePage(`${overview}index.html`, renderPage({
         <li><a class="topic-row" href="${topicUrl(lang, topic.id)}"><span class="topic-name">${escape(topic[lang])}</span><span class="topic-semesters">${escape(semesterRanges(semesters))}</span><span class="topic-count">${escape(count(n))}</span><span class="topic-arrow" aria-hidden="true">→</span></a></li>`).join('')}
       </ul>
     </section>
-    <script type="application/json" id="article-index">${randomData}</script>
+    ${randomScript}
   </main>
 `
 }));

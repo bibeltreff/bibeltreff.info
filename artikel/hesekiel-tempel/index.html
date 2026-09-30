@@ -37,13 +37,15 @@
     <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
     <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M12 5v14m-6-6 6 6 6-6"/></symbol>
     <symbol id="icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
     <symbol id="icon-dark" viewBox="0 0 24 24"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></symbol>
   </defs></svg>
 
   <header class="site-header">
     <div class="header-inner wrap">
       <a class="brand" href="../../index.html" aria-label="Bibeltreff – Startseite"><span class="brand-icon"><svg class="icon" aria-hidden="true"><use href="#icon-tree"/></svg></span>Bibeltreff</a>
-      <nav class="main-nav" aria-label="Hauptnavigation"><a href="../../index.html#treffen">Treffen</a><a href="../../index.html#evangelium">Evangelium</a><a href="../../index.html#zeugnisse">Zeugnisse</a><a href="../../index.html#kontakt">Kontakt</a><div class="nav-item nav-articles">
+      <nav class="main-nav" id="main-nav" aria-label="Hauptnavigation"><a href="../../index.html#treffen">Treffen</a><a href="../../index.html#evangelium">Evangelium</a><a href="../../index.html#zeugnisse">Zeugnisse</a><a href="../../index.html#kontakt">Kontakt</a><div class="nav-item nav-articles">
         <a class="nav-parent" href="../../artikel/" aria-current="page">Artikel</a>
         <div class="nav-menu" aria-label="Artikel-Menü" role="group">
           <a href="../../artikel/das-buch-offenbarung/offenbarung-11-die-siebte-posaune.html">Letzter Artikel</a>
@@ -56,6 +58,9 @@
       <div class="header-actions">
         <button type="button" class="theme-toggle" data-label="Farbschema" data-light="Hell" data-dark="Dunkel" data-switch-light="Zum hellen Modus wechseln" data-switch-dark="Zum dunklen Modus wechseln" aria-label="Farbschema" hidden>
           <svg class="icon" aria-hidden="true"><use href="#icon-light"/></svg>
+        </button>
+        <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" data-open="Menü öffnen" data-close="Menü schließen" aria-label="Menü öffnen" hidden>
+          <svg class="icon" aria-hidden="true"><use href="#icon-menu"/></svg>
         </button>
         <a class="language-switch" href="../../articles/hesekiel-tempel/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
       </div>
