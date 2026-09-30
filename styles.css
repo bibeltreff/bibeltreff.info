@@ -45,7 +45,7 @@ h2 { font-size: clamp(1.85rem, 3.3vw, 2.5rem); letter-spacing: -.035em; }
 .brand-dot { color: var(--accent); }
 .main-nav { --nav-gap: 32px; display: flex; align-items: center; gap: var(--nav-gap); font-size: 15px; font-weight: 500; color: light-dark(#596371, #b1bccb); }
 .main-nav a { padding: 10px 0; }
-.main-nav a[aria-current="location"] { color: var(--accent); }
+.main-nav a[aria-current="location"], .main-nav a[aria-current="page"] { color: var(--accent); }
 .header-actions { display: flex; align-items: center; gap: 10px; }
 .language-switch { display: grid; place-items: center; min-width: 36px; min-height: 36px; border-radius: 7px; color: var(--accent); font-size: 13px; font-weight: 600; }
 .language-switch:hover { background: var(--soft); }
@@ -449,6 +449,8 @@ summary::-webkit-details-marker { display: none; }
 .nav-subitem.open-left > .nav-submenu { left: auto; right: 100%; }
 @media (hover: hover) and (min-width: 701px) {
   .nav-item:hover > .nav-menu, .nav-item:focus-within > .nav-menu { display: block; }
+  /* "Artikel" stays highlighted while its menu is open. */
+  .main-nav > .nav-item:hover > .nav-parent, .main-nav > .nav-item:focus-within > .nav-parent { color: var(--accent); }
 }
 
 /* Article overview, topic lists and article pages. */

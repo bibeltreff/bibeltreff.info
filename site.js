@@ -41,7 +41,7 @@ function measureNavigation() {
 }
 
 // A section chosen from the menu stays highlighted until the visitor scrolls on their own.
-// Otherwise sections near the page end, which cannot scroll up to the reading line, never become active.
+// Otherwise a jump to a section near the page end could highlight a neighbour, because the page stops early.
 let chosenSection = sectionLinks.find(({ link }) => link.hash === location.hash)?.section || null;
 for (const { link, section } of sectionLinks) {
   link.addEventListener('click', () => { chosenSection = section; scheduleUpdate(); });
@@ -54,16 +54,27 @@ for (const event of ['wheel', 'touchstart', 'keydown', 'pointerdown']) {
   }, { passive: true });
 }
 
+// A menu entry becomes active once its section reaches the reading line below the header and stays
+// active until the next one does, so sections without an entry (like the Telegram chat) belong to the one before.
+// Sections near the page end that can never scroll up to the line get evenly spaced points in the last stretch.
 function currentSection(headerHeight) {
   if (chosenSection) return chosenSection;
-  const visible = sectionLinks.map(({ section }) => section).filter(section => section.getBoundingClientRect().bottom > headerHeight);
-  const pageEnd = document.documentElement.scrollHeight - 1;
-  if (window.scrollY + window.innerHeight >= pageEnd) {
-    return visible.findLast(section => section.getBoundingClientRect().top < window.innerHeight) || null;
+  const offset = headerHeight + 24;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const activations = sectionLinks.map(({ section }) => section.getBoundingClientRect().top + window.scrollY - offset);
+  const firstUnreachable = activations.findIndex(activation => activation > maxScroll);
+  if (firstUnreachable !== -1) {
+    const previous = activations[firstUnreachable - 1] ?? 0;
+    const start = Math.max(previous, maxScroll - window.innerHeight / 2);
+    const step = (maxScroll - start) / (activations.length - firstUnreachable);
+    for (let index = firstUnreachable; index < activations.length; index++) {
+      activations[index] = start + step * (index - firstUnreachable + 1);
+    }
   }
-  // 1px tolerance, because anchor jumps can stop a fraction of a pixel below the line.
-  const readingLine = headerHeight + 24 + 1;
-  return visible.find(section => section.getBoundingClientRect().top <= readingLine && section.getBoundingClientRect().bottom > readingLine) || null;
+  // 1px tolerance, because anchor jumps can stop a fraction of a pixel short.
+  const position = window.scrollY + 1;
+  const index = activations.findLastIndex(activation => activation <= position);
+  return index === -1 ? null : sectionLinks[index].section;
 }
 
 let scheduled = false;
