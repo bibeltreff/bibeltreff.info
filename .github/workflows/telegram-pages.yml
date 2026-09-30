@@ -34,8 +34,9 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
+  # Every push to main is built and deployed; the Telegram sync (schedule, manual sync) needs TELEGRAM_SYNC_ENABLED.
   build:
-    if: github.ref == 'refs/heads/main' && vars.TELEGRAM_SYNC_ENABLED == 'true' && (github.event_name != 'workflow_dispatch' || inputs.mode == 'sync')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || vars.TELEGRAM_SYNC_ENABLED == 'true') && (github.event_name != 'workflow_dispatch' || inputs.mode == 'sync')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -58,11 +59,12 @@ jobs:
       - run: npm run check
       # Persist the batch before the next run can acknowledge it to Telegram.
       # A conflicting push fails safely; the unacknowledged batch is retried.
-      - name: Save public feed and generated pages
+      # Generated pages are not versioned: every run builds them again.
+      - name: Save public feed
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/telegram.json assets/telegram assets/previews index.html en.html artikel articles sitemap.xml robots.txt
+          git add content/telegram.json assets/telegram
           if ! git diff --cached --quiet; then
             git commit -m 'Update Telegram feed'
             git push origin HEAD:main

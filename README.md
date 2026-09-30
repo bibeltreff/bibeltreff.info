@@ -25,7 +25,7 @@ Originalfotos unter `assets/images/` ablegen und in `src/index.html` mit ihrem O
 
 `npm run build` erstellt automatisch eine WebP-Vorschau mit höchstens 1200 Pixeln Breite unter `assets/previews/`, setzt die passenden Bildmaße und verlinkt das Original zum Öffnen per Klick. Vorhandene Links bleiben erhalten. Das Original wird nicht verändert; zum Austauschen einfach die Datei ersetzen und erneut bauen. Auch Telegram-Fotos werden beim Build verarbeitet. SVG, GIF, externe Bilder, dekorative Bilder mit `alt=""` sowie Bilder mit `srcset` oder innerhalb von `<picture>` werden nicht verarbeitet.
 
-Vorschaudateinamen hängen vom Bildinhalt ab, damit ausgetauschte Fotos keine veraltete Vorschau aus dem Browsercache zeigen. Originale, erzeugte Vorschauen und die beiden HTML-Seiten gemeinsam einchecken; der Deployment-Workflow erzeugt die Vorschauen ebenfalls automatisch. Nur eine Datei in den Bilderordner zu legen fügt sie noch nicht zur Seite hinzu: Sie muss auch im Template eingebunden sein.
+Vorschaudateinamen hängen vom Bildinhalt ab, damit ausgetauschte Fotos keine veraltete Vorschau aus dem Browsercache zeigen. Nur die Originale einchecken; die Vorschauen erzeugt der Build (lokal wie im Deployment-Workflow), sie stehen in `.gitignore`. Nur eine Datei in den Bilderordner zu legen fügt sie noch nicht zur Seite hinzu: Sie muss auch im Template eingebunden sein.
 
 ### Inhaltsdateien
 
@@ -42,7 +42,7 @@ Vorschaudateinamen hängen vom Bildinhalt ab, damit ausgetauschte Fotos keine ve
 - `site.js`: Markierung des aktuellen Evangeliums-Themas und Messung der haftenden Navigation.
 - `assets/meeting-status.js`: Zeigt den sanft pulsierenden blauen Punkt nur zu den veröffentlichten wöchentlichen Treffzeiten (Zeitzone Europe/Berlin). Bei reduzierter Bewegung bleibt er ruhig; ohne JavaScript bleibt er verborgen.
 - `assets/documents/evangelium-in-farben.pdf`: Aktuelles deutsches Originalheft als Download (Fassung `Das_Evangelium_in_Farben_3_Uni_GER.pdf`).
-- `index.html` und `en.html`, `artikel/` und `articles/`: Generierte deutsche und englische Seiten. Änderungen hier werden beim Bauen überschrieben; `artikel/` und `articles/` werden dabei jedes Mal komplett neu erzeugt.
+- `index.html` und `en.html`, `artikel/` und `articles/`, `sitemap.xml`, `robots.txt` und `assets/previews/`: Von `npm run build` erzeugt und nicht im Repository (`.gitignore`). Änderungen hier werden beim Bauen überschrieben; `artikel/` und `articles/` werden dabei jedes Mal komplett neu erzeugt.
 
 Deutsch bleibt die Standardsprache. Der Sprachlink in der Kopfzeile öffnet `en.html` beziehungsweise `index.html` und funktioniert ohne JavaScript. Beide Seiten haben eigene Metadaten sowie gegenseitige `hreflang`-Verweise. Das Originalheft bleibt deutsch und ist auf der englischen Seite als „German PDF“ gekennzeichnet.
 
@@ -186,7 +186,7 @@ Nach jeder Änderung `npm run build` und `npm run check` ausführen und das Erge
 
 ## Statisches Hosting
 
-Die fertig gebauten `index.html` und `en.html` werden mit versioniert. Das bestehende GitHub-Pages-Hosting aus dem Repository-Stamm kann unverändert weiterlaufen. Vor dem Push immer bauen und prüfen; ohne automatischen Telegram-Import werden keine GitHub Actions, externen Bibliotheken oder Node-Prozesse auf dem Host benötigt. Für automatische Kanalnachrichten dient der unten beschriebene optionale Workflow. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
+Die gebauten Seiten werden nicht versioniert. Der Workflow `.github/workflows/telegram-pages.yml` baut und prüft die Website bei jedem Push auf `main` und veröffentlicht sie auf GitHub Pages (**Settings → Pages → Source: GitHub Actions**). Vor dem Push lokal `npm run build` und `npm run check` ausführen, damit Fehler nicht erst im Workflow auffallen. Auf dem Host werden keine externen Bibliotheken oder Node-Prozesse benötigt. `CNAME` bleibt erhalten. `.nojekyll` deaktiviert unnötige Jekyll-Verarbeitung.
 
 Für einen späteren IONOS-/Linux-Server genügen `index.html`, `en.html`, `styles.css`, `site.js`, `robots.txt`, `sitemap.xml`, `assets/`, `artikel/` und `articles/` im Webroot von nginx oder Apache. Alle lokalen URLs sind relativ, daher funktioniert die Seite auch in einem Unterverzeichnis. Keine SPA-Rewrites nötig; Ordner wie `artikel/` müssen nur ihre `index.html` ausliefern, wie es nginx, Apache und GitHub Pages standardmäßig tun.
 
@@ -224,7 +224,7 @@ Die Website kann Texte und Bildunterschriften aus `@bibeltreff_uni` als drei Kar
 2. Bei `@BotFather` über `/mybots` → `@bibeltreff_bot` den API-Token abrufen. Im Repository unter **Settings → Secrets and variables → Actions → Secrets → New repository secret** als `TELEGRAM_BOT_TOKEN` speichern. Nicht in Dateien, Nachrichten oder öffentliche Logs einfügen.
 3. Unter **Actions → Telegram and GitHub Pages → Run workflow** zunächst `mode: inspect` auswählen. Die Ausgabe zeigt nur `webhookActive`, `pendingUpdates` und `membership`. Diese Prüfung verändert keine Verbindung und bestätigt keine Updates.
 4. Bei `webhookActive: true` zuerst den bisherigen Dienst identifizieren. Der Collector löscht den Webhook niemals automatisch. Auch bei `false` prüfen, ob auf einem alten Server oder bei einem Bot-Dienst noch ein Polling-Programm läuft; das lässt sich über die API nicht zuverlässig erkennen. Für diesen Collector darf kein anderer Empfänger den Bot abfragen.
-5. Unter **Settings → Pages → Build and deployment → Source** auf **GitHub Actions** umstellen. Der Workflow veröffentlicht nur die Website-Dateien, nicht Quellcode oder den Update-Offset. Er schreibt den Feed und die generierten Seiten nach `main`; Branch-Regeln müssen diesen Workflow-Push erlauben.
+5. Unter **Settings → Pages → Build and deployment → Source** auf **GitHub Actions** umstellen. Der Workflow veröffentlicht nur die Website-Dateien, nicht Quellcode oder den Update-Offset. Er schreibt nur den Telegram-Feed nach `main`; Branch-Regeln müssen diesen Workflow-Push erlauben.
 6. Unter **Settings → Secrets and variables → Actions → Variables** die Repository-Variable `TELEGRAM_SYNC_ENABLED` auf `true` setzen. Danach den Workflow einmal mit `mode: sync` starten. Der Telegram-Import läuft einmal täglich um 18:17 UTC (19:17 Uhr in Berlin im Winter, 20:17 Uhr im Sommer). Pushes auf `main` bauen und veröffentlichen die Website mit den bereits gespeicherten Nachrichten, ohne Telegram erneut abzufragen. GitHub kann geplante Läufe verzögern und bei längerer Repository-Inaktivität deaktivieren; fehlgeschlagene oder ausbleibende Läufe beachten.
 
 Der Workflow bestätigt bei Telegram nur Updates, deren Zustand bereits in einem vorherigen Lauf gespeichert wurde. Neue Updates werden zunächst zusammen mit den drei Nachrichten versioniert. Bei einem fehlgeschlagenen Commit/Push wird der noch unbestätigte Stapel beim nächsten Lauf erneut eingelesen. Pro Lauf werden bis zu 100 Updates verarbeitet; bei einem größeren Rückstand weitere Läufe auslösen. Updates hält Telegram höchstens 24 Stunden vor. Beim täglichen Abruf gibt es daher keinen Zeitpuffer: Verzögerte oder ausgefallene Läufe können Nachrichten verpassen; diese müssen gegebenenfalls erneut an den Bot weitergeleitet werden.
@@ -257,7 +257,7 @@ Einen bereits vorhandenen `nextOffset` unverändert lassen. Danach bauen, prüfe
 - **Einmal täglich um 18:17 UTC**: Neue Telegram-Nachrichten werden abgeholt; das Veröffentlichen einer Kanalnachricht löst selbst keinen sofortigen Workflow aus.
 - **Manuell**: `inspect` prüft nur die Bot-Verbindung; `sync` aktualisiert und veröffentlicht.
 
-Sync und Deployment benötigen `TELEGRAM_SYNC_ENABLED=true`. Ein geplanter oder manuell gestarteter Sync holt neue bzw. bearbeitete Beiträge, behält die drei höchsten Nachrichten-IDs, lädt unterstütztes Audio herunter, baut beide Sprachen, prüft sie und speichert Feed, Audio und generierte Seiten im Repository. Danach veröffentlicht er die Website auf GitHub Pages. Der eigene Commit mit dem `GITHUB_TOKEN` löst keinen weiteren Push-Workflow aus. Bei einem Fehler vor dem Deployment bleibt die bisherige Website online.
+Der tägliche und der manuelle Sync benötigen `TELEGRAM_SYNC_ENABLED=true`; Pushes auf `main` werden auch ohne diese Variable gebaut und veröffentlicht. Ein geplanter oder manuell gestarteter Sync holt neue bzw. bearbeitete Beiträge, behält die drei höchsten Nachrichten-IDs, lädt unterstütztes Audio herunter, baut beide Sprachen, prüft sie und speichert Feed und Audio im Repository. Danach veröffentlicht er die Website auf GitHub Pages. Der eigene Commit mit dem `GITHUB_TOKEN` löst keinen weiteren Push-Workflow aus. Bei einem Fehler vor dem Deployment bleibt die bisherige Website online.
 
 ### Audio, Fotos und Formatierungen
 

@@ -20,7 +20,7 @@ const server = http.createServer(async (request, response) => {
     if (name.endsWith('/')) name += 'index.html';
     const target = path.resolve(root, name);
     const relative = path.relative(root, target);
-    const allowed = ['index.html', 'en.html', 'styles.css', 'site.js'].includes(name) || /^(assets|artikel|articles)\//.test(name);
+    const allowed = ['index.html', 'en.html', 'styles.css', 'site.js', 'robots.txt', 'sitemap.xml'].includes(name) || /^(assets|artikel|articles)\//.test(name);
     if (!allowed || relative.startsWith('..') || path.isAbsolute(relative)) {
       response.writeHead(404).end('Not found');
       return;
