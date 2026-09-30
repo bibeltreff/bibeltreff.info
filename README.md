@@ -102,7 +102,7 @@ Einleitung …
 > — Offenbarung 11:3
 ```
 
-`image` und `imageAlt` (Beitragsbild) sind optional. Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Text und Formatierung wurden unverändert aus WordPress übernommen: In Kapitälchen gesetztes „Herr“ steht als HERR in Großbuchstaben, Unterstreichungen als `<u>…</u>`. Entfernt wurden nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links zwischen Artikeln und die zwei Audiodateien verweisen noch auf die alte Website.
+`image` und `imageAlt` (Beitragsbild) sind optional. Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Entfernt wurden nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links zwischen Artikeln und die zwei Audiodateien verweisen noch auf die alte Website.
 
 ## Statisches Hosting
 
@@ -178,6 +178,7 @@ Die Standard-Bot-API erlaubt Downloads bis 20 MB. Größere oder nicht herunterl
 Die Formatierung stammt aus Telegrams `entities` bzw. `caption_entities`, einschließlich verschachtelter Formatierungen und korrekter Emoji-Positionen. HTML aus Nachrichtentexten wird nicht ausgeführt; Links sind auf HTTP, HTTPS und E-Mail beschränkt. Nicht unterstützte Telegram-Sonderformatierungen erscheinen als normaler Text.
 
 **Bestehende Beiträge nach diesem Upgrade:** Nach dem Push die betroffenen Originalnachrichten nochmals mit sichtbarer Herkunft an den Bot weiterleiten und `mode: sync` ausführen. Frühere Importe hatten Formatierungen, Audio-IDs bzw. Foto-IDs noch nicht gespeichert. Reguläre Fotos werden in der größten von Telegram angebotenen Auflösung importiert; ältere Foto-Nachrichten müssen für den erstmaligen Bildimport erneut an den Bot weitergeleitet werden. Albumteile zählen weiterhin als einzelne Nachrichten; es gibt noch keine zusammengefasste Albumgalerie. Neue Beiträge enthalten diese Daten automatisch. Sind Weiterleitungen im Kanal gesperrt, können neue Kanalbeiträge bzw. nachfolgende Bearbeitungen die vollständigen Daten liefern.
+
 ### Lokale Ausführung
 
 Token über eine private Umgebungsvariable `TELEGRAM_BOT_TOKEN` bereitstellen. Die Befehle laden keine `.env`-Dateien automatisch.
