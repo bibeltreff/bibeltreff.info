@@ -98,14 +98,14 @@ Jedes Zeugnis erhält automatisch ein per Maus, Touch und Tastatur bedienbares A
 
 ### Artikel
 
-Die Artikel von [hochschul-bibelkreise.de](https://hochschul-bibelkreise.de/category/neues-aus-dem-bibelkreis/) liegen als Markdown unter `content/artikel/de/<id>.md`, ihre Bilder unter `assets/artikel/<id>/`. Die `id` ist der Slug des deutschen Originals. Eine englische Fassung ist optional und hat dieselbe `id` in `content/artikel/en/`. Übernommen wurden alle 68 deutschen Artikel und die 9 vorhandenen englischen Fassungen; weitere Artikel sollen nur noch neu übersetzt werden. Die Artikel sind noch nicht in die Website eingebunden.
+Die Artikel von [hochschul-bibelkreise.de](https://hochschul-bibelkreise.de/category/neues-aus-dem-bibelkreis/) liegen als Markdown unter `content/artikel/de/<serie>/<id>.md`, ihre Bilder unter `assets/artikel/<serie>/<id>/`. Die Serien entsprechen den Themen der alten Website: `das-buch-offenbarung`, `das-reich-gottes-in-den-verschiedenen-zeitaltern`, `der-traum-nebukadnezars`, `die-aufstiegslieder`, `die-stiftshuette`, `hesekiel-tempel` und `zion-die-wohnung-gottes`. Die angezeigten Namen der Themen stehen in beiden Sprachen in `content/artikel/themen.json`; die Reihenfolge dort entspricht dem Menü der alten Website. Die `id` ist der Slug des deutschen Originals. Eine englische Fassung ist optional und liegt mit derselben Serie und `id` unter `content/artikel/en/<serie>/`. Übernommen wurden alle 68 deutschen Artikel und die 9 vorhandenen englischen Fassungen; weitere Artikel sollen nur noch neu übersetzt werden. Die Artikel sind noch nicht in die Website eingebunden.
 
 ```markdown
 ---
 title: Offenbarung 11:3-14 Die zwei Zeugen
 date: 2022-03-22
 source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-11-die-zwei-zeugen/
-image: assets/artikel/offenbarung-11-die-zwei-zeugen/Oelbaeume-752x440.jpeg
+image: assets/artikel/das-buch-offenbarung/offenbarung-11-die-zwei-zeugen/Oelbaeume-752x440.jpeg
 imageAlt: Die zwei Ölbäume
 ---
 
