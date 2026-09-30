@@ -3,7 +3,7 @@ title: Glaube für meinen Bedarf oder Glaube für Gottes Vorsatz?
 date: 2026-09-30T15:19:46+02:00
 ---
 
-# Glaube für meinen Bedarf oder Glaube für Gottes Vorsatz?
+Glaube für meinen Bedarf oder Glaube für Gottes Vorsatz?
 
 Hebräer 11 spricht über den Glauben der Väter. Abel, Henoch, Noah, Abraham, Mose und viele andere haben durch Glauben ein gutes Zeugnis erlangt. Gott hat für sie bezeugt, dass sie ihm wohlgefallen haben. In Hebräer 12 werden sie dann zu dieser großen „Wolke von Zeugen“.
 
