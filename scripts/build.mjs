@@ -261,6 +261,9 @@ await writePage(`${overview}index.html`, renderPage({
 for (const topic of langTopics) {
   const file = `${topicUrl(lang, topic.id)}index.html`;
   const topicArticles = list.filter((article) => article.topic === topic.id);
+  const thumbnails = await Promise.all(topicArticles.map((article) => article.image && optimizeImages.thumbnail(article.image)));
+  // The thumbnail repeats the title link, so it is skipped by keyboard and screen readers.
+  const thumbnail = (article, index) => thumbnails[index] ? `<a class="article-thumb" href="${article.url}" tabindex="-1" aria-hidden="true"><img src="${thumbnails[index].url}" alt="" width="${thumbnails[index].width}" height="${thumbnails[index].height}" loading="lazy" decoding="async"></a>` : '';
   await writePage(file, renderPage({
     file,
     page: 'topic',
@@ -275,11 +278,14 @@ for (const topic of langTopics) {
       <h1>${escape(topic[lang])}</h1>
       <p class="page-intro">${escape(count(topicArticles.length))}</p>
     </header>
-    <ol class="article-list wrap">${topicArticles.map((article) => `
-      <li class="article-item">
-        <h2><a href="${article.url}">${escape(article.title)}</a></h2>
-        <p class="article-meta">${time(article)}</p>
-        <p class="article-excerpt">${escape(article.excerpt)}</p>
+    <ol class="article-list wrap">${topicArticles.map((article, index) => `
+      <li class="article-item${thumbnails[index] ? ' has-thumb' : ''}">
+        ${thumbnail(article, index)}
+        <div class="article-item-text">
+          <h2><a href="${article.url}">${escape(article.title)}</a></h2>
+          <p class="article-meta">${time(article)}</p>
+          <p class="article-excerpt">${escape(article.excerpt)}</p>
+        </div>
       </li>`).join('')}
     </ol>
   </main>

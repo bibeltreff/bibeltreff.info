@@ -532,6 +532,11 @@ summary::-webkit-details-marker { display: none; }
 .article-item { padding-block: 26px; border-top: 1px solid var(--line); }
 .article-item h2 { margin-bottom: 8px; font-size: 24px; line-height: 1.25; letter-spacing: -.02em; }
 .article-item .article-excerpt { max-width: 72ch; }
+.article-item.has-thumb { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 26px; align-items: start; }
+.article-thumb { display: block; overflow: hidden; border-radius: 8px; background: var(--soft); }
+.article-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; transition: opacity .15s; }
+.article-item:has(h2 a:hover) .article-thumb img, .article-thumb:hover img { opacity: .85; }
+.article-item-text > h2:first-child { margin-top: -4px; }
 .article { max-width: 740px; }
 /* The self-hosted font has no italic; articles use emphasis in Bible quotes, so allow a slanted fallback. */
 .article-body { color: light-dark(#3d4653, #c9d2dd); font-size: 18px; line-height: 1.75; font-synthesis: style; }
@@ -569,6 +574,8 @@ summary::-webkit-details-marker { display: none; }
   .topic-count { text-align: left; }
   .topic-arrow { grid-row: 1 / 4; grid-column: 2; align-self: center; }
   .article-item h2 { font-size: 21px; }
+  .article-item.has-thumb { grid-template-columns: 112px minmax(0, 1fr); gap: 16px; }
+  .article-item.has-thumb .article-excerpt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; margin-top: 8px; font-size: 15px; }
   .article-body { font-size: 17px; }
   .article-body h2 { font-size: 24px; }
   .article-body h3 { font-size: 20px; }
