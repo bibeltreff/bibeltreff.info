@@ -15,8 +15,9 @@ npm run dev
 ## Inhalte und Gestaltung ändern
 
 - `content/shared.json`: Sprachunabhängige Daten, die für beide Sprachen gelten: Wochentag, Uhrzeiten, Adresse, Karten- und Zoom-Link der Treffen, Farben und Reihenfolge der Evangeliums-Themen die URLs der Kontakt- und Kanal-Links sowie die Reihenfolge der Zeugnisse.
-- `content/site.json`: Deutsche Texte: Einladung, Beschreibung der Treffen, sechs Evangeliums-Themen, Beschriftungen der Kontaktlinks und Datenschutztexte.
-- `content/site.en.json`: Englische Übersetzung mit gekürzten NKJV-Bibelzitaten.
+- `content/site.json`: Deutsche Texte: Einladung, Beschreibung der Treffen, Beschriftungen der Kontaktlinks und Datenschutztexte.
+- `content/site.en.json`: Englische Übersetzung dieser Texte.
+- `content/gospel.de.json` und `content/gospel.en.json`: Die sechs Evangeliums-Themen auf Deutsch und Englisch, mit gekürzten NKJV-Bibelzitaten in der englischen Fassung. Die Kapitel-IDs (`plan`, `problem` usw.) stehen direkt auf oberster Ebene.
 - `content/zeugnisse/de/` und `content/zeugnisse/en/`: Zeugnisse als Markdown, eine Datei pro Zeugnis und Sprache (siehe „Zeugnisse schreiben“).
 - `content/legal.json`: Betreiberangaben für Impressum und Datenschutzerklärung.
 - `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
@@ -24,7 +25,7 @@ npm run dev
 - `styles.css`: Responsive Gestaltung; Hauptfarbe ist das Blau aus dem PDF `#1d61b2` (`--accent`).
 - `site.js`: Markierung des aktuellen Evangeliums-Themas und Messung der haftenden Navigation.
 - `assets/meeting-status.js`: Zeigt den sanft pulsierenden blauen Punkt nur zu den veröffentlichten wöchentlichen Treffzeiten (Zeitzone Europe/Berlin). Bei reduzierter Bewegung bleibt er ruhig; ohne JavaScript bleibt er verborgen.
-- `assets/documents/evangelium-in-farben.pdf`: Unverändertes Originalheft als Download.
+- `assets/documents/evangelium-in-farben.pdf`: Aktuelles deutsches Originalheft als Download (Fassung `Das_Evangelium_in_Farben_3_Uni_GER.pdf`).
 - `index.html` und `en.html`: Generierte deutsche und englische Seiten. Änderungen hier werden beim Bauen überschrieben.
 
 Deutsch bleibt die Standardsprache. Der Sprachlink in der Kopfzeile öffnet `en.html` beziehungsweise `index.html` und funktioniert ohne JavaScript. Beide Seiten haben eigene Metadaten sowie gegenseitige `hreflang`-Verweise. Das Originalheft bleibt deutsch und ist auf der englischen Seite als „German PDF“ gekennzeichnet.
@@ -44,7 +45,7 @@ npm run check
 
 In `content/shared.json` stehen nur Daten, die nicht übersetzt werden. Sichtbare Wörter bleiben immer in der Sprachdatei, auch wenn sie in beiden Sprachen gleich lauten (etwa „WhatsApp“ oder „Gold“). Jeder Eintrag in `meetings`, `gospel`, `contact` und `social` hat in `shared.json` eine `id`; die Sprachdateien enthalten unter derselben `id` die Texte dazu. Die Reihenfolge bestimmt `shared.json`. Ein neues Treffen braucht also einen Eintrag in `shared.json` (`id`, `weekday` als englischer Kleinbuchstaben-Name wie `wednesday`, `start`, `end`, `address`, `map`, optional `online`) und in beiden Sprachdateien einen Eintrag mit `label`, `location` und `note`. Fehlt eine `id` in einer Sprache oder gibt es sie nur dort, bricht der Build mit einer Fehlermeldung ab.
 
-Bei jedem Thema in `gospel` werden alle Bibelstellen in `verses` direkt angezeigt. Zusätzliche Stellen können in `moreVerses` eingetragen werden, ebenfalls als Objekte mit `text` und `reference`. Nur wenn `moreVerses` Einträge enthält, erscheint darunter „Weitere Bibelstellen +“ zum Aufklappen. Ein leeres oder weggelassenes `moreVerses` erzeugt keinen Aufklappbereich.
+Die Texte zu `gospel` stehen in `content/gospel.de.json` und `content/gospel.en.json`; IDs, Farben und Reihenfolge bleiben in `content/shared.json`. Bei jedem Thema werden alle Bibelstellen in `verses` direkt angezeigt. Zusätzliche Stellen können in `moreVerses` eingetragen werden, ebenfalls als Objekte mit `text` und `reference`. Nur wenn `moreVerses` Einträge enthält, erscheint darunter „Weitere Bibelstellen +“ zum Aufklappen. Ein leeres oder weggelassenes `moreVerses` erzeugt keinen Aufklappbereich.
 
 Treffzeiten und der Treffpunkt am grünen Tisch stammen auf Wunsch des Betreibers aus dem PDF. Die Kontakt-, Kanal- und Zoom-Links stammen von der bisherigen Website. Sonntag bleibt mit anschließendem Mittagessen. Bibelzitate und Erläuterungen folgen dem bereitgestellten Heft; die Farbreihenfolge ist Gold, Schwarz, Rot, Weiß, Grün, Gold.
 

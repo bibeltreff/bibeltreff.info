@@ -1,7 +1,7 @@
 ---
 name: Thomas
 headline: Ich habe geschmeckt, wie unübertrefflich Christus ist
-intro: Befreit von einem weltlichen, sündigen Leben - für ein tägliches Leben mit Christus.
+intro: Befreit von einem weltlichen, sündigen Christenleben – für ein tägliches Leben mit Christus.
 ---
 
 Ich nahm den Herrn Jesus in mein Leben auf, als ich sechs Jahre alt war. Er gab mir Freude ins Herz. Meine Eltern erzählten mir viel von der Bibel und ich ging gerne in den Gottesdienst.

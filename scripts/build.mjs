@@ -20,21 +20,22 @@ const weekdays = {
 const weekdayKeys = weekdays.en.map((day) => day.toLowerCase());
 
 // Generate full HTML at build time: content and navigation work without JavaScript.
-// A future CMS exporter only needs to provide the same content/shared.json and content/site.json schemas.
+// A future CMS exporter only needs to provide the same shared, site and gospel content schemas.
 for (const lang of ['de', 'en']) {
 const english = lang === 'en';
 const contentFile = english ? 'site.en.json' : 'site.json';
 const outputFile = english ? 'en.html' : 'index.html';
 const content = JSON.parse(await readFile(path.join(root, 'content', contentFile), 'utf8'));
+const gospelFile = `gospel.${lang}.json`;
+const gospelTexts = JSON.parse(await readFile(path.join(root, 'content', gospelFile), 'utf8'));
 const ui = JSON.parse(await readFile(path.join(root, 'content', `ui.${lang}.json`), 'utf8'));
 // Combine each shared entry with the text stored under its id in the language file.
-const localize = (section, toFields = (text) => text) => {
-  const texts = content[section];
+const localize = (section, toFields = (text) => text, texts = content[section], source = contentFile) => {
   const ids = shared[section].map((item) => item.id);
   const unknown = Object.keys(texts).filter((id) => !ids.includes(id));
-  if (unknown.length) throw new Error(`content/${contentFile}: ${section} has no shared entry for ${unknown.join(', ')}`);
+  if (unknown.length) throw new Error(`content/${source}: ${section} has no shared entry for ${unknown.join(', ')}`);
   return shared[section].map((item) => {
-    if (!(item.id in texts)) throw new Error(`content/${contentFile}: ${section}.${item.id} is missing`);
+    if (!(item.id in texts)) throw new Error(`content/${source}: ${section}.${item.id} is missing`);
     return { ...item, ...toFields(texts[item.id]) };
   });
 };
@@ -43,7 +44,7 @@ const meetings = localize('meetings').map((meeting) => {
   if (weekday < 0) throw new Error(`Unknown meeting weekday: ${meeting.weekday}`);
   return { ...meeting, weekday, day: weekdays[lang][weekday] };
 });
-const gospel = localize('gospel');
+const gospel = localize('gospel', undefined, gospelTexts, gospelFile);
 const contact = localize('contact', (label) => ({ label }));
 const social = localize('social', (label) => ({ label }));
 const testimonies = await loadTestimonies(root, lang, shared.testimonies);
@@ -103,5 +104,5 @@ const html = template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   return slots[key];
 });
 await writeFile(path.join(root, outputFile), html);
-console.log(`Built ${outputFile} from src/index.html, content/shared.json, content/${contentFile} and content/zeugnisse/${lang}.`);
+console.log(`Built ${outputFile} from src/index.html, content/shared.json, content/${contentFile}, content/${gospelFile} and content/zeugnisse/${lang}.`);
 }

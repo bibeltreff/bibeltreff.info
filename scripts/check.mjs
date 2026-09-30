@@ -16,6 +16,7 @@ let checked = 0;
 for (const { lang, page, source, other } of locales) {
 const html = await readFile(path.join(root, page), 'utf8');
 const content = JSON.parse(await readFile(path.join(root, 'content', source), 'utf8'));
+content.gospel = JSON.parse(await readFile(path.join(root, 'content', `gospel.${lang}.json`), 'utf8'));
 content.testimonies = await loadTestimonies(root, lang, shared.testimonies);
 const ui = JSON.parse(await readFile(path.join(root, 'content', `ui.${lang}.json`), 'utf8'));
 assert.ok(html.includes(`<html lang="${lang}">`), `Incorrect language in ${page}`);

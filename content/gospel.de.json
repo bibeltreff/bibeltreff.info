@@ -1,0 +1,122 @@
+{
+  "plan": {
+    "label": "Der Plan",
+    "colorName": "Gold",
+    "keyword": "Beziehung",
+    "question": "Wozu hat Gott uns geschaffen?",
+    "text": "Gold steht für Gottes Ziel mit uns Menschen. Er schuf uns ohne Sünde und ihm ähnlich, damit wir in seinem Auftrag gerecht über die Erde herrschen. Wir können uns für eine persönliche Beziehung mit Gott entscheiden und ihn als Vater kennenlernen.",
+    "verses": [
+      {
+        "text": "Und Gott sprach: Lasst uns Menschen machen nach unserem Bild, uns ähnlich; die sollen herrschen auf Erden!",
+        "reference": "1. Mose 1:26"
+      },
+      {
+        "text": "Er hat uns in Liebe vorherbestimmt, seine Söhne zu sein.",
+        "reference": "Epheser 1:4–5"
+      }
+    ],
+    "moreVerses": []
+  },
+  "problem": {
+    "label": "Das Problem",
+    "colorName": "Schwarz",
+    "keyword": "Trennung",
+    "question": "Warum brauchen wir Rettung?",
+    "text": "Der Mensch ließ sich von Satans Lüge verführen. So kam das Böse in uns Menschen. Da ist keiner, der Gutes tut. Wir leben in Sünde und sind von Gott getrennt. Wegen unserer Schuld stehen wir unter Gottes gerechtem Gericht, dem ewigen Feuersee.",
+    "verses": [
+      {
+        "text": "Die alte Schlange, der Teufel, verführt die ganze Erde.",
+        "reference": "Offenbarung 12:9"
+      },
+      {
+        "text": "Alle haben gesündigt und haben Mangel an der Herrlichkeit Gottes.",
+        "reference": "Römer 3:23"
+      },
+      {
+        "text": "Der Lohn der Sünde ist der Tod.",
+        "reference": "Römer 6:23"
+      },
+      {
+        "text": "Dies ist der zweite Tod, der Feuersee.",
+        "reference": "Offenbarung 20:14"
+      }
+    ],
+    "moreVerses": []
+  },
+  "loesung": {
+    "label": "Die Lösung",
+    "colorName": "Rot",
+    "keyword": "Liebe",
+    "question": "Wie rettet Gott uns?",
+    "text": "Weil Gott uns so sehr liebt, gab er seinen Sohn Jesus Christus, um uns zu retten. Jesus war ohne Sünde, doch er nahm unsere Schuld auf sich und starb für uns am Kreuz. Das ist der größte Beweis für Gottes Liebe.",
+    "verses": [
+      {
+        "text": "Gott aber beweist seine Liebe zu uns dadurch, dass Christus für uns gestorben ist, als wir noch Sünder waren.",
+        "reference": "Römer 5:8"
+      },
+      {
+        "text": "Denn so sehr hat Gott die Welt geliebt, dass er seinen einziggeborenen Sohn gab, …",
+        "reference": "Johannes 3:16"
+      }
+    ],
+    "moreVerses": []
+  },
+  "weg": {
+    "label": "Der Weg",
+    "colorName": "Weiß",
+    "keyword": "Neues Leben",
+    "question": "Nimm Jesus Christus auf!",
+    "text": "Jesus Christus allein kann dich von Sünde und Gericht retten. Glaube an ihn, bekenne ihn als deinen Herrn und lass dich taufen! So wirst du gerettet von dem Feuersee und empfängst ewiges Leben.",
+    "verses": [
+      {
+        "text": "… damit jeder, der an ihn glaubt, nicht verloren gehe, sondern ewiges Leben habe.",
+        "reference": "Johannes 3:16"
+      },
+      {
+        "text": "Wer glaubt und getauft wird, der wird gerettet werden.",
+        "reference": "Markus 16:16a"
+      },
+      {
+        "text": "Wenn du Jesus als Herrn bekennst und glaubst, dass Gott ihn von den Toten auferweckt hat, so wirst du gerettet.",
+        "reference": "Römer 10:9"
+      }
+    ],
+    "moreVerses": []
+  },
+  "wachstum": {
+    "label": "Wachstum",
+    "colorName": "Grün",
+    "keyword": "Im Glauben wachsen",
+    "question": "Wie erfährst du mehr Errettung?",
+    "text": "Jesus will uns weiter retten: von Bosheit, Sünde, Weltlichem und allem, was uns von Gott trennt. Arbeite täglich mit ihm zusammen: Nähre dich von Gottes Wort, lass dich mit anderen zu Gottes Haus aufbauen und bringe Gott geistliche Opfer dar.",
+    "verses": [
+      {
+        "text": "So legt nun ab alle Bosheit … und verlangt wie Neugeborene nach der reinen Milch des Wortes Gottes, damit ihr durch sie wachst zur Errettung.",
+        "reference": "1. Petrus 2:1–2"
+      },
+      {
+        "text": "… und lasst auch ihr euch aufbauen zum geistlichen Haus, zu einer heiligen Priesterschaft, um geistliche Opfer darzubringen durch Jesus Christus.",
+        "reference": "1. Petrus 2:5"
+      }
+    ],
+    "moreVerses": []
+  },
+  "lohn": {
+    "label": "Der Lohn",
+    "colorName": "Gold",
+    "keyword": "Hoffnung",
+    "question": "Was hält Jesus für dich bereit?",
+    "text": "Wenn du Jesus folgst und zur vollen Errettung wächst, erhältst du den höchsten Lohn: Du wirst Gott in seinem kommenden Reich als König und Priester dienen. Jesus kommt bald zurück!",
+    "verses": [
+      {
+        "text": "… und [Jesus] hat sie unserem Gott zu Königen und Priestern gemacht, und sie werden herrschen auf Erden.",
+        "reference": "Offenbarung 5:9–10"
+      },
+      {
+        "text": "Jesus Christus spricht: Siehe, ich komme schnell und mein Lohn ist bei mir, um jedem zu geben, wie sein Werk ist.",
+        "reference": "Offenbarung 22:12"
+      }
+    ],
+    "moreVerses": []
+  }
+}
