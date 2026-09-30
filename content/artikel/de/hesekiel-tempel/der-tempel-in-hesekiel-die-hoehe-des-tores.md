@@ -1,7 +1,6 @@
 ---
 title: Die Höhe des Tores
 date: 2018-12-31T23:36:27+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-die-hoehe-des-tores/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-die-hoehe-des-tores/Brandenburger_Tor-752x440.jpg
 imageAlt: Brandenburger Tor
 ---

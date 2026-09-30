@@ -1,7 +1,6 @@
 ---
 title: "Offenbarung Kapitel 4: Der Thron Gottes im Himmel"
 date: 2020-12-02T21:04:38+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-kapitel-4-der-thron-gottes-im-himmel/
 image: assets/artikel/das-buch-offenbarung/offenbarung-kapitel-4-der-thron-gottes-im-himmel/clouds-gcc1192cb9_1920-752x440.jpg
 imageAlt: clouds gcc1192cb9 1920
 ---

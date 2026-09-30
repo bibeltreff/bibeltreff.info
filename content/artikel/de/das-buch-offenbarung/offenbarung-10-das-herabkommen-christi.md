@@ -1,7 +1,6 @@
 ---
 title: "Offenbarung 10: Das Herabkommen Christi"
 date: 2022-01-08T20:27:32+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-10-das-herabkommen-christi/
 image: assets/artikel/das-buch-offenbarung/offenbarung-10-das-herabkommen-christi/Offb-10_1-3-Herabkommen-Christi-Wolke-752x440-1-752x440.png
 imageAlt: Das Herabkommen Christi bekleidet mit einer Wolke
 ---

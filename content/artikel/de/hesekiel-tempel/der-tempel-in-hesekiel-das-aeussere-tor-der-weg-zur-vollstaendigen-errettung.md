@@ -1,7 +1,6 @@
 ---
 title: "Das äußere Tor: der Weg zur vollständigen Errettung"
 date: 2018-12-17T17:36:28+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-das-aeussere-tor-der-weg-zur-vollstaendigen-errettung/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-der-weg-zur-vollstaendigen-errettung/Tor_6-752x440.jpg
 imageAlt: Tor 6
 ---

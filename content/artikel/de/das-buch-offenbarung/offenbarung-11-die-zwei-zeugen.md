@@ -1,7 +1,6 @@
 ---
 title: Offenbarung 11:3-14 Die zwei Zeugen
 date: 2022-03-22T15:13:02+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-11-die-zwei-zeugen/
 image: assets/artikel/das-buch-offenbarung/offenbarung-11-die-zwei-zeugen/Oelbaeume-752x440.jpeg
 imageAlt: Die zwei Ölbäume
 ---

@@ -1,7 +1,6 @@
 ---
 title: Zeichen der Wiederkunft Jesu an der Nation Israel
 date: 2018-04-23T10:55:44+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-zeichen-der-wiederkunft-jesu-an-der-nation-israel/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-zeichen-der-wiederkunft-jesu-an-der-nation-israel/jerusalem-1712855_1920-752x440.jpg
 imageAlt: jerusalem 1712855 1920
 ---

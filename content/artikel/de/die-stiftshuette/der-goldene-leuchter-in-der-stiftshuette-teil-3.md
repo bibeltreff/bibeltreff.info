@@ -1,7 +1,6 @@
 ---
 title: Der Goldene Leuchter – Seine Pflege
 date: 2020-06-24T14:57:00+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-goldene-leuchter-in-der-stiftshuette-teil-3/
 image: assets/artikel/die-stiftshuette/der-goldene-leuchter-in-der-stiftshuette-teil-3/Leuchter_Teil2-752x440.jpg
 imageAlt: Leuchter Teil2
 ---

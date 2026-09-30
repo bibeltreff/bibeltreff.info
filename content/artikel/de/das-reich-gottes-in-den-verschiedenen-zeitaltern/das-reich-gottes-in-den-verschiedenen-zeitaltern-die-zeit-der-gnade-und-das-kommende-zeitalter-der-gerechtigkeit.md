@@ -1,7 +1,6 @@
 ---
 title: Das Zeitalter der Gnade und das kommende Zeitalter der Gerechtigkeit
 date: 2018-09-13T18:36:01+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-die-zeit-der-gnade-und-das-kommende-zeitalter-der-gerechtigkeit/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-die-zeit-der-gnade-und-das-kommende-zeitalter-der-gerechtigkeit/landscape-5538015_1920-752x440.jpg
 imageAlt: landscape 5538015 1920
 ---

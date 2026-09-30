@@ -1,7 +1,6 @@
 ---
 title: Gewissheit, dass Gott für uns ist!
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/gewissheit-dass-gott-fur-uns-ist/
 image: assets/artikel/die-aufstiegslieder/gewissheit-dass-gott-fur-uns-ist/freedom-1886402_1920-752x440.jpg
 imageAlt: Befreiung
 ---

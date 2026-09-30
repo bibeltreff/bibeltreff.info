@@ -1,7 +1,6 @@
 ---
 title: In Zion ist Christus der König
 date: 2020-04-14T17:55:16+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/in-zion-ist-christus-der-koenig/
 image: assets/artikel/zion-die-wohnung-gottes/in-zion-ist-christus-der-koenig/chess-g74612c596_1920-752x440.jpg
 imageAlt: chess g74612c596 1920
 ---

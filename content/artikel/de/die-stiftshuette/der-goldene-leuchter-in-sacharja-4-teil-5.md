@@ -1,7 +1,6 @@
 ---
 title: Der Goldene Leuchter in Sacharja 4
 date: 2020-07-14T18:02:10+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-goldene-leuchter-in-sacharja-4-teil-5/
 image: assets/artikel/die-stiftshuette/der-goldene-leuchter-in-sacharja-4-teil-5/Leuchter_Teil4-752x440.jpg
 imageAlt: Leuchter Teil4
 ---

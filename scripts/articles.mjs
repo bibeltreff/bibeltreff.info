@@ -8,7 +8,7 @@ import { readFrontmatter } from './markdown.mjs';
 export const articleLanguages = ['de', 'en'];
 // Output folders: German pages under artikel/, English ones under articles/.
 export const articleFolders = { de: 'artikel', en: 'articles' };
-const fields = ['title', 'date', 'excerpt', 'source', 'image', 'imageAlt'];
+const fields = ['title', 'date', 'excerpt', 'image', 'imageAlt'];
 const required = ['title', 'date'];
 const idPattern = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
@@ -114,14 +114,7 @@ function excerpt(tokens) {
 
 function createRenderer(articles, topicIds) {
   // Old hochschul-bibelkreise.de links point to the imported pages where possible.
-  const bySlug = new Map();
-  for (const lang of articleLanguages) {
-    for (const article of articles[lang]) {
-      bySlug.set(article.id, article.id);
-      const slug = article.source?.match(/\/([^/]+)\/?$/)?.[1];
-      if (slug) bySlug.set(slug, article.id);
-    }
-  }
+  const ids = new Set(articleLanguages.flatMap((lang) => articles[lang].map((article) => article.id)));
   const find = (lang, id) => articles[lang].find((article) => article.id === id);
   let current;
   function internalLink(href) {
@@ -133,9 +126,8 @@ function createRenderer(articles, topicIds) {
     if (/(^|\/)category\/neues-aus-dem-bibelkreis\/$/.test(folders) && topicIds.includes(slug)) {
       return topicUrl(articles[current.lang].some((article) => article.topic === slug) ? current.lang : 'de', slug);
     }
-    const id = !folders.startsWith('category/') && !folders.startsWith('tag/') && bySlug.get(slug);
-    if (!id) return href;
-    return (find(current.lang, id) || find('de', id)).url;
+    if (folders.startsWith('category/') || folders.startsWith('tag/') || !ids.has(slug)) return href;
+    return (find(current.lang, slug) || find('de', slug)).url;
   }
 
   const marked = new Marked({ gfm: true });

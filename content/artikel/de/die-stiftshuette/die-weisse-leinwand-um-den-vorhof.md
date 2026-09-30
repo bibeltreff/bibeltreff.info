@@ -1,7 +1,6 @@
 ---
 title: Die weiße Leinwand um den Vorhof
 date: 2020-05-21T08:26:44+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/die-stiftshuette/die-weisse-leinwand-um-den-vorhof/
 image: assets/artikel/die-stiftshuette/die-weisse-leinwand-um-den-vorhof/Anmerkung-2020-04-01-150811-e1585746561475-752x440.jpg
 imageAlt: Anmerkung 2020 04 01 150811 e1585746561475
 ---

@@ -1,7 +1,6 @@
 ---
 title: Wehe, wehe, wehe denen, die auf der Erde wohnen
 date: 2021-12-08T11:30:10+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/wehe-wehe-wehe-denen-die-auf-der-erde-wohnen/
 image: assets/artikel/das-buch-offenbarung/wehe-wehe-wehe-denen-die-auf-der-erde-wohnen/Offb-8_13_wehe-wehe-wehe-752x440-1-1536x881-752x440.jpg
 imageAlt: Offb 8 13 wehe wehe wehe 752x440 1 1536x881
 ---

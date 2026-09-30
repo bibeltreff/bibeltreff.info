@@ -1,7 +1,6 @@
 ---
 title: “Ich hebe meine Augen auf”
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/ich-hebe-meine-augen-auf/
 image: assets/artikel/die-aufstiegslieder/ich-hebe-meine-augen-auf/sky-3335585_1920-752x440.jpg
 imageAlt: sky 3335585 1920
 ---

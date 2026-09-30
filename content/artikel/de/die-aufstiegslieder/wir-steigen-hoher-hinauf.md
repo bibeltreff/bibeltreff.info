@@ -1,7 +1,6 @@
 ---
 title: Wir steigen höher hinauf!
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/wir-steigen-hoher-hinauf/
 image: assets/artikel/die-aufstiegslieder/wir-steigen-hoher-hinauf/stairs-2385205_1920-752x440.jpg
 imageAlt: stairs 2385205 1920
 ---

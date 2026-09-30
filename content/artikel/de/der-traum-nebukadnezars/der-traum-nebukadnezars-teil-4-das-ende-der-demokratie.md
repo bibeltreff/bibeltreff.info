@@ -1,7 +1,6 @@
 ---
 title: Der Traum Nebukadnezars (Teil 4) – Das Ende der Demokratie
 date: 2020-01-15T16:08:26+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-traum-nebukadnezars-teil-4-das-ende-der-demokratie/
 image: assets/artikel/der-traum-nebukadnezars/der-traum-nebukadnezars-teil-4-das-ende-der-demokratie/Fuss-1-752x440.png
 imageAlt: Fuss 1
 ---

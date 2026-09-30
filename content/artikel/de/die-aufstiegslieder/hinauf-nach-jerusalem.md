@@ -1,7 +1,6 @@
 ---
 title: Hinauf nach Jerusalem
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/hinauf-nach-jerusalem/
 image: assets/artikel/die-aufstiegslieder/hinauf-nach-jerusalem/stairs-3614468_1920-752x440.jpg
 imageAlt: Stufen hinauf
 ---

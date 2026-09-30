@@ -1,7 +1,6 @@
 ---
 title: Die Aufstiegslieder in den Psalmen (Teil 2)
 date: 2013-12-23T04:20:35+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/die-aufstiegslieder-in-den-psalmen-teil-2/
 image: assets/artikel/die-aufstiegslieder/die-aufstiegslieder-in-den-psalmen-teil-2/stairway-4126514_1920-752x440.jpg
 imageAlt: stairway 4126514 1920
 ---

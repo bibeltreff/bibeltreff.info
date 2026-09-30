@@ -1,7 +1,6 @@
 ---
 title: Die ersten vier Posaunengerichte
 date: 2021-11-25T09:29:22+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/die-ersten-vier-posaunengerichte/
 image: assets/artikel/das-buch-offenbarung/die-ersten-vier-posaunengerichte/Screenshot-2022-02-21-233346-1-752x440.png
 imageAlt: Screenshot 2022 02 21 233346 1
 ---

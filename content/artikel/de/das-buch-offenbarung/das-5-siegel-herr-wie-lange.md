@@ -1,7 +1,6 @@
 ---
 title: Offenbarung 6 – Das 5. Siegel
 date: 2021-02-24T12:32:50+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-5-siegel-herr-wie-lange/
 image: assets/artikel/das-buch-offenbarung/das-5-siegel-herr-wie-lange/Screenshot-2022-03-15-113722-752x440.png
 imageAlt: Screenshot 2022 03 15 113722
 ---

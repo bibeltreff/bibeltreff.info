@@ -1,7 +1,6 @@
 ---
 title: "Nebuchadnezzar’s Dream (Part 1): Recognizing the Signs of the Times"
 date: 2022-02-24T22:41:48+01:00
-source: https://hochschul-bibelkreise.de/en/news-from-the-bible-study/nebuchadnezzars-dream-part-1-recognizing-the-signs-of-the-times/
 image: assets/artikel/der-traum-nebukadnezars/der-traum-nebukadnezars-teil-1-die-zeichen-der-zeit-erkennen/DasBuchDaniel_new-768x530-752x440-1-752x440.jpg
 imageAlt: The Book of Daniel
 ---

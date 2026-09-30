@@ -1,7 +1,6 @@
 ---
 title: In Zion ist Leben zu finden
 date: 2020-04-20T14:01:32+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/in-zion-ist-leben-zu-finden/
 image: assets/artikel/zion-die-wohnung-gottes/in-zion-ist-leben-zu-finden/hands-ga55360295_1920-752x440.jpg
 imageAlt: hands ga55360295 1920
 ---

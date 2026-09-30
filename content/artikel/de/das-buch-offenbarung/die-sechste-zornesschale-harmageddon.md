@@ -1,7 +1,6 @@
 ---
 title: Offenbarung 16:12-16 Harmageddon – Die sechste Zornesschale
 date: 2022-03-15T08:42:33+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-buch-offenbarung/die-sechste-zornesschale-harmageddon/
 image: assets/artikel/das-buch-offenbarung/die-sechste-zornesschale-harmageddon/Jezreel-Valley-from-Mount-Tabor-752x440.jpg
 imageAlt: Jezreel-Valley-from-Mount-Tabor
 ---

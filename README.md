@@ -99,13 +99,12 @@ Die Artikel von [hochschul-bibelkreise.de](https://hochschul-bibelkreise.de/cate
 
 Der Build erzeugt daraus statische Seiten: `artikel/` (Übersicht), `artikel/<serie>/` (alle Artikel eines Themas, neueste zuerst, mit Datum und den ersten ein bis zwei Sätzen) und `artikel/<serie>/<id>.html` (der Artikel mit Links zum älteren und neueren Artikel desselben Themas). Die englischen Seiten liegen entsprechend unter `articles/` und zeigen nur Themen mit englischen Artikeln. Der Sprachlink führt zur Übersetzung, sonst zur Übersicht der anderen Sprache. Die Übersicht zeigt den letzten Artikel, einen zufälligen Artikel und alle Themen. Im Kopf öffnet „Artikel“ bei Maus-Hover ein Menü mit „Letzter Artikel“, „Zufälliger Artikel“ und „Alle Artikel“, daneben klappen die Themen auf. Auf Touch-Geräten und schmalen Bildschirmen führt „Artikel“ direkt zur Übersicht. Der Zufall wählt JavaScript beim Klick bzw. beim Laden der Übersicht; ohne JavaScript führen beide zu einem beim Bauen festgelegten Artikel.
 
-`date` ist der Veröffentlichungszeitpunkt (`2024-05-31` oder mit Uhrzeit `2024-05-31T18:30:00+02:00`); er bestimmt die Reihenfolge, angezeigt wird nur der Tag. Bei gleichem Zeitpunkt wird nach Titel sortiert, etwa bei elf Aufstiegsliedern, die im Original alle den 30. November 2007 tragen. Artikelbilder erhalten wie andere Bilder automatisch eine WebP-Vorschau mit Link zum Original.
+Artikelbilder erhalten wie andere Bilder automatisch eine WebP-Vorschau mit Link zum Original.
 
 ```markdown
 ---
 title: Offenbarung 11:3-14 Die zwei Zeugen
 date: 2022-03-22
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-11-die-zwei-zeugen/
 image: assets/artikel/das-buch-offenbarung/offenbarung-11-die-zwei-zeugen/Oelbaeume-752x440.jpeg
 imageAlt: Die zwei Ölbäume
 ---
@@ -119,7 +118,19 @@ Einleitung …
 > — Offenbarung 11:3
 ```
 
-`image` und `imageAlt` (Beitragsbild) sind optional und werden bisher nicht angezeigt. Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Sonstiges HTML wird als Text angezeigt, erlaubt sind nur `<u>` und `<br>`. `#`-Überschriften werden zu Zwischenüberschriften, weil der Titel die Seitenüberschrift ist. Ein Zitat, dessen letzter Absatz mit `—` beginnt, zeigt diesen als Quellenangabe. Entfernt wurden beim Import nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links auf importierte Artikel und Themen der alten Website führen beim Bauen auf die neuen Seiten.
+Im Kopfbereich zwischen den `---`-Zeilen sind genau diese Felder erlaubt; jedes andere Feld (auch ein Tippfehler wie `Titel:`) bricht den Build mit `unknown field …` ab:
+
+| Feld | Pflicht? | Bedeutung |
+|---|---|---|
+| `title` | **ja** | Überschrift des Artikels |
+| `date` | **ja** | Veröffentlichungszeitpunkt: `2024-05-31` oder mit Uhrzeit `2024-05-31T18:30:00+02:00`. Bestimmt die Reihenfolge (neueste zuerst); angezeigt wird nur der Tag. Bei gleichem Zeitpunkt wird nach Titel sortiert. |
+| `excerpt` | nein | Eigener Anrisstext für Übersicht, Themenliste und Suchmaschinen, einzeilig; wird unverändert und ohne „…“ angezeigt. Ohne `excerpt` entsteht er automatisch aus den ersten ein bis zwei Sätzen des ersten Absatzes und endet mit „…“. |
+| `image` | nein | Beitragsbild (Pfad ab `assets/`); wird bisher nicht angezeigt |
+| `imageAlt` | nein | Alternativtext zum Beitragsbild; wird bisher nicht angezeigt |
+
+Das Thema ist kein Feld: Es ergibt sich allein aus dem Ordner, in dem die Datei liegt (`content/artikel/de/<thema>/<id>.md`). Der Ordnername muss als `id` in `content/artikel/themen.json` stehen. Um einen Artikel einem anderen Thema zuzuordnen, die Datei (und ihre Bilder unter `assets/artikel/<thema>/<id>/`) in den anderen Themenordner verschieben.
+
+Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Sonstiges HTML wird als Text angezeigt, erlaubt sind nur `<u>` und `<br>`. `#`-Überschriften werden zu Zwischenüberschriften, weil der Titel die Seitenüberschrift ist. Ein Zitat, dessen letzter Absatz mit `—` beginnt, zeigt diesen als Quellenangabe. Entfernt wurden beim Import nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links auf importierte Artikel und Themen der alten Website führen beim Bauen auf die neuen Seiten.
 
 ### Neue Inhalte anlegen
 
@@ -153,7 +164,7 @@ Nach jeder Änderung `npm run build` und `npm run check` ausführen und das Erge
    ![Beschreibung des Bildes](assets/artikel/das-buch-offenbarung/offenbarung-12-die-frau-und-der-drache/zeitstrahl.jpg)
    ```
 
-   Pflicht sind nur `title` und `date`. Der Anrisstext in Übersicht und Themenliste (zugleich die Seitenbeschreibung für Suchmaschinen) entsteht automatisch aus den ersten ein bis zwei Sätzen des ersten Absatzes und endet immer mit „…“. Wer ihn selbst formulieren möchte, trägt ihn optional als einzeiliges `excerpt: Mein eigener Anrisstext.` ein; dieser Text wird unverändert und ohne „…“ angezeigt. `source` gibt es nur bei den importierten Artikeln. Mehrere Artikel am selben Tag lassen sich mit Uhrzeit ordnen, zum Beispiel `date: 2026-10-07T19:30:00+02:00`.
+   Pflicht sind nur `title` und `date`; alle möglichen Felder stehen in der Tabelle unter „Artikel“. Mehrere Artikel am selben Tag lassen sich mit Uhrzeit ordnen, zum Beispiel `date: 2026-10-07T19:30:00+02:00`.
 3. Bilder unter `assets/artikel/<thema>/<id>/` ablegen und mit dem Pfad ab `assets/` einbinden, wie im Beispiel. Die Beschreibung in `![…]` ist der Alternativtext. Die Vorschau erzeugt der Build.
 4. Optional die englische Fassung als `content/artikel/en/<thema>/<id>.md` mit gleichem Thema und gleicher `id` anlegen. Ohne sie erscheint der Artikel nur auf Deutsch; der Sprachlink führt dann zur englischen Übersicht.
 5. Bauen und prüfen. Der neue Artikel erscheint automatisch als „Letzter Artikel“, in seinem Thema und im Zufall.

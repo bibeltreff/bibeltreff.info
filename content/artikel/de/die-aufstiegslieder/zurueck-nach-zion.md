@@ -1,7 +1,6 @@
 ---
 title: Zurück nach Zion
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/zurueck-nach-zion/
 image: assets/artikel/die-aufstiegslieder/zurueck-nach-zion/road-3159505_1920-752x440.jpg
 imageAlt: Weg zum Licht
 ---

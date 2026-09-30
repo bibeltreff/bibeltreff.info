@@ -1,7 +1,6 @@
 ---
 title: Der Goldene Leuchter in der Stiftshütte – Licht und Leben
 date: 2020-06-17T14:52:19+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-goldene-leuchter-in-der-stiftshuette-licht-und-leben-teil-2/
 image: assets/artikel/die-stiftshuette/der-goldene-leuchter-in-der-stiftshuette-licht-und-leben-teil-2/Leuchter_Teil1-752x440.jpg
 imageAlt: Leuchter Teil1
 ---

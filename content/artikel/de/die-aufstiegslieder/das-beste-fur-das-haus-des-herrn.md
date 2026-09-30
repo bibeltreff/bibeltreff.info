@@ -1,7 +1,6 @@
 ---
 title: Das Beste für das Haus des Herrn
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-beste-fur-das-haus-des-herrn/
 image: assets/artikel/die-aufstiegslieder/das-beste-fur-das-haus-des-herrn/tree-g15cfe3fa4_1920-752x440.jpg
 imageAlt: tree g15cfe3fa4 1920
 ---

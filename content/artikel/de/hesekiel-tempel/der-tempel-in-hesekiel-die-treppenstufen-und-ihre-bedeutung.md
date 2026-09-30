@@ -1,7 +1,6 @@
 ---
 title: Die Treppenstufen und ihre Bedeutung
 date: 2019-04-02T19:13:07+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-die-treppenstufen-und-ihre-bedeutung/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-die-treppenstufen-und-ihre-bedeutung/Die-Tempelanlage-in-Hesekiel-3D-offen-752x440.jpg
 imageAlt: Die Tempelanlage in Hesekiel 3D offen
 ---

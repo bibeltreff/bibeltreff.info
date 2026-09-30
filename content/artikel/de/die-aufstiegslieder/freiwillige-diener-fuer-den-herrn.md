@@ -1,7 +1,6 @@
 ---
 title: Freiwillige Diener für den Herrn!
 date: 2007-11-30T16:15:43+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/freiwillige-diener-fuer-den-herrn/
 image: assets/artikel/die-aufstiegslieder/freiwillige-diener-fuer-den-herrn/water-3021650_1280-752x440.jpg
 imageAlt: water 3021650 1280
 ---

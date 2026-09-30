@@ -1,7 +1,6 @@
 ---
 title: "Das Reich Gottes in den verschiedenen Zeitaltern: Vater, dein Reich komme!"
 date: 2018-04-16T15:35:04+02:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme/
 image: assets/artikel/das-reich-gottes-in-den-verschiedenen-zeitaltern/das-reich-gottes-in-den-verschiedenen-zeitaltern-vater-dein-reich-komme/reich_gottes-752x440.jpg
 imageAlt: reich gottes
 ---

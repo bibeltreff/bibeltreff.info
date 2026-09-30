@@ -1,7 +1,6 @@
 ---
 title: Offenbarung 11:1-2 Das Messen des Tempels, des Altars und der Anbeter
 date: 2022-03-10T18:07:01+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-11-das-messen-des-tempels/
 image: assets/artikel/das-buch-offenbarung/offenbarung-11-das-messen-des-tempels/Offb-11_1-2-Das-Messen-des-Tempels-752x440.png
 imageAlt: Offenbarung 11 - Die Messrute
 ---

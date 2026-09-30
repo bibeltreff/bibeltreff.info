@@ -1,7 +1,6 @@
 ---
 title: Offenbarung 6 – Worin lohnt es sich zu investieren?
 date: 2021-02-07T15:29:19+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/offenbarung-kapitel-6-worin-lohnt-es-sich-zu-investieren/
 image: assets/artikel/das-buch-offenbarung/offenbarung-kapitel-6-worin-lohnt-es-sich-zu-investieren/Screenshot-2022-02-28-231147-1-752x440.png
 imageAlt: Screenshot 2022 02 28 231147 1
 ---

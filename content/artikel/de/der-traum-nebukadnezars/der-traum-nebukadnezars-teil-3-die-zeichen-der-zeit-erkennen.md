@@ -1,7 +1,6 @@
 ---
 title: Der Traum Nebukadnezars (Teil 3) – Die Zeichen der Zeit erkennen
 date: 2020-01-03T17:33:50+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-traum-nebukadnezars-teil-3-die-zeichen-der-zeit-erkennen/
 image: assets/artikel/der-traum-nebukadnezars/der-traum-nebukadnezars-teil-3-die-zeichen-der-zeit-erkennen/DasBuchDaniel_new-1024x706-752x440.jpg
 imageAlt: DasBuchDaniel new 1024x706
 ---

@@ -1,7 +1,6 @@
 ---
 title: "Das äußere Tor: Eingang in die Tempelanlage"
 date: 2018-11-23T11:30:00+01:00
-source: https://hochschul-bibelkreise.de/neues-aus-dem-bibelkreis/der-tempel-in-hesekiel-das-aeussere-tor-eingang-in-die-tempelanlage/
 image: assets/artikel/hesekiel-tempel/der-tempel-in-hesekiel-das-aeussere-tor-der-weg-zur-vollstaendigen-errettung/Tor_6-752x440.jpg
 imageAlt: Tor 6
 ---
