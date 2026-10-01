@@ -31,6 +31,21 @@ Wir glauben: „Herr, hilf mir, dass es mir gut geht. Hilf mir, dass ich die Sch
 
 Die Menschen in Hebräer 11 kümmerten sich um Gottes Vorsatz. Wenn wir heute Menschen sein wollen, die sich dafür interessieren, was Gott heute tun möchte, dann brauchen auch wir diese Art von Glauben, um es umzusetzen.
 
+Sie haben auch Leiden erduldet.
+Es ist eine Sache wegen eigenen Entscheidungen zu leiden, aber Abel wollte Gott ein Opfer darbringen und musste dadurch Verfolgung erleiden und wurde sogar ein Märtyrer.
+Auch wir erleiden Drangsaal und Schwachheit wenn wir Gottes Willen tun wollen, aber genau dann brauchen wir diesen Glauben Gottes.
+Durch diesen Glauben erlangen auch wir so ein Zeugnis, wie die alten in Hebr. 11:2.
+Von Mose steht sogar geschrieben:
+
+> ^24^Durch Glauben weigerte sich Mose, als er groß geworden war, ein Sohn der Tochter des Pharao zu heißen;
+> ^25^er wollte lieber mit dem Volk Gottes misshandelt werden, als den vergänglichen Genuss der Sünde haben,
+> ^26^(und) achtete die Schmach Christi für größeren Reichtum als die Schätze Ägyptens; denn er sah weg auf die Belohnung.
+>
+> — Hebräer 11:24-26
+
+Wie sieht es mit uns aus?
+Sind auch wir solche Leute die, wenn Gott es will, Ihm ein Opfer darreichen, egal was über uns gedacht wird oder ob wir deswegen verspottet werden?
+
 ## Was hat erste Priorität?
 
 Das wird besonders bei Mose deutlich.
