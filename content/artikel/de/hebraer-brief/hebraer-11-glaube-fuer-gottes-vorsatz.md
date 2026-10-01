@@ -65,6 +65,8 @@ Darum müssen auch wir lernen, den Herrn zu kennen, sein Sprechen zu hören und 
 
 Denn zu glauben bedeutet nicht nur, **an Gott zu glauben**, sondern auch, **Gott zu glauben** – seinen Aussprüchen zu glauben, seinem Plan zu glauben und danach zu handeln.
 
+Und dazu gehört auch, dass wir bereit sind, unser Selbst in den Tod zu geben. Wenn wir heute nicht im Kleinen bereit sind, unser Selbst, unseren alten Menschen und unseren Stolz in den Tod zu geben, wie wollen wir dann einmal unser physisches Leben hingeben, wenn es dazu kommen sollte?
+
 Darum lasst uns beten:
 
 > Herr, was möchtest du heute tun? Was möchtest du von mir haben? Und wie kann ich durch den Glauben mit dir zusammenarbeiten, damit dein Vorsatz vorangeht?
