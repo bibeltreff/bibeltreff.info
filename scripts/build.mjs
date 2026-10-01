@@ -89,7 +89,8 @@ const privacy = `<details class="footer-legal" id="datenschutz"><summary>${escap
     <section><h3>${escape(ui.privacyControllerTitle)}</h3>${operator}</section>
 ${content.privacy.sections.map((section) => `    <section><h3>${escape(section.heading)}</h3>${section.paragraphs.map((p) => `<p>${escape(p)}</p>`).join('')}${section.links?.length ? `<p>${links(section.links, 'text-link')}</p>` : ''}</section>`).join('\n')}
     <p class="privacy-updated">${escape(ui.privacyUpdated)}: ${escape(privacyDate)}</p></div></details>`;
-const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${escape(verse.text)}${ui.quoteClose}</p><cite>${escape(verse.reference)}</cite></blockquote>`;
+const inline = (value) => escape(value).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${inline(verse.text)}${ui.quoteClose}</p><cite>${escape(verse.reference)}</cite></blockquote>`;
 const uiSlots = Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)]));
 
 // --- Articles of this language ----------------------------------------------
