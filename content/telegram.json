@@ -1,65 +1,116 @@
 {
-  "nextOffset": 244344108,
+  "nextOffset": 244344113,
   "posts": [
     {
-      "id": 433,
-      "date": "2026-09-23T18:39:25.000Z",
-      "text": "Aus dem Bibeltreff:\n\nDer neue und der alte Bund\n\nHebr. 8:1-5,11",
-      "hasMedia": true,
+      "id": 436,
+      "date": "2026-10-01T12:43:55.000Z",
+      "text": "Aus dem Bibeltreff:\n\nGlauben für meinen Bedarf oder Glauben für Gottes Vorsatz?\n\nhttps://bibeltreff.info/artikel/hebraer-brief/hebraer-11-glaube-fuer-gottes-vorsatz.html\n\nHebr. 11:1-7; Hebr. 12:2",
       "entities": [
         {
           "type": "bold",
           "offset": 21,
-          "length": 26
+          "length": 58
+        },
+        {
+          "type": "url",
+          "offset": 81,
+          "length": 88
         }
       ],
+      "hasMedia": true,
       "audio": {
-        "fileId": "CQACAgIAAxkBAAMGarfLezl74Zg924gz9YaGmmcHuAgAAlOoAALrmaFJFJvXqxFB6js9BA",
-        "key": "14a328443baaeb39",
+        "fileId": "CQACAgIAAx0CU0qd4QACAbRqvlWKrNalEbeMZf2cAAHwckyczt8AAg-jAAIMcPFJvEjVvnMiGnA9BA",
+        "key": "7bcb9b2a28e83861",
         "extension": "mp3",
-        "title": "Der neue und der alte Bund",
-        "size": 11834202
+        "title": "Glaube für meinen Bedarf oder Glaube für Gottes Vorsatz?",
+        "size": 17034682
       }
     },
     {
-      "id": 432,
-      "date": "2026-09-17T20:15:06.000Z",
-      "text": "Aus dem Bibeltreff:\n\nGott spricht zu uns in dem Sohn, der Gehorsam lernte indem, was er litt\n\nHebr. 1:1-2; Apg. 15; Hebr. 5:7-10",
-      "hasMedia": true,
+      "id": 435,
+      "date": "2026-10-01T12:35:07.000Z",
+      "text": "+++  Neue Website online +++\n\nhttps://bibeltreff.info/\n\nWir haben die Website grundlegend überarbeitet — schaut euch gerne um und leitet sie weiter!\n\nHighlights:\n\n🔹 Das Evangelium in Farben: https://bibeltreff.info/#evangelium\n\n🔹 Zeugnisse: https://bibeltreff.info/#zeugnisse\n\n🔹 Bibeltreff-Zusammenfassungen: https://bibeltreff.info/artikel/\n\nMaranatha",
       "entities": [
         {
+          "type": "url",
+          "offset": 30,
+          "length": 24
+        },
+        {
           "type": "bold",
-          "offset": 21,
-          "length": 71
+          "offset": 166,
+          "length": 24
+        },
+        {
+          "type": "url",
+          "offset": 192,
+          "length": 35
+        },
+        {
+          "type": "bold",
+          "offset": 232,
+          "length": 9
+        },
+        {
+          "type": "url",
+          "offset": 243,
+          "length": 34
+        },
+        {
+          "type": "bold",
+          "offset": 282,
+          "length": 28
+        },
+        {
+          "type": "url",
+          "offset": 312,
+          "length": 32
         }
       ],
-      "audio": {
-        "fileId": "CQACAgIAAxkBAAMFarfLcfqYOE7mLBr8BzXZYedOHNMAAlGnAAJcSGlJwvlYS-dLQA89BA",
-        "key": "2ccf9a92bf6739d7",
-        "extension": "mp3",
-        "title": "Gott spricht zu uns in dem Sohn, der Gehorsam lernte an dem, was…",
-        "size": 21179608
-      }
+      "hasMedia": false
     },
     {
-      "id": 430,
-      "date": "2026-09-09T16:55:06.000Z",
-      "text": "Aus dem Bibeltreff:\n\nÜberfluss der Geschwister vom Jugendwochende über die Feste des Herrn\n\nHebr 7:1-2; 4. Mose 10:9; 2. Mose 5:1-3; 2. Mose 7:26",
-      "hasMedia": true,
+      "id": 434,
+      "date": "2026-10-01T12:34:49.000Z",
+      "text": "+++  Neue Website online +++\n\nhttps://bibeltreff.info/\n\nWir haben die Website grundlegend überarbeitet — schaut euch gerne um und leitet sie weiter!\n\nHighlights:\n\n🔹 Das Evangelium in Farben: https://bibeltreff.info/#evangelium\n\n🔹 Zeugnisse: https://bibeltreff.info/#zeugnisse\n\n🔹 Bibeltreff-Zusammenfassungen: https://bibeltreff.info/artikel/\n\nMaranatha",
       "entities": [
         {
+          "type": "url",
+          "offset": 30,
+          "length": 24
+        },
+        {
           "type": "bold",
-          "offset": 19,
-          "length": 71
+          "offset": 166,
+          "length": 24
+        },
+        {
+          "type": "url",
+          "offset": 192,
+          "length": 35
+        },
+        {
+          "type": "bold",
+          "offset": 232,
+          "length": 9
+        },
+        {
+          "type": "url",
+          "offset": 243,
+          "length": 34
+        },
+        {
+          "type": "bold",
+          "offset": 282,
+          "length": 28
+        },
+        {
+          "type": "url",
+          "offset": 312,
+          "length": 32
         }
       ],
-      "audio": {
-        "fileId": "CQACAgIAAxkBAAMEarfLZuaHsAjciQ-gSG2eXHsUXJwAAv2mAAJeWxFJW0vRKytYLRI9BA",
-        "key": "882237e5eb72e0e6",
-        "extension": "mp3",
-        "title": "Überfluss der Geschwister vom Jugendwochende über die Feste des…",
-        "size": 16697388
-      }
+      "hasMedia": false
     }
   ]
 }
