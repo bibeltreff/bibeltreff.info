@@ -465,7 +465,7 @@ summary::-webkit-details-marker { display: none; }
 /* Articles menu: hover dropdown with a topic flyout on desktop; on phones "Artikel" is a plain link. */
 .nav-item { position: relative; }
 .main-nav > .nav-item > .nav-parent { display: inline-block; }
-.main-nav > .nav-articles { padding-left: var(--nav-gap); border-left: 1px solid var(--line); }
+.main-nav > .nav-articles { padding-left: var(--nav-gap); }
 .nav-articles > .nav-menu { left: calc(var(--nav-gap) - 14px); }
 .nav-menu { display: none; position: absolute; top: 100%; left: -14px; z-index: 30; min-width: 210px; padding: 7px; background: light-dark(white, #1b2635); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px #162b4824; }
 .main-nav .nav-menu a { display: flex; justify-content: space-between; gap: 18px; padding: 8px 12px; border-radius: 6px; color: var(--ink); white-space: nowrap; }
