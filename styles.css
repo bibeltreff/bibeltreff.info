@@ -342,7 +342,6 @@ summary::-webkit-details-marker { display: none; }
   .hero-actions { flex-direction: column; }
   .hero-actions .button { width: 100%; max-width: 290px; }
   .main-nav { justify-content: space-between; --nav-gap: 6px; font-size: 13px; }
-  .main-nav > .nav-articles { padding-left: 10px; }
 }
 @media (max-width: 360px) {
   .header-inner .brand-icon { display: none; }
@@ -465,8 +464,6 @@ summary::-webkit-details-marker { display: none; }
 /* Articles menu: hover dropdown with a topic flyout on desktop; on phones "Artikel" is a plain link. */
 .nav-item { position: relative; }
 .main-nav > .nav-item > .nav-parent { display: inline-block; }
-.main-nav > .nav-articles { padding-left: var(--nav-gap); }
-.nav-articles > .nav-menu { left: calc(var(--nav-gap) - 14px); }
 .nav-menu { display: none; position: absolute; top: 100%; left: -14px; z-index: 30; min-width: 210px; padding: 7px; background: light-dark(white, #1b2635); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px #162b4824; }
 .main-nav .nav-menu a { display: flex; justify-content: space-between; gap: 18px; padding: 8px 12px; border-radius: 6px; color: var(--ink); white-space: nowrap; }
 .main-nav .nav-menu a:hover, .main-nav .nav-menu .nav-item:hover > a, .main-nav .nav-menu a:focus-visible { background: var(--soft); color: var(--accent); }
@@ -486,7 +483,6 @@ summary::-webkit-details-marker { display: none; }
   .menu-ready .main-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: calc(100svh - var(--header-height)); overflow-y: auto; overscroll-behavior: contain; flex-direction: column; align-items: stretch; gap: 0; padding: 6px 20px 18px; font-size: 17px; background: light-dark(#fdfdfd, #141c27); border-bottom: 1px solid var(--line); box-shadow: 0 14px 24px #162b4814; }
   .menu-open .main-nav { display: flex; }
   .menu-ready .main-nav a { padding: 13px 0; border-bottom: 1px solid var(--line); }
-  .menu-ready .main-nav > .nav-articles { padding-left: 0; border-left: 0; }
   .menu-ready .main-nav > .nav-articles > .nav-parent { display: block; }
   /* The articles entries follow indented; the topic flyout stays hidden, "Alle Artikel" leads to the topics. */
   .menu-ready .nav-articles > .nav-menu { display: block; position: static; min-width: 0; padding: 0 0 0 18px; background: none; border: 0; border-radius: 0; box-shadow: none; }
