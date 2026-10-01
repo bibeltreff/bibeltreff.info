@@ -67,11 +67,11 @@ Treffzeiten und der Treffpunkt am grünen Tisch stammen auf Wunsch des Betreiber
 
 ### Zeugnisse schreiben
 
-Jedes Zeugnis ist eine Markdown-Datei pro Sprache: `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md`. Der Dateiname ohne `.md` ist die `id`; er darf nur Kleinbuchstaben, Ziffern und Bindestriche enthalten und erscheint als Sprungmarke `#zeugnis-<id>`. Die Reihenfolge auf der Seite bestimmt die Liste `testimonies` in `content/shared.json`.
+Jedes Zeugnis ist eine Markdown-Datei pro Sprache: `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md`. Verwende neutrale Dateinamen (zum Beispiel `testimony-1.md`) und als `name` „Anonym“ beziehungsweise „Anonymous“, damit weder Anzeige, Avatar noch Sprungmarke den Namen der Person verraten. Der Dateiname ohne `.md` ist die `id`; er darf nur Kleinbuchstaben, Ziffern und Bindestriche enthalten und erscheint als Sprungmarke `#zeugnis-<id>`. Die Reihenfolge auf der Seite bestimmt die Liste `testimonies` in `content/shared.json`.
 
 ```markdown
 ---
-name: Maria
+name: Anonym
 headline: Ein Satz, der als Überschrift erscheint.
 intro: Eine kurze Zeile unter der Überschrift.
 ---
@@ -140,8 +140,8 @@ Nach jeder Änderung `npm run build` und `npm run check` ausführen und das Erge
 
 **Ein neues Zeugnis**
 
-1. `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md` im Format aus „Zeugnisse schreiben“ anlegen, zum Beispiel `content/zeugnisse/de/maria.md`. Beide Sprachen sind Pflicht.
-2. Die `id` (hier `maria`) in `content/shared.json` unter `testimonies` an der Stelle eintragen, an der das Zeugnis erscheinen soll.
+1. `content/zeugnisse/de/<id>.md` und `content/zeugnisse/en/<id>.md` im Format aus „Zeugnisse schreiben“ anlegen, zum Beispiel `content/zeugnisse/de/testimony-3.md`. Beide Sprachen sind Pflicht.
+2. Die `id` (hier `testimony-3`) in `content/shared.json` unter `testimonies` an der Stelle eintragen, an der das Zeugnis erscheinen soll.
 3. Bauen und prüfen.
 
 **Ein neuer Artikel**

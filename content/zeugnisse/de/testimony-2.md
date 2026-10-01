@@ -1,5 +1,5 @@
 ---
-name: Thomas
+name: Anonym
 headline: Ich habe geschmeckt, wie unübertrefflich Christus ist
 intro: Befreit von einem weltlichen, sündigen Christenleben – für ein tägliches Leben mit Christus.
 ---
@@ -19,7 +19,7 @@ Doch ich danke Gott, dass er mich nicht aufgegeben hat! Ich hätte das sicher ve
 > Ja, ich achte auch alles für Verlust wegen der **unübertrefflichen Erkenntnis Christi Jesu**, meines Herrn, um dessentwillen ich alle Dinge verloren habe und sie für Abfall achte, damit ich Christus gewinne.
 > — Philipper 3:8
 
-Nachdem ich zum Studium nach Stuttgart kam, traf ich die Geschwister vom Bibeltreff – gleich am ersten Tag des Mathe-Vorkurses! Durch die Gemeinschaft mit ihnen zeigte mir Gott immer mehr, wie ich es tatsächlich schaffe, jeden Tag ein Leben mit ihm zu führen.
+Während meines Studiums lernte ich die Geschwister vom Bibeltreff kennen. Durch die Gemeinschaft mit ihnen zeigte mir Gott immer mehr, wie ich es tatsächlich schaffe, jeden Tag ein Leben mit ihm zu führen.
 
 Ich lernte: Die Bibel ist uns als tägliche Speise gegeben! Gottes Wort schmeckt wunderbar und stärkt mich zu überwinden! Auch der regelmäßige Austausch mit den anderen und gemeinsames Gebet stärkten mich immer mehr, mein altes, weltliches Leben zu lassen. Es ist so viel besser, durch und mit Christus zu leben!
 
