@@ -55,6 +55,18 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_SYNC_ENABLED: 'true'
+      # Audio and photos are not versioned. The cache keeps them between runs;
+      # the media step fetches only what is missing and removes retired files.
+      - name: Restore Telegram media
+        uses: actions/cache@v4
+        with:
+          path: assets/telegram
+          key: telegram-media-${{ hashFiles('content/telegram.json') }}
+          restore-keys: telegram-media-
+      - name: Download Telegram media
+        run: npm run telegram:media
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       - run: npm run build
       - run: npm run check
       # Persist the batch before the next run can acknowledge it to Telegram.
@@ -64,7 +76,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/telegram.json assets/telegram
+          git add content/telegram.json
           if ! git diff --cached --quiet; then
             git commit -m 'Update Telegram feed'
             git push origin HEAD:main

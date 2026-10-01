@@ -2,6 +2,7 @@ import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { renderTelegram } from './telegram-render.mjs';
+import { attachLocalMedia } from './telegram-media.mjs';
 import { loadTestimonies } from './testimonies.mjs';
 import { createImageOptimizer } from './images.mjs';
 import { articleFolders, loadArticles, overviewUrl, topicUrl } from './articles.mjs';
@@ -10,7 +11,8 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const optimizeImages = createImageOptimizer(root);
 const layout = await readFile(path.join(root, 'src/layout.html'), 'utf8');
 const template = await readFile(path.join(root, 'src/index.html'), 'utf8');
-const telegram = JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8'));
+// Audio and photos come from `npm run telegram:media`; posts without a local file link to Telegram.
+const telegram = await attachLocalMedia(JSON.parse(await readFile(path.join(root, 'content/telegram.json'), 'utf8')));
 const legal = JSON.parse(await readFile(path.join(root, 'content/legal.json'), 'utf8'));
 // Language-independent data (times, addresses, links, colors); the language files only hold visible text.
 const shared = JSON.parse(await readFile(path.join(root, 'content/shared.json'), 'utf8'));

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mergeUpdates, syncFeed, createApi } from './telegram.mjs';
+import { mergeUpdates, syncFeed, createApi, withoutSources } from './telegram.mjs';
 import { renderTelegram } from './telegram-render.mjs';
 
 const empty = () => ({ nextOffset: 0, posts: [] });
@@ -92,7 +92,7 @@ test('renders complete escaped text, safe links, three cards, and no empty secti
 
 // Formatting and local audio regression coverage.
 import { cleanEntities, renderText } from './telegram-format.mjs';
-import { getAudio, downloadMedia, readMediaResponse, maxMediaBytes } from './telegram-media.mjs';
+import { getAudio, downloadMedia, attachLocalMedia, readMediaResponse, maxMediaBytes } from './telegram-media.mjs';
 import { mkdtemp, readFile, writeFile, readdir, unlink, rmdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -235,4 +235,20 @@ test('failed photo downloads preserve captions and unsafe photo sources are reje
   assert.equal(state.posts[0].text, 'Post 434');
   state.posts[0].photo.src = 'https://example.org/private.jpg';
   assert.throws(() => renderTelegram(state, {}, 'en'), /Invalid Telegram photo/);
+});
+
+test('the build links only media present locally and the feed never stores local paths', async t => {
+  const folder = await audioFolder(t);
+  const state = mergeUpdates(empty(), [update(1, photoMessage(434)), update(2, audioMessage(433))]);
+  await downloadMedia(state, async () => ({ file_path: 'music/file.mp3', file_size: 4 }), 'secret', { folder, fetcher: async () => new Response(new Uint8Array([1, 2, 3, 4])), warn: message => assert.fail(message) });
+  const saved = withoutSources(state);
+  assert.ok(!JSON.stringify(saved).includes('assets/telegram'));
+  assert.ok(state.posts[0].photo.src, 'withoutSources must not mutate the build state');
+  const built = await attachLocalMedia(structuredClone(saved), { folder });
+  assert.equal(built.posts[0].photo.src, state.posts[0].photo.src);
+  assert.equal(built.posts[1].audio.src, state.posts[1].audio.src);
+  await unlink(new URL(state.posts[1].audio.src.split('/').pop(), folder));
+  const partial = await attachLocalMedia(structuredClone(saved), { folder });
+  assert.equal(partial.posts[1].audio.src, undefined);
+  assert.ok(renderTelegram(partial, { telegramAudioFallback: 'Listen on Telegram' }, 'en').includes('Listen on Telegram'));
 });

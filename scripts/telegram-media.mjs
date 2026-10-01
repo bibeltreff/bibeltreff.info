@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, rename, readdir, unlink } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, readdir, unlink, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 export const maxMediaBytes = 20_000_000;
@@ -40,13 +40,26 @@ export async function readMediaResponse(response) {
   return Buffer.concat(chunks);
 }
 
+const attachments = state => state.posts.flatMap(post => ['audio', 'photo'].filter(kind => post[kind]?.fileId)
+  .map(kind => ({ post, kind, attachment: post[kind], name: `${kind}-${post.id}-${post[kind].key}.${post[kind].extension}` })));
+
+// Media files are not versioned: the build links whatever the media step left in the folder.
+// Missing files fall back to the Telegram link.
+export async function attachLocalMedia(state, { folder = directory } = {}) {
+  for (const { attachment, name } of attachments(state)) {
+    delete attachment.src;
+    try {
+      const { size } = await stat(new URL(name, folder));
+      if (size && size <= maxMediaBytes) attachment.src = `assets/telegram/${name}`;
+    } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
+  return state;
+}
+
 // Token-bearing URLs are used only here, never saved in JSON or HTML.
 export async function downloadMedia(state, api, token, { fetcher = fetch, folder = directory, warn = console.warn } = {}) {
   await mkdir(folder, { recursive: true });
-  for (const { post, kind } of state.posts.flatMap(post => ['audio', 'photo'].map(kind => ({ post, kind })))) {
-    const attachment = post[kind];
-    if (!attachment?.fileId) continue;
-    const name = `${kind}-${post.id}-${attachment.key}.${attachment.extension}`;
+  for (const { post, attachment, name } of attachments(state)) {
     const target = new URL(name, folder);
     const src = `assets/telegram/${name}`;
     try {
@@ -67,11 +80,11 @@ export async function downloadMedia(state, api, token, { fetcher = fetch, folder
       await rename(new URL(name + '.tmp', folder), target);
       attachment.src = src;
     } catch {
-      // Retry on the next sync, while still publishing the text and original link.
-      warn(`Media for post ${post.id} could not be downloaded; keeping the Telegram link and retrying next time.`);
+      // Retry on the next build, while still publishing the text and original link.
+      warn(`Media for post ${post.id} could not be downloaded; keeping the Telegram link and retrying on the next build.`);
     }
   }
-  // Keep only current feed media in the working tree; unrelated assets are untouched.
+  // Keep only current feed media in the folder (and thus the build cache); unrelated assets are untouched.
   const keep = new Set(state.posts.flatMap(post => [post.audio?.src, post.photo?.src]).filter(Boolean).map(src => src.split('/').pop()));
   for (const name of await readdir(folder)) {
     if (/^(audio-\d+-[a-f0-9]{16}\.(mp3|m4a|ogg|oga|opus|wav|aac|flac)|photo-\d+-[a-f0-9]{16}\.jpg)(\.tmp)?$/.test(name) && !keep.has(name)) await unlink(new URL(name, folder));

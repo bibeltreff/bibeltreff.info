@@ -259,13 +259,13 @@ Einen bereits vorhandenen `nextOffset` unverändert lassen. Danach bauen, prüfe
 - **Einmal täglich um 18:17 UTC**: Neue Telegram-Nachrichten werden abgeholt; das Veröffentlichen einer Kanalnachricht löst selbst keinen sofortigen Workflow aus.
 - **Manuell**: `inspect` prüft nur die Bot-Verbindung; `sync` aktualisiert und veröffentlicht.
 
-Der tägliche und der manuelle Sync benötigen `TELEGRAM_SYNC_ENABLED=true`; Pushes auf `main` werden auch ohne diese Variable gebaut und veröffentlicht. Ein geplanter oder manuell gestarteter Sync holt neue bzw. bearbeitete Beiträge, behält die drei höchsten Nachrichten-IDs, lädt unterstütztes Audio herunter, baut beide Sprachen, prüft sie und speichert Feed und Audio im Repository. Danach veröffentlicht er die Website auf GitHub Pages. Der eigene Commit mit dem `GITHUB_TOKEN` löst keinen weiteren Push-Workflow aus. Bei einem Fehler vor dem Deployment bleibt die bisherige Website online.
+Der tägliche und der manuelle Sync benötigen `TELEGRAM_SYNC_ENABLED=true`; Pushes auf `main` werden auch ohne diese Variable gebaut und veröffentlicht. Ein geplanter oder manuell gestarteter Sync holt neue bzw. bearbeitete Beiträge, behält die drei höchsten Nachrichten-IDs, baut beide Sprachen, prüft sie und speichert den Feed im Repository. Danach veröffentlicht er die Website auf GitHub Pages. Der eigene Commit mit dem `GITHUB_TOKEN` löst keinen weiteren Push-Workflow aus. Bei einem Fehler vor dem Deployment bleibt die bisherige Website online.
 
 ### Audio, Fotos und Formatierungen
 
-Audio und Fotos werden während des Syncs mit dem privaten Bot-Token heruntergeladen und unter `assets/telegram/` gespeichert. `scripts/telegram-media.mjs` lädt beide Medientypen herunter, verwendet lokale Kopien wieder und entfernt nicht mehr benötigte Mediendateien aus dem aktuellen Website-Dateibestand. Besucher erhalten nur lokale URLs und einen HTML-Audioplayer (`preload="none"`, kein Autoplay); der Token erscheint nie in Seiten oder Audiodatei-URLs. Unterstützt werden Audio-Nachrichten, Sprachnachrichten und als Audiodokument erkannte Dateien in MP3, M4A, Ogg/Opus, WAV, AAC und FLAC. Die Abspielbarkeit des jeweiligen Codecs hängt vom Browser ab; ein Downloadlink bleibt verfügbar.
+Audio und Fotos werden nicht versioniert (`assets/telegram/` steht in `.gitignore`), damit die Git-Historie nicht mit jeder Aufnahme wächst. Vor jedem Build, auch bei normalen Pushes, lädt `npm run telegram:media` sie mit dem privaten Bot-Token nach `assets/telegram/`. Der Workflow hält den Ordner per `actions/cache` zwischen den Läufen vor, sodass nur neue Dateien heruntergeladen werden. `scripts/telegram-media.mjs` verwendet vorhandene Kopien wieder und entfernt nicht mehr benötigte Mediendateien. Im Feed stehen nur die Telegram-Datei-IDs; der Build verlinkt eine Aufnahme bzw. ein Foto nur, wenn die Datei lokal vorhanden ist, sonst erscheint der Hinweis auf den Telegram-Kanal. Besucher erhalten nur lokale URLs und einen HTML-Audioplayer (`preload="none"`, kein Autoplay); der Token erscheint nie in Seiten oder Audiodatei-URLs. Unterstützt werden Audio-Nachrichten, Sprachnachrichten und als Audiodokument erkannte Dateien in MP3, M4A, Ogg/Opus, WAV, AAC und FLAC. Die Abspielbarkeit des jeweiligen Codecs hängt vom Browser ab; ein Downloadlink bleibt verfügbar.
 
-Die Standard-Bot-API erlaubt Downloads bis 20 MB. Größere oder nicht herunterladbare Dateien behalten den Telegram-Link. Fehlgeschlagene Downloads werden beim nächsten Sync erneut versucht. Bereits gespeicherte Dateien werden wiederverwendet. Audio und Fotos zu Nachrichten, die aus den letzten drei herausfallen, werden aus dem aktuellen Website-Dateibestand entfernt; frühere Versionen bleiben in der Git-Historie.
+Die Standard-Bot-API erlaubt Downloads bis 20 MB. Größere oder nicht herunterladbare Dateien behalten den Telegram-Link. Ist Telegram beim Build nicht erreichbar oder fehlt der Token, wird die Website trotzdem veröffentlicht, mit Telegram-Link statt Player; der nächste Build versucht den Download erneut. Audio und Fotos zu Nachrichten, die aus den letzten drei herausfallen, werden aus dem Ordner und damit aus Cache und Website entfernt.
 
 Die Formatierung stammt aus Telegrams `entities` bzw. `caption_entities`, einschließlich verschachtelter Formatierungen und korrekter Emoji-Positionen. HTML aus Nachrichtentexten wird nicht ausgeführt; Links sind auf HTTP, HTTPS und E-Mail beschränkt. Nicht unterstützte Telegram-Sonderformatierungen erscheinen als normaler Text.
 
@@ -279,11 +279,12 @@ Token über eine private Umgebungsvariable `TELEGRAM_BOT_TOKEN` bereitstellen. D
 npm run telegram:inspect
 # Erst nach Prüfung auf bisherige Bot-Dienste TELEGRAM_SYNC_ENABLED=true setzen:
 npm run telegram:sync
+npm run telegram:media   # optional: Audio und Fotos lokal anzeigen
 npm run build
 npm run check
 ```
 
-Den geänderten Feed vor dem nächsten Sync dauerhaft sichern/committen. Lokalen Sync und den GitHub-Workflow nicht parallel betreiben. Der normale Build funktioniert weiterhin ohne Netzwerk und ohne Token. `npm run check` testet zusätzlich Auswahl, Bearbeitungen, Weiterleitungen, Datenschutzfilter, Webhook-Schutz und HTML-Escaping anhand künstlicher Nachrichten; echte API-Zugriffe erfolgen dabei nicht.
+Den geänderten Feed vor dem nächsten Sync dauerhaft sichern/committen. Lokalen Sync und den GitHub-Workflow nicht parallel betreiben. Der normale Build funktioniert weiterhin ohne Netzwerk und ohne Token; Telegram-Medien erscheinen dann als Link zum Kanal. `npm run check` testet zusätzlich Auswahl, Bearbeitungen, Weiterleitungen, Datenschutzfilter, Webhook-Schutz und HTML-Escaping anhand künstlicher Nachrichten; echte API-Zugriffe erfolgen dabei nicht.
 
 Referenzen: [Telegram Bot API](https://core.telegram.org/bots/api#getupdates), [Webhook-Prüfung](https://core.telegram.org/bots/api#getwebhookinfo), [GitHub Pages mit Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 

@@ -48,8 +48,6 @@ export function mergeUpdates(state, updates) {
       posts.set(id, { ...previous, entities: previous.entities ?? entities, ...(previous.audio || !audio ? {} : { audio }), ...(previous.photo || !photo ? {} : { photo }) });
       continue;
     }
-    if (audio && audio.key === previous?.audio?.key && previous.audio.src) audio.src = previous.audio.src;
-    if (photo && photo.key === previous?.photo?.key && previous.photo.src) photo.src = previous.photo.src;
     posts.set(id, { id, date: new Date((direct ? message.date : origin.date) * 1000).toISOString(), text, entities, hasMedia, ...(audio ? { audio } : {}), ...(photo ? { photo } : {}) });
   }
   return validateState({ nextOffset, posts: [...posts.values()].sort((a, b) => b.id - a.id).slice(0, 3) });
@@ -90,9 +88,26 @@ export async function syncFeed(api, state) {
   return mergeUpdates(state, updates);
 }
 
+export function withoutSources(state) {
+  return { ...state, posts: state.posts.map(({ audio, photo, ...post }) => ({ ...post,
+    ...(audio ? { audio: (({ src, ...rest }) => rest)(audio) } : {}),
+    ...(photo ? { photo: (({ src, ...rest }) => rest)(photo) } : {}) })) };
+}
+
 async function main() {
   const command = process.argv[2];
-  if (!['inspect', 'sync'].includes(command)) throw new Error('Usage: node scripts/telegram.mjs inspect|sync');
+  if (!['inspect', 'sync', 'media'].includes(command)) throw new Error('Usage: node scripts/telegram.mjs inspect|sync|media');
+  if (command === 'media') {
+    // Media is fetched for every build and never committed; without a token the site links to Telegram instead.
+    if (!process.env.TELEGRAM_BOT_TOKEN) {
+      console.warn('TELEGRAM_BOT_TOKEN is not set; skipping media download. Posts link to Telegram instead.');
+      return;
+    }
+    const state = validateState(JSON.parse(await readFile(stateFile, 'utf8')));
+    await downloadMedia(state, createApi(process.env.TELEGRAM_BOT_TOKEN), process.env.TELEGRAM_BOT_TOKEN);
+    console.log(`Media ready for ${state.posts.filter(post => post.audio?.src || post.photo?.src).length} of ${state.posts.length} posts.`);
+    return;
+  }
   const api = createApi(process.env.TELEGRAM_BOT_TOKEN);
   if (command === 'inspect') {
     console.log(JSON.stringify(await inspectBot(api), null, 2));
@@ -101,7 +116,8 @@ async function main() {
   }
   if (process.env.TELEGRAM_SYNC_ENABLED !== 'true') throw new Error('First inspect the bot and stop any old polling program. Then set TELEGRAM_SYNC_ENABLED=true.');
   const state = validateState(JSON.parse(await readFile(stateFile, 'utf8')));
-  const next = await downloadMedia(await syncFeed(api, state), api, process.env.TELEGRAM_BOT_TOKEN);
+  // Local media paths are build output, not feed data.
+  const next = withoutSources(await syncFeed(api, state));
   if (JSON.stringify(next) !== JSON.stringify(state)) {
     const temporary = new URL('../content/telegram.json.tmp', import.meta.url);
     await writeFile(temporary, JSON.stringify(next, null, 2) + '\n');
