@@ -1,5 +1,5 @@
 ---
-name: Thomas
+name: Anonymous
 headline: I have tasted how surpassingly excellent Christ is
 intro: Freed from a worldly, sinful Christian life – to live with Christ every day.
 ---
@@ -19,7 +19,7 @@ I thank God that He did not give up on me, even though I deserved it. He brought
 > … I also count all things loss for the excellence of the knowledge of Christ Jesus my Lord … that I may gain Christ.
 > — Philippians 3:8
 
-After I moved to Stuttgart to study, I met the brothers and sisters from Bibeltreff on the very first day of the preparatory maths course! Through fellowship with them, God showed me more and more how I could actually live with Him every day.
+During my studies, I met the brothers and sisters from Bibeltreff. Through fellowship with them, God showed me more and more how I could actually live with Him every day.
 
 I learned that the Bible has been given to us as our daily food! God's Word tastes wonderful and strengthens me to overcome! Regularly sharing with the others and praying together also gave me more and more strength to leave my old, worldly life behind. It is so much better to live through and with Christ.
 

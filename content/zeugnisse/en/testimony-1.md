@@ -1,5 +1,5 @@
 ---
-name: Can Luca
+name: Anonymous
 headline: I came to know God as the One who gives me life and strength.
 intro: From knowing about God to a living relationship with Him.
 ---

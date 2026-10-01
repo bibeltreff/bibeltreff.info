@@ -1,5 +1,5 @@
 ---
-name: Can Luca
+name: Anonym
 headline: Gott als den erfahren, der mir Leben und Kraft gibt.
 intro: Vom Wissen über Gott zu einer lebendigen Beziehung mit ihm.
 ---
