@@ -87,7 +87,7 @@ Weiter geht es nach dem Bibelzitat.
 
 - Zwischen den beiden `---` stehen genau die Felder `name`, `headline` und `intro`, jeweils in einer Zeile.
 - Ein Bibelzitat ist ein Block, dessen Zeilen alle mit `>` beginnen. Die letzte Zeile nennt nach einem Gedankenstrich (`—`, `–` oder `--`) die Stelle.
-- Der Text bleibt schlicht: Überschriften, Listen, Links und Formatierungen wie `**fett**` werden nicht unterstützt. Anführungszeichen um Überschrift und Zitat setzt die Seite selbst.
+- Der Text bleibt schlicht: Überschriften, Listen, Links und Formatierungen wie `**fett**` werden nicht unterstützt. Nur Versnummern lassen sich hochstellen: `^12^` wird zu `¹²` (siehe „Artikel“). Anführungszeichen um Überschrift und Zitat setzt die Seite selbst.
 
 Wie ein neues Zeugnis angelegt wird, steht unter „Neue Inhalte anlegen“.
 
@@ -131,6 +131,8 @@ Im Kopfbereich zwischen den `---`-Zeilen sind genau diese Felder erlaubt; jedes 
 Das Thema ist kein Feld: Es ergibt sich allein aus dem Ordner, in dem die Datei liegt (`content/artikel/de/<thema>/<id>.md`). Der Ordnername muss als `id` in `content/artikel/themen.json` stehen. Um einen Artikel einem anderen Thema zuzuordnen, die Datei (und ihre Bilder unter `assets/artikel/<thema>/<id>/`) in den anderen Themenordner verschieben.
 
 Anders als bei den Zeugnissen ist hier übliches Markdown erlaubt: Überschriften, `**fett**`, `*kursiv*`, Links, Listen, Bilder, Tabellen und Zeilenumbrüche mit `\` am Zeilenende. Sonstiges HTML wird als Text angezeigt, erlaubt sind nur `<u>` und `<br>`. `#`-Überschriften werden zu Zwischenüberschriften, weil der Titel die Seitenüberschrift ist. Ein Zitat, dessen letzter Absatz mit `—` beginnt, zeigt diesen als Quellenangabe. Entfernt wurden beim Import nur Inhaltsverzeichnis, Telegram-Button und Seitenleiste. Links auf importierte Artikel und Themen der alten Website führen beim Bauen auf die neuen Seiten.
+
+Versnummern werden zwischen zwei `^` geschrieben: `^12^ Und der sechste goss …` erscheint als `¹² Und der sechste goss …`. Das spart das Tippen der hochgestellten Zeichen; diese direkt einzufügen funktioniert weiterhin. `<sup>` geht nicht, weil HTML als Text angezeigt wird. Ohne schließendes `^` (etwa `2^10`) und in `Code` bleibt der Text unverändert.
 
 ### Neue Inhalte anlegen
 

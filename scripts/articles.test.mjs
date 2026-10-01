@@ -82,3 +82,10 @@ test('reports mistakes with the file', async () => {
   await assert.rejects(load({ 'de/serie/a.md': article('A', '1. Mai 2024', 'Text.') }), /a.md: date must look like/);
   await assert.rejects(load({ 'de/serie/a.md': article('A', '2024-01-01', 'Text.'), 'de/andere/a.md': article('B', '2024-01-01', 'Text.') }), /already has an article "a"/);
 });
+
+test('turns ^12^ into superscript verse numbers outside code', async () => {
+  const { articles } = await load({ 'de/serie/eins.md': article('Eins', '2024-01-02', '> *^12^ Und der sechste* ^3^\n\nCode `^4^` und 2^10 bleiben.') });
+  const { html } = articles.de[0];
+  assert.match(html, /<em>¹² Und der sechste<\/em> ³/);
+  assert.match(html, /<code>\^4\^<\/code> und 2\^10 bleiben/);
+});

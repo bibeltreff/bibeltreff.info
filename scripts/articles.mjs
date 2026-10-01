@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { Marked } from 'marked';
-import { readFrontmatter } from './markdown.mjs';
+import { readFrontmatter, superscript } from './markdown.mjs';
 
 // Articles live in content/artikel/<lang>/<topic>/<id>.md; content/artikel/themen.json names the topics.
 // German is required, an English version with the same topic and id is optional.
@@ -132,6 +132,17 @@ function createRenderer(articles, topicIds) {
 
   const marked = new Marked({ gfm: true });
   marked.use({
+    extensions: [{
+      // Verse numbers: `^12^` becomes `¹²`.
+      name: 'verse',
+      level: 'inline',
+      start: (src) => src.match(/\^\d+\^/)?.index,
+      tokenizer(src) {
+        const match = src.match(/^\^\d+\^/);
+        if (match) return { type: 'verse', raw: match[0] };
+      },
+      renderer: ({ raw }) => superscript(raw)
+    }],
     renderer: {
       // Inline HTML stays text, except underline and line breaks in table cells.
       html({ text }) {

@@ -44,3 +44,11 @@ test('reports mistakes with file and line', () => {
   assert.throws(() => parse('---\n---\n\n> — Joh 1:1\n'), /no text/);
   assert.throws(() => parse('---\n---\n\n# Titel\n'), /headings are not supported/);
 });
+
+test('turns ^12^ into superscript verse numbers', () => {
+  const { blocks } = parse('---\n---\n\n^1^ Im Anfang ^12^ x^2\n\n> ^16^ Denn also\n> — Johannes 3:16\n');
+  assert.deepEqual(blocks, [
+    { type: 'paragraph', text: '¹ Im Anfang ¹² x^2' },
+    { type: 'quote', text: '¹⁶ Denn also', reference: 'Johannes 3:16' }
+  ]);
+});

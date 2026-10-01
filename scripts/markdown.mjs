@@ -1,12 +1,17 @@
 // Minimal Markdown for content files: a frontmatter block with `key: value` lines, then
 // paragraphs separated by blank lines. A block whose lines all start with `>` is a quote;
-// its last line `— Reference` names the source. Text stays plain: no inline formatting.
+// its last line `— Reference` names the source. Text stays plain: no inline formatting,
+// except verse numbers like `^12^`, which become superscript digits.
 
 const unquote = (value) => {
   if (/^".*"$/.test(value)) return JSON.parse(value);
   if (/^'.*'$/.test(value)) return value.slice(1, -1).replaceAll("''", "'");
   return value;
 };
+
+const superscripts = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+// `^12^` becomes `¹²`, so verse numbers can be typed without special keys.
+export const superscript = (text) => text.replace(/\^(\d+)\^/g, (_, digits) => [...digits].map((d) => superscripts[d]).join(''));
 
 // Shared by testimonies and articles: returns the fields and the body lines after the frontmatter.
 export function readFrontmatter(source, file) {
@@ -42,10 +47,10 @@ export function parseMarkdown(source, file) {
       const reference = quote.at(-1)?.match(/^(?:—|–|--)\s*(.+)$/);
       if (!reference) throw new Error(`${where}: a quote must end with a line like "> — Johannes 3:16"`);
       if (quote.length < 2) throw new Error(`${where}: quote has a reference but no text`);
-      blocks.push({ type: 'quote', text: quote.slice(0, -1).join(' '), reference: reference[1] });
+      blocks.push({ type: 'quote', text: superscript(quote.slice(0, -1).join(' ')), reference: reference[1] });
     } else {
       if (block[0].startsWith('#')) throw new Error(`${where}: headings are not supported here`);
-      blocks.push({ type: 'paragraph', text: block.join(' ') });
+      blocks.push({ type: 'paragraph', text: superscript(block.join(' ')) });
     }
     block = [];
   };
