@@ -228,7 +228,7 @@ const home = fill(template, {
     <div class="meeting-links"><a href="${escape(meeting.map)}">${escape(ui.route)} ${arrow}</a>${meeting.online ? `<a href="${escape(meeting.online)}">${escape(ui.online)} ${arrow}</a>` : ''}</div>
   </article>`).join('\n'),
   colors: gospel.map((chapter, index) => `<a class="color-tab color-${escape(chapter.color)}" href="#${escape(chapter.id)}" data-chapter="${escape(chapter.id)}" aria-label="${index + 1}. ${escape(chapter.label)}: ${escape(chapter.question)} (${escape(chapter.colorName)})">
-    <span class="color-index" aria-hidden="true">0${index + 1}<span class="color-arrow">↘</span></span><span class="color-label">${escape(chapter.label)}</span>
+    <span class="color-index" aria-hidden="true">0${index + 1}</span><span class="color-label">${escape(chapter.label)}</span>
     <span class="color-tooltip" aria-hidden="true">${escape(chapter.question)}</span>
   </a>`).join('\n'),
   chapters: gospel.map((chapter, index) => `<article class="gospel-chapter chapter-${escape(chapter.color)}" id="${escape(chapter.id)}" aria-labelledby="${escape(chapter.id)}-title">
