@@ -1,6 +1,26 @@
 {
-  "nextOffset": 244344113,
+  "nextOffset": 244344114,
   "posts": [
+    {
+      "id": 437,
+      "date": "2026-10-20T07:11:03.000Z",
+      "text": "Aus dem Bibeltreff:\n\nDer Herr will sein Gesetz in unser Denksinn geben.\n\nHebr. 8:8-12; Spr. 4:4",
+      "entities": [
+        {
+          "type": "bold",
+          "offset": 21,
+          "length": 50
+        }
+      ],
+      "hasMedia": true,
+      "audio": {
+        "fileId": "CQACAgIAAx0CU0qd4QACAbVq1xQFJDaO6wTo6C96HEtpU_K2SQACXaEAAlVYuEqzkOowbUF0bj0E",
+        "key": "3bf024bbc3ce5a74",
+        "extension": "mp3",
+        "title": "Der Herr will sein Gesetz in unseren Denksinn geben",
+        "size": 17263556
+      }
+    },
     {
       "id": 436,
       "date": "2026-10-01T12:43:55.000Z",
@@ -29,49 +49,6 @@
     {
       "id": 435,
       "date": "2026-10-01T12:35:07.000Z",
-      "text": "+++  Neue Website online +++\n\nhttps://bibeltreff.info/\n\nWir haben die Website grundlegend überarbeitet — schaut euch gerne um und leitet sie weiter!\n\nHighlights:\n\n🔹 Das Evangelium in Farben: https://bibeltreff.info/#evangelium\n\n🔹 Zeugnisse: https://bibeltreff.info/#zeugnisse\n\n🔹 Bibeltreff-Zusammenfassungen: https://bibeltreff.info/artikel/\n\nMaranatha",
-      "entities": [
-        {
-          "type": "url",
-          "offset": 30,
-          "length": 24
-        },
-        {
-          "type": "bold",
-          "offset": 166,
-          "length": 24
-        },
-        {
-          "type": "url",
-          "offset": 192,
-          "length": 35
-        },
-        {
-          "type": "bold",
-          "offset": 232,
-          "length": 9
-        },
-        {
-          "type": "url",
-          "offset": 243,
-          "length": 34
-        },
-        {
-          "type": "bold",
-          "offset": 282,
-          "length": 28
-        },
-        {
-          "type": "url",
-          "offset": 312,
-          "length": 32
-        }
-      ],
-      "hasMedia": false
-    },
-    {
-      "id": 434,
-      "date": "2026-10-01T12:34:49.000Z",
       "text": "+++  Neue Website online +++\n\nhttps://bibeltreff.info/\n\nWir haben die Website grundlegend überarbeitet — schaut euch gerne um und leitet sie weiter!\n\nHighlights:\n\n🔹 Das Evangelium in Farben: https://bibeltreff.info/#evangelium\n\n🔹 Zeugnisse: https://bibeltreff.info/#zeugnisse\n\n🔹 Bibeltreff-Zusammenfassungen: https://bibeltreff.info/artikel/\n\nMaranatha",
       "entities": [
         {
