@@ -1,6 +1,26 @@
 {
-  "nextOffset": 244344116,
+  "nextOffset": 244344118,
   "posts": [
+    {
+      "id": 440,
+      "date": "2026-11-05T09:31:42.000Z",
+      "text": "Aus dem Bibeltreff:\n\nEs war ein Zelt bereitet... ein Gleichnis für die gegenwärtige Zeit (Hebr. 9)\n\nDer Hebräerbrief bringt uns zurück zu der Stiftshütte. Warum? Als erstes nennt er den goldenen Leuchter als Bestandteil des Heiligtums. Was bedeutet das für uns heute?\n\nVerse: Hebr. 9:1-5; 9; Offb. 1:12, 20; 2:1-6",
+      "entities": [
+        {
+          "type": "bold",
+          "offset": 21,
+          "length": 77
+        }
+      ],
+      "hasMedia": true,
+      "audio": {
+        "fileId": "CQACAgIAAx0CU0qd4QACAbhq7FNuZ3GsD63tu1fk1AlUdlPbxwACVqsAAie3YEsopaiMWSGRPz0E",
+        "key": "25185e9acb6f0135",
+        "extension": "mp3",
+        "title": "Hebräer 9: Es war ein Zelt bereitet",
+        "size": 26848851
+      }
+    },
     {
       "id": 439,
       "date": "2026-10-27T07:32:24.000Z",
@@ -39,31 +59,6 @@
         "extension": "mp3",
         "title": "Der Herr will sein Gesetz in unseren Denksinn geben",
         "size": 17263556
-      }
-    },
-    {
-      "id": 436,
-      "date": "2026-10-01T12:43:55.000Z",
-      "text": "Aus dem Bibeltreff:\n\nGlauben für meinen Bedarf oder Glauben für Gottes Vorsatz?\n\nhttps://bibeltreff.info/artikel/hebraer-brief/hebraer-11-glaube-fuer-gottes-vorsatz.html\n\nHebr. 11:1-7; Hebr. 12:2",
-      "entities": [
-        {
-          "type": "bold",
-          "offset": 21,
-          "length": 58
-        },
-        {
-          "type": "url",
-          "offset": 81,
-          "length": 88
-        }
-      ],
-      "hasMedia": true,
-      "audio": {
-        "fileId": "CQACAgIAAx0CU0qd4QACAbRqvlWKrNalEbeMZf2cAAHwckyczt8AAg-jAAIMcPFJvEjVvnMiGnA9BA",
-        "key": "7bcb9b2a28e83861",
-        "extension": "mp3",
-        "title": "Glaube für meinen Bedarf oder Glaube für Gottes Vorsatz?",
-        "size": 17034682
       }
     }
   ]
