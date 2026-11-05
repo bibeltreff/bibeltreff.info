@@ -40,7 +40,7 @@ test('teasers point to generated routes and quotations identify their source', (
   assert.notEqual(tabernacleUrls.de, tabernacleUrls.en);
   for (const lang of ['de', 'en']) {
     assert.ok(renderTabernacleTeaser(lang).includes(`href="${tabernacleUrls[lang]}"`));
-    assert.ok(renderTabernacleTour(lang).includes(texts[lang].scriptureLabel));
+    assert.ok(renderTabernacleTour(lang).includes(texts[lang].reference));
     assert.ok(texts[lang].readingIntro.includes(texts[lang].reference));
   }
 });
@@ -103,4 +103,20 @@ test('each detail illustration has accessible labels and valid local SVG referen
     assert.ok(labels.every(label => ids.includes(label)));
   }
   assert.throws(() => renderTabernacleDetail('unknown', 'unknown'), /Unknown tabernacle detail/);
+});
+
+
+test('navigation stays with the illustration before the long quotation', () => {
+  for (const lang of ['de', 'en']) {
+    const html = renderTabernacleTour(lang);
+    const figure = html.match(/<figure class="tour-visual">([\s\S]*?)<\/figure>/)[1];
+    assert.ok(figure.includes('data-tour-next'));
+    assert.ok(figure.includes('class="tour-artboard"'));
+    assert.equal((html.match(/data-tour-next/g) || []).length, 1);
+    assert.ok(html.indexOf('data-tour-next') < html.indexOf('class="tour-reading"'));
+    for (const removed of ['class="tour-hint"', 'class="tour-contents-note"', 'class="tour-verse-label"', 'class="tour-explanation"']) assert.ok(!html.includes(removed));
+    assert.match(renderTabernacleSvg(lang), /data-tour-interior="" hidden="hidden" style="display:none"/);
+    assert.ok(renderTabernacleSvg(lang).includes('data-tour-exterior=""'));
+  }
+  assert.ok(texts.de.reference.startsWith('Hebräer '));
 });

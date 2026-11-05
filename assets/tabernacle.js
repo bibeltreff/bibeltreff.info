@@ -11,6 +11,9 @@
   const svg = tour.querySelector('.tabernacle-svg');
   const zoom = tour.querySelector('[data-tour-zoom]');
   const contents = tour.querySelector('.tour-contents');
+  const title = tour.querySelector('[data-tour-title]');
+  const exterior = svg.querySelector('[data-tour-exterior]');
+  const interior = svg.querySelector('[data-tour-interior]');
   let selected = 0;
   let enlarged = false;
 
@@ -21,17 +24,23 @@
       object.classList.toggle('is-active', active.includes(object.dataset.tourObject));
     });
     const detail = panel.dataset.detail;
+    const closed = panel.id === 'station-tent';
+    if (closed) enlarged = false;
+    for (const [view, visible] of [[exterior, closed], [interior, !closed]]) {
+      view.style.display = visible ? '' : 'none';
+      if (visible) view.removeAttribute('hidden');
+      else view.setAttribute('hidden', 'hidden');
+    }
     svg.hidden = Boolean(detail);
     // SVG does not consistently honor the HTML hidden attribute in all engines.
     svg.style.display = detail ? 'none' : '';
     contents.hidden = !detail;
-    tour.querySelector('figcaption').hidden = Boolean(detail);
     tour.querySelectorAll('[data-tour-detail]').forEach(element => { element.hidden = element.dataset.tourDetail !== detail; });
-    zoom.hidden = Boolean(detail);
+    zoom.hidden = Boolean(detail) || closed;
     zoom.setAttribute('aria-pressed', String(enlarged));
     zoom.textContent = enlarged ? zoom.dataset.overviewLabel : zoom.dataset.detailLabel;
     let viewBox = '0 0 900 540';
-    if (enlarged && !detail) {
+    if (enlarged && !detail && !closed) {
       const object = [...svg.querySelectorAll('[data-tour-object]')].find(item => item.dataset.tourObject === active[0]);
       const box = object.getBBox();
       viewBox = `${box.x - 35} ${box.y - 35} ${box.width + 70} ${box.height + 70}`;
@@ -50,6 +59,7 @@
     next.textContent = selected === panels.length - 1 ? next.dataset.restartLabel : next.dataset.nextLabel;
     count.textContent = `${String(selected + 1).padStart(2, '0')} / ${panels.length}`;
     status.textContent = `${status.dataset.stepLabel} ${selected + 1} ${status.dataset.ofLabel} ${panels.length} · ${panels[selected].querySelector('h2').textContent}`;
+    title.textContent = panels[selected].querySelector('h2').textContent;
     updateView();
     if (saveHash) {
       // Replace rather than push so ten tour steps do not fill browser history.
