@@ -26,24 +26,31 @@ function fixture(lang, hash = '') {
   const previous = node(), next = node({ dataset: { nextLabel: t.next, restartLabel: t.restart } });
   const status = node({ dataset: { stepLabel: t.step, ofLabel: t.of } });
   const zoom = node({ dataset: { overviewLabel: 'overview', detailLabel: 'detail' } });
-  const svg = node({ querySelectorAll: () => objects });
-  const contents = node(), count = node(), caption = node();
-  const singles = { '[data-tour-previous]': previous, '[data-tour-next]': next, '[data-tour-status]': status, '[data-tour-count]': count, '.tabernacle-svg': svg, '[data-tour-zoom]': zoom, '.tour-contents': contents, '.tour-controls': node(), '.tour-stops': node({ scrollWidth: 100, clientWidth: 100 }), figcaption: caption };
+  const exterior = node(), interior = node();
+  const svg = node({ querySelectorAll: () => objects, querySelector: key => key === '[data-tour-exterior]' ? exterior : interior });
+  const contents = node(), count = node(), title = node();
+  const singles = { '[data-tour-previous]': previous, '[data-tour-next]': next, '[data-tour-status]': status, '[data-tour-count]': count, '.tabernacle-svg': svg, '[data-tour-zoom]': zoom, '.tour-contents': contents, '.tour-controls': node(), '.tour-stops': node({ scrollWidth: 100, clientWidth: 100 }), '[data-tour-title]': title };
   const multiples = { '[data-tour-stop]': stops, '[data-tour-panel]': panels, '[data-tour-object]': objects, '[data-tour-detail]': details };
   const tour = node({ querySelector: key => singles[key], querySelectorAll: key => multiples[key] });
   const window = node(), location = { hash };
   vm.runInNewContext(client, { document: { querySelector: () => tour }, window, location, history: { replaceState: (_, __, value) => { location.hash = value; } } });
-  return { tour, stops, panels, previous, next, zoom, svg, contents, details, status, caption, window, location };
+  return { tour, stops, panels, previous, next, zoom, svg, contents, details, status, exterior, interior, title, window, location };
 }
 
 for (const lang of ['de', 'en']) {
   test(`${lang}: all stops, contents, boundaries and restart remain in sync`, () => {
     const f = fixture(lang);
     assert.equal(f.previous.disabled, true);
+    assert.equal(f.exterior.style.display, '');
+    assert.equal(f.interior.style.display, 'none');
+    assert.equal(f.zoom.hidden, true);
     for (let index = 0; index < f.stops.length; index++) {
       f.stops[index].click();
       assert.equal(f.panels.filter(p => !p.hidden).length, 1);
       assert.equal(f.panels[index].hidden, false);
+      assert.equal(f.title.textContent, texts[lang].steps[index].title);
+      assert.equal(f.exterior.style.display, index === 0 ? '' : 'none');
+      assert.equal(f.interior.style.display, index === 0 ? 'none' : '');
       assert.equal(f.stops[index].attributes['aria-current'], 'step');
       assert.equal(f.status.textContent, `${texts[lang].step} ${index + 1} ${texts[lang].of} 10 · ${texts[lang].steps[index].title}`);
       assert.equal(f.contents.hidden, !Boolean(texts[lang].steps[index].detail));
@@ -53,6 +60,9 @@ for (const lang of ['de', 'en']) {
     f.next.click();
     assert.equal(f.panels[0].hidden, false);
     assert.equal(f.contents.hidden, true);
+    assert.equal(f.exterior.style.display, '');
+    assert.equal(f.interior.style.display, 'none');
+    assert.equal(f.zoom.hidden, true);
     assert.equal(f.previous.disabled, true);
   });
 }
