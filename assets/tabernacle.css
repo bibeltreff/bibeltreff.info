@@ -28,6 +28,12 @@
 .tour-reference { margin-bottom: 7px; color: var(--gold-ink); font-size: 12px; font-weight: 600; }
 .tour-verse-label { margin-bottom: 8px; font-size: 11px; color: var(--muted); }
 .tour-verse { padding-left: 15px; border-left: 2px solid var(--gold-line); font-family: Georgia, serif; font-size: 20px; line-height: 1.55; color: var(--ink); }
+.tour-verse { margin: 0; }
+.tour-verse p { margin: 0; font-size: inherit; line-height: inherit; font-weight: 400; letter-spacing: normal; }
+.tour-verse cite { display: block; margin-top: 10px; font-family: 'Source Sans 3', sans-serif; font-size: 12px; font-style: normal; color: var(--muted); }
+.tour-verse-context { color: var(--muted); }
+.tour-verse-current { color: var(--ink); }
+.tour-verse-number { color: var(--gold-ink); font-size: 11px; margin-right: 3px; }
 .tour-explanation { margin-top: 20px; font-size: 15px; color: var(--muted); line-height: 1.65; }
 .tour-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--line); }
 .tour-controls[hidden], .tour-zoom[hidden], .tour-contents[hidden], [data-tour-detail][hidden], .tour-panel[hidden] { display: none; }

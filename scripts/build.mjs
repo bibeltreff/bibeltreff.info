@@ -277,8 +277,8 @@ await writePage(tourFile, renderPage({
   page: 'articles',
   title: `${tourTitle} – Bibeltreff`,
   description: english
-    ? 'Explore the rooms and furnishings of the tabernacle in an interactive tour of Hebrews 9:2–4.'
-    : 'Entdecke die Räume und Geräte der Stiftshütte in einem interaktiven Rundgang durch Hebräer 9,2–4.',
+    ? 'Explore the rooms and furnishings of the tabernacle in an interactive tour of Heb. 9:2–5.'
+    : 'Entdecke die Räume und Geräte der Stiftshütte in einem interaktiven Rundgang durch Hebr. 9:2–5.',
   canonical: `${site}${tourFile}`,
   alternates: alternateLinks(tabernacleUrls),
   languageUrl: tabernacleUrls[other],

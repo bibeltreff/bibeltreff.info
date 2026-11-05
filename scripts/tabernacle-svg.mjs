@@ -1,5 +1,5 @@
 // A schematic cutaway, not an archaeological reconstruction. The altar is drawn
-// before the veil; Hebrews 9:4 associates it with the Most Holy Place.
+// before the veil, following the placement described in Exodus 30:6.
 export function renderTabernacleSvg(lang = 'de') {
   const en = lang === 'en';
   const labels = en ? {
@@ -109,15 +109,17 @@ export function renderTabernacleSvg(lang = 'de') {
     <ellipse cx="693" cy="294" rx="70" ry="14" fill="#090f19" opacity=".35"/>
     <path d="M639 235h86v51h-86Z" fill="url(#tab-gold-front)" stroke="#f1ce79" stroke-width="1.8"/>
     <path d="m725 235 27-18v51l-27 18Z" fill="#b88937" stroke="#e3bc64" stroke-width="1.6"/>
-    <path d="m633 234 28-19h98l-29 19Z" fill="url(#tab-gold)" stroke="#ffe0a0" stroke-width="1.6"/>
-    <path d="M633 234v5h97v-5m0 5 29-19v-5" fill="#b98c3a" stroke="#e6c270" stroke-width="1.2"/>
     <path d="M649 246h66v29h-66Z" fill="none" stroke="#9f7027" stroke-opacity=".5"/>
     <path d="m626 262 112 0m-85-53 112 0" fill="none" stroke="#ebca80" stroke-width="4" stroke-linecap="round"/>
-    <g fill="url(#tab-gold)" stroke="#f5d78f" stroke-width="1.2" stroke-linejoin="round">
+  </g>
+  <g class="tour-object" data-tour-object="mercy-seat">
+    <path d="m633 234 28-19h98l-29 19Z" fill="url(#tab-gold)" stroke="#ffe0a0" stroke-width="1.6"/>
+    <path d="M633 234v5h97v-5m0 5 29-19v-5" fill="#b98c3a" stroke="#e6c270" stroke-width="1.2"/>
+  </g>
+  <g class="tour-object" data-tour-object="cherubim" fill="url(#tab-gold)" stroke="#f5d78f" stroke-width="1.2" stroke-linejoin="round">
       <path d="M665 223c3-7 7-13 8-24l6-1c1 12 5 18 8 25Zm8-24c-13-3-19-13-21-28 15 4 25 15 27 27Zm6-1c1-16 9-28 24-36-1 18-9 30-24 36Z"/>
       <path d="M724 211c-3-7-7-13-8-24l-6-1c-1 12-5 18-8 25Zm-8-24c13-3 19-13 21-28-15 4-25 15-27 27Zm-6-1c-1-16-9-28-24-36 1 18 9 30 24 36Z"/>
       <circle cx="677" cy="192" r="4"/><circle cx="712" cy="180" r="4"/>
-    </g>
   </g>
   <path d="M48 475h804" stroke="#9aabc3" stroke-opacity=".15"/>
 </svg>`;
