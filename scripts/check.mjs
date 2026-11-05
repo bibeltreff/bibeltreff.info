@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { loadTestimonies } from './testimonies.mjs';
 import { articleFolders, loadArticles, overviewUrl, topicUrl } from './articles.mjs';
+import { tabernacleUrls } from './tabernacle.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const locales = [
@@ -78,7 +79,7 @@ const { topics, articles } = await loadArticles(root);
 let articlePages = 0;
 for (const lang of ['de', 'en']) {
   const folder = articleFolders[lang];
-  const expected = [`${overviewUrl(lang)}index.html`,
+  const expected = [`${overviewUrl(lang)}index.html`, tabernacleUrls[lang],
     ...topics.filter(topic => articles[lang].some(article => article.topic === topic.id)).map(topic => `${topicUrl(lang, topic.id)}index.html`),
     ...articles[lang].map(article => article.url)].sort();
   const found = (await readdir(path.join(root, folder), { recursive: true })).filter(name => name.endsWith('.html')).map(name => `${folder}/${name.split(path.sep).join('/')}`).sort();
@@ -87,6 +88,15 @@ for (const lang of ['de', 'en']) {
     const html = await readFile(path.join(root, page), 'utf8');
     assert.ok(html.includes(`<html lang="${lang}"`), `Incorrect language in ${page}`);
     assert.ok(html.includes('class="language-switch"'), `Missing language switch in ${page}`);
+    if (page === tabernacleUrls[lang]) {
+      const otherLang = lang === 'de' ? 'en' : 'de';
+      const prefix = '../'.repeat(page.split('/').length - 1);
+      assert.ok(html.includes(`class="language-switch" href="${prefix}${tabernacleUrls[otherLang]}"`), `Incorrect tour language switch in ${page}`);
+      assert.ok(html.includes(`<link rel="canonical" href="${site}${page}">`), `Incorrect tour canonical in ${page}`);
+      for (const alternate of ['de', 'en', 'x-default']) {
+        assert.ok(html.includes(`rel="alternate" hreflang="${alternate}"`), `Missing tour alternate ${alternate} in ${page}`);
+      }
+    }
     await checkPage(page, html);
     articlePages++;
   }

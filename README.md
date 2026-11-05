@@ -34,6 +34,8 @@ Vorschaudateinamen hängen vom Bildinhalt ab, damit ausgetauschte Fotos keine ve
 - `content/site.en.json`: Englische Übersetzung dieser Texte.
 - `content/gospel.de.json` und `content/gospel.en.json`: Die sechs Evangeliums-Themen auf Deutsch und Englisch, mit gekürzten NKJV-Bibelzitaten in der englischen Fassung. Die Kapitel-IDs (`plan`, `problem` usw.) stehen direkt auf oberster Ebene.
 - `content/zeugnisse/de/` und `content/zeugnisse/en/`: Zeugnisse als Markdown, eine Datei pro Zeugnis und Sprache (siehe „Zeugnisse schreiben“).
+- `content/tabernacle.json`: Deutsche und englische Texte und Stationen des Stiftshütten-Rundgangs. Die Bibeltexte sind ausdrücklich als sinngemäße Zusammenfassungen gekennzeichnet.
+- `scripts/tabernacle.mjs` und `scripts/tabernacle-svg.mjs`: Rundgang, Artikel-Verweise und schematische Zeichnung; `assets/tabernacle.css` und `assets/tabernacle.js`: Gestaltung und Bedienung. Der Build erstellt `artikel/die-stiftshuette/rundgang.html` sowie `articles/die-stiftshuette/tour.html`. Ohne JavaScript sind alle Stationen lesbar.
 - `content/legal.json`: Betreiberangaben für Impressum und Datenschutzerklärung.
 - `content/ui.de.json` und `content/ui.en.json`: Beschriftungen, Navigation, Hinweise und barrierefreie Texte beider Sprachen.
 - `src/layout.html`: Gemeinsames Seitengerüst aller Seiten (Kopf, Navigation mit Artikel-Menü, Fußbereich) mit Platzhaltern für beide Sprachen.
