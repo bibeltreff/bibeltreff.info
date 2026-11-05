@@ -47,7 +47,7 @@ for (const lang of ['de', 'en']) {
       assert.equal(f.stops[index].attributes['aria-current'], 'step');
       assert.equal(f.status.textContent, `${texts[lang].step} ${index + 1} ${texts[lang].of} 10 · ${texts[lang].steps[index].title}`);
       assert.equal(f.contents.hidden, !Boolean(texts[lang].steps[index].detail));
-      if (index >= 7) assert.equal(f.details.filter(d => !d.hidden).length, 1);
+      assert.equal(f.details.filter(d => !d.hidden).length, texts[lang].steps[index].detail ? 1 : 0);
     }
     assert.equal(f.next.textContent, texts[lang].restart);
     f.next.click();
@@ -59,7 +59,7 @@ for (const lang of ['de', 'en']) {
 
 test('deep links, scoped keyboard navigation and zoom work without scrolling the page', () => {
   const f = fixture('de', '#station-ark');
-  assert.equal(f.panels[6].hidden, false);
+  assert.equal(f.panels.find(p => p.id === 'station-ark').hidden, false);
   f.zoom.click();
   assert.equal(f.zoom.attributes['aria-pressed'], 'true');
   assert.notEqual(f.svg.attributes.viewBox, '0 0 900 540');
@@ -70,7 +70,7 @@ test('deep links, scoped keyboard navigation and zoom work without scrolling the
   assert.equal(f.panels[8].hidden, false);
   key('Home');
   assert.equal(f.panels[0].hidden, false);
-  f.location.hash = '#station-table';
+  f.location.hash = '#station-holy';
   f.window.listeners.hashchange();
-  assert.equal(f.panels[3].hidden, false);
+  assert.equal(f.panels[1].hidden, false);
 });

@@ -9,11 +9,27 @@ export const tabernacleUrls = { de: 'artikel/die-stiftshuette/rundgang.html', en
 // they are visible through its closed sides in the overview.
 function renderContents(kind, title) {
   const drawings = {
-    manna: `<ellipse cx="180" cy="250" rx="90" ry="15" fill="#0a1423"/><path d="M128 97h104l-10 30c37 23 40 92 15 115H123c-25-23-22-92 15-115Z" fill="url(#tab-detail-gold)" stroke="#f4d996" stroke-width="2"/><ellipse cx="180" cy="98" rx="53" ry="12" fill="#a87930" stroke="#f4d996" stroke-width="2"/><ellipse cx="180" cy="97" rx="43" ry="8" fill="#f4e5c5"/><g fill="#fff7dc"><circle cx="160" cy="95" r="4"/><circle cx="175" cy="97" r="3"/><circle cx="192" cy="95" r="4"/><circle cx="205" cy="97" r="3"/></g><path d="M139 144c-12 28-10 58-2 72" fill="none" stroke="#fff1bd" stroke-width="5" stroke-linecap="round" opacity=".6"/><path d="M129 231h102" stroke="#9d6c28" stroke-width="3"/>`,
+    jar: `<ellipse cx="180" cy="250" rx="90" ry="15" fill="#0a1423"/><path d="M129 104h102l-10 25c38 25 41 89 16 113H123c-25-24-22-88 16-113Z" fill="url(#tab-detail-gold)" stroke="#f4d996" stroke-width="2"/><path d="M128 105c0-36 104-36 104 0Z" fill="url(#tab-detail-gold)" stroke="#f4d996" stroke-width="2"/><circle cx="180" cy="73" r="7" fill="#f5d78b"/><path d="M134 132c-53-8-56 61-5 60m102-60c53-8 56 61 5 60" fill="none" stroke="#d4a64c" stroke-width="8"/><path d="M146 142c-12 28-11 54-3 72" fill="none" stroke="#fff1bd" stroke-width="5" stroke-linecap="round" opacity=".6"/>`,
     staff: `<ellipse cx="180" cy="259" rx="86" ry="12" fill="#0a1423"/><path d="M156 261c9-49 22-96 24-153s19-67 32-47" fill="none" stroke="#d3aa64" stroke-width="10" stroke-linecap="round"/><path d="M175 164c-29-14-39-29-39-50 27 4 43 22 39 50Zm7-40c27-8 41-23 44-42-25 0-42 15-44 42Z" fill="#91b59c" stroke="#b6d5af" stroke-width="2"/><path d="m171 195 35-34m-25-39-25-35" stroke="#cfb67f" stroke-width="3"/><g fill="#ead9e9" stroke="#cfa4c9"><circle cx="207" cy="155" r="12"/><circle cx="198" cy="164" r="10"/><circle cx="214" cy="169" r="10"/><circle cx="153" cy="80" r="10"/></g><g fill="#f4ce71"><circle cx="207" cy="163" r="5"/><circle cx="153" cy="80" r="4"/></g>`,
     tablets: `<ellipse cx="180" cy="253" rx="108" ry="14" fill="#0a1423"/><path d="M81 235V112a47 47 0 0 1 94 0v123Z" fill="#c4c5c6" stroke="#f1e5cb" stroke-width="2"/><path d="M185 235V112a47 47 0 0 1 94 0v123Z" fill="#b2b7bc" stroke="#eee2ca" stroke-width="2"/><g stroke="#6b727b" stroke-width="4" stroke-linecap="round"><path d="M100 133h55m-55 18h45m-45 18h55m-55 18h39m-39 18h51M204 133h55m-55 18h45m-45 18h55m-55 18h39m-39 18h51"/></g>`
   };
+  if (kind === 'manna') {
+    const grains = Array.from({ length: 24 }, (_, i) => `<circle cx="${137 + (i % 5) * 20 + (Math.floor(i / 5) % 2) * 8}" cy="${134 + Math.floor(i / 5) * 22}" r="6" fill="#f7edcc"/>`).join('');
+    drawings.manna = `<ellipse cx="180" cy="250" rx="90" ry="15" fill="#0a1423"/><path d="M128 97h104l-10 30c37 23 40 92 15 115H123c-25-23-22-92 15-115Z" fill="#c79b4020" stroke="#edcb7d" stroke-width="3"/>${grains}`;
+  }
   return `<svg class="tour-content-svg" viewBox="0 0 360 300" role="img" aria-label="${escape(title)}" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="tab-detail-${kind}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe3a0"/><stop offset=".5" stop-color="#d6ac55"/><stop offset="1" stop-color="#9e712b"/></linearGradient></defs>${drawings[kind].replaceAll('tab-detail-gold', `tab-detail-${kind}`)}</svg>`;
+}
+
+function renderPassage(t, endIndex, highlightCurrent = false) {
+  const steps = t.steps.slice(0, endIndex + 1);
+  const verse = steps.filter(s => s.verseNumber).at(-1).verseNumber;
+  const reference = `${t.reference.split(':')[0]}:2${verse === 2 ? '' : `–${verse}`}`;
+  const text = steps.map((s, index) => {
+    const number = s.verseNumber ? `<sup class="tour-verse-number">${s.verseNumber}</sup>` : '';
+    const className = highlightCurrent ? (index === endIndex ? 'tour-verse-current' : 'tour-verse-context') : '';
+    return `${number}<span class="${className}" data-verse-chunk>${escape(s.verse)}</span>`;
+  }).join(' ');
+  return `<blockquote class="tour-verse"><p>${text}</p><cite>${escape(reference)}</cite></blockquote>`;
 }
 
 export function renderTabernacleTour(lang) {
@@ -42,7 +58,7 @@ export function renderTabernacleTour(lang) {
               <p class="tour-reference">${escape(s.reference)}</p>
               <h2 id="station-title-${s.id}">${escape(s.title)}</h2>
               <p class="tour-verse-label">${escape(t.scriptureLabel)}</p>
-              <p class="tour-verse">${escape(s.verse)}</p>
+              ${renderPassage(t, index, true)}
               <p class="tour-explanation">${escape(s.text)}</p>
             </section>`).join('')}
           </div>
@@ -52,7 +68,7 @@ export function renderTabernacleTour(lang) {
       <nav class="tour-stops" aria-label="${escape(t.overview)}">${t.steps.map((s, index) => `<a href="#station-${s.id}" data-tour-stop><span>${String(index + 1).padStart(2, '0')}</span>${escape(s.short)}</a>`).join('')}</nav>
       <p class="tour-hint">${escape(t.hint)}</p>
     </section>
-    <details class="tour-context"><summary>${escape(t.reading)}</summary><p>${escape(t.readingIntro)}</p><p>${escape(t.altarNote)}</p></details>
+    <details class="tour-context"><summary>${escape(t.reading)}</summary><p>${escape(t.readingIntro)}</p>${renderPassage(t, t.steps.length - 1)}<p>${escape(t.altarNote)}</p></details>
     <section class="tour-related"><div><h2>${escape(t.related)}</h2><p>${escape(t.relatedText)}</p></div><a class="button button-quiet" href="${lang === 'de' ? 'artikel/die-stiftshuette/' : 'articles/'}">${escape(t.relatedLink)}</a></section>
   </main>`;
 }

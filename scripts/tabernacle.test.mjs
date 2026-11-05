@@ -34,11 +34,43 @@ test('static fallback renders every station with unique IDs and working local an
   }
 });
 
-test('teasers point to generated routes and both translations identify paraphrased Bible text', () => {
+test('teasers point to generated routes and quotations identify their source', () => {
   assert.notEqual(tabernacleUrls.de, tabernacleUrls.en);
   for (const lang of ['de', 'en']) {
     assert.ok(renderTabernacleTeaser(lang).includes(`href="${tabernacleUrls[lang]}"`));
     assert.ok(renderTabernacleTour(lang).includes(texts[lang].scriptureLabel));
-    assert.ok(texts[lang].altarNote.includes('9'));
+    assert.ok(texts[lang].readingIntro.includes(texts[lang].reference));
+  }
+});
+
+// The user's supplied wording is pinned independently of the editable content.
+const exactGermanPassage = 'Denn es war ein Zelt bereitet, der erste (Teil), worin sowohl der Leuchter als auch der Tisch und die Schaubrote waren, welcher das Heilige heißt, und hinter dem zweiten Vorhang war der zweite Teil des Zeltes, welcher das Allerheiligste heißt; (dieses) hatte den goldenen Räucheraltar und die Lade des Bundes, von allen Seiten ganz mit Gold überzogen, in welcher der goldene Krug war, der das Manna enthielt, und der Stab Aarons, der gesprosst hatte, und die Tafeln des Bundes, und oben über ihr die Cherubim der Herrlichkeit, die den Sühne(deckel) überschatteten, wovon jetzt nicht im Einzelnen zu reden ist.';
+
+test('German quotations preserve the exact supplied wording and verse boundaries', () => {
+  assert.equal(texts.de.fullPassage, exactGermanPassage);
+  assert.equal(texts.de.steps.map(s => s.verse).join(' '), exactGermanPassage);
+  assert.deepEqual(texts.de.steps.filter(s => s.verseNumber).map(s => [s.id, s.verseNumber]), [
+    ['tent', 2], ['most-holy', 3], ['altar', 4], ['cherubim', 5]
+  ]);
+  const html = renderTabernacleTour('de');
+  const quotes = [...html.matchAll(/<blockquote class="tour-verse"><p>([\s\S]*?)<\/p>/g)];
+  assert.equal(quotes.length, texts.de.steps.length + 1);
+  const extract = quote => [...quote.matchAll(/data-verse-chunk>([^<]*)<\/span>/g)].map(m => m[1]).join(' ');
+  for (let i = 0; i < texts.de.steps.length; i++) {
+    assert.equal(extract(quotes[i][1]), texts.de.steps.slice(0, i + 1).map(s => s.verse).join(' '));
+    assert.equal((quotes[i][1].match(/class="tour-verse-current"/g) || []).length, 1);
+  }
+  assert.equal(extract(quotes.at(-1)[1]), exactGermanPassage);
+});
+
+test('station sequence follows the screenshots and every reference uses a colon', () => {
+  const sequence = ['tent', 'holy', 'most-holy', 'altar', 'ark', 'jar', 'manna', 'staff', 'tablets', 'cherubim'];
+  for (const lang of ['de', 'en']) {
+    const t = texts[lang];
+    assert.deepEqual(t.steps.map(s => s.id), sequence);
+    assert.equal(t.steps.map(s => s.verse).join(' '), t.fullPassage);
+    assert.ok(t.reference.endsWith('9:2–5'));
+    for (const step of t.steps) assert.match(step.reference, /9:[2-5]$/);
+    assert.doesNotMatch(JSON.stringify(t), /(?:Hebräer|Hebr\.) 9,/);
   }
 });
