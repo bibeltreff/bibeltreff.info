@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { renderTabernacleTour, renderTabernacleTeaser, tabernacleUrls } from './tabernacle.mjs';
+import { renderTabernacleSvg } from './tabernacle-svg.mjs';
+import { renderTabernacleDetail } from './tabernacle-details.mjs';
 
 const texts = JSON.parse(await readFile(new URL('../content/tabernacle.json', import.meta.url), 'utf8'));
 
@@ -73,4 +75,32 @@ test('station sequence follows the screenshots and every reference uses a colon'
     for (const step of t.steps) assert.match(step.reference, /9:[2-5]$/);
     assert.doesNotMatch(JSON.stringify(t), /(?:Hebräer|Hebr\.) 9,/);
   }
+});
+
+test('overview preserves the reference furnishings in both languages', () => {
+  for (const lang of ['de', 'en']) {
+    const svg = renderTabernacleSvg(lang);
+    for (const [attribute, count] of [['data-lamp', 7], ['data-loaf', 12], ['data-cherub', 2], ['data-horn', 4], ['data-carrying-ring', 4]]) {
+      assert.equal([...svg.matchAll(new RegExp(`${attribute}="`, 'g'))].length, count, attribute);
+    }
+    for (const object of ['cherubim', 'mercy-seat', 'lampstand', 'table', 'altar', 'ark']) {
+      assert.ok(svg.includes(`data-tour-object="${object}"`));
+    }
+    const teaser = renderTabernacleTeaser(lang);
+    assert.ok(teaser.includes('data-loaf="6"'), 'article preview reuses the corrected furnishings');
+    assert.ok(teaser.includes('id="teaser-tab-gold"'));
+    assert.ok(!teaser.includes('id="tab-gold"'), 'preview IDs must not collide with the tour');
+  }
+});
+
+test('each detail illustration has accessible labels and valid local SVG references', () => {
+  for (const kind of ['jar', 'manna', 'staff', 'tablets']) {
+    const svg = renderTabernacleDetail(kind, kind);
+    const ids = [...svg.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
+    assert.equal(new Set(ids).size, ids.length);
+    for (const [, id] of svg.matchAll(/url\(#([^)]+)\)/g)) assert.ok(ids.includes(id));
+    const labels = svg.match(/aria-labelledby="([^"]+)"/)[1].split(' ');
+    assert.ok(labels.every(label => ids.includes(label)));
+  }
+  assert.throws(() => renderTabernacleDetail('unknown', 'unknown'), /Unknown tabernacle detail/);
 });

@@ -67,6 +67,8 @@
 .tour-teaser { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 30px; align-items: center; padding: 26px; margin-block: 28px; border: 1px solid var(--line); border-radius: 12px; background: light-dark(#f7f9fc, #192434); }
 .tour-teaser-art { border-radius: 8px; background: #172337; }
 .tour-teaser-art svg { display: block; width: 100%; height: auto; }
+.tour-teaser-art .tabernacle-svg { margin: 0; aspect-ratio: 80 / 31; }
+.tour-teaser-art .tabernacle-svg text { display: none; }
 .tour-teaser .section-label { margin-bottom: 8px; font-size: 10px; }
 .tour-teaser h2 { font-size: 24px; }
 .tour-teaser p:not(.section-label) { margin-top: 10px; max-width: 650px; color: var(--muted); font-size: 15px; line-height: 1.6; }
