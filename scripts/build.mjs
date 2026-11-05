@@ -6,6 +6,7 @@ import { attachLocalMedia } from './telegram-media.mjs';
 import { loadTestimonies } from './testimonies.mjs';
 import { createImageOptimizer } from './images.mjs';
 import { articleFolders, loadArticles, overviewUrl, topicUrl } from './articles.mjs';
+import { renderTabernacleTour, renderTabernacleTeaser, tabernacleUrls } from './tabernacle.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const optimizeImages = createImageOptimizer(root);
@@ -92,6 +93,8 @@ ${content.privacy.sections.map((section) => `    <section><h3>${escape(section.h
 const inline = (value) => escape(value).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 const quote = (verse) => `<blockquote><p>${ui.quoteOpen}${inline(verse.text)}${ui.quoteClose}</p><cite>${escape(verse.reference)}</cite></blockquote>`;
 const uiSlots = Object.fromEntries(Object.entries(ui).map(([key, value]) => [key, escape(value)]));
+const tabernacleLabel = english ? 'Explore the tabernacle' : 'Stiftshütte entdecken';
+const tabernacleStyles = '  <link rel="stylesheet" href="assets/tabernacle.css">';
 
 // --- Articles of this language ----------------------------------------------
 const list = articles[lang];
@@ -141,6 +144,7 @@ const nav = (page) => {
         <div class="nav-menu" aria-label="${uiSlots.articlesMenu}" role="group">
           <a href="${latest.url}">${uiSlots.articlesLatest}</a>
           <a href="${fallback.url}" data-random-articles="${escape(pickable)}">${uiSlots.articlesRandom}</a>
+          <a href="${tabernacleUrls[lang]}">${tabernacleLabel}</a>
           <div class="nav-item nav-subitem"><a class="nav-parent" href="${overviewUrl(lang)}">${uiSlots.articlesAll} <span aria-hidden="true">›</span></a>
             <div class="nav-menu nav-submenu">${langTopics.map((topic) => `<a href="${topicUrl(lang, topic.id)}">${escape(topic[lang])}</a>`).join('')}</div>
           </div>
@@ -265,6 +269,24 @@ await writePage(outputFile, renderPage({
   scripts: '  <script src="assets/meeting-status.js" defer></script>'
 }));
 
+// --- Interactive tabernacle tour --------------------------------------------
+const tourFile = tabernacleUrls[lang];
+const tourTitle = english ? 'An interactive tour of the tabernacle' : 'Ein Rundgang durch die Stiftshütte';
+await writePage(tourFile, renderPage({
+  file: tourFile,
+  page: 'articles',
+  title: `${tourTitle} – Bibeltreff`,
+  description: english
+    ? 'Explore the rooms and furnishings of the tabernacle in an interactive tour of Hebrews 9:2–4.'
+    : 'Entdecke die Räume und Geräte der Stiftshütte in einem interaktiven Rundgang durch Hebräer 9,2–4.',
+  canonical: `${site}${tourFile}`,
+  alternates: alternateLinks(tabernacleUrls),
+  languageUrl: tabernacleUrls[other],
+  structuredData: [breadcrumbData([[overviewUrl(lang), ui.articlesTitle], [tourFile, tourTitle]])],
+  main: renderTabernacleTour(lang),
+  scripts: `${tabernacleStyles}\n  <script src="assets/tabernacle.js" defer></script>`
+}));
+
 // --- Article overview: latest, random, then all topics -----------------------
 const overview = overviewUrl(lang);
 await writePage(`${overview}index.html`, renderPage({
@@ -275,6 +297,7 @@ await writePage(`${overview}index.html`, renderPage({
   canonical: `${site}${overview}`,
   alternates: alternateLinks({ de: overviewUrl('de'), en: overviewUrl('en') }),
   languageUrl: overviewUrl(other),
+  scripts: tabernacleStyles,
   main: `  <main id="inhalt" class="articles-page">
     <header class="page-head wrap">
       <h1>${uiSlots.articlesTitle}</h1>
@@ -284,6 +307,7 @@ await writePage(`${overview}index.html`, renderPage({
         ${articleCard(latest, ui.articlesLatest)}
         ${articleCard(fallback, ui.articlesRandom, ' data-random-card')}
     </section>
+    ${renderTabernacleTeaser(lang)}
     <section class="topics-section wrap" aria-labelledby="topics-title">
       <h2 id="topics-title">${uiSlots.articlesTopics}</h2>
 <ul class="topic-list">${topicsBySemester.map(({ topic, count: n, semesters }) => `
@@ -310,6 +334,7 @@ for (const topic of langTopics) {
     canonical: `${site}${topicUrl(lang, topic.id)}`,
     alternates: alternateLinks({ de: topicUrl('de', topic.id), en: articles.en.some((article) => article.topic === topic.id) && topicUrl('en', topic.id) }),
     languageUrl: articles[other].some((article) => article.topic === topic.id) ? topicUrl(other, topic.id) : overviewUrl(other),
+    scripts: topic.id === 'die-stiftshuette' ? tabernacleStyles : '',
     structuredData: [breadcrumbData([[overview, ui.articlesTitle], [topicUrl(lang, topic.id), topic[lang]]])],
     main: `  <main id="inhalt" class="articles-page">
     <header class="page-head wrap">
@@ -317,6 +342,7 @@ for (const topic of langTopics) {
       <h1>${escape(topic[lang])}</h1>
       <p class="page-intro">${escape(count(topicArticles.length))}</p>
     </header>
+    ${topic.id === 'die-stiftshuette' ? renderTabernacleTeaser(lang) : ''}
     <ol class="article-list wrap">${topicArticles.map((article, index) => `
       <li class="article-item${thumbnails[index] ? ' has-thumb' : ''}">
         ${thumbnail(article, index)}
