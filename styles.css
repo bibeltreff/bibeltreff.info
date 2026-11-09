@@ -144,6 +144,34 @@ h1 > span { color: var(--accent); }
 .meeting-links span { margin-left: 3px; }
 .meeting-footnote { margin-top: 20px; font-size: 14px; text-align: center; color: var(--muted); }
 .meeting-footnote a { color: var(--accent); }
+/* Featured lecture: the original yellow flyer remains readable in either theme. */
+.lecture-section { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr); gap: 32px; align-items: center; padding: 36px; margin-block: 4px 54px; background: #ffcb29; color: #171c1b; border-radius: 14px; }
+.lecture-label { margin-bottom: 16px; color: #34371d; text-transform: uppercase; letter-spacing: .08em; }
+.lecture-question { margin-bottom: 9px; font-size: 17px; font-weight: 600; }
+.lecture-copy h2 { font-size: clamp(1.9rem, 3.2vw, 2.65rem); letter-spacing: -.035em; line-height: 1.1; }
+.lecture-subtitle { margin-top: 18px; font-size: 17px; line-height: 1.55; }
+.lecture-details { display: grid; gap: 12px; margin-top: 24px; font-size: 16px; line-height: 1.5; }
+.lecture-details strong { font-weight: 700; }
+.lecture-download { margin-top: 25px; padding-inline: 18px; background: #111817; color: #fff; font-size: 14px; }
+.lecture-download:hover { background: #293332; color: #fff; }
+.lecture-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.lecture-gallery a { display: block; overflow: hidden; border-radius: 7px; box-shadow: 0 5px 18px #171c1b26; }
+.lecture-gallery img { display: block; width: 100%; height: auto; }
+.lecture-section a:focus-visible { outline: 3px solid #171c1b; outline-offset: 5px; }
+@media (max-width: 850px) {
+  .lecture-section { grid-template-columns: minmax(0, 1fr); padding: 28px; gap: 28px; }
+  .lecture-copy { max-width: 600px; }
+  .lecture-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lecture-gallery { max-width: 620px; }
+}
+@media (max-width: 500px) {
+  .lecture-section { padding: 22px 18px; gap: 24px; margin-bottom: 36px; }
+  .lecture-copy h2 { font-size: 2rem; }
+  .lecture-subtitle, .lecture-question { font-size: 16px; }
+  .lecture-details { grid-template-columns: minmax(0, 1fr); }
+  .lecture-download { width: 100%; }
+  .lecture-gallery { grid-template-columns: minmax(0, 1fr); max-width: none; gap: 16px; }
+}
 .gospel-section { background: light-dark(#f6f7f9, #182230); border-block: 1px solid var(--line); padding-top: 71px; }
 .gospel-heading { align-items: center; }
 .gospel-heading > div > p:last-child { max-width: 585px; color: var(--muted); margin-top: 18px; font-size: 17px; }
