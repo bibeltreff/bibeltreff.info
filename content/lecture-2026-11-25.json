@@ -14,7 +14,8 @@
     "campus": "Campus Vaihingen",
     "download": "Flyer als PDF herunterladen",
     "frontLabel": "Flyer-Vorderseite groß ansehen",
-    "backLabel": "Flyer-Rückseite groß ansehen"
+    "backLabel": "Flyer-Rückseite groß ansehen",
+    "shareLink": "Direktlink zum Vortrag"
   },
   "en": {
     "label": "Talk at Campus Vaihingen",
@@ -27,6 +28,7 @@
     "campus": "Campus Vaihingen",
     "download": "Download flyer (German, PDF)",
     "frontLabel": "View the front of the German flyer at full size",
-    "backLabel": "View the back of the German flyer at full size"
+    "backLabel": "View the back of the German flyer at full size",
+    "shareLink": "Direct link to this talk"
   }
 }
