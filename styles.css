@@ -148,11 +148,13 @@ h1 > span { color: var(--accent); }
 .lecture-section { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr); gap: 32px; align-items: center; padding: 36px; margin-block: 4px 54px; background: #ffcb29; color: #171c1b; border-radius: 14px; }
 .lecture-label { margin-bottom: 16px; color: #34371d; text-transform: uppercase; letter-spacing: .08em; }
 .lecture-question { margin-bottom: 9px; font-size: 17px; font-weight: 600; }
-.lecture-copy h2 { font-size: clamp(1.9rem, 3.2vw, 2.65rem); letter-spacing: -.035em; line-height: 1.1; }
+.lecture-copy h2 { font-weight: 700; font-size: clamp(1.9rem, 3.2vw, 2.65rem); letter-spacing: -.035em; line-height: 1.1; }
 .lecture-subtitle { margin-top: 18px; font-size: 17px; line-height: 1.55; }
 .lecture-details { display: grid; gap: 12px; margin-top: 24px; font-size: 16px; line-height: 1.5; }
 .lecture-details strong { font-weight: 700; }
-.lecture-download { margin-top: 25px; padding-inline: 18px; background: #111817; color: #fff; font-size: 14px; }
+.lecture-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 25px; }
+.lecture-share { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 600; text-decoration: underline; }
+.lecture-download { padding-inline: 18px; background: #111817; color: #fff; font-size: 14px; }
 .lecture-download:hover { background: #293332; color: #fff; }
 .lecture-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
 .lecture-gallery a { display: block; overflow: hidden; border-radius: 7px; box-shadow: 0 5px 18px #171c1b26; }
