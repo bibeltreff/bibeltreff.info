@@ -1,0 +1,32 @@
+{
+  "datetime": "2026-11-25T17:30:00+01:00",
+  "pdf": "assets/documents/2026-11-Vortrag-Uni-Vaihingen_A6.pdf",
+  "front": "assets/events/2026-11-25-ki/flyer-vorderseite.webp",
+  "back": "assets/events/2026-11-25-ki/flyer-rueckseite.webp",
+  "de": {
+    "label": "Vortrag am Campus Vaihingen",
+    "question": "Werde ich bald ersetzt?",
+    "title": "KI, meine Zukunft und die Bibel",
+    "subtitle": "Was macht den Menschen einzigartig – und welche Zukunft hat Gott für ihn?",
+    "date": "Mittwoch, 25. November 2026",
+    "time": "17:30 Uhr",
+    "room": "Raum V47.04",
+    "campus": "Campus Vaihingen",
+    "download": "Flyer als PDF herunterladen",
+    "frontLabel": "Flyer-Vorderseite groß ansehen",
+    "backLabel": "Flyer-Rückseite groß ansehen"
+  },
+  "en": {
+    "label": "Talk at Campus Vaihingen",
+    "question": "Will I soon be replaced?",
+    "title": "AI, my future and the Bible",
+    "subtitle": "What makes humans unique – and what future does God have for them?",
+    "date": "Wednesday, 25 November 2026",
+    "time": "17:30 CET",
+    "room": "Room V47.04",
+    "campus": "Campus Vaihingen",
+    "download": "Download flyer (German, PDF)",
+    "frontLabel": "View the front of the German flyer at full size",
+    "backLabel": "View the back of the German flyer at full size"
+  }
+}

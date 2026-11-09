@@ -7,6 +7,7 @@ import { loadTestimonies } from './testimonies.mjs';
 import { createImageOptimizer } from './images.mjs';
 import { articleFolders, loadArticles, overviewUrl, topicUrl } from './articles.mjs';
 import { renderTabernacleTour, renderTabernacleTeaser, tabernacleUrls } from './tabernacle.mjs';
+import { renderLecture } from './lecture.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const optimizeImages = createImageOptimizer(root);
@@ -217,6 +218,7 @@ const articleAside = `<aside class="telegram-articles" aria-label="${uiSlots.art
 const home = fill(template, {
   ...uiSlots,
   telegram: renderTelegram(telegram, ui, lang, articleAside),
+  lecture: renderLecture(lang),
   eyebrow: escape(content.hero.eyebrow),
   heading: escape(content.hero.heading),
   accent: escape(content.hero.accent),
