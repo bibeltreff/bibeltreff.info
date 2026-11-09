@@ -16,7 +16,7 @@ export function renderLecture(lang) {
         <p class="lecture-subtitle">${escape(t.subtitle)}</p>
         <div class="lecture-details">
           <p><time datetime="${escape(lecture.datetime)}"><strong>${escape(t.date)}<br>${escape(t.time)}</strong></time></p>
-          <p>${escape(t.room)}<br>${escape(t.campus)}</p>
+          <p><a class="lecture-location" href="${escape(lecture.map)}">${escape(t.room)}<br>${escape(t.campus)}</a></p>
         </div>
         <div class="lecture-actions"><a class="button lecture-download" href="${escape(lecture.pdf)}" download>${escape(t.download)}</a><a class="lecture-share" href="${escape(directLink)}">${escape(t.shareLink)}</a></div>
       </div>

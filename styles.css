@@ -1,11 +1,11 @@
-/* Source Sans 3 (SIL OFL 1.1, assets/fonts/OFL.txt), self-hosted variable font 400–700. */
+/* Source Sans 3 (SIL OFL 1.1, assets/fonts/OFL.txt), self-hosted variable font 400–900. */
 @font-face {
-  font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: swap;
+  font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 900; font-display: swap;
   src: url('assets/fonts/source-sans-3-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
-  font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: swap;
+  font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 900; font-display: swap;
   src: url('assets/fonts/source-sans-3-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -148,10 +148,11 @@ h1 > span { color: var(--accent); }
 .lecture-section { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr); gap: 32px; align-items: center; padding: 36px; margin-block: 4px 54px; background: #ffcb29; color: #171c1b; border-radius: 14px; }
 .lecture-label { margin-bottom: 16px; color: #34371d; text-transform: uppercase; letter-spacing: .08em; }
 .lecture-question { margin-bottom: 9px; font-size: 17px; font-weight: 600; }
-.lecture-copy h2 { font-weight: 700; font-size: clamp(1.9rem, 3.2vw, 2.65rem); letter-spacing: -.035em; line-height: 1.1; }
+.lecture-copy h2 { font-weight: 900; font-size: clamp(1.9rem, 3.2vw, 2.65rem); letter-spacing: -.035em; line-height: 1.1; }
 .lecture-subtitle { margin-top: 18px; font-size: 17px; line-height: 1.55; }
 .lecture-details { display: grid; gap: 12px; margin-top: 24px; font-size: 16px; line-height: 1.5; }
 .lecture-details strong { font-weight: 700; }
+.lecture-location { font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
 .lecture-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 25px; }
 .lecture-share { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 600; text-decoration: underline; }
 .lecture-download { padding-inline: 18px; background: #111817; color: #fff; font-size: 14px; }
