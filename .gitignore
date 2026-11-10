@@ -17,3 +17,6 @@ tmp/
 /assets/previews/
 /sitemap.xml
 /robots.txt
+
+# Local Vercel project settings
+.vercel/
