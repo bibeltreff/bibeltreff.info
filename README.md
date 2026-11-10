@@ -13,6 +13,28 @@ npm run dev
 
 Öffnet einen lokalen Server unter `http://127.0.0.1:4173`. Alternativ `node scripts/serve.mjs`. Der Server baut beim Start die Seite; nach Inhaltsänderungen `npm run build` ausführen und den Browser neu laden. CSS und JavaScript benötigen nur ein Neuladen. Ein anderer Port lässt sich über `PORT` setzen.
 
+## Änderungen vor dem Merge im Browser prüfen
+
+Für eine echte Vorschau pro Branch ist das Repository mit `vercel.json` vorbereitet. Das Vercel-Projekt dient als zusätzliche Testwebsite; die öffentliche Domain `bibeltreff.info` bleibt bei GitHub Pages.
+
+Einmalige Einrichtung:
+
+1. Unter https://vercel.com/new das GitHub-Repository `bibeltreff/bibeltreff.info` importieren und der Vercel-GitHub-App Zugriff auf dieses Repository geben.
+2. Framework **Other**, Node.js **24.x**, Installation `npm ci`, Build `npm run build:preview`, Ausgabeordner `_site`. Die Befehle und der Ausgabeordner stehen auch in `vercel.json`.
+3. Für die erste Vorschau den Einrichtungsbranch `setup/branch-previews` bereitstellen: dort sind `vercel.json` und der neue Build-Befehl bereits vorhanden. `main` enthält diese Konfiguration erst nach dem Merge; ein erster Build von `main` kann bis dahin nicht mit dem neuen Befehl laufen.
+4. Für das Vorschau-Projekt die von Vercel bereitgestellte Domain verwenden. Keine bestehende eigene Domain zuordnen.
+5. Nach Prüfung die Vorschau-Konfiguration einmalig übernehmen. Weitere Änderungsbranches starten danach mit dieser Einrichtung.
+
+Danach erzeugt Vercel für neue Commits auf PR-Branches eine eigene Vorschau-URL und zeigt sie im Pull Request an. Die URL kann auch auf Android geöffnet werden. Änderungen auf älteren Branches benötigen zunächst die neue Vorschau-Konfiguration.
+
+Der Ablauf für weitere Änderungen ist: Branch und PR anlegen → Vorschau öffnen und prüfen → PR nach Freigabe nach `main` mergen → GitHub Pages veröffentlicht die Änderung.
+
+`npm run build:preview` baut und prüft die Website. `scripts/stage-preview.mjs` kopiert ausschließlich die öffentlichen Dateien nach `_site/`; Quellinhalte, lokale Einstellungen und Skripte werden nicht veröffentlicht. Vercel sendet für diese Testwebsite einen `X-Robots-Tag: noindex, nofollow, noarchive`-Header.
+
+Die Vorschau verwendet den gespeicherten Telegram-Feed. Ein Telegram-Sync oder Bot-Token ist dafür nicht nötig. Ohne vorhandene Mediendateien zeigt die bestehende Darstellung Links zu Telegram. Kanonische URLs und ausdrücklich teilbare Direktlinks bleiben auf `bibeltreff.info` ausgerichtet und führen beim Anklicken aus der Vorschau zur öffentlichen Website.
+
+Dokumentation: [Vercel-Vorschauumgebungen](https://vercel.com/docs/deployments/environments) und [Vercel für GitHub](https://vercel.com/docs/git/vercel-for-github).
+
 ## Inhalte und Gestaltung ändern
 
 ### Fotos automatisch verkleinern
