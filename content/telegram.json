@@ -1,6 +1,43 @@
 {
-  "nextOffset": 244344118,
+  "nextOffset": 244344119,
   "posts": [
+    {
+      "id": 441,
+      "date": "2026-11-09T17:36:46.000Z",
+      "text": "Herzliche Einladung zum Vortrag \n\nWerde ich bald ersetzt? KI, meine Zukunft und die Bibel\n\nKI löst komplexe Mathematikaufgaben, entwickelt Software und entwirft technische Bauteile. Aufgaben, für die wir jahrelang studieren, übernimmt KI zunehmend in Sekunden. Werden wir bald überflüssig? Erwartet uns eine düstere Zukunft? Die Bibel zeigt eine ganz andere Perspektive: Gott schuf den Menschen nach seinem Bild und gab ihm eine Berufung, die keine Maschine übernehmen kann. Was sagt die Bibel über KI, und was bedeutet das für deine Zukunft? Komm vorbei und finde es heraus.\n\n🕠 Mittwoch, 25.11.2026, 17:30 Uhr\n📍 Pfaffenwaldring 47 UG, Raum V47.04, Campus Vaihingen\n\nhttps://bibeltreff.info/#vortrag-ki",
+      "entities": [
+        {
+          "type": "bold",
+          "offset": 34,
+          "length": 55
+        },
+        {
+          "type": "bold",
+          "offset": 580,
+          "length": 31
+        },
+        {
+          "type": "text_link",
+          "offset": 615,
+          "length": 21,
+          "url": "https://maps.app.goo.gl/DwgBxXbG2pYwWorR9"
+        },
+        {
+          "type": "url",
+          "offset": 669,
+          "length": 35
+        }
+      ],
+      "hasMedia": true,
+      "photo": {
+        "fileId": "AgACAgIAAx0CU0qd4QACAblq8nUIrRClTLDp8R_JKd4wctxQJwACMiRrG1KbkUvxXIexUKH9CgEAAwIAA3kAAz0E",
+        "key": "ef08e4482c64d524",
+        "extension": "jpg",
+        "width": 904,
+        "height": 1279,
+        "size": 142496
+      }
+    },
     {
       "id": 440,
       "date": "2026-11-05T09:31:42.000Z",
@@ -39,26 +76,6 @@
         "extension": "mp3",
         "title": "Der neue Bund",
         "size": 15590094
-      }
-    },
-    {
-      "id": 437,
-      "date": "2026-10-20T07:11:03.000Z",
-      "text": "Aus dem Bibeltreff:\n\nDer Herr will sein Gesetz in unser Denksinn geben.\n\nHebr. 8:8-12; Spr. 4:4",
-      "entities": [
-        {
-          "type": "bold",
-          "offset": 21,
-          "length": 50
-        }
-      ],
-      "hasMedia": true,
-      "audio": {
-        "fileId": "CQACAgIAAx0CU0qd4QACAbVq1xQFJDaO6wTo6C96HEtpU_K2SQACXaEAAlVYuEqzkOowbUF0bj0E",
-        "key": "3bf024bbc3ce5a74",
-        "extension": "mp3",
-        "title": "Der Herr will sein Gesetz in unseren Denksinn geben",
-        "size": 17263556
       }
     }
   ]
