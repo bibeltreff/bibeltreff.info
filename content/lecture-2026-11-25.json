@@ -3,6 +3,8 @@
   "pdf": "assets/documents/2026-11-Vortrag-Uni-Vaihingen_A6.pdf",
   "front": "assets/events/2026-11-25-ki/flyer-vorderseite.webp",
   "back": "assets/events/2026-11-25-ki/flyer-rueckseite.webp",
+  "imageWidth": 1200,
+  "imageHeight": 1697,
   "de": {
     "label": "Vortrag am Campus Vaihingen",
     "question": "Werde ich bald ersetzt?",
@@ -22,13 +24,21 @@
     "question": "Will I soon be replaced?",
     "title": "AI, my future and the Bible",
     "subtitle": "What makes humans unique – and what future does God have for them?",
+    "paragraphs": [
+      "AI solves complex maths problems, develops software and designs technical components. Increasingly, it can complete in seconds tasks that we spend years learning to do. Will we soon become redundant? Does a bleak future await us?",
+      "The Bible presents a very different perspective: God created human beings in His image and gave them a calling that no machine can fulfil.",
+      "What does the Bible say about AI, and what does that mean for your future? Come along and find out."
+    ],
     "date": "Wednesday, 25 November 2026",
     "time": "17:30 CET",
     "room": "Room V47.04",
     "campus": "Campus Vaihingen",
-    "download": "Download flyer (German, PDF)",
-    "frontLabel": "View the front of the German flyer at full size",
-    "backLabel": "View the back of the German flyer at full size",
+    "pdf": "assets/documents/2026-11-Vortrag-Uni-Vaihingen_A6-en.pdf",
+    "front": "assets/events/2026-11-25-ki/flyer-front-en.webp",
+    "back": "assets/events/2026-11-25-ki/flyer-back-en.webp",
+    "download": "Download flyer (English, PDF)",
+    "frontLabel": "View the front of the English flyer at full size",
+    "backLabel": "View the back of the English flyer at full size",
     "shareLink": "Direct link to this talk"
   },
   "map": "https://maps.app.goo.gl/43JhudM5efxjuiHn7"
