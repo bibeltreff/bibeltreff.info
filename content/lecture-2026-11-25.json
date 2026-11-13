@@ -3,6 +3,8 @@
   "pdf": "assets/documents/2026-11-Vortrag-Uni-Vaihingen_A6.pdf",
   "front": "assets/events/2026-11-25-ki/flyer-vorderseite.webp",
   "back": "assets/events/2026-11-25-ki/flyer-rueckseite.webp",
+  "imageWidth": 1200,
+  "imageHeight": 1697,
   "de": {
     "label": "Vortrag am Campus Vaihingen",
     "question": "Werde ich bald ersetzt?",
@@ -31,9 +33,12 @@
     "time": "17:30 CET",
     "room": "Room V47.04",
     "campus": "Campus Vaihingen",
-    "download": "Download flyer (German, PDF)",
-    "frontLabel": "View the front of the German flyer at full size",
-    "backLabel": "View the back of the German flyer at full size",
+    "pdf": "assets/documents/2026-11-Vortrag-Uni-Vaihingen_A6-en.pdf",
+    "front": "assets/events/2026-11-25-ki/flyer-front-en.webp",
+    "back": "assets/events/2026-11-25-ki/flyer-back-en.webp",
+    "download": "Download flyer (English, PDF)",
+    "frontLabel": "View the front of the English flyer at full size",
+    "backLabel": "View the back of the English flyer at full size",
     "shareLink": "Direct link to this talk"
   },
   "map": "https://maps.app.goo.gl/43JhudM5efxjuiHn7"
