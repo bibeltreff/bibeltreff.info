@@ -13,7 +13,8 @@ export function renderLecture(lang) {
         <p class="eyebrow lecture-label">${escape(t.label)}</p>
         <p class="lecture-question">${escape(t.question)}</p>
         <h2 id="lecture-title">${escape(t.title)}</h2>
-        <p class="lecture-subtitle">${escape(t.subtitle)}</p>
+        <p class="lecture-subtitle">${escape(t.subtitle)}</p>${t.paragraphs?.length ? `
+        <div class="lecture-description">${t.paragraphs.map(paragraph => `<p>${escape(paragraph)}</p>`).join('')}</div>` : ''}
         <div class="lecture-details">
           <p><time datetime="${escape(lecture.datetime)}"><strong>${escape(t.date)}<br>${escape(t.time)}</strong></time></p>
           <p><a class="lecture-location" href="${escape(lecture.map)}">${escape(t.room)}<br>${escape(t.campus)}</a></p>
